@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { SafeImage } from "@/components/ui/SafeImage";
 import {
   SITE,
   LOGO,
@@ -41,7 +41,7 @@ export function Header({ onCallbackClick }: HeaderProps) {
       <div className="container-site">
         <div className="nav-shell">
           <Link href="/" className="shrink-0">
-            <Image src={LOGO} alt={SITE.name} width={170} height={42} className="h-[42px] w-auto" priority />
+            <SafeImage src={LOGO} alt={SITE.name} width={170} height={42} className="h-[42px] w-auto" priority />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-7 text-base">
@@ -66,7 +66,7 @@ export function Header({ onCallbackClick }: HeaderProps) {
                       href={item.href}
                       className="flex gap-4 p-3 rounded-[10px] hover:bg-cream-bg transition-colors"
                     >
-                      <Image src={item.icon} alt="" width={40} height={40} />
+                      <SafeImage src={item.icon} alt="" width={40} height={40} />
                       <div>
                         <div className="font-medium text-sm">{item.label}</div>
                         <div className="text-xs text-muted">{item.meta}</div>
@@ -76,7 +76,7 @@ export function Header({ onCallbackClick }: HeaderProps) {
                 </div>
               )}
             </div>
-            {NAV_LINKS.filter((l) => !l.hasSubmenu).map((link) => (
+            {NAV_LINKS.map((link) => (
               <Link key={link.href} href={link.href} className="hover:opacity-70">
                 {link.label}
               </Link>
@@ -92,7 +92,7 @@ export function Header({ onCallbackClick }: HeaderProps) {
             aria-label="Меню"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
-            <Image src={BURGER_ICON} alt="" width={32} height={32} />
+            <SafeImage src={BURGER_ICON} alt="" width={32} height={32} />
           </button>
         </div>
 
@@ -103,7 +103,7 @@ export function Header({ onCallbackClick }: HeaderProps) {
                 {item.label}
               </Link>
             ))}
-            {NAV_LINKS.filter((l) => !l.hasSubmenu).map((link) => (
+            {NAV_LINKS.map((link) => (
               <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)}>
                 {link.label}
               </Link>
@@ -124,7 +124,7 @@ export function Footer() {
       <div className="container-site">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
           <div>
-            <Image
+            <SafeImage
               src={LOGO}
               alt={SITE.name}
               width={170}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 
 interface CallbackPopupProps {
   open: boolean;
@@ -12,7 +12,7 @@ export function CallbackPopup({ open, onClose }: CallbackPopupProps) {
 
   if (!open) return null;
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
@@ -86,7 +86,7 @@ export function CookieBanner() {
 export function ContactForm({ title, subtitle }: { title?: string; subtitle?: string }) {
   const [sent, setSent] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);

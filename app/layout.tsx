@@ -6,13 +6,15 @@ import "./globals.css";
 
 const unbounded = Unbounded({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-heading",
+  variable: "--font-unbounded",
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const montserrat = Montserrat({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-body",
+  variable: "--font-montserrat",
+  display: "swap",
 });
 
 export const metadata: Metadata = {

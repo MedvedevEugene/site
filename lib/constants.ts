@@ -17,7 +17,6 @@ export const BURGER_ICON =
   "https://static.tildacdn.com/tild3130-6632-4232-b561-323161346563/burger.svg";
 
 export const NAV_LINKS = [
-  { label: "Обучение", href: "/base-cource", hasSubmenu: true },
   { label: "Расписание", href: "/timetable" },
   { label: "Психологическая помощь", href: "/psychological-help" },
   { label: "Статьи", href: "/blog" },

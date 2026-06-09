@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SafeImage } from "@/components/ui/SafeImage";
 import { TestimonialSlider } from "@/components/ui/TestimonialSlider";
 import { HERO_TAGS, PROGRAMS } from "@/lib/constants";
 
@@ -49,7 +50,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {PROGRAMS.map((p) => (
               <Link key={p.href} href={p.href} className="card flex gap-5 items-start hover:border-primary">
-                <Image src={p.icon} alt="" width={80} height={80} className="w-20 h-20 rounded-xl object-cover shrink-0" />
+                <SafeImage src={p.icon} alt="" width={80} height={80} className="w-20 h-20 rounded-xl object-cover shrink-0" />
                 <div>
                   <div className="text-[13px] text-muted mb-1">{p.meta}</div>
                   <h3 className="font-heading text-base font-medium m-0">{p.title}</h3>
