@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { TopBar, Header, Footer } from "./SiteChrome";
+import { TopBar, Header } from "./SiteChrome";
 import { CallbackPopup, CookieBanner } from "@/components/forms/CallbackPopup";
+import { ContactFooterSection } from "@/components/layout/ContactFooterSection";
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   const [callbackOpen, setCallbackOpen] = useState(false);
@@ -12,7 +13,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       <TopBar onCallbackClick={() => setCallbackOpen(true)} />
       <Header onCallbackClick={() => setCallbackOpen(true)} />
       <main>{children}</main>
-      <Footer />
+      <ContactFooterSection />
       <CallbackPopup open={callbackOpen} onClose={() => setCallbackOpen(false)} />
       <CookieBanner />
     </>

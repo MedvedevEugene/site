@@ -61,7 +61,7 @@ export const TESTIMONIALS = [
     quote:
       "Я перестал играть роль жертвы и стал увереннее. Это изменило мой доход и отношения.",
     author: "Геннадий Шепелин",
-    role: "Выпускник ИЖСИЗ",
+    role: "Выпускник ИРЖ",
     photo:
       "https://static.tildacdn.com/tild6165-3236-4831-a536-613231653133/jonathan-borba-RTHwe.jpg",
   },

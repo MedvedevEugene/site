@@ -9,7 +9,6 @@ import {
   BURGER_ICON,
   NAV_LINKS,
   EDUCATION_LINKS,
-  FOOTER_LINKS,
 } from "@/lib/constants";
 
 interface HeaderProps {
@@ -20,13 +19,20 @@ export function TopBar({ onCallbackClick }: HeaderProps) {
   return (
     <div className="bg-white pt-[18px]">
       <div className="container-site flex items-center justify-between gap-4 flex-wrap">
-        <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="text-base underline">
-          {SITE.phoneDisplay}
-        </a>
-        <span className="text-base hidden md:inline">{SITE.hours}</span>
-        <button type="button" onClick={onCallbackClick} className="btn btn-primary text-[11px] uppercase tracking-wide px-5 py-3">
-          Заказать звонок
-        </button>
+        <form className="search-shell hidden sm:flex" onSubmit={(e) => e.preventDefault()}>
+          <span className="text-muted text-sm">🔍</span>
+          <input type="search" placeholder="Поиск" className="border-0 bg-transparent outline-none text-sm w-full min-w-[100px]" />
+          <button type="submit" className="text-sm text-muted bg-light rounded-lg px-3 py-1 border-0">Найти</button>
+        </form>
+        <div className="flex items-center gap-4 flex-wrap ml-auto">
+          <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="text-base underline">
+            {SITE.phoneDisplay}
+          </a>
+          <span className="text-base hidden md:inline">{SITE.hours}</span>
+          <button type="button" onClick={onCallbackClick} className="btn btn-primary-solid">
+            Заказать звонок
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -40,15 +46,15 @@ export function Header({ onCallbackClick }: HeaderProps) {
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm pb-5 pt-3">
       <div className="container-site">
         <div className="nav-shell">
-          <Link href="/" className="shrink-0">
-            <SafeImage src={LOGO} alt={SITE.name} width={170} height={42} className="h-[42px] w-auto" priority />
+          <Link href="/" className="shrink-0 max-w-[220px]">
+            <SafeImage src={LOGO} alt={SITE.name} width={220} height={42} className="h-[42px] w-auto max-w-full" priority />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-7 text-base">
+          <nav className="hidden lg:flex items-center gap-6 text-base">
             <div className="relative">
               <button
                 type="button"
-                className="flex items-center gap-1 hover:opacity-70"
+                className="nav-edu-btn"
                 onMouseEnter={() => setEduOpen(true)}
                 onMouseLeave={() => setEduOpen(false)}
               >
@@ -115,61 +121,5 @@ export function Header({ onCallbackClick }: HeaderProps) {
         )}
       </div>
     </header>
-  );
-}
-
-export function Footer() {
-  return (
-    <footer className="bg-primary text-white pt-[60px] pb-[30px]">
-      <div className="container-site">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
-          <div>
-            <SafeImage
-              src={LOGO}
-              alt={SITE.name}
-              width={170}
-              height={40}
-              className="h-10 w-auto brightness-0 invert mb-4"
-            />
-            <p className="text-sm opacity-80 m-0">{SITE.fullName}</p>
-            <p className="text-[13px] opacity-60 mt-2">Лицензия {SITE.license}</p>
-            <div className="flex gap-3 mt-4">
-              <a href="#" className="w-9 h-9 rounded-full bg-white/15 grid place-items-center text-sm font-semibold">TG</a>
-              <a href="#" className="w-9 h-9 rounded-full bg-white/15 grid place-items-center text-sm font-semibold">VK</a>
-              <a href="#" className="w-9 h-9 rounded-full bg-white/15 grid place-items-center text-sm font-semibold">M</a>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold opacity-70 m-0 mb-4">Обучение</h4>
-            {FOOTER_LINKS.education.map((l) => (
-              <Link key={l.href} href={l.href} className="block text-sm opacity-90 mb-2.5 hover:opacity-100">
-                {l.label}
-              </Link>
-            ))}
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold opacity-70 m-0 mb-4">Помощь</h4>
-            {FOOTER_LINKS.help.map((l) => (
-              <Link key={l.href} href={l.href} className="block text-sm opacity-90 mb-2.5 hover:opacity-100">
-                {l.label}
-              </Link>
-            ))}
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold opacity-70 m-0 mb-4">Контакты</h4>
-            <a href={`tel:${SITE.phoneAlt.replace(/[\s()-]/g, "")}`} className="block text-sm opacity-90 mb-2.5">
-              {SITE.phoneAlt}
-            </a>
-            <a href={`mailto:${SITE.email}`} className="block text-sm opacity-90 mb-2.5">
-              {SITE.email}
-            </a>
-          </div>
-        </div>
-        <div className="border-t border-white/15 pt-6 flex justify-between flex-wrap gap-3 text-[13px] opacity-70">
-          <span>© {new Date().getFullYear()} {SITE.name}</span>
-          <Link href="/privacy" className="hover:opacity-100">Политика конфиденциальности</Link>
-        </div>
-      </div>
-    </footer>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface FAQItem {
   question: string;
@@ -8,24 +8,24 @@ interface FAQItem {
 }
 
 export function FAQ({ items }: { items: FAQItem[] }) {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="max-w-[800px] mx-auto">
+    <div className="max-w-[900px] mx-auto flex flex-col gap-4">
       {items.map((item, index) => {
         const isOpen = openIndex === index;
         return (
-          <div key={item.question} className="border-b border-border">
+          <div key={item.question}>
             <button
               type="button"
-              className="w-full bg-transparent border-0 text-left py-5 text-base font-medium flex justify-between items-center gap-4"
+              className="accordion-item w-full border-0"
               onClick={() => setOpenIndex(isOpen ? null : index)}
             >
-              {item.question}
-              <span className="text-2xl font-light shrink-0">{isOpen ? "−" : "+"}</span>
+              <span>{item.question}</span>
+              <span className="text-2xl font-light shrink-0 leading-none">{isOpen ? "−" : "+"}</span>
             </button>
             {isOpen && (
-              <p className="pb-5 m-0 text-muted text-[15px] leading-relaxed">{item.answer}</p>
+              <p className="px-6 pb-2 m-0 text-muted text-[15px] leading-relaxed">{item.answer}</p>
             )}
           </div>
         );
