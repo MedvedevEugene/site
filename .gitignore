@@ -2,3 +2,9 @@
 .vercel
 dist/
 *.log
+node_modules/
+.next/
+out/
+.env
+.env.local
+.env*.local

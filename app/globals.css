@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3b3758;
+  --color-primary-dark: #272344;
+  --color-cream: #f8f7e4;
+  --color-cream-bg: #f9f8e8;
+  --color-muted: #5d5d7b;
+  --color-light: #f1f1f3;
+  --color-border: #efefef;
+  --font-heading: "Unbounded", sans-serif;
+  --font-body: "Montserrat", sans-serif;
+  --radius-lg: 20px;
+  --radius-md: 10px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 bg-white leading-relaxed;
+    color: var(--color-primary);
+    font-family: var(--font-body), "Montserrat", sans-serif;
+  }
+
+  .font-heading {
+    font-family: var(--font-heading), "Unbounded", sans-serif;
+  }
+
+  img {
+    @apply max-w-full block;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .container-site {
+    width: min(1160px, calc(100% - 40px));
+    margin-inline: auto;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center rounded-[10px] px-6 py-3.5 text-sm font-medium border border-transparent transition-all duration-200;
+  }
+
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary-dark);
+  }
+
+  .btn-primary:hover {
+    background-color: #fff;
+    color: var(--color-primary-dark);
+  }
+
+  .btn-outline {
+    @apply bg-white;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-light);
+  }
+
+  .section {
+    @apply py-[70px];
+  }
+
+  .section-cream {
+    @apply py-[70px];
+    background-color: var(--color-cream-bg);
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    @apply text-center text-[clamp(24px,3vw,32px)] font-medium m-0 mb-3;
+  }
+
+  .section-subtitle {
+    @apply text-center text-muted max-w-[640px] mx-auto mb-10;
+  }
+
+  .nav-shell {
+    background: linear-gradient(0deg, var(--color-cream) 0%, #fff 100%);
+    @apply border border-border rounded-[20px] px-7 py-[18px] flex items-center justify-between gap-5;
+  }
+
+  .card {
+    @apply bg-white border border-border rounded-[20px] p-7 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(59,55,88,0.1)];
+  }
+
+  .card-accent {
+    background: linear-gradient(135deg, #3b3758 0%, #5a5478 100%);
+    @apply text-white border-0;
+  }
+
+  .tag {
+    @apply bg-light rounded-full px-4 py-2 text-[13px] font-medium;
+  }
+}

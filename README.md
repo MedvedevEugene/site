@@ -1,45 +1,52 @@
-# ИЖСИЗ — демо-прототип нового сайта
+# ИЖСИЗ — сайт института
 
-Демонстрация для заказчика: как может выглядеть сайт после переноса с [Tilda (lifeinstitute.ru)](https://lifeinstitute.ru/).
+Новый сайт [lifeinstitute.ru](https://lifeinstitute.ru/) на Next.js 15 + Tailwind CSS.
 
-## Что внутри
+## Страницы
 
-| Файл | Описание |
-|------|----------|
-| `index.html` | Главная страница — hero, слайдер отзывов, каталог программ |
-| `individual-consultations.html` | Страница консультаций (как на [lifeinstitute.ru/individual-consultations](https://lifeinstitute.ru/individual-consultations)) |
-| `psychological-help.html` | **Новая страница из ТЗ** — NLP-инструменты + ИИ-разбор |
+| URL | Описание |
+|-----|----------|
+| `/` | Главная |
+| `/individual-consultations` | Индивидуальные консультации |
+| `/psychological-help` | Психологическая помощь (новая из ТЗ) |
+| `/timetable` | Расписание (Google Calendar) |
+| `/16-associations`, `/nlu`, `/ptichno-rybko` | NLP-инструменты + ИИ-разбор |
+| `/base-cource`, `/business-cource` | Курсы |
+| `/rasstanovochnye-gruppy`, `/telese-terapiya` | Новые лендинги из ТЗ |
+| `/teachers/[slug]` | Шаблон преподавателя |
 
-## Как открыть локально
+Папка [`demo/`](demo/) — первый HTML-прототип для заказчика.
+
+## Локальный запуск
 
 ```bash
-cd demo
-python3 -m http.server 8080
+npm install
+cp .env.example .env.local
+npm run dev
 ```
 
-Откройте в браузере: **http://localhost:8080**
+Откройте http://localhost:3000
 
 ## Деплой на Vercel
 
-1. Создайте репозиторий на GitHub и запушьте код:
-   ```bash
-   git remote add origin https://github.com/ВАШ_АККАУНТ/izhsiz-demo.git
-   git push -u origin main
-   ```
-2. На [vercel.com](https://vercel.com) → **Add New Project** → импортируйте репозиторий.
-3. Настройки подставятся из `vercel.json` автоматически (build: `npm run build`, output: `dist`).
-4. Нажмите **Deploy**.
+1. Push в [github.com/MedvedevEugene/site](https://github.com/MedvedevEugene/site)
+2. Import на [vercel.com](https://vercel.com)
+3. Добавьте переменные из `.env.example` в Settings → Environment Variables
 
-Альтернатива без GitHub: в Vercel CLI — `npx vercel demo` из корня проекта.
+## Расписание для заказчика
 
-## Что показать заказчику
+Менеджер добавляет события в **Google Calendar** — они автоматически появляются на `/timetable`.
 
-1. **Главная** — тот же стиль (шрифты Unbounded + Montserrat, цвета #3b3758, кремовый фон), слайдер отзывов
-2. **Консультации** — полная воронка: запросы → форматы → шаги → квиз → специалисты → FAQ
-3. **Психологическая помощь** — новый функционал из ТЗ, который на Tilda не реализуется
+Настройка:
+1. Создайте Google Calendar для института
+2. В `.env.local`: `GOOGLE_CALENDAR_ID` и `GOOGLE_CALENDAR_API_KEY`
+3. Выдайте доступ редактора нужным сотрудникам
 
-## Это демо, не финальный продукт
+## Структура
 
-- Картинки и логотип — с текущего Tilda-сайта
-- Формы и оплата — заглушки (alert)
-- Финальная версия — Next.js + бэкенд для ИИ-инструментов
+```
+app/           — страницы и API routes
+components/    — UI, layout, формы, инструменты
+lib/           — константы и конфиг
+demo/          — HTML-прототип (legacy)
+```
