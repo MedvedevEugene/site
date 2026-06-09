@@ -1,11 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 
 interface PageShellProps {
   title: string;
   description: string;
   breadcrumbs?: { label: string; href?: string }[];
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 export function PageShell({ title, description, breadcrumbs = [], children }: PageShellProps) {

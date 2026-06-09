@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { TopBar, Header, Footer } from "./SiteChrome";
 import { CallbackPopup } from "@/components/forms/CallbackPopup";
 import { CookieBanner } from "@/components/forms/CookieBanner";
 
-export function SiteLayout({ children }: { children: React.ReactNode }) {
+export function SiteLayout({ children }: { children: ReactNode }) {
   const [callbackOpen, setCallbackOpen] = useState(false);
 
   return (

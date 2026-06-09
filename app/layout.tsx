@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Unbounded, Montserrat } from "next/font/google";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { SITE } from "@/lib/constants";
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="ru" className={`${unbounded.variable} ${montserrat.variable}`}>
