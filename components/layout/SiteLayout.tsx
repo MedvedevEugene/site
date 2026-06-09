@@ -2,8 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import { TopBar, Header, Footer } from "./SiteChrome";
-import { CallbackPopup } from "@/components/forms/CallbackPopup";
-import { CookieBanner } from "@/components/forms/CookieBanner";
+import { CallbackPopup, CookieBanner } from "@/components/forms/CallbackPopup";
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   const [callbackOpen, setCallbackOpen] = useState(false);
