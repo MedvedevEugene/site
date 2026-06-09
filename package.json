@@ -1,0 +1,7 @@
+{
+  "name": "izhsiz-demo",
+  "private": true,
+  "scripts": {
+    "build": "mkdir -p dist && cp -r demo/. dist/"
+  }
+}

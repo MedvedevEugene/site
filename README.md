@@ -10,7 +10,7 @@
 | `individual-consultations.html` | Страница консультаций (как на [lifeinstitute.ru/individual-consultations](https://lifeinstitute.ru/individual-consultations)) |
 | `psychological-help.html` | **Новая страница из ТЗ** — NLP-инструменты + ИИ-разбор |
 
-## Как открыть
+## Как открыть локально
 
 ```bash
 cd demo
@@ -19,7 +19,18 @@ python3 -m http.server 8080
 
 Откройте в браузере: **http://localhost:8080**
 
-Или просто откройте `demo/index.html` двойным кликом.
+## Деплой на Vercel
+
+1. Создайте репозиторий на GitHub и запушьте код:
+   ```bash
+   git remote add origin https://github.com/ВАШ_АККАУНТ/izhsiz-demo.git
+   git push -u origin main
+   ```
+2. На [vercel.com](https://vercel.com) → **Add New Project** → импортируйте репозиторий.
+3. Настройки подставятся из `vercel.json` автоматически (build: `npm run build`, output: `dist`).
+4. Нажмите **Deploy**.
+
+Альтернатива без GitHub: в Vercel CLI — `npx vercel demo` из корня проекта.
 
 ## Что показать заказчику
 
