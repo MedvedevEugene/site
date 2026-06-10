@@ -2,7 +2,11 @@ import Image from "next/image";
 import { SITE } from "@/lib/constants";
 import { IMAGES } from "@/lib/site-data";
 
-export function DiplomasSection() {
+type DiplomasSectionProps = {
+  diplomaUrl?: string;
+};
+
+export function DiplomasSection({ diplomaUrl = IMAGES.diploma }: DiplomasSectionProps) {
   return (
     <section className="section bg-white">
       <div className="container-site">
@@ -20,7 +24,7 @@ export function DiplomasSection() {
           </div>
           <div className="relative rounded-[40px] overflow-hidden min-h-[360px] bg-gradient-to-tr from-[#c5b4e3] to-[#fff5e6] p-8">
             <Image
-              src={IMAGES.diploma}
+              src={diplomaUrl}
               alt="Диплом"
               fill
               className="object-contain opacity-40 p-6"

@@ -3,10 +3,13 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { FAQ } from "@/components/ui/FAQ";
 import { IMAGES } from "@/lib/site-data";
+import { getPublishedTariffs, getMediaUrl } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Индивидуальные консультации",
 };
+
+export const dynamic = "force-dynamic";
 
 const FEATURES = [
   { value: "от 60 минут", label: "продолжительность встречи" },
@@ -48,11 +51,11 @@ const TOPICS = [
   },
 ];
 
-const PRICING = [
-  { title: "Диагностическая сессия 30 мин.", desc: "познакомиться с форматом, сформулировать запрос и понять следующий шаг", cta: "Записаться", icon: IMAGES.price1 },
-  { title: "Разовая консультация до 2ч.", desc: "глубже разобрать ситуацию, получить ясность и рекомендации по дальнейшей работе", cta: "Записаться", icon: IMAGES.price2 },
-  { title: "Пакет 10 сессий", desc: "для более глубокой и последовательной работы, когда важны устойчивые изменения и сопровождение в процессе", cta: "Записаться", icon: IMAGES.price3 },
-  { title: "Сопровождение после пакета сессий", desc: "поддерживаем после основной работы, чтобы помочь сохранить результат и двигаться дальше", cta: "Узнать больше", icon: IMAGES.price4, outline: true },
+const PRICING_FALLBACK = [
+  { title: "Диагностическая сессия 30 мин.", description: "познакомиться с форматом, сформулировать запрос и понять следующий шаг", price: null as string | null, ctaText: "Записаться", ctaLink: null as string | null, iconUrl: IMAGES.price1, outline: false },
+  { title: "Разовая консультация до 2ч.", description: "глубже разобрать ситуацию, получить ясность и рекомендации по дальнейшей работе", price: null, ctaText: "Записаться", ctaLink: null, iconUrl: IMAGES.price2, outline: false },
+  { title: "Пакет 10 сессий", description: "для более глубокой и последовательной работы, когда важны устойчивые изменения и сопровождение в процессе", price: null, ctaText: "Записаться", ctaLink: null, iconUrl: IMAGES.price3, outline: false },
+  { title: "Сопровождение после пакета сессий", description: "поддерживаем после основной работы, чтобы помочь сохранить результат и двигаться дальше", price: null, ctaText: "Узнать больше", ctaLink: null, iconUrl: IMAGES.price4, outline: true },
 ];
 
 const STEPS = [
@@ -92,7 +95,25 @@ const FAQ_ITEMS = [
   { question: "Сохраняется ли конфиденциальность?", answer: "Да. Всё обсуждаемое остаётся в рамках профессионального и бережного взаимодействия." },
 ];
 
-export default function IndividualConsultationsPage() {
+export default async function IndividualConsultationsPage() {
+  const [dbTariffs, consultHero, quizTeam] = await Promise.all([
+    getPublishedTariffs("consultations"),
+    getMediaUrl("consult-hero", IMAGES.consultHero),
+    getMediaUrl("quiz-team", IMAGES.quizTeam),
+  ]);
+  const pricing =
+    dbTariffs.length > 0
+      ? dbTariffs.map((t) => ({
+          title: t.title,
+          description: t.description,
+          price: t.price,
+          ctaText: t.ctaText,
+          ctaLink: t.ctaLink,
+          iconUrl: t.iconUrl,
+          outline: t.outline,
+        }))
+      : PRICING_FALLBACK;
+
   return (
     <>
       <section className="py-8 md:py-12 bg-cream-bg">
@@ -114,7 +135,7 @@ export default function IndividualConsultationsPage() {
               </div>
             </div>
             <div className="relative min-h-[360px]">
-              <Image src={IMAGES.consultHero} alt="" fill className="object-contain object-center" sizes="(max-width: 1024px) 100vw, 50vw" />
+              <Image src={consultHero} alt="" fill className="object-contain object-center" sizes="(max-width: 1024px) 100vw, 50vw" />
             </div>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
@@ -151,15 +172,18 @@ export default function IndividualConsultationsPage() {
         <div className="container-site">
           <h2 className="section-title">Форматы и стоимость</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {PRICING.map((p) => (
-              <div key={p.title} className="price-card-tilda">
-                <div className="absolute right-5 top-5 w-20 h-20">
-                  <Image src={p.icon} alt="" fill className="object-contain" sizes="80px" />
-                </div>
+            {pricing.map((p) => (
+              <div key={p.title} className="price-card-tilda relative">
+                {p.iconUrl && (
+                  <div className="absolute right-5 top-5 w-20 h-20">
+                    <Image src={p.iconUrl} alt="" fill className="object-contain" sizes="80px" />
+                  </div>
+                )}
                 <h3 className="font-heading text-xl font-medium m-0 mb-3 max-w-[70%]">{p.title}</h3>
-                <p className="text-sm text-muted flex-1 m-0 mb-6 max-w-[75%]">{p.desc}</p>
-                <Link href="#quiz" className={`btn self-start uppercase text-[11px] tracking-wide ${"outline" in p && p.outline ? "btn-outline" : "btn-primary-solid"}`}>
-                  {p.cta}
+                {p.price && <div className="font-medium text-primary mb-2">{p.price}</div>}
+                <p className="text-sm text-muted flex-1 m-0 mb-6 max-w-[75%]">{p.description}</p>
+                <Link href={p.ctaLink || "#quiz"} className={`btn self-start uppercase text-[11px] tracking-wide ${p.outline ? "btn-outline" : "btn-primary-solid"}`}>
+                  {p.ctaText}
                 </Link>
               </div>
             ))}
@@ -199,7 +223,7 @@ export default function IndividualConsultationsPage() {
         <div className="container-site">
           <h2 className="section-title">Подберем вам специалиста</h2>
           <div className="relative rounded-[28px] overflow-hidden min-h-[360px] flex items-center justify-center text-center text-white p-8">
-            <Image src={IMAGES.quizTeam} alt="" fill className="object-cover" sizes="100vw" />
+            <Image src={quizTeam} alt="" fill className="object-cover" sizes="100vw" />
             <div className="absolute inset-0 bg-black/55" />
             <div className="relative z-10 max-w-[640px]">
               <h3 className="font-heading text-[clamp(22px,3vw,32px)] font-medium m-0 mb-4">

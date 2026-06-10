@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  startAt     DateTime
+  endAt       DateTime
+  instructor  String?
+  format      String   @default("online")
+  eventType   String?
+  color       String?
+  link        String?
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model NewsPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String?
+  content     String?
+  imageUrl    String?
+  published   Boolean  @default(true)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Tariff {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  price       String?
+  priceNote   String?
+  ctaText     String   @default("Записаться")
+  ctaLink     String?
+  iconUrl     String?
+  group       String   @default("consultations")
+  sortOrder   Int      @default(0)
+  published   Boolean  @default(true)
+  outline     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model MediaItem {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  label     String
+  url       String
+  alt       String?
+  updatedAt DateTime @updatedAt
+}

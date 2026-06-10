@@ -7,7 +7,11 @@ import { SafeImage } from "@/components/ui/SafeImage";
 import { TESTIMONIALS } from "@/lib/constants";
 import { HERO_TAG_ROWS, IMAGES } from "@/lib/site-data";
 
-export function HeroSection() {
+type HeroSectionProps = {
+  heroPortrait?: string;
+};
+
+export function HeroSection({ heroPortrait = IMAGES.heroPortrait }: HeroSectionProps) {
   const [current, setCurrent] = useState(0);
   const t = TESTIMONIALS[current];
 
@@ -44,7 +48,7 @@ export function HeroSection() {
 
           <div className="relative min-h-[420px] lg:min-h-[520px]">
             <Image
-              src={IMAGES.heroPortrait}
+              src={heroPortrait}
               alt=""
               fill
               priority

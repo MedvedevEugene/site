@@ -7,18 +7,27 @@ import { FeaturePillars } from "@/components/home/FeaturePillars";
 import { VideoTabs } from "@/components/home/VideoTabs";
 import { DiplomasSection } from "@/components/home/DiplomasSection";
 import { PathSection } from "@/components/home/PathSection";
+import { getMediaMap } from "@/lib/content";
+import { IMAGES } from "@/lib/site-data";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const media = await getMediaMap({
+    "hero-portrait": IMAGES.heroPortrait,
+    diploma: IMAGES.diploma,
+  });
+
   return (
     <>
-      <HeroSection />
+      <HeroSection heroPortrait={media["hero-portrait"]} />
       <ProgramCatalog />
       <ResonanceCarousel />
       <EventsCalendar />
       <SupportTabs />
       <FeaturePillars />
       <VideoTabs />
-      <DiplomasSection />
+      <DiplomasSection diplomaUrl={media.diploma} />
       <PathSection />
     </>
   );

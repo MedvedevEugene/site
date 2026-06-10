@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { CALENDAR_EMBED_MONTH } from "@/lib/site-data";
+import { TimetableCalendar } from "@/components/calendar/TimetableCalendar";
 
 export const metadata: Metadata = {
   title: "Расписание",
@@ -17,14 +17,10 @@ export default function TimetablePage() {
         <p className="text-lg text-muted max-w-[640px] m-0 mb-10">
           В этом разделе вы найдёте расписание всех наших программ, занятий и групп — выберите подходящее время, чтобы присоединиться.
         </p>
-        <div className="rounded-[20px] border border-border overflow-hidden bg-white h-[600px]">
-          <iframe
-            title="Календарь ИЖСИЗ"
-            src={CALENDAR_EMBED_MONTH}
-            className="w-full h-full border-0"
-            loading="lazy"
-          />
-        </div>
+        <TimetableCalendar />
+        <p className="text-sm text-muted mt-6 m-0">
+          События добавляются через админ-панель — без программиста.
+        </p>
       </div>
     </section>
   );

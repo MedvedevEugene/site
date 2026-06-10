@@ -8,3 +8,7 @@ out/
 .env
 .env.local
 .env*.local
+
+# Prisma local (optional)
+prisma/*.db
+prisma/*.db-journal
