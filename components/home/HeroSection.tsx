@@ -40,10 +40,15 @@ export function HeroSection({ heroPortrait = IMAGES.heroPortrait }: HeroSectionP
                 </div>
               ))}
             </div>
-            <Link href="/catalog" className="btn btn-primary-solid inline-flex">
-              <SafeImage src={IMAGES.logoCircle} alt="" width={22} height={22} className="w-[22px] h-[22px]" />
-              Подобрать программу
-            </Link>
+            <div className="flex flex-wrap gap-3 mb-7">
+              <Link href="/catalog" className="btn btn-primary-solid inline-flex">
+                <SafeImage src={IMAGES.logoCircle} alt="" width={22} height={22} className="w-[22px] h-[22px]" />
+                Подобрать программу
+              </Link>
+              <Link href="/psychological-help" className="btn btn-outline uppercase text-[11px] tracking-wide">
+                Пройти онлайн-инструмент
+              </Link>
+            </div>
           </div>
 
           <div className="relative min-h-[420px] lg:min-h-[520px]">

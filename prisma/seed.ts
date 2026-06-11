@@ -20,6 +20,7 @@ async function main() {
   await prisma.newsPost.deleteMany();
   await prisma.tariff.deleteMany();
   await prisma.mediaItem.deleteMany();
+  await prisma.specialist.deleteMany();
 
   await prisma.event.createMany({
     data: [
@@ -118,6 +119,56 @@ async function main() {
       { key: "consult-hero", label: "Консультации — hero", url: IMAGES.consultHero },
       { key: "quiz-team", label: "Квиз — фото команды", url: IMAGES.quizTeam },
       { key: "diploma", label: "Диплом", url: IMAGES.diploma },
+    ],
+  });
+
+  await prisma.specialist.createMany({
+    data: [
+      {
+        slug: "asya-bykovskaya",
+        name: "Ася Быковская",
+        role: "Руководитель института, преподаватель, расстановщик, терапевт",
+        photoUrl: "https://static.tildacdn.com/tild3962-6236-4536-a463-663630633963/8B7A2059_1.png",
+        bio: "Руководитель института. Ведёт обучение расстановкам и личную практику.",
+        services: ["Обучение расстановкам", "Психологическое консультирование", "Телесные практики"],
+        sortOrder: 0,
+      },
+      {
+        slug: "ekaterina-skulochenko",
+        name: "Екатерина Скулоченко",
+        role: "Заместитель телесного направления, расстановщик, терапевт",
+        photoUrl: "https://static.tildacdn.com/tild3039-3963-4365-b732-613738356331/image_31.png",
+        bio: "Специалист телесного направления, расстановщик и терапевт.",
+        services: ["Телесно-ориентированная терапия", "Психологическое консультирование"],
+        sortOrder: 1,
+      },
+      {
+        slug: "svetlana-elistratova",
+        name: "Светлана Елистратова",
+        role: "Заместитель учебной части, преподаватель, расстановщик, терапевт",
+        photoUrl: "https://static.tildacdn.com/tild3465-3034-4232-b531-666636393961/c_1.jpg",
+        bio: "Преподаватель базового курса, расстановщик.",
+        services: ["Обучение расстановкам", "Психологическое консультирование"],
+        sortOrder: 2,
+      },
+      {
+        slug: "regina-karimulina",
+        name: "Регина Каримулина",
+        role: "Расстановщик, терапевт",
+        photoUrl: "https://static.tildacdn.com/tild6165-3236-4831-a536-613231653133/jonathan-borba-RTHwe.jpg",
+        bio: "Расстановщик и терапевт института.",
+        services: ["Системная семейная терапия", "Расстановки"],
+        sortOrder: 3,
+      },
+      {
+        slug: "tamara-ralkova",
+        name: "Тамара Ралькова",
+        role: "Расстановщик, терапевт",
+        photoUrl: "https://static.tildacdn.com/tild6530-3633-4430-a230-366336663936/10.png",
+        bio: "Расстановщик и терапевт института.",
+        services: ["Расстановки", "Психологическое консультирование"],
+        sortOrder: 4,
+      },
     ],
   });
 

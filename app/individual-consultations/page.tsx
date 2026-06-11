@@ -3,7 +3,8 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { FAQ } from "@/components/ui/FAQ";
 import { IMAGES } from "@/lib/site-data";
-import { getPublishedTariffs, getMediaUrl } from "@/lib/content";
+import { getPublishedTariffs, getMediaUrl, getPublishedSpecialists } from "@/lib/content";
+import { SpecialistCard } from "@/components/specialists/SpecialistCard";
 
 export const metadata: Metadata = {
   title: "Индивидуальные консультации",
@@ -76,12 +77,8 @@ const METHODS = [
   { title: "Телесно-ориентированная терапия", text: "учитывает связь эмоций, тела и жизненного опыта" },
 ];
 
-const SPECIALISTS = [
-  { name: "Ася Быковская", role: "Руководитель института, преподаватель, расстановщик, терапевт", photo: "https://static.tildacdn.com/tild3962-6236-4536-a463-663630633963/8B7A2059_1.png", slug: "asya-bykovskaya" },
-  { name: "Екатерина Скулоченко", role: "Заместитель телесного направления, расстановщик, терапевт", photo: "https://static.tildacdn.com/tild3039-3963-4365-b732-613738356331/image_31.png", slug: "ekaterina-skulochenko" },
-  { name: "Светлана Елистратова", role: "Заместитель учебной части, преподаватель, расстановщик, терапевт", photo: "https://static.tildacdn.com/tild3465-3034-4232-b531-666636393961/c_1.jpg", slug: "svetlana-elistratova" },
-  { name: "Регина Каримулина", role: "Расстановщик, терапевт", photo: "https://static.tildacdn.com/tild6165-3236-4831-a536-613231653133/jonathan-borba-RTHwe.jpg", slug: "regina-karimulina" },
-  { name: "Тамара Ралькова", role: "Расстановщик, терапевт", photo: "https://static.tildacdn.com/tild6530-3633-4430-a230-366336663936/10.png", slug: "tamara-ralkova" },
+const SPECIALISTS_FALLBACK = [
+  { slug: "asya-bykovskaya", name: "Ася Быковская", role: "Руководитель института, преподаватель, расстановщик, терапевт", photoUrl: "https://static.tildacdn.com/tild3962-6236-4536-a463-663630633963/8B7A2059_1.png" },
 ];
 
 const FAQ_ITEMS = [
@@ -96,10 +93,11 @@ const FAQ_ITEMS = [
 ];
 
 export default async function IndividualConsultationsPage() {
-  const [dbTariffs, consultHero, quizTeam] = await Promise.all([
+  const [dbTariffs, consultHero, quizTeam, dbSpecialists] = await Promise.all([
     getPublishedTariffs("consultations"),
     getMediaUrl("consult-hero", IMAGES.consultHero),
     getMediaUrl("quiz-team", IMAGES.quizTeam),
+    getPublishedSpecialists(),
   ]);
   const pricing =
     dbTariffs.length > 0
@@ -113,6 +111,16 @@ export default async function IndividualConsultationsPage() {
           outline: t.outline,
         }))
       : PRICING_FALLBACK;
+
+  const specialists =
+    dbSpecialists.length > 0
+      ? dbSpecialists.map((s) => ({
+          slug: s.slug,
+          name: s.name,
+          role: s.role,
+          photoUrl: s.photoUrl,
+        }))
+      : SPECIALISTS_FALLBACK;
 
   return (
     <>
@@ -240,22 +248,13 @@ export default async function IndividualConsultationsPage() {
 
       <section className="section bg-white" id="specialists">
         <div className="container-site">
-          <h2 className="section-title">Наши специалисты</h2>
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+            <h2 className="section-title m-0">Наши специалисты</h2>
+            <Link href="/specialists" className="btn btn-outline text-sm">Все специалисты</Link>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
-            {SPECIALISTS.map((s) => (
-              <div key={s.name} className="specialist-card">
-                <div className="relative aspect-[3/4]">
-                  <Image src={s.photo} alt={s.name} fill className="object-cover object-top" sizes="240px" />
-                </div>
-                <div className="p-5 -mt-8 relative z-10 mx-3 mb-3 bg-white rounded-[20px] shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
-                  <p className="font-semibold text-sm m-0 mb-1">{s.name}</p>
-                  <p className="text-xs text-muted m-0 mb-4 leading-snug min-h-[48px]">{s.role}</p>
-                  <div className="flex flex-col gap-2">
-                    <Link href="#quiz" className="btn btn-primary-solid text-[10px] py-2.5 w-full justify-center">Запись</Link>
-                    <Link href={`/teachers/${s.slug}`} className="btn btn-outline text-[10px] py-2.5 w-full justify-center">О специалисте</Link>
-                  </div>
-                </div>
-              </div>
+            {specialists.map((s) => (
+              <SpecialistCard key={s.slug} specialist={s} />
             ))}
           </div>
         </div>

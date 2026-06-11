@@ -9,6 +9,7 @@ import {
   BURGER_ICON,
   NAV_LINKS,
   EDUCATION_LINKS,
+  MORE_LINKS,
 } from "@/lib/constants";
 
 interface HeaderProps {
@@ -41,6 +42,7 @@ export function TopBar({ onCallbackClick }: HeaderProps) {
 export function Header({ onCallbackClick }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [eduOpen, setEduOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm pb-5 pt-3">
@@ -87,9 +89,33 @@ export function Header({ onCallbackClick }: HeaderProps) {
                 {link.label}
               </Link>
             ))}
-            <Link href="/catalog" className="hover:opacity-70">
-              Ещё ▾
-            </Link>
+            <div className="relative">
+              <button
+                type="button"
+                className="hover:opacity-70"
+                onMouseEnter={() => setMoreOpen(true)}
+                onMouseLeave={() => setMoreOpen(false)}
+              >
+                Ещё ▾
+              </button>
+              {moreOpen && (
+                <div
+                  className="absolute top-full right-0 mt-2 w-[280px] bg-white rounded-[10px] border border-border shadow-[0_5px_15px_rgba(0,0,0,0.05)] p-2 z-50"
+                  onMouseEnter={() => setMoreOpen(true)}
+                  onMouseLeave={() => setMoreOpen(false)}
+                >
+                  {MORE_LINKS.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="block px-3 py-2.5 rounded-[10px] hover:bg-cream-bg text-sm transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           </nav>
 
           <button
@@ -112,6 +138,11 @@ export function Header({ onCallbackClick }: HeaderProps) {
             {NAV_LINKS.map((link) => (
               <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)}>
                 {link.label}
+              </Link>
+            ))}
+            {MORE_LINKS.map((item) => (
+              <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}>
+                {item.label}
               </Link>
             ))}
             <button type="button" className="btn btn-primary mt-2" onClick={() => { setMobileOpen(false); onCallbackClick(); }}>

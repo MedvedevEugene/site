@@ -18,8 +18,17 @@ export const BURGER_ICON =
 
 export const NAV_LINKS = [
   { label: "Расписание", href: "/timetable" },
-  { label: "Психологическая помощь", href: "/psychological-help" },
+  { label: "Психологическая помощь", href: "/individual-consultations" },
   { label: "Статьи", href: "/blog" },
+] as const;
+
+export const MORE_LINKS = [
+  { label: "Каталог услуг", href: "/catalog" },
+  { label: "Специалисты", href: "/specialists" },
+  { label: "Расстановочные группы", href: "/rasstanovochnye-gruppy" },
+  { label: "Видеоматериалы", href: "/video-materials" },
+  { label: "О нас", href: "/information-about-the-educational-organization" },
+  { label: "Маркет", href: "/market" },
 ] as const;
 
 export const EDUCATION_LINKS = [
@@ -108,7 +117,7 @@ export const PROGRAMS = [
   },
   {
     href: "/business-cource",
-    meta: "6 мес. / 400 часов",
+    meta: "6 мес. / 126 часов",
     title: "Курс обучения бизнес-расстановкам",
     icon: "https://static.tildacdn.com/tild6533-3437-4239-b366-323565346534/business.svg",
   },

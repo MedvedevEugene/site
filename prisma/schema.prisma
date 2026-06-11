@@ -61,3 +61,17 @@ model MediaItem {
   alt       String?
   updatedAt DateTime @updatedAt
 }
+
+model Specialist {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  role      String
+  photoUrl  String
+  bio       String?
+  services  String[] @default([])
+  sortOrder Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

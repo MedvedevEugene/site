@@ -47,3 +47,24 @@ export async function getPublishedNews() {
     return [];
   }
 }
+
+export async function getPublishedSpecialists() {
+  try {
+    return prisma.specialist.findMany({
+      where: { published: true },
+      orderBy: { sortOrder: "asc" },
+    });
+  } catch {
+    return [];
+  }
+}
+
+export async function getSpecialistBySlug(slug: string) {
+  try {
+    return prisma.specialist.findFirst({
+      where: { slug, published: true },
+    });
+  } catch {
+    return null;
+  }
+}

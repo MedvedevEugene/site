@@ -9,6 +9,7 @@ const NAV = [
   { href: "/admin/events", label: "Расписание" },
   { href: "/admin/news", label: "Новости" },
   { href: "/admin/tariffs", label: "Тарифы" },
+  { href: "/admin/specialists", label: "Специалисты" },
   { href: "/admin/media", label: "Фото" },
 ];
 
@@ -28,7 +29,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
         <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
           <div>
             <div className="font-heading font-medium">Админ-панель ИЖСИЗ</div>
-            <div className="text-xs text-white/70">Расписание · новости · тарифы · фото</div>
+            <div className="text-xs text-white/70">Расписание · новости · тарифы · специалисты · фото</div>
           </div>
           <div className="flex items-center gap-3">
             <Link href="/" className="text-sm text-white/80 hover:text-white">На сайт</Link>
