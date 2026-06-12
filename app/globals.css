@@ -101,7 +101,7 @@
   }
 
   .catalog-card--featured {
-    @apply bg-accent-lavender;
+    @apply bg-[#f0f4f9];
   }
 
   .catalog-card--default {

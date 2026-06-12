@@ -5,7 +5,9 @@ export const IMAGES = {
   quoteIcon: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
   logoCircle: `${CDN}/tild3633-3262-4161-a430-353230613533/logo-circle.svg`,
   logoWhite: `${CDN}/tild3934-3966-4163-a230-616634613964/logo-white.svg`,
-  spiral: `${CDN}/tild6131-3963-4562-a538-303632663636/color.svg`,
+  /** Декор на карточке «Базовый курс» в каталоге (завитушка с Tilda) */
+  catalogDecor: `${CDN}/tild3865-3764-4963-b439-373761633561/01b0e4cc-d423-4d42-9.png`,
+  spiral: `${CDN}/tild3865-3764-4963-b439-373761633561/01b0e4cc-d423-4d42-9.png`,
   supportChat: `${CDN}/tild3539-6431-4765-a639-383164353762/Frame_56.png`,
   featureCompass: `${CDN}/tild3838-3430-4339-b238-363035623439/image_17.png`,
   featureAtom: `${CDN}/tild3764-3864-4939-b437-303535336566/image_18.png`,

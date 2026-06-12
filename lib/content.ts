@@ -28,7 +28,7 @@ export async function getMediaMap(fallbacks: Record<string, string>) {
 
 export async function getPublishedTariffs(group: string) {
   try {
-    return prisma.tariff.findMany({
+    return await prisma.tariff.findMany({
       where: { published: true, group },
       orderBy: { sortOrder: "asc" },
     });
@@ -39,7 +39,7 @@ export async function getPublishedTariffs(group: string) {
 
 export async function getPublishedNews() {
   try {
-    return prisma.newsPost.findMany({
+    return await prisma.newsPost.findMany({
       where: { published: true },
       orderBy: { publishedAt: "desc" },
     });
@@ -50,7 +50,7 @@ export async function getPublishedNews() {
 
 export async function getPublishedSpecialists() {
   try {
-    return prisma.specialist.findMany({
+    return await prisma.specialist.findMany({
       where: { published: true },
       orderBy: { sortOrder: "asc" },
     });
@@ -61,7 +61,7 @@ export async function getPublishedSpecialists() {
 
 export async function getSpecialistBySlug(slug: string) {
   try {
-    return prisma.specialist.findFirst({
+    return await prisma.specialist.findFirst({
       where: { slug, published: true },
     });
   } catch {

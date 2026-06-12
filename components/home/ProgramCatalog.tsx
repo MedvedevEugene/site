@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SafeImage } from "@/components/ui/SafeImage";
+import Image from "next/image";
 import { CATALOG_PROGRAMS, IMAGES } from "@/lib/site-data";
 
 export function ProgramCatalog() {
@@ -17,12 +17,12 @@ export function ProgramCatalog() {
                 className={`catalog-card ${featured ? "catalog-card--featured md:col-span-2" : "catalog-card--default"} group`}
               >
                 {featured && (
-                  <SafeImage
-                    src={IMAGES.spiral}
+                  <Image
+                    src={IMAGES.catalogDecor}
                     alt=""
-                    width={200}
-                    height={200}
-                    className="absolute right-4 top-4 w-40 h-40 opacity-20 pointer-events-none"
+                    width={220}
+                    height={220}
+                    className="absolute right-0 bottom-0 w-[min(220px,45%)] h-auto opacity-90 pointer-events-none object-contain"
                   />
                 )}
                 <div>
