@@ -20,9 +20,9 @@ export function ProgramCatalog() {
                   <Image
                     src={IMAGES.catalogDecor}
                     alt=""
-                    width={220}
-                    height={220}
-                    className="absolute right-0 bottom-0 w-[min(220px,45%)] h-auto opacity-90 pointer-events-none object-contain"
+                    width={200}
+                    height={200}
+                    className="absolute right-4 bottom-4 w-[min(180px,40%)] h-auto opacity-[0.12] pointer-events-none object-contain"
                   />
                 )}
                 <div>

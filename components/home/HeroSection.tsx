@@ -8,11 +8,12 @@ type HeroSectionProps = {
   heroPortrait?: string;
 };
 
-/** Портрет с Tilda; если в админке подставили другую картинку — оставляем референс. */
+const HERO_PORTRAIT_MARK = "01b0e4cc";
+
+/** В админке иногда сохраняли облако/шапку вместо портрета — подставляем правильный URL. */
 function resolvePortrait(url?: string) {
-  if (!url) return IMAGES.heroPortrait;
-  if (url.includes("01b0e4cc") || url.includes("catalogDecor")) return IMAGES.heroPortrait;
-  return url;
+  if (url?.includes(HERO_PORTRAIT_MARK)) return url;
+  return IMAGES.heroPortrait;
 }
 
 export function HeroSection({ heroPortrait }: HeroSectionProps) {
@@ -61,7 +62,7 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-contain object-bottom object-center pointer-events-none select-none"
+              className="object-contain object-bottom object-right lg:object-center pointer-events-none select-none"
             />
             <div className="absolute right-0 top-[42%] -translate-y-1/2 z-10 w-[min(100%,340px)] hidden sm:block">
               <div className="testimonial-card shadow-[0_12px_40px_rgba(59,55,88,0.12)]">

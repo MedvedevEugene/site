@@ -1,13 +1,14 @@
 const CDN = "https://static.tildacdn.com";
 
 export const IMAGES = {
-  heroPortrait: `${CDN}/tild6439-3761-4838-b130-303234303536/2d6688fa-356a-47ed-9.png`,
+  /** Портрет в hero (как на lifeinstitute.ru) */
+  heroPortrait: `${CDN}/tild3865-3764-4963-b439-373761633561/01b0e4cc-d423-4d42-9.png`,
   quoteIcon: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
   logoCircle: `${CDN}/tild3633-3262-4161-a430-353230613533/logo-circle.svg`,
   logoWhite: `${CDN}/tild3934-3966-4163-a230-616634613964/logo-white.svg`,
-  /** Декор на карточке «Базовый курс» в каталоге (завитушка с Tilda) */
-  catalogDecor: `${CDN}/tild3865-3764-4963-b439-373761633561/01b0e4cc-d423-4d42-9.png`,
-  spiral: `${CDN}/tild3865-3764-4963-b439-373761633561/01b0e4cc-d423-4d42-9.png`,
+  /** Декор на карточке «Базовый курс» — завитушка, не фото */
+  catalogDecor: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
+  spiral: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
   supportChat: `${CDN}/tild3539-6431-4765-a639-383164353762/Frame_56.png`,
   featureCompass: `${CDN}/tild3838-3430-4339-b238-363035623439/image_17.png`,
   featureAtom: `${CDN}/tild3764-3864-4939-b437-303535336566/image_18.png`,
@@ -15,6 +16,8 @@ export const IMAGES = {
   diploma: `${CDN}/tild6266-3664-4961-b563-323138343337/diplom.jpg`,
   certificate: `${CDN}/tild3435-6536-4536-a462-373262326366/telegram-cloud-docum.png`,
   pathCloud: `${CDN}/tild6336-3530-4139-b964-313032653332/2334f0c3-5471-4549-9.png`,
+  /** 3D-шапка на облаке — блок «Ваш путь в ИРЖ» */
+  pathGradCap: `${CDN}/tild6439-3761-4838-b130-303234303536/2d6688fa-356a-47ed-9.png`,
   pathGrad: `${CDN}/tild6263-3362-4234-b739-363836656135/Ellipse_3.svg`,
   consultHero: `${CDN}/tild6366-6338-4565-a237-326139383261/Frame_137.png`,
   quizTeam: `${CDN}/tild3634-3466-4365-a233-386430663137/Rectangle_71.png`,

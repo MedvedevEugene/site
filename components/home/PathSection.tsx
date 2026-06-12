@@ -10,7 +10,7 @@ export function PathSection() {
           <Image src={IMAGES.pathCloud} alt="" width={180} height={140} className="w-[140px] h-auto opacity-90" />
         </div>
         <div className="absolute right-0 bottom-8 hidden lg:block">
-          <Image src={IMAGES.pathGrad} alt="" width={160} height={120} className="w-[130px] h-auto opacity-90" />
+          <Image src={IMAGES.pathGradCap} alt="" width={160} height={160} className="w-[130px] h-auto opacity-90" />
         </div>
         <h2 className="font-heading text-[clamp(24px,3vw,36px)] font-medium m-0 mb-4">Ваш путь в ИРЖ</h2>
         <p className="text-muted max-w-[560px] mx-auto m-0 mb-8">
