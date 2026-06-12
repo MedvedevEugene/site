@@ -20,7 +20,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroSection heroPortrait={media["hero-portrait"]} />
+      <HeroSection heroPortrait={media["hero-portrait"] || IMAGES.heroPortrait} />
       <ProgramCatalog />
       <ResonanceCarousel />
       <EventsCalendar />

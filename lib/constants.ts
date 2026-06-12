@@ -65,12 +65,19 @@ export const FOOTER_LINKS = {
   ],
 } as const;
 
+/** Единственная цитата в hero — как на lifeinstitute.ru */
+export const HERO_TESTIMONIAL = {
+  quote:
+    "Я перестал играть роль жертвы и стал увереннее. Это изменило мой доход и отношения.",
+  author: "Геннадий Шепелин",
+  role: "Выпускник ИРЖ",
+} as const;
+
 export const TESTIMONIALS = [
   {
-    quote:
-      "Я перестал играть роль жертвы и стал увереннее. Это изменило мой доход и отношения.",
-    author: "Геннадий Шепелин",
-    role: "Выпускник ИРЖ",
+    quote: HERO_TESTIMONIAL.quote,
+    author: HERO_TESTIMONIAL.author,
+    role: HERO_TESTIMONIAL.role,
     photo:
       "https://static.tildacdn.com/tild6165-3236-4831-a536-613231653133/jonathan-borba-RTHwe.jpg",
   },
