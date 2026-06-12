@@ -48,12 +48,12 @@ export function Header({ onCallbackClick }: HeaderProps) {
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm pb-5 pt-3">
       <div className="container-site">
         <div className="nav-shell">
-          <Link href="/" className="shrink-0 max-w-[220px]">
-            <SafeImage src={LOGO} alt={SITE.name} width={220} height={42} className="h-[42px] w-auto max-w-full" priority />
-          </Link>
+          <div className="flex items-center gap-4 lg:gap-5 min-w-0">
+            <Link href="/" className="shrink-0 max-w-[220px]">
+              <SafeImage src={LOGO} alt={SITE.name} width={220} height={42} className="h-[42px] w-auto max-w-full" priority />
+            </Link>
 
-          <nav className="hidden lg:flex items-center gap-6 text-base">
-            <div className="relative">
+            <div className="relative hidden lg:block">
               <button
                 type="button"
                 className="nav-edu-btn"
@@ -84,15 +84,18 @@ export function Header({ onCallbackClick }: HeaderProps) {
                 </div>
               )}
             </div>
+          </div>
+
+          <nav className="hidden lg:flex items-center gap-7 text-base shrink-0">
             {NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} className="hover:opacity-70">
+              <Link key={link.href} href={link.href} className="hover:opacity-70 whitespace-nowrap">
                 {link.label}
               </Link>
             ))}
             <div className="relative">
               <button
                 type="button"
-                className="hover:opacity-70"
+                className="hover:opacity-70 whitespace-nowrap"
                 onMouseEnter={() => setMoreOpen(true)}
                 onMouseLeave={() => setMoreOpen(false)}
               >

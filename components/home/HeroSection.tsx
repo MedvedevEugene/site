@@ -16,15 +16,34 @@ function resolvePortrait(url?: string) {
   return IMAGES.heroPortrait;
 }
 
+function HeroTestimonialCard() {
+  return (
+    <div className="testimonial-card shadow-[0_12px_40px_rgba(59,55,88,0.12)]">
+      <SafeImage
+        src={IMAGES.quoteIcon}
+        alt=""
+        width={32}
+        height={32}
+        className="w-8 h-8 mb-4"
+      />
+      <p className="text-[15px] leading-relaxed m-0 mb-4 text-primary-dark">
+        &ldquo;{HERO_TESTIMONIAL.quote}&rdquo;
+      </p>
+      <div className="font-semibold text-sm text-primary-dark">{HERO_TESTIMONIAL.author}</div>
+      <div className="text-[11px] text-primary-dark/80 mt-0.5">{HERO_TESTIMONIAL.role}</div>
+    </div>
+  );
+}
+
 export function HeroSection({ heroPortrait }: HeroSectionProps) {
   const portrait = resolvePortrait(heroPortrait);
 
   return (
     <section className="py-8 md:py-10 lg:py-12 bg-cream-bg/40 overflow-hidden">
       <div className="container-site">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 xl:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 xl:gap-8 items-center">
           {/* Левая колонка — как на Tilda */}
-          <div className="z-10 max-w-[560px]">
+          <div className="z-10 lg:col-span-5 max-w-[560px]">
             <h1 className="font-heading text-[clamp(28px,4vw,44px)] font-medium leading-[1.15] m-0 mb-5 text-primary">
               Найди опору, ясность и новый вектор жизни в&nbsp;ИЖСИЗ
             </h1>
@@ -54,32 +73,23 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
             </Link>
           </div>
 
-          {/* Правая колонка — портрет + одна цитата */}
-          <div className="relative min-h-[380px] sm:min-h-[440px] lg:min-h-[520px] xl:min-h-[560px]">
+          {/* Правая зона — портрет слева, цитата справа (не на лице) */}
+          <div className="lg:col-span-7 relative min-h-[360px] sm:min-h-[420px] lg:min-h-[520px]">
             <Image
               src={portrait}
               alt=""
-              fill
+              width={844}
+              height={745}
               priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-contain object-bottom object-right lg:object-center pointer-events-none select-none"
+              sizes="(max-width: 1024px) 100vw, 58vw"
+              className="absolute left-0 bottom-0 w-[min(100%,560px)] sm:w-[min(88%,520px)] lg:w-[min(78%,560px)] h-auto max-h-[92%] object-contain object-left object-bottom pointer-events-none select-none"
             />
-            <div className="absolute right-0 top-[42%] -translate-y-1/2 z-10 w-[min(100%,340px)] hidden sm:block">
-              <div className="testimonial-card shadow-[0_12px_40px_rgba(59,55,88,0.12)]">
-                <SafeImage
-                  src={IMAGES.quoteIcon}
-                  alt=""
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 mb-4"
-                />
-                <p className="text-[15px] leading-relaxed m-0 mb-4 text-primary">
-                  &ldquo;{HERO_TESTIMONIAL.quote}&rdquo;
-                </p>
-                <div className="font-semibold text-sm text-primary">{HERO_TESTIMONIAL.author}</div>
-                <div className="text-xs text-muted mt-0.5">{HERO_TESTIMONIAL.role}</div>
-              </div>
+            <div className="hidden lg:block absolute right-0 top-[20%] z-10 w-[260px]">
+              <HeroTestimonialCard />
             </div>
+          </div>
+          <div className="lg:hidden max-w-[340px]">
+            <HeroTestimonialCard />
           </div>
         </div>
       </div>

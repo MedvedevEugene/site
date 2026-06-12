@@ -77,7 +77,7 @@
   }
 
   .nav-edu-btn {
-    @apply inline-flex items-center gap-1 rounded-[10px] border border-primary bg-white px-4 py-2 text-base hover:bg-cream-bg;
+    @apply inline-flex items-center justify-center gap-1 h-[42px] min-w-[125px] rounded-[10px] border border-primary bg-transparent px-4 text-base font-medium text-primary shrink-0;
   }
 
   .search-shell {
@@ -109,7 +109,7 @@
   }
 
   .testimonial-card {
-    @apply bg-white border border-primary rounded-[20px] p-6 shadow-[0_8px_30px_rgba(59,55,88,0.08)] max-w-[340px];
+    @apply bg-white border border-primary-dark rounded-[10px] p-6 shadow-[0_8px_30px_rgba(59,55,88,0.08)] max-w-[340px];
   }
 
   .pill-tab {
