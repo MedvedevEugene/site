@@ -113,7 +113,7 @@
   }
 
   .testimonial-card--hero {
-    @apply w-[259px] h-[259px] max-w-none p-5 flex flex-col box-border;
+    @apply w-[259px] min-h-[192px] max-w-none p-5 flex flex-col box-border bg-white;
   }
 
   .pill-tab {
