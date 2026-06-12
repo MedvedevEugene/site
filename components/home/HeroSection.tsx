@@ -18,19 +18,23 @@ function resolvePortrait(url?: string) {
 
 function HeroTestimonialCard() {
   return (
-    <div className="testimonial-card shadow-[0_12px_40px_rgba(59,55,88,0.12)]">
+    <div className="testimonial-card testimonial-card--hero shadow-[0_12px_40px_rgba(59,55,88,0.12)]">
       <SafeImage
         src={IMAGES.quoteIcon}
         alt=""
-        width={32}
-        height={32}
-        className="w-8 h-8 mb-4"
+        width={16}
+        height={16}
+        className="w-4 h-4 mb-3"
       />
-      <p className="text-[15px] leading-relaxed m-0 mb-4 text-primary-dark">
+      <p className="text-[12px] leading-[1.45] m-0 mb-auto text-primary-dark">
         &ldquo;{HERO_TESTIMONIAL.quote}&rdquo;
       </p>
-      <div className="font-semibold text-sm text-primary-dark">{HERO_TESTIMONIAL.author}</div>
-      <div className="text-[11px] text-primary-dark/80 mt-0.5">{HERO_TESTIMONIAL.role}</div>
+      <div className="mt-4 pt-2">
+        <div className="font-semibold text-[14px] text-primary-dark leading-tight">
+          {HERO_TESTIMONIAL.author}
+        </div>
+        <div className="text-[11px] text-primary-dark/75 mt-0.5">{HERO_TESTIMONIAL.role}</div>
+      </div>
     </div>
   );
 }
@@ -41,9 +45,8 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
   return (
     <section className="py-8 md:py-10 lg:py-12 bg-cream-bg/40 overflow-hidden">
       <div className="container-site">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 xl:gap-6 items-center">
-          {/* Текст */}
-          <div className="z-10 lg:col-span-5 xl:col-span-5 max-w-[560px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
+          <div className="z-10 lg:col-span-5 max-w-[560px]">
             <h1 className="font-heading text-[clamp(28px,4vw,44px)] font-medium leading-[1.15] m-0 mb-5 text-primary">
               Найди опору, ясность и новый вектор жизни в&nbsp;ИЖСИЗ
             </h1>
@@ -73,26 +76,21 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
             </Link>
           </div>
 
-          {/* Портрет — отдельная колонка, без наложения цитаты */}
-          <div className="lg:col-span-4 xl:col-span-4 flex items-end justify-center lg:justify-start min-h-[320px] sm:min-h-[380px] lg:min-h-[480px]">
+          {/* Крупный портрет + квадратная цитата справа сверху, как на Tilda */}
+          <div className="lg:col-span-7 relative min-h-[380px] sm:min-h-[440px] lg:min-h-[520px] xl:min-h-[560px]">
             <Image
               src={portrait}
               alt=""
-              width={844}
-              height={745}
+              fill
               priority
-              sizes="(max-width: 1024px) 90vw, 33vw"
-              className="w-full max-w-[min(100%,480px)] h-auto object-contain object-bottom pointer-events-none select-none"
+              sizes="(max-width: 1024px) 100vw, 58vw"
+              className="object-contain object-left-bottom pointer-events-none select-none scale-[1.02] origin-bottom-left"
             />
-          </div>
-
-          {/* Цитата — своя колонка справа, как на Tilda */}
-          <div className="hidden lg:flex lg:col-span-3 xl:col-span-3 items-center justify-end">
-            <div className="w-full max-w-[260px]">
+            <div className="hidden lg:block absolute right-0 top-[8%] xl:top-[10%] z-10">
               <HeroTestimonialCard />
             </div>
           </div>
-          <div className="lg:hidden max-w-[340px] -mt-2">
+          <div className="lg:hidden max-w-[280px] mx-auto sm:mx-0 -mt-4">
             <HeroTestimonialCard />
           </div>
         </div>

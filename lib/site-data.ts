@@ -59,7 +59,7 @@ export const CATALOG_PROGRAMS = [
     href: "/business-cource",
     tag: "Профессиональная переподготовка",
     title: "Курс обучения бизнес расстановкам",
-    meta: "6 мес. / 126 часов",
+    meta: "6 мес. / 400 часов",
   },
   {
     href: "/telese-terapiya",
@@ -69,6 +69,7 @@ export const CATALOG_PROGRAMS = [
   },
   {
     href: "/individual-consultations",
+    wide: true,
     tag: "Психологическая помощь",
     title: "Индивидуальные консультации",
     meta: "от 30 минут",

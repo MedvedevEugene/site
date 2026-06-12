@@ -112,6 +112,10 @@
     @apply bg-white border border-primary-dark rounded-[10px] p-6 shadow-[0_8px_30px_rgba(59,55,88,0.08)] max-w-[340px];
   }
 
+  .testimonial-card--hero {
+    @apply w-[259px] h-[259px] max-w-none p-5 flex flex-col box-border;
+  }
+
   .pill-tab {
     @apply rounded-full border border-primary px-5 py-2.5 text-sm font-medium transition-colors;
   }

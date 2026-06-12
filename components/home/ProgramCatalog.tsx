@@ -7,14 +7,15 @@ export function ProgramCatalog() {
     <section className="section bg-white">
       <div className="container-site">
         <h2 className="section-title">Каталог наших программ</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {CATALOG_PROGRAMS.map((p) => {
             const featured = "featured" in p && p.featured;
+            const wide = featured || ("wide" in p && p.wide);
             return (
               <Link
                 key={p.href}
                 href={p.href}
-                className={`catalog-card ${featured ? "catalog-card--featured" : "catalog-card--default"} group`}
+                className={`catalog-card ${featured ? "catalog-card--featured" : "catalog-card--default"} ${wide ? "lg:col-span-2" : ""} group`}
               >
                 {featured && (
                   <Image
