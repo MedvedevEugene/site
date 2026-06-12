@@ -41,9 +41,9 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
   return (
     <section className="py-8 md:py-10 lg:py-12 bg-cream-bg/40 overflow-hidden">
       <div className="container-site">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 xl:gap-8 items-center">
-          {/* Левая колонка — как на Tilda */}
-          <div className="z-10 lg:col-span-5 max-w-[560px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 xl:gap-6 items-center">
+          {/* Текст */}
+          <div className="z-10 lg:col-span-5 xl:col-span-5 max-w-[560px]">
             <h1 className="font-heading text-[clamp(28px,4vw,44px)] font-medium leading-[1.15] m-0 mb-5 text-primary">
               Найди опору, ясность и новый вектор жизни в&nbsp;ИЖСИЗ
             </h1>
@@ -73,22 +73,26 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
             </Link>
           </div>
 
-          {/* Правая зона — портрет слева, цитата справа (не на лице) */}
-          <div className="lg:col-span-7 relative min-h-[360px] sm:min-h-[420px] lg:min-h-[520px]">
+          {/* Портрет — отдельная колонка, без наложения цитаты */}
+          <div className="lg:col-span-4 xl:col-span-4 flex items-end justify-center lg:justify-start min-h-[320px] sm:min-h-[380px] lg:min-h-[480px]">
             <Image
               src={portrait}
               alt=""
               width={844}
               height={745}
               priority
-              sizes="(max-width: 1024px) 100vw, 58vw"
-              className="absolute left-0 bottom-0 w-[min(100%,560px)] sm:w-[min(88%,520px)] lg:w-[min(78%,560px)] h-auto max-h-[92%] object-contain object-left object-bottom pointer-events-none select-none"
+              sizes="(max-width: 1024px) 90vw, 33vw"
+              className="w-full max-w-[min(100%,480px)] h-auto object-contain object-bottom pointer-events-none select-none"
             />
-            <div className="hidden lg:block absolute right-0 top-[20%] z-10 w-[260px]">
+          </div>
+
+          {/* Цитата — своя колонка справа, как на Tilda */}
+          <div className="hidden lg:flex lg:col-span-3 xl:col-span-3 items-center justify-end">
+            <div className="w-full max-w-[260px]">
               <HeroTestimonialCard />
             </div>
           </div>
-          <div className="lg:hidden max-w-[340px]">
+          <div className="lg:hidden max-w-[340px] -mt-2">
             <HeroTestimonialCard />
           </div>
         </div>

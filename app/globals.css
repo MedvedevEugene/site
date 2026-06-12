@@ -97,7 +97,7 @@
   }
 
   .catalog-card {
-    @apply relative overflow-hidden rounded-[24px] p-7 min-h-[220px] flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1;
+    @apply relative overflow-hidden rounded-[24px] p-7 min-h-[242px] flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1;
   }
 
   .catalog-card--featured {
