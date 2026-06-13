@@ -18,7 +18,7 @@ function resolvePortrait(url?: string) {
 
 function HeroTestimonialCard() {
   return (
-    <div className="testimonial-card testimonial-card--hero shadow-[0_12px_40px_rgba(39,35,68,0.1)]">
+    <div className="testimonial-card testimonial-card--hero">
       <SafeImage
         src={IMAGES.quoteIcon}
         alt=""
@@ -29,11 +29,11 @@ function HeroTestimonialCard() {
       <p className="text-[12px] leading-[1.55] m-0 text-[#272344]">
         &ldquo;{HERO_TESTIMONIAL.quote}&rdquo;
       </p>
-      <div className="mt-4">
-        <div className="font-semibold text-[14px] text-[#272344] leading-tight">
+      <div className="mt-auto pt-4">
+        <div className="font-semibold text-[14px] text-[#272344] leading-[1.55]">
           {HERO_TESTIMONIAL.author}
         </div>
-        <div className="text-[11px] text-[#272344]/80 mt-0.5">{HERO_TESTIMONIAL.role}</div>
+        <div className="text-[11px] text-[#272344] leading-[1.55] mt-0.5">{HERO_TESTIMONIAL.role}</div>
       </div>
     </div>
   );
@@ -43,57 +43,50 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
   const portrait = resolvePortrait(heroPortrait);
 
   return (
-    <section className="py-8 md:py-10 lg:py-12 bg-white overflow-hidden">
+    <section className="hero-tilda bg-white overflow-hidden">
       <div className="container-site">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
-          <div className="z-10 lg:col-span-3 max-w-[480px]">
-            <h1 className="font-heading text-[clamp(28px,4vw,44px)] font-medium leading-[1.15] m-0 mb-5 text-primary">
+        <div className="hero-tilda__stage">
+          <div className="hero-tilda__content">
+            <h1 className="hero-tilda__title">
               Найди опору, ясность и новый вектор жизни в&nbsp;ИЖСИЗ
             </h1>
-            <p className="text-lg text-muted m-0 mb-6 leading-relaxed">
+            <p className="hero-tilda__subtitle">
               Обучение и расстановки, которые помогают обрести устойчивость в жизни, отношениях и бизнесе
             </p>
-            <div className="flex flex-col gap-2.5 mb-8">
+            <div className="hero-tilda__tags">
               {HERO_TAG_ROWS.map((row) => (
-                <div key={row.join("-")} className="flex flex-wrap gap-2.5">
+                <div key={row.join("-")} className="hero-tilda__tag-row">
                   {row.map((tag) => (
-                    <span key={tag} className="tag-white">
+                    <span key={tag} className="hero-tilda__tag">
                       {tag}
                     </span>
                   ))}
                 </div>
               ))}
             </div>
-            <Link href="/catalog" className="btn btn-primary-solid inline-flex">
+            <Link href="/catalog" className="hero-tilda__cta">
               <SafeImage
                 src={IMAGES.logoCircle}
                 alt=""
-                width={22}
-                height={22}
-                className="w-[22px] h-[22px]"
+                width={19}
+                height={19}
+                className="w-[19px] h-[19px] shrink-0"
               />
               Подобрать программу
             </Link>
           </div>
 
-          {/* Портрет и цитата — отдельные колонки, размеры как на lifeinstitute.ru */}
-          <div className="lg:col-span-9 lg:grid lg:grid-cols-[minmax(0,1fr)_259px] lg:gap-3 xl:gap-4 items-start min-h-[380px] sm:min-h-[440px] lg:min-h-[540px]">
-            <div className="relative flex items-end justify-start self-end min-h-[320px] sm:min-h-[400px] lg:min-h-[540px] overflow-visible">
-              <Image
-                src={portrait}
-                alt=""
-                width={584}
-                height={515}
-                priority
-                sizes="(max-width: 1024px) 100vw, 52vw"
-                className="w-[min(120%,760px)] max-w-none max-h-[610px] h-auto object-contain object-left-bottom pointer-events-none select-none lg:-ml-8 xl:-ml-10"
-              />
-            </div>
-            <div className="hidden lg:block self-start pt-8 xl:pt-10 shrink-0">
-              <HeroTestimonialCard />
-            </div>
-          </div>
-          <div className="lg:hidden max-w-[259px] mx-auto sm:mx-0 -mt-2">
+          <Image
+            src={portrait}
+            alt=""
+            width={584}
+            height={515}
+            priority
+            sizes="(max-width: 1023px) 85vw, 584px"
+            className="hero-tilda__portrait"
+          />
+
+          <div className="hero-tilda__quote">
             <HeroTestimonialCard />
           </div>
         </div>
