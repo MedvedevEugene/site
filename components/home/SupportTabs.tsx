@@ -30,8 +30,8 @@ export function SupportTabs() {
               <h3 className="font-heading text-[clamp(20px,2.5vw,28px)] font-medium m-0 mb-4 leading-snug">{tab.title}</h3>
               <p className="text-muted m-0 leading-relaxed">{tab.text}</p>
             </div>
-            <div className="relative rounded-[20px] overflow-hidden border border-border bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)] aspect-[4/3]">
-              <Image src={tab.image} alt="" fill className="object-cover object-top" sizes="(max-width: 1024px) 100vw, 50vw" />
+            <div className="relative rounded-[20px] overflow-hidden border border-border bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)] aspect-[630/310] max-h-[310px]">
+              <Image src={tab.image} alt="" fill className="object-contain object-top" sizes="(max-width: 1024px) 100vw, 50vw" />
             </div>
           </div>
         </div>

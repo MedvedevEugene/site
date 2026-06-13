@@ -60,25 +60,30 @@ const PRICING_FALLBACK = [
 ];
 
 const STEPS = [
-  "Знакомство и уточнение запроса",
-  "Подбор специалиста и формата",
-  "Первая встреча",
-  "Дальнейшая работа",
-  "Поддержка и сопровождение",
-  "Конфиденциальность и этика",
+  { question: "1. Знакомство и уточнение запроса", answer: "На первом этапе мы внимательно выслушиваем вас, помогаем сформулировать запрос и понять, с чем вы пришли." },
+  { question: "2. Подбор специалиста и формата", answer: "Подбираем специалиста и формат работы под ваш запрос — разовую консультацию или серию встреч." },
+  { question: "3. Первая встреча", answer: "Вы рассказываете о ситуации, специалист помогает увидеть суть происходящего и предложить следующий шаг." },
+  { question: "4. Дальнейшая работа", answer: "При необходимости продолжаем работу в выбранном формате — с регулярными встречами и поддержкой." },
+  { question: "5. Поддержка и сопровождение", answer: "После основной работы можем предложить сопровождение, чтобы закрепить результат." },
+  { question: "6. Конфиденциальность и этика", answer: "Всё обсуждаемое остаётся в рамках профессионального и бережного взаимодействия." },
 ];
 
 const METHODS = [
-  { title: "Клиент-центрированный подход", text: "бережная работа, в которой внимание уделяется вашему запросу, состоянию и внутреннему темпу" },
-  { title: "Системная семейная терапия", text: "рассматривает ситуацию шире – через связи, отношения и влияние семейной системы на текущую жизнь" },
-  { title: "Транзактный анализ", text: "позволяет лучше понять внутренние роли, способы общения и повторяющиеся сценарии в отношениях и жизни" },
-  { title: "Гештальт-терапия", text: "помогает замечать чувства и потребности здесь и сейчас, возвращая контакт с собой" },
-  { title: "Когнитивно-поведенческий подход", text: "работает с мыслями и поведением, которые поддерживают сложные состояния" },
-  { title: "Телесно-ориентированная терапия", text: "учитывает связь эмоций, тела и жизненного опыта" },
+  { title: "Клиент-центрированный подход", text: "бережная работа, в которой внимание уделяется вашему запросу, состоянию и внутреннему темпу", icon: IMAGES.methodIcon1 },
+  { title: "Системная семейная терапия", text: "рассматривает ситуацию шире – через связи, отношения и влияние семейной системы на текущую жизнь", icon: IMAGES.methodIcon2 },
+  { title: "Транзактный анализ", text: "позволяет лучше понять внутренние роли, способы общения и повторяющиеся сценарии в отношениях и жизни", icon: IMAGES.methodIcon3 },
+  { title: "Гештальт-терапия", text: "помогает замечать чувства и потребности здесь и сейчас, возвращая контакт с собой", icon: IMAGES.methodIcon4 },
+  { title: "Когнитивно-поведенческий подход", text: "работает с мыслями и поведением, которые поддерживают сложные состояния", icon: IMAGES.methodIcon5 },
+  { title: "Телесно-ориентированная терапия", text: "учитывает связь эмоций, тела и жизненного опыта", icon: IMAGES.methodIcon6 },
+  { title: "Авторская методология ИРЖ", text: "целостный подход института, соединяющий разные методы для более глубокой и многослойной работы с запросом", icon: IMAGES.methodIcon7 },
 ];
 
 const SPECIALISTS_FALLBACK = [
   { slug: "asya-bykovskaya", name: "Ася Быковская", role: "Руководитель института, преподаватель, расстановщик, терапевт", photoUrl: "https://static.tildacdn.com/tild3962-6236-4536-a463-663630633963/8B7A2059_1.png" },
+  { slug: "ekaterina-skulochenko", name: "Екатерина Скулоченко", role: "Заместитель телесного направления, расстановщик, терапевт", photoUrl: "https://static.tildacdn.com/tild6363-3539-4761-a332-386339353837/telegram-cloud-photo.png" },
+  { slug: "svetlana-elistratova", name: "Светлана Елистратова", role: "Заместитель учебной части, преподаватель, расстановщик, терапевт", photoUrl: "https://static.tildacdn.com/tild3039-3963-4365-b732-613738356331/image_31.png" },
+  { slug: "regina-karimulina", name: "Регина Каримулина", role: "Расстановщик, преподаватель, терапевт", photoUrl: "https://static.tildacdn.com/tild3465-3034-4232-b531-666636393961/c_1.jpg" },
+  { slug: "tamara-ralkova", name: "Тамара Ралькова", role: "Расстановщик, преподаватель, терапевт", photoUrl: "https://static.tildacdn.com/tild3465-3034-4232-b531-666636393961/c_1.jpg" },
 ];
 
 const FAQ_ITEMS = [
@@ -93,10 +98,10 @@ const FAQ_ITEMS = [
 ];
 
 export default async function IndividualConsultationsPage() {
-  const [dbTariffs, consultHero, quizTeam, dbSpecialists] = await Promise.all([
+  const [dbTariffs, consultHero, quizCover, dbSpecialists] = await Promise.all([
     getPublishedTariffs("consultations"),
     getMediaUrl("consult-hero", IMAGES.consultHero),
-    getMediaUrl("quiz-team", IMAGES.quizTeam),
+    getMediaUrl("quiz-cover", IMAGES.quizCover),
     getPublishedSpecialists(),
   ]);
   const pricing =
@@ -124,33 +129,36 @@ export default async function IndividualConsultationsPage() {
 
   return (
     <>
-      <section className="py-8 md:py-12 bg-cream-bg">
+      <section className="py-8 md:py-12 bg-[#f9f8e8]">
         <div className="container-site">
           <div className="text-sm text-muted mb-6">
             <Link href="/">Главная</Link> / Индивидуальные консультации
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <div>
-              <h1 className="font-heading text-[clamp(28px,4vw,42px)] font-medium leading-tight m-0 mb-5">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(320px,520px)] gap-8 lg:gap-10 items-start">
+            <div className="max-w-[596px]">
+              <h1 className="font-body text-[clamp(28px,3.4vw,34px)] font-semibold leading-[1.2] m-0 mb-5 text-primary">
                 Индивидуальные консультации онлайн – чтобы лучше понять свою ситуацию и найти опору
               </h1>
-              <p className="text-lg text-muted m-0 mb-7 max-w-[560px]">
+              <p className="text-xl text-muted m-0 mb-8 max-w-[540px] leading-relaxed">
                 Спокойно разбираем личные и жизненные запросы, помогаем увидеть суть происходящего и подобрать подходящий формат дальнейшей работы.
               </p>
               <div className="flex flex-wrap gap-3">
-                <Link href="#specialists" className="btn btn-primary-solid">Выбрать специалиста</Link>
-                <Link href="#quiz" className="btn btn-outline uppercase text-[11px] tracking-wide">Получить консультацию</Link>
+                <Link href="#specialists" className="btn btn-primary-solid normal-case text-sm px-6">Выбрать специалиста</Link>
+                <Link href="#quiz" className="btn btn-outline normal-case text-sm px-6">Получить консультацию</Link>
               </div>
             </div>
-            <div className="relative min-h-[360px]">
-              <Image src={consultHero} alt="" fill className="object-contain object-center" sizes="(max-width: 1024px) 100vw, 50vw" />
+            <div className="relative min-h-[320px] sm:min-h-[400px] lg:min-h-[436px] lg:-mr-6">
+              <Image src={consultHero} alt="" fill className="object-contain object-right-top scale-[1.05] origin-top-right" sizes="(max-width: 1024px) 100vw, 520px" priority />
             </div>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6 mt-14 pt-8 border-t border-border/60">
             {FEATURES.map((f) => (
-              <div key={f.label}>
-                <div className="font-heading text-lg font-medium mb-1">• {f.value}</div>
-                <div className="text-sm text-muted">{f.label}</div>
+              <div key={f.label} className="flex gap-3 items-start">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 shrink-0" />
+                <div>
+                  <div className="font-body text-2xl font-medium mb-1 text-primary leading-tight">{f.value}</div>
+                  <div className="text-base text-muted">{f.label}</div>
+                </div>
               </div>
             ))}
           </div>
@@ -160,13 +168,13 @@ export default async function IndividualConsultationsPage() {
       <section className="section bg-[#fdfbf4]">
         <div className="container-site">
           <h2 className="section-title">Когда это помогает?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
             {TOPICS.map((t) => (
               <div key={t.title} className="topic-card group">
                 <Image src={t.image} alt="" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 33vw" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#3d3447]/95 via-[#3d3447]/50 to-[#c4b4a6]/30" />
-                <div className="relative z-10">
-                  <div className="w-9 h-9 rounded-full bg-white/90 flex items-center justify-center text-primary mb-auto mb-6">›</div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#272344]/95 via-[#272344]/45 to-transparent" />
+                <div className="relative z-10 min-h-[320px] flex flex-col">
+                  <div className="w-9 h-9 rounded-full bg-white/90 flex items-center justify-center text-primary mb-auto text-lg leading-none">›</div>
                   <h3 className="font-heading text-xl font-medium m-0 mb-2">{t.title}</h3>
                   <p className="text-sm text-white/90 m-0 leading-relaxed">{t.text}</p>
                 </div>
@@ -179,7 +187,7 @@ export default async function IndividualConsultationsPage() {
       <section className="section bg-white">
         <div className="container-site">
           <h2 className="section-title">Форматы и стоимость</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-10">
             {pricing.map((p) => (
               <div key={p.title} className="price-card-tilda relative">
                 {p.iconUrl && (
@@ -201,14 +209,7 @@ export default async function IndividualConsultationsPage() {
 
       <section className="section-cream">
         <div className="container-site max-w-[800px]">
-          <div className="flex flex-col gap-4">
-            {STEPS.map((step, i) => (
-              <div key={step} className="accordion-item">
-                <span>{i + 1}. {step}</span>
-                <span className="text-2xl font-light">+</span>
-              </div>
-            ))}
-          </div>
+          <FAQ items={STEPS} />
         </div>
       </section>
 
@@ -218,7 +219,9 @@ export default async function IndividualConsultationsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {METHODS.map((m) => (
               <div key={m.title} className="methods-card">
-                <div className="w-16 h-16 rounded-full bg-[#ebe4f8] mb-6" />
+                <div className="relative w-16 h-16 rounded-full bg-[#ebe4f8] mb-6 flex items-center justify-center">
+                  <Image src={m.icon} alt="" width={32} height={32} className="w-8 h-8 object-contain" />
+                </div>
                 <h3 className="font-heading text-lg font-medium m-0 mb-3">{m.title}</h3>
                 <p className="text-sm text-muted m-0 leading-relaxed">{m.text}</p>
               </div>
@@ -230,14 +233,14 @@ export default async function IndividualConsultationsPage() {
       <section className="section bg-white" id="quiz">
         <div className="container-site">
           <h2 className="section-title">Подберем вам специалиста</h2>
-          <div className="relative rounded-[28px] overflow-hidden min-h-[360px] flex items-center justify-center text-center text-white p-8">
-            <Image src={quizTeam} alt="" fill className="object-cover" sizes="100vw" />
-            <div className="absolute inset-0 bg-black/55" />
+          <div className="relative rounded-[28px] overflow-hidden min-h-[420px] md:min-h-[500px] flex items-center justify-center text-center text-white p-8 mt-10">
+            <Image src={quizCover} alt="" fill className="object-cover object-center" sizes="100vw" priority />
+            <div className="absolute inset-0 bg-black/45" />
             <div className="relative z-10 max-w-[640px]">
               <h3 className="font-heading text-[clamp(22px,3vw,32px)] font-medium m-0 mb-4">
                 Ответьте на несколько вопросов и мы подберем вам специалиста
               </h3>
-              <p className="m-0 mb-6 text-white/90">
+              <p className="m-0 mb-6 text-white/90 text-lg">
                 Квиз займёт 1–2 минуты. По вашим ответам мы предложим подходящий формат работы и поможем выбрать специалиста под ваш запрос.
               </p>
               <button type="button" className="btn btn-accent rounded-full px-8">Начать →</button>

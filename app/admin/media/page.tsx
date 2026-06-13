@@ -7,7 +7,7 @@ import { IMAGES } from "@/lib/site-data";
 const PRESETS = [
   { key: "hero-portrait", label: "Hero — портрет", url: IMAGES.heroPortrait },
   { key: "consult-hero", label: "Консультации — hero", url: IMAGES.consultHero },
-  { key: "quiz-team", label: "Квиз — фото команды", url: IMAGES.quizTeam },
+  { key: "quiz-cover", label: "Квиз — фон", url: IMAGES.quizCover },
   { key: "diploma", label: "Диплом", url: IMAGES.diploma },
 ];
 

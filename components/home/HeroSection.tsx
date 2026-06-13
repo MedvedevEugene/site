@@ -46,7 +46,7 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
     <section className="py-8 md:py-10 lg:py-12 bg-white overflow-hidden">
       <div className="container-site">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
-          <div className="z-10 lg:col-span-4 xl:col-span-5 max-w-[560px]">
+          <div className="z-10 lg:col-span-3 max-w-[480px]">
             <h1 className="font-heading text-[clamp(28px,4vw,44px)] font-medium leading-[1.15] m-0 mb-5 text-primary">
               Найди опору, ясность и новый вектор жизни в&nbsp;ИЖСИЗ
             </h1>
@@ -77,19 +77,19 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
           </div>
 
           {/* Портрет и цитата — отдельные колонки, размеры как на lifeinstitute.ru */}
-          <div className="lg:col-span-8 xl:col-span-7 lg:grid lg:grid-cols-[minmax(0,1fr)_259px] lg:gap-3 xl:gap-5 items-end min-h-[380px] sm:min-h-[440px] lg:min-h-[515px]">
-            <div className="relative flex items-end justify-start min-h-[320px] sm:min-h-[400px] lg:min-h-[515px] overflow-hidden lg:overflow-visible">
+          <div className="lg:col-span-9 lg:grid lg:grid-cols-[minmax(0,1fr)_259px] lg:gap-3 xl:gap-5 items-start min-h-[400px] sm:min-h-[480px] lg:min-h-[620px]">
+            <div className="relative flex items-end justify-start self-end min-h-[360px] sm:min-h-[440px] lg:min-h-[620px] overflow-visible">
               <Image
                 src={portrait}
                 alt=""
-                width={844}
-                height={745}
+                width={584}
+                height={515}
                 priority
-                sizes="(max-width: 1024px) 95vw, 50vw"
-                className="w-full max-w-[584px] max-h-[515px] h-auto object-contain object-left-bottom pointer-events-none select-none lg:-ml-6 xl:-ml-10"
+                sizes="(max-width: 1024px) 100vw, 58vw"
+                className="w-[min(135%,860px)] max-w-none max-h-[640px] h-auto object-contain object-left-bottom pointer-events-none select-none lg:-ml-6 xl:-ml-12 2xl:-ml-16"
               />
             </div>
-            <div className="hidden lg:block self-start mt-[20%] xl:mt-[22%] shrink-0">
+            <div className="hidden lg:block self-start pt-6 xl:pt-8 shrink-0">
               <HeroTestimonialCard />
             </div>
           </div>
