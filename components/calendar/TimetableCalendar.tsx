@@ -142,7 +142,7 @@ export function TimetableCalendar({ compact }: { compact?: boolean }) {
   }
 
   return (
-    <div className={`rounded-[24px] border border-border overflow-hidden bg-gradient-to-br from-[#f0faf9] via-white to-cream-bg ${compact ? "" : "shadow-[0_8px_30px_rgba(59,55,88,0.06)]"}`}>
+    <div className={`overflow-hidden bg-gradient-to-br from-[#f0faf9] via-white to-cream-bg ${compact ? "rounded-none border-0" : "rounded-[24px] border border-border shadow-[0_8px_30px_rgba(59,55,88,0.06)]"}`}>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 md:p-5 border-b border-border bg-white/80">
         <div className="flex items-center gap-2 flex-wrap">
           <button type="button" className="pill-tab bg-white text-sm py-2" onClick={() => setCursor(startOfWeek(new Date()))}>

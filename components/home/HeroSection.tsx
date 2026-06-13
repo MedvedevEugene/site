@@ -43,7 +43,7 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
   const portrait = resolvePortrait(heroPortrait);
 
   return (
-    <section className="py-8 md:py-10 lg:py-12 bg-cream-bg/40 overflow-hidden">
+    <section className="py-8 md:py-10 lg:py-12 bg-white overflow-hidden">
       <div className="container-site">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           <div className="z-10 lg:col-span-4 xl:col-span-5 max-w-[560px]">

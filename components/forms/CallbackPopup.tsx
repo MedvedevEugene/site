@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 
 interface CallbackPopupProps {
   open: boolean;
@@ -51,7 +51,7 @@ export function CallbackPopup({ open, onClose }: CallbackPopupProps) {
               <input name="name" required placeholder="Имя" className="border border-border rounded-[10px] px-4 py-3 text-base" />
               <input name="phone" required placeholder="Телефон" className="border border-border rounded-[10px] px-4 py-3 text-base" />
               <select name="contact" className="border border-border rounded-[10px] px-4 py-3 text-base">
-                <option value="phone">Phone</option>
+                <option value="phone">Телефон</option>
                 <option value="telegram">Telegram</option>
                 <option value="whatsapp">WhatsApp</option>
                 <option value="max">Max</option>
@@ -68,15 +68,32 @@ export function CallbackPopup({ open, onClose }: CallbackPopupProps) {
 export function CookieBanner() {
   const [visible, setVisible] = useState(true);
 
+  useEffect(() => {
+    if (localStorage.getItem("cookie-accepted")) {
+      setVisible(false);
+    }
+  }, []);
+
   if (!visible) return null;
 
+  function accept() {
+    localStorage.setItem("cookie-accepted", "1");
+    setVisible(false);
+  }
+
   return (
-    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-md z-[150] bg-white border border-border rounded-[20px] p-5 shadow-[0_5px_15px_rgba(0,0,0,0.1)]">
-      <p className="text-sm text-muted m-0 mb-4">
-        Используя сайт, вы соглашаетесь на работу файлов cookie. Обработка данных ведётся по{" "}
+    <div className="fixed bottom-5 right-5 left-5 md:left-auto z-[150] md:max-w-[480px] lg:max-w-[560px] bg-[#ebebeb] rounded-[10px] p-5 shadow-[0_5px_15px_rgba(0,0,0,0.08)]">
+      <p className="text-sm text-primary m-0 mb-4 leading-relaxed">
+        Используя сайт, вы соглашаетесь на работу файлов cookie. Они помогают нам лучше настроить
+        взаимодействие и поддерживать стабильное, понятное цифровое пространство. Обработка данных
+        ведётся по{" "}
         <a href="/privacy" className="underline">Политике персональных данных</a>.
       </p>
-      <button type="button" className="btn btn-primary w-full" onClick={() => setVisible(false)}>
+      <button
+        type="button"
+        className="rounded-[5px] border border-[#999] bg-white px-6 py-2.5 text-sm font-medium text-primary hover:bg-cream-bg"
+        onClick={accept}
+      >
         Принимаю
       </button>
     </div>

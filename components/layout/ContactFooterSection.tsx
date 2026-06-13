@@ -21,6 +21,7 @@ function FooterLeadForm() {
           name: data.get("name"),
           phone: data.get("phone"),
           email: data.get("email"),
+          contact: data.get("contact"),
         }),
       });
     } catch {
@@ -40,6 +41,12 @@ function FooterLeadForm() {
         <input name="phone" required placeholder="+7 (000) 000-00-00" className="rounded-[10px] border-0 px-4 py-3.5 text-base text-primary" />
         <input name="email" type="email" placeholder="Почта" className="rounded-[10px] border-0 px-4 py-3.5 text-base text-primary" />
       </div>
+      <select name="contact" className="rounded-[10px] border-0 px-4 py-3.5 text-base text-primary bg-white">
+        <option value="phone">Телефон</option>
+        <option value="telegram">Telegram</option>
+        <option value="whatsapp">WhatsApp</option>
+        <option value="max">Max</option>
+      </select>
       <label className="flex items-start gap-2 text-sm text-white/80">
         <input type="checkbox" required className="mt-1" />
         <span>
@@ -47,7 +54,7 @@ function FooterLeadForm() {
           <Link href="/privacy" className="underline">политикой конфиденциальности</Link>.
         </span>
       </label>
-      <button type="submit" className="btn btn-accent self-start mt-1">Отправить заявку</button>
+      <button type="submit" className="btn btn-primary-solid self-start mt-1">Отправить заявку</button>
     </form>
   );
 }
@@ -59,7 +66,7 @@ export function ContactFooterSection() {
         <div className="bg-primary-card rounded-[32px] p-8 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14">
           <div>
             <h2 className="font-heading text-[clamp(22px,3vw,32px)] font-medium m-0 mb-4 text-white leading-snug">
-              Нужна опора, терапия или обучение? Мы подскажем.
+              Нужна опора, терапия<br />или обучение? Мы подскажем.
             </h2>
             <p className="text-white/80 m-0 leading-relaxed">
               Оставьте контакты – ответим в течение дня, поможем выбрать формат (личная терапия, группы,

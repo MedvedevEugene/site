@@ -16,7 +16,7 @@ export function PathSection() {
         <p className="text-muted max-w-[560px] mx-auto m-0 mb-8">
           Кто-то приходит за поддержкой, кто-то – за профессией. Выберите своё направление.
         </p>
-        <Link href="/catalog" className="btn btn-primary-solid">Выбрать свой путь</Link>
+        <Link href="#catalog" className="btn btn-primary-solid">Выбрать свой путь</Link>
       </div>
       <div className="h-12 bg-primary-footer curve-top" />
     </section>

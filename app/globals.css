@@ -48,7 +48,11 @@
   }
 
   .btn-glass {
-    @apply rounded-full border border-white/40 bg-white/25 text-white backdrop-blur-md px-8 py-3 text-sm hover:bg-white/35;
+    @apply rounded-[30px] border border-white bg-[#cfced5] text-white px-8 py-3 text-sm font-semibold hover:bg-[#c4c3ca];
+  }
+
+  .btn-resonance {
+    @apply inline-flex items-center justify-center rounded-[30px] border border-white bg-[#cfced5] text-white px-8 py-3 text-sm font-semibold;
   }
 
   .btn-accent {
@@ -64,7 +68,7 @@
   }
 
   .section-title {
-    @apply font-heading text-center text-[clamp(24px,3vw,36px)] font-medium m-0 mb-3 text-primary;
+    @apply font-body text-center text-[clamp(24px,3vw,36px)] font-semibold m-0 mb-3 text-primary;
   }
 
   .section-subtitle {
@@ -97,15 +101,39 @@
   }
 
   .catalog-card {
-    @apply relative overflow-hidden rounded-[24px] p-7 min-h-[242px] flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1;
+    @apply relative overflow-hidden rounded-[20px] px-[30px] py-[30px] min-h-[242px] flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1;
   }
 
   .catalog-card--featured {
     @apply bg-[#f0f4f9];
   }
 
+  .catalog-card--cream {
+    @apply bg-[#f9f8e8];
+  }
+
+  .catalog-card--white {
+    @apply bg-white border border-[#efefef];
+  }
+
   .catalog-card--default {
     @apply bg-cream-pill;
+  }
+
+  .video-tab-bar {
+    @apply flex w-full max-w-[720px] mx-auto border border-primary-dark rounded-[3px] overflow-hidden mb-8;
+  }
+
+  .video-tab {
+    @apply flex-1 py-3 px-4 text-sm font-medium text-primary-dark bg-white border-r border-primary-dark last:border-r-0 transition-colors;
+  }
+
+  .video-tab-active {
+    @apply bg-primary-dark text-white;
+  }
+
+  .calendar-shell {
+    @apply rounded-[16px] border border-[#eee] overflow-hidden bg-white;
   }
 
   .testimonial-card {

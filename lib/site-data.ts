@@ -10,6 +10,7 @@ export const IMAGES = {
   catalogDecor: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
   spiral: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
   supportChat: `${CDN}/tild3539-6431-4765-a639-383164353762/Frame_56.png`,
+  videoPoster: `${CDN}/tild6664-3738-4963-a632-303161336434/Frame_90.png`,
   featureCompass: `${CDN}/tild3838-3430-4339-b238-363035623439/image_17.png`,
   featureAtom: `${CDN}/tild3764-3864-4939-b437-303535336566/image_18.png`,
   featureMixer: `${CDN}/tild3764-3333-4532-b031-623163313531/image_19.png`,
@@ -50,6 +51,7 @@ export const CATALOG_PROGRAMS = [
   {
     href: "/base-cource",
     featured: true,
+    tone: "featured" as const,
     tag: "Профессиональная переподготовка",
     badge: "Программа 2026",
     title: "Базовый курс обучения семейным расстановкам",
@@ -57,12 +59,14 @@ export const CATALOG_PROGRAMS = [
   },
   {
     href: "/business-cource",
+    tone: "cream" as const,
     tag: "Профессиональная переподготовка",
     title: "Курс обучения бизнес расстановкам",
     meta: "6 мес. / 400 часов",
   },
   {
     href: "/telese-terapiya",
+    tone: "white" as const,
     tag: "Внутренний курс",
     title: "Продвинутый курс по расстановкам",
     meta: "10 мес. / 777 часов",
@@ -70,18 +74,21 @@ export const CATALOG_PROGRAMS = [
   {
     href: "/individual-consultations",
     wide: true,
+    tone: "cream" as const,
     tag: "Психологическая помощь",
     title: "Индивидуальные консультации",
     meta: "от 30 минут",
   },
   {
     href: "/rasstanovochnye-gruppy",
+    tone: "cream" as const,
     tag: "Мероприятия",
     title: "Расстановочные группы",
     meta: "Очно / онлайн",
   },
   {
     href: "/market",
+    tone: "cream" as const,
     tag: "Магазин",
     title: "Маркет развивающих товаров",
     meta: "Круглосуточно",
@@ -92,7 +99,7 @@ export const RESONANCE_CARDS = [
   { title: "Стать расстановщиком", image: IMAGES.resonance1, href: "/base-cource" },
   { title: "Личная терапия в безопасном формате", image: IMAGES.resonance2, href: "/individual-consultations" },
   { title: "Наладить отношения в семье", image: IMAGES.resonance3, href: "/individual-consultations" },
-  { title: "Снять тревогу и вернуть энергию", image: IMAGES.resonance4, href: "/psychological-help" },
+  { title: "Снять тревогу и вернуть энергию", image: IMAGES.resonance4, href: "/individual-consultations" },
   { title: "Деньги и карьерные развилки", image: IMAGES.resonance5, href: "/business-cource" },
 ] as const;
 
@@ -134,9 +141,9 @@ export const FEATURE_PILLARS = [
 ] as const;
 
 export const VIDEO_TABS = [
-  { id: "offline", label: "Очный формат" },
-  { id: "online", label: "Онлайн практика" },
-  { id: "lecture", label: "Онлайн лекция" },
+  { id: "offline", label: "Очный формат", poster: IMAGES.videoPoster },
+  { id: "online", label: "Онлайн практика", poster: IMAGES.videoPoster },
+  { id: "lecture", label: "Онлайн лекция", poster: IMAGES.videoPoster },
 ] as const;
 
 export const FOOTER_COLUMNS = {
@@ -151,12 +158,10 @@ export const FOOTER_COLUMNS = {
   about: {
     title: "ОБ ИРЖ",
     links: [
-      { label: "О нас", href: "/information-about-the-educational-organization" },
       { label: "Статьи", href: "/blog" },
       { label: "Расписание", href: "/timetable" },
       { label: "Расстановочные группы", href: "/rasstanovochnye-gruppy" },
       { label: "Психологическая помощь", href: "/individual-consultations" },
-      { label: "Специалисты", href: "/specialists" },
       { label: "Маркет развивающих товаров", href: "/market" },
       { label: "Индивидуальные расстановки", href: "/individual-consultations" },
       { label: "Вебинары", href: "/video-materials" },

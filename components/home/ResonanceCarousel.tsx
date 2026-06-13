@@ -9,37 +9,51 @@ export function ResonanceCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
 
   function scroll(dir: -1 | 1) {
-    trackRef.current?.scrollBy({ left: dir * 320, behavior: "smooth" });
+    trackRef.current?.scrollBy({ left: dir * 400, behavior: "smooth" });
   }
 
   return (
     <section className="section bg-white overflow-hidden">
       <div className="container-site">
         <h2 className="section-title">Что вам откликается сейчас?</h2>
-        <div className="relative">
+        <div className="relative mt-10">
           <button
             type="button"
             aria-label="Назад"
             onClick={() => scroll(-1)}
-            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-xl bg-primary/90 text-white items-center justify-center border-0"
+            className="hidden md:flex absolute -left-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-xl bg-primary/90 text-white items-center justify-center border-0"
           >
             ‹
           </button>
           <div
             ref={trackRef}
-            className="flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex gap-5 md:gap-10 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {RESONANCE_CARDS.map((card) => (
               <Link
                 key={card.title}
                 href={card.href}
-                className="relative shrink-0 w-[280px] sm:w-[300px] h-[420px] rounded-[28px] overflow-hidden snap-start group"
+                className="relative shrink-0 w-[280px] sm:w-[320px] md:w-[360px] aspect-[3/4] rounded-[28px] overflow-hidden snap-start group"
               >
-                <Image src={card.image} alt="" fill className="object-cover transition-transform duration-300 group-hover:scale-105" sizes="300px" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+                <Image
+                  src={card.image}
+                  alt=""
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="360px"
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to bottom, rgba(39, 35, 68, 0.4) 0%, transparent 55%)",
+                  }}
+                />
                 <div className="absolute inset-0 p-7 flex flex-col items-center text-center text-white">
-                  <p className="font-heading text-xl font-medium mt-8 mb-auto leading-snug">{card.title}</p>
-                  <span className="btn-glass mt-6">Откликается</span>
+                  <p className="font-heading text-[20px] md:text-[26px] font-medium mt-6 mb-auto leading-snug max-w-[280px]">
+                    {card.title}
+                  </p>
+                  <span className="btn-resonance mt-6">Откликается</span>
                 </div>
               </Link>
             ))}
@@ -48,7 +62,7 @@ export function ResonanceCarousel() {
             type="button"
             aria-label="Вперёд"
             onClick={() => scroll(1)}
-            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-xl bg-primary/90 text-white items-center justify-center border-0"
+            className="hidden md:flex absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-xl bg-primary/90 text-white items-center justify-center border-0"
           >
             ›
           </button>
