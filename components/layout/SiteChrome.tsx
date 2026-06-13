@@ -45,7 +45,7 @@ export function Header({ onCallbackClick }: HeaderProps) {
   const [moreOpen, setMoreOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm pb-5 pt-3">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm pb-3 pt-3">
       <div className="container-site">
         <div className="nav-shell">
           <div className="flex items-center gap-4 lg:gap-5 min-w-0">

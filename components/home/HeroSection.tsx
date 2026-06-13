@@ -43,9 +43,10 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
   const portrait = resolvePortrait(heroPortrait);
 
   return (
-    <section className="hero-tilda bg-white overflow-hidden">
+    <section className="hero-tilda overflow-hidden">
       <div className="container-site">
         <div className="hero-tilda__stage">
+          <div className="hero-tilda__glow" aria-hidden />
           <div className="hero-tilda__content">
             <h1 className="hero-tilda__title">
               Найди опору, ясность и новый вектор жизни в&nbsp;ИЖСИЗ

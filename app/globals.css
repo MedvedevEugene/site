@@ -146,7 +146,7 @@
 
   /* Hero — pixel layout from lifeinstitute.ru (artboard 1200×727) */
   .hero-tilda {
-    @apply pb-0;
+    @apply pb-0 bg-white -mt-1;
   }
 
   .hero-tilda__stage {
@@ -154,11 +154,23 @@
     width: 100%;
     max-width: 1200px;
     margin-inline: auto;
-    min-height: 560px;
+    min-height: 500px;
+  }
+
+  .hero-tilda__glow {
+    position: absolute;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    height: 72%;
+    border-radius: 0 0 60px 60px;
+    background: linear-gradient(180deg, #f8f7e4 0%, #ffffff 100%);
+    z-index: 0;
+    pointer-events: none;
   }
 
   .hero-tilda__content {
-    @apply relative z-10 pt-8 pb-10;
+    @apply relative z-10 pt-4 pb-8;
   }
 
   .hero-tilda__title {
@@ -195,12 +207,17 @@
 
   @media (min-width: 1024px) {
     .hero-tilda__stage {
-      min-height: 727px;
+      min-height: 640px;
+    }
+
+    .hero-tilda__glow {
+      top: 88px;
+      height: 74%;
     }
 
     .hero-tilda__content {
       position: absolute;
-      top: 220px;
+      top: 108px;
       left: 20px;
       width: 482px;
       padding: 0;
@@ -216,48 +233,55 @@
 
     .hero-tilda__portrait {
       position: absolute;
-      top: 212px;
+      top: 100px;
       left: 411px;
       width: 584px;
       max-width: none;
       margin: 0;
+      z-index: 1;
     }
 
     .hero-tilda__quote {
       position: absolute;
-      top: 223px;
+      top: 112px;
       left: 921px;
       width: 259px;
       margin: 0;
+      z-index: 2;
     }
   }
 
   @media (min-width: 1024px) and (max-width: 1199px) {
     .hero-tilda__stage {
-      min-height: 620px;
+      min-height: 580px;
+    }
+
+    .hero-tilda__glow {
+      top: 72px;
     }
 
     .hero-tilda__content {
-      top: 180px;
+      top: 88px;
       left: 10px;
       width: 38%;
     }
 
     .hero-tilda__portrait {
-      top: 190px;
+      top: 80px;
       left: 36%;
       width: 46%;
     }
 
     .hero-tilda__quote {
-      top: 200px;
+      top: 92px;
       left: auto;
       right: 10px;
       width: 220px;
     }
 
     .testimonial-card--hero {
-      @apply w-[220px] h-[192px];
+      width: 220px;
+      height: 192px;
     }
   }
 
