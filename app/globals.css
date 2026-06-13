@@ -144,9 +144,16 @@
     @apply w-[259px] h-[192px] max-w-none p-[19px] flex flex-col box-border bg-white border border-primary-dark rounded-[10px] shadow-none;
   }
 
-  /* Hero — pixel layout from lifeinstitute.ru (artboard 1200×727) */
+  /* Hero — layout from lifeinstitute.ru (1200×727 artboard) */
   .hero-tilda {
-    @apply pb-0 bg-white -mt-1;
+    @apply bg-white;
+  }
+
+  .hero-tilda__band {
+    background: linear-gradient(to top, #f8f7e4 0%, #ffffff 58%);
+    border-radius: 0 0 60px 60px;
+    overflow: hidden;
+    padding-bottom: 8px;
   }
 
   .hero-tilda__stage {
@@ -154,23 +161,12 @@
     width: 100%;
     max-width: 1200px;
     margin-inline: auto;
-    min-height: 500px;
-  }
-
-  .hero-tilda__glow {
-    position: absolute;
-    top: 72px;
-    left: 0;
-    width: 100%;
-    height: 72%;
-    border-radius: 0 0 60px 60px;
-    background: linear-gradient(180deg, #f8f7e4 0%, #ffffff 100%);
-    z-index: 0;
-    pointer-events: none;
+    min-height: 520px;
+    padding: 32px 0 24px;
   }
 
   .hero-tilda__content {
-    @apply relative z-10 pt-4 pb-8;
+    @apply relative z-10;
   }
 
   .hero-tilda__title {
@@ -178,11 +174,11 @@
   }
 
   .hero-tilda__subtitle {
-    @apply font-body text-[clamp(18px,2.5vw,24px)] font-normal leading-[1.55] m-0 mt-9 text-[#3b3758] max-w-[449px];
+    @apply font-body text-[clamp(18px,2.5vw,24px)] font-normal leading-[1.55] m-0 mt-6 text-[#3b3758] max-w-[449px];
   }
 
   .hero-tilda__tags {
-    @apply flex flex-col gap-2.5 mt-10 max-w-[482px];
+    @apply flex flex-col gap-2.5 mt-8 max-w-[482px];
   }
 
   .hero-tilda__tag-row {
@@ -194,60 +190,53 @@
   }
 
   .hero-tilda__cta {
-    @apply inline-flex items-center justify-center gap-1.5 mt-3 h-[37px] px-[15px] rounded-[10px] bg-[#3b3758] text-white text-[14px] font-medium normal-case tracking-normal hover:opacity-90 transition-opacity;
+    @apply inline-flex items-center justify-center gap-1.5 mt-3 h-[37px] min-w-[224px] px-[15px] rounded-[10px] bg-[#3b3758] text-white text-[14px] font-medium normal-case tracking-normal hover:opacity-90 transition-opacity;
   }
 
   .hero-tilda__portrait {
-    @apply relative z-[1] mx-auto mt-4 w-full max-w-[420px] h-auto object-contain pointer-events-none select-none;
+    @apply relative z-[1] mx-auto mt-6 w-full max-w-[400px] h-auto object-contain object-bottom pointer-events-none select-none;
   }
 
   .hero-tilda__quote {
-    @apply relative z-[2] mt-6 max-w-[259px];
+    @apply relative z-[2] mt-5 max-w-[259px] mx-auto sm:mx-0;
   }
 
   @media (min-width: 1024px) {
     .hero-tilda__stage {
-      min-height: 640px;
-    }
-
-    .hero-tilda__glow {
-      top: 88px;
-      height: 74%;
+      min-height: 620px;
+      padding: 0;
     }
 
     .hero-tilda__content {
       position: absolute;
-      top: 108px;
+      top: 48px;
       left: 20px;
       width: 482px;
-      padding: 0;
+    }
+
+    .hero-tilda__subtitle {
+      margin-top: 24px;
     }
 
     .hero-tilda__tags {
-      margin-top: 91px;
-    }
-
-    .hero-tilda__cta {
-      margin-top: 10px;
+      margin-top: 32px;
     }
 
     .hero-tilda__portrait {
       position: absolute;
-      top: 100px;
+      top: 36px;
       left: 411px;
       width: 584px;
       max-width: none;
       margin: 0;
-      z-index: 1;
     }
 
     .hero-tilda__quote {
       position: absolute;
-      top: 112px;
+      top: 48px;
       left: 921px;
       width: 259px;
       margin: 0;
-      z-index: 2;
     }
   }
 
@@ -256,26 +245,22 @@
       min-height: 580px;
     }
 
-    .hero-tilda__glow {
-      top: 72px;
-    }
-
     .hero-tilda__content {
-      top: 88px;
+      top: 36px;
       left: 10px;
       width: 38%;
     }
 
     .hero-tilda__portrait {
-      top: 80px;
+      top: 28px;
       left: 36%;
       width: 46%;
     }
 
     .hero-tilda__quote {
-      top: 92px;
+      top: 40px;
       left: auto;
-      right: 10px;
+      right: 0;
       width: 220px;
     }
 
