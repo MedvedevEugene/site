@@ -77,19 +77,19 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
           </div>
 
           {/* Портрет и цитата — отдельные колонки, размеры как на lifeinstitute.ru */}
-          <div className="lg:col-span-9 lg:grid lg:grid-cols-[minmax(0,1fr)_259px] lg:gap-3 xl:gap-5 items-start min-h-[400px] sm:min-h-[480px] lg:min-h-[620px]">
-            <div className="relative flex items-end justify-start self-end min-h-[360px] sm:min-h-[440px] lg:min-h-[620px] overflow-visible">
+          <div className="lg:col-span-9 lg:grid lg:grid-cols-[minmax(0,1fr)_259px] lg:gap-3 xl:gap-4 items-start min-h-[380px] sm:min-h-[440px] lg:min-h-[540px]">
+            <div className="relative flex items-end justify-start self-end min-h-[320px] sm:min-h-[400px] lg:min-h-[540px] overflow-visible">
               <Image
                 src={portrait}
                 alt=""
                 width={584}
                 height={515}
                 priority
-                sizes="(max-width: 1024px) 100vw, 58vw"
-                className="w-[min(135%,860px)] max-w-none max-h-[640px] h-auto object-contain object-left-bottom pointer-events-none select-none lg:-ml-6 xl:-ml-12 2xl:-ml-16"
+                sizes="(max-width: 1024px) 100vw, 52vw"
+                className="w-[min(120%,760px)] max-w-none max-h-[610px] h-auto object-contain object-left-bottom pointer-events-none select-none lg:-ml-8 xl:-ml-10"
               />
             </div>
-            <div className="hidden lg:block self-start pt-6 xl:pt-8 shrink-0">
+            <div className="hidden lg:block self-start pt-8 xl:pt-10 shrink-0">
               <HeroTestimonialCard />
             </div>
           </div>
