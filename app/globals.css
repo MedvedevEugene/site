@@ -205,13 +205,17 @@
     @apply relative w-[259px] h-[192px] max-w-none p-[19px] flex flex-col box-border bg-white border border-primary-dark rounded-[10px] shadow-none;
   }
 
+  .testimonial-card__quote-marks {
+    @apply absolute top-[19px] left-[19px] flex items-center gap-0.5 pointer-events-none;
+  }
+
   .testimonial-card__quote-icon {
-    @apply absolute top-[19px] left-[19px] w-4 h-4 shrink-0 pointer-events-none;
+    @apply w-4 h-4 shrink-0;
     transform: rotate(90deg);
   }
 
   .testimonial-card__quote-text {
-    @apply text-[12px] leading-[1.55] m-0 text-[#272344] pt-5 pr-1;
+    @apply text-[12px] leading-[1.55] m-0 text-[#272344] pt-[37px] pr-1;
   }
 
   /* Hero — layout from lifeinstitute.ru (1200×727 artboard) */

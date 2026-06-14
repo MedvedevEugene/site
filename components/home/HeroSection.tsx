@@ -36,7 +36,10 @@ function HeroQuoteMark() {
 function HeroTestimonialCard() {
   return (
     <div className="testimonial-card testimonial-card--hero">
-      <HeroQuoteMark />
+      <div className="testimonial-card__quote-marks" aria-hidden>
+        <HeroQuoteMark />
+        <HeroQuoteMark />
+      </div>
       <p className="testimonial-card__quote-text">{HERO_TESTIMONIAL.quote}</p>
       <div className="mt-auto pt-3">
         <div className="font-semibold text-[14px] text-[#272344] leading-[1.55]">
