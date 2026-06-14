@@ -13,8 +13,8 @@ export function SiteLayout({ children }: { children: ReactNode }) {
 
   return (
     <ProgramPopupProvider onOpen={() => setProgramOpen(true)}>
-      <div className="site-header sticky top-0 z-50 bg-white">
-        <TopBar onCallbackClick={() => setCallbackOpen(true)} />
+      <TopBar onCallbackClick={() => setCallbackOpen(true)} />
+      <div className="site-nav sticky top-0 z-50 bg-white">
         <Header onCallbackClick={() => setCallbackOpen(true)} />
       </div>
       <main>{children}</main>

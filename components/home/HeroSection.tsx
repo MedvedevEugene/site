@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { SafeImage } from "@/components/ui/SafeImage";
 import { HeroProgramCta } from "@/components/home/HeroProgramCta";
 import { HERO_TESTIMONIAL } from "@/lib/constants";
 import { HERO_TAG_ROWS, IMAGES } from "@/lib/site-data";
@@ -15,19 +14,30 @@ function resolvePortrait(url?: string) {
   return IMAGES.heroPortrait;
 }
 
+function HeroQuoteMark() {
+  return (
+    <svg
+      className="testimonial-card__quote-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden
+    >
+      <path
+        d="M16 8C16 6.41775 15.5308 4.87103 14.6518 3.55544C13.7727 2.23984 12.5233 1.21446 11.0615 0.608964C9.59966 0.00346267 7.99113 -0.154964 6.43928 0.153718C4.88743 0.4624 3.46197 1.22433 2.34315 2.34315C1.22433 3.46197 0.4624 4.88743 0.153718 6.43928C-0.154964 7.99113 0.00346269 9.59966 0.608964 11.0615C1.21446 12.5233 2.23984 13.7727 3.55544 14.6518C4.87103 15.5308 6.41775 16 8 16L8 8H16Z"
+        fill="#272344"
+      />
+    </svg>
+  );
+}
+
 function HeroTestimonialCard() {
   return (
     <div className="testimonial-card testimonial-card--hero">
-      <SafeImage
-        src={IMAGES.quoteIcon}
-        alt=""
-        width={16}
-        height={16}
-        className="testimonial-card__quote-icon"
-      />
-      <p className="text-[12px] leading-[1.55] m-0 text-[#272344] pt-5">
-        {HERO_TESTIMONIAL.quote}
-      </p>
+      <HeroQuoteMark />
+      <p className="testimonial-card__quote-text">{HERO_TESTIMONIAL.quote}</p>
       <div className="mt-auto pt-3">
         <div className="font-semibold text-[14px] text-[#272344] leading-[1.55]">
           {HERO_TESTIMONIAL.author}
