@@ -152,9 +152,8 @@
   }
 
   .catalog-card__spiral {
-    @apply absolute inset-0 pointer-events-none bg-center bg-cover;
+    @apply absolute inset-0 w-full h-full pointer-events-none object-cover object-center;
     transform: rotate(180deg);
-    opacity: 0.14;
   }
 
   .catalog-card__badge {

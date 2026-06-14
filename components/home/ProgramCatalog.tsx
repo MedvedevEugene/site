@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { CATALOG_PROGRAMS, IMAGES } from "@/lib/site-data";
 
 const TONE_CLASS = {
@@ -37,9 +38,12 @@ export function ProgramCatalog() {
               >
                 {featured && (
                   <>
-                    <div
+                    <Image
+                      src={IMAGES.spiral}
+                      alt=""
+                      width={616}
+                      height={722}
                       className="catalog-card__spiral"
-                      style={{ backgroundImage: `url(${IMAGES.spiral})` }}
                       aria-hidden
                     />
                     {"badge" in p && p.badge && (
