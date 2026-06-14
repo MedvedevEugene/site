@@ -153,7 +153,7 @@
     background: linear-gradient(to top, #f8f7e4 0%, #ffffff 58%);
     border-radius: 0 0 60px 60px;
     overflow: hidden;
-    padding-bottom: 8px;
+    padding-bottom: 0;
   }
 
   .hero-tilda__stage {
@@ -161,8 +161,8 @@
     width: 100%;
     max-width: 1200px;
     margin-inline: auto;
-    min-height: 520px;
-    padding: 32px 0 24px;
+    min-height: 0;
+    padding: 32px 0 0;
   }
 
   .hero-tilda__content {
@@ -194,7 +194,7 @@
   }
 
   .hero-tilda__portrait {
-    @apply relative z-[1] mx-auto mt-6 w-full max-w-[400px] h-auto object-contain object-bottom pointer-events-none select-none;
+    @apply relative z-[1] mx-auto mt-6 mb-0 w-full max-w-[400px] h-auto object-contain object-bottom pointer-events-none select-none;
   }
 
   .hero-tilda__quote {
@@ -203,7 +203,8 @@
 
   @media (min-width: 1024px) {
     .hero-tilda__stage {
-      min-height: 620px;
+      /* высота = портрет 515px, низ картинки = низ жёлтой подложки */
+      min-height: 515px;
       padding: 0;
     }
 
@@ -224,9 +225,11 @@
 
     .hero-tilda__portrait {
       position: absolute;
-      top: 36px;
+      bottom: 0;
       left: 411px;
+      top: auto;
       width: 584px;
+      height: auto;
       max-width: none;
       margin: 0;
     }
@@ -242,7 +245,7 @@
 
   @media (min-width: 1024px) and (max-width: 1199px) {
     .hero-tilda__stage {
-      min-height: 580px;
+      min-height: 460px;
     }
 
     .hero-tilda__content {
@@ -252,7 +255,8 @@
     }
 
     .hero-tilda__portrait {
-      top: 28px;
+      bottom: 0;
+      top: auto;
       left: 36%;
       width: 46%;
     }
