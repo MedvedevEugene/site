@@ -70,7 +70,7 @@ export function Header({ onCallbackClick }: HeaderProps) {
   const [moreOpen, setMoreOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm pb-3 pt-3">
+    <header className="pb-3 pt-3">
       <div className="container-site">
         <div className="nav-shell">
           <div className="flex items-center gap-4 lg:gap-5 min-w-0">
@@ -78,34 +78,27 @@ export function Header({ onCallbackClick }: HeaderProps) {
               <SafeImage src={LOGO} alt={SITE.name} width={220} height={42} className="h-[42px] w-auto max-w-full" priority />
             </Link>
 
-            <div className="relative hidden lg:block">
-              <button
-                type="button"
-                className="nav-edu-btn"
-                onMouseEnter={() => setEduOpen(true)}
-                onMouseLeave={() => setEduOpen(false)}
-              >
+            <div
+              className="relative hidden lg:block"
+              onMouseEnter={() => setEduOpen(true)}
+              onMouseLeave={() => setEduOpen(false)}
+            >
+              <button type="button" className="nav-edu-btn">
                 Обучение ▾
               </button>
               {eduOpen && (
-                <div
-                  className="absolute top-full left-0 mt-2 w-[320px] bg-white rounded-[10px] border border-border shadow-[0_5px_15px_rgba(0,0,0,0.05)] p-2 z-50"
-                  onMouseEnter={() => setEduOpen(true)}
-                  onMouseLeave={() => setEduOpen(false)}
-                >
-                  {EDUCATION_LINKS.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="flex gap-4 p-3 rounded-[10px] hover:bg-cream-bg transition-colors"
-                    >
-                      <SafeImage src={item.icon} alt="" width={40} height={40} />
-                      <div>
-                        <div className="font-medium text-sm">{item.label}</div>
-                        <div className="text-xs text-muted">{item.meta}</div>
-                      </div>
-                    </Link>
-                  ))}
+                <div className="absolute top-full left-0 pt-[15px] z-50">
+                  <div className="nav-edu-menu">
+                    {EDUCATION_LINKS.map((item) => (
+                      <Link key={item.href} href={item.href} className="nav-edu-menu__item">
+                        <SafeImage src={item.icon} alt="" width={40} height={40} className="shrink-0" />
+                        <div>
+                          <div className="text-sm leading-snug">{item.label}</div>
+                          <div className="text-xs text-muted mt-1">{item.meta}</div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>

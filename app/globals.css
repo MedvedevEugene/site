@@ -85,7 +85,7 @@
   }
 
   .site-search {
-    @apply flex items-stretch w-full max-w-[470px] min-w-[330px];
+    @apply flex items-stretch w-[350px] max-w-full shrink-0 gap-[15px];
   }
 
   .site-search__field {
@@ -93,20 +93,34 @@
   }
 
   .site-search__input {
-    @apply w-full h-10 box-border rounded-[10px] border border-[#f1f1f3] bg-[#fdfdfd] pl-10 pr-3 font-body text-base font-normal text-[#5d5d7b] outline-none;
+    @apply w-full h-10 box-border rounded-[10px] border border-[#f1f1f3] bg-[#fdfdfd] pl-10 pr-3 font-body text-sm font-normal text-[#5d5d7b] outline-none;
   }
 
   .site-search__input::placeholder {
     color: #5d5d7b;
     opacity: 0.5;
+    font-weight: 400;
+    font-size: 14px;
   }
 
   .site-search__icon {
-    @apply absolute left-3 top-1/2 -translate-y-1/2 w-[18px] h-[18px] pointer-events-none shrink-0;
+    @apply absolute left-3 top-1/2 -translate-y-1/2 w-[16px] h-[16px] pointer-events-none shrink-0;
   }
 
   .site-search__submit {
-    @apply ml-2 shrink-0 h-10 min-w-[120px] px-5 rounded-[10px] border-0 bg-[#f1f1f3] font-body text-base font-normal text-[#3b3758] cursor-pointer transition-colors hover:bg-[#e8e8ea];
+    @apply shrink-0 h-10 min-w-[120px] px-5 rounded-[10px] border-0 bg-[#f1f1f3] font-body text-sm font-normal text-[#3b3758] cursor-pointer transition-colors hover:bg-[#e8e8ea];
+  }
+
+  .nav-edu-menu {
+    @apply flex items-stretch bg-white rounded-[10px] border border-border shadow-[0_5px_15px_rgba(0,0,0,0.05)] overflow-hidden;
+  }
+
+  .nav-edu-menu__item {
+    @apply flex gap-3 p-4 w-[150px] box-border hover:bg-cream-bg transition-colors border-r border-border last:border-r-0;
+  }
+
+  .site-header {
+    box-shadow: 0 1px 0 rgba(239, 239, 239, 0.9);
   }
 
   .tag-white {
@@ -122,7 +136,7 @@
   }
 
   .catalog-card {
-    @apply relative overflow-hidden rounded-[20px] px-[30px] py-[30px] min-h-[242px] flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1;
+    @apply relative overflow-hidden rounded-[20px] px-[30px] py-[30px] min-h-[242px] flex flex-col transition-transform duration-200 hover:-translate-y-1;
   }
 
   .catalog-card--featured {
@@ -134,7 +148,33 @@
   }
 
   .catalog-card--white {
-    @apply bg-white border border-[#efefef];
+    @apply bg-[#f9f8e8];
+  }
+
+  .catalog-card__spiral {
+    @apply absolute inset-0 pointer-events-none bg-center bg-cover;
+    transform: rotate(180deg);
+    opacity: 0.14;
+  }
+
+  .catalog-card__badge {
+    @apply absolute top-[25px] right-[30px] z-[2] flex items-center gap-2 text-[14px] font-medium text-[#774bd9];
+  }
+
+  .catalog-card__tag {
+    @apply relative z-[1] text-[13px] text-[#1e1e1e] mb-2;
+  }
+
+  .catalog-card__body {
+    @apply relative z-[1] flex-1 flex items-center;
+  }
+
+  .catalog-card__title {
+    @apply font-body text-[20px] font-normal leading-[1.2] m-0 text-[#1e1e1e] max-w-[420px] group-hover:opacity-80;
+  }
+
+  .catalog-card__meta {
+    @apply relative z-[1] text-[14px] text-[#1e1e1e];
   }
 
   .catalog-card--default {
@@ -162,7 +202,11 @@
   }
 
   .testimonial-card--hero {
-    @apply w-[259px] h-[192px] max-w-none p-[19px] flex flex-col box-border bg-white border border-primary-dark rounded-[10px] shadow-none;
+    @apply relative w-[259px] h-[192px] max-w-none p-[19px] flex flex-col box-border bg-white border border-primary-dark rounded-[10px] shadow-none;
+  }
+
+  .testimonial-card__quote-icon {
+    @apply absolute top-[19px] left-[19px] w-4 h-4 shrink-0;
   }
 
   /* Hero — layout from lifeinstitute.ru (1200×727 artboard) */
@@ -207,11 +251,11 @@
   }
 
   .hero-tilda__tag {
-    @apply inline-flex items-center justify-center h-[37px] px-4 rounded-[10px] border border-[#efefef] bg-white text-[14px] font-medium text-[#3b3758] shadow-[0_2px_8px_rgba(0,0,0,0.04)] whitespace-nowrap;
+    @apply inline-flex items-center justify-center h-[37px] px-4 rounded-[10px] bg-white text-[14px] font-medium text-[#3b3758] whitespace-nowrap;
   }
 
   .hero-tilda__cta {
-    @apply inline-flex items-center justify-center gap-1.5 mt-3 h-[37px] min-w-[224px] px-[15px] rounded-[10px] bg-[#3b3758] text-white text-[14px] font-medium normal-case tracking-normal hover:opacity-90 transition-opacity;
+    @apply inline-flex items-center justify-center gap-1.5 mt-3 h-[37px] min-w-[224px] px-[15px] rounded-[10px] bg-[#3b3758] text-white text-[14px] font-medium normal-case tracking-normal border-0 cursor-pointer hover:opacity-90 transition-opacity;
   }
 
   .hero-tilda__portrait {

@@ -1,6 +1,6 @@
-import Link from "next/link";
 import Image from "next/image";
 import { SafeImage } from "@/components/ui/SafeImage";
+import { HeroProgramCta } from "@/components/home/HeroProgramCta";
 import { HERO_TESTIMONIAL } from "@/lib/constants";
 import { HERO_TAG_ROWS, IMAGES } from "@/lib/site-data";
 
@@ -23,10 +23,10 @@ function HeroTestimonialCard() {
         alt=""
         width={16}
         height={16}
-        className="w-4 h-4 mb-3 shrink-0"
+        className="testimonial-card__quote-icon"
       />
-      <p className="text-[12px] leading-[1.55] m-0 text-[#272344]">
-        &ldquo;{HERO_TESTIMONIAL.quote}&rdquo;
+      <p className="text-[12px] leading-[1.55] m-0 text-[#272344] pt-5">
+        {HERO_TESTIMONIAL.quote}
       </p>
       <div className="mt-auto pt-3">
         <div className="font-semibold text-[14px] text-[#272344] leading-[1.55]">
@@ -64,16 +64,7 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
                   </div>
                 ))}
               </div>
-              <Link href="/catalog" className="hero-tilda__cta">
-                <SafeImage
-                  src={IMAGES.logoCircle}
-                  alt=""
-                  width={19}
-                  height={19}
-                  className="w-[19px] h-[19px] shrink-0"
-                />
-                Подобрать программу
-              </Link>
+              <HeroProgramCta />
             </div>
 
             <Image
