@@ -51,8 +51,36 @@
     @apply rounded-[30px] border border-white bg-[#cfced5] text-white px-8 py-3 text-sm font-semibold hover:bg-[#c4c3ca];
   }
 
+  /* lifeinstitute.ru — блок «Что вам откликается» (rec1361812121) */
+  .resonance-card__btn-wrapper {
+    @apply w-full -translate-y-5;
+  }
+
   .btn-resonance {
-    @apply inline-flex items-center justify-center rounded-[30px] border border-white bg-[#cfced5] text-white px-8 py-3 text-sm font-semibold;
+    @apply inline-flex items-center justify-center w-full rounded-[30px] border border-white/30 bg-white/20 text-white px-6 text-sm font-semibold font-body;
+    height: 45px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: none;
+    transform: perspective(1px) translateZ(0);
+    transition-duration: 0.3s;
+    transition-property: transform, box-shadow, background, border-color;
+    transition-timing-function: ease-out;
+    will-change: transform;
+  }
+
+  .group:hover .btn-resonance,
+  .group:focus-visible .btn-resonance {
+    transform: translateY(8px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+  }
+
+  @media (max-width: 639px) {
+    .btn-resonance {
+      height: 50px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
   }
 
   .btn-accent {

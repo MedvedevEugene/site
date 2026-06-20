@@ -46,14 +46,16 @@ export function ResonanceCarousel() {
                   className="absolute inset-0"
                   style={{
                     background:
-                      "linear-gradient(to bottom, rgba(39, 35, 68, 0.4) 0%, transparent 55%)",
+                      "linear-gradient(to bottom, rgba(39, 35, 68, 0.4) 0%, rgba(39, 35, 68, 0) 100%)",
                   }}
                 />
-                <div className="absolute inset-0 p-7 flex flex-col items-center text-center text-white">
-                  <p className="font-heading text-[20px] md:text-[26px] font-medium mt-6 mb-auto leading-snug max-w-[280px]">
+                <div className="absolute inset-0 px-[30px] py-5 flex flex-col items-center text-center text-white">
+                  <p className="font-body text-[20px] md:text-[26px] font-normal mb-auto leading-snug">
                     {card.title}
                   </p>
-                  <span className="btn-resonance mt-6">Откликается</span>
+                  <div className="resonance-card__btn-wrapper">
+                    <span className="btn-resonance">Откликается</span>
+                  </div>
                 </div>
               </Link>
             ))}
