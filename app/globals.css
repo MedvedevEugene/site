@@ -390,4 +390,308 @@
   .curve-top {
     border-radius: 50% 50% 0 0 / 24px 24px 0 0;
   }
+
+  /* Base course page — lifeinstitute.ru/base-cource */
+  .bc-page {
+    @apply bg-white;
+  }
+
+  .bc-header-spacer {
+    height: 0;
+  }
+
+  .bc-breadcrumbs {
+    @apply flex flex-wrap items-center gap-1 text-sm text-[#1e1e1e] py-6;
+  }
+
+  .bc-breadcrumbs__sep {
+    @apply text-[#858585];
+  }
+
+  .bc-section {
+    @apply py-14 md:py-16;
+  }
+
+  .bc-section--cream {
+    @apply bg-[#f9f8e8];
+  }
+
+  .bc-section-title {
+    @apply font-body text-[clamp(24px,3vw,36px)] font-medium text-center m-0 mb-8 text-[#3b3758];
+  }
+
+  .bc-section-title--left {
+    @apply text-left;
+  }
+
+  .bc-section-subtitle {
+    @apply text-center text-[#3b3758] m-0 mb-8 -mt-4;
+  }
+
+  .bc-center {
+    @apply flex justify-center;
+  }
+
+  .bc-btn {
+    @apply inline-flex items-center justify-center rounded-[10px] px-6 py-3.5 text-sm font-semibold border border-transparent transition-opacity hover:opacity-90 cursor-pointer uppercase tracking-wide;
+  }
+
+  .bc-btn--dark {
+    @apply bg-[#272344] text-white;
+  }
+
+  .bc-btn--outline {
+    @apply bg-white text-[#272344] border-[#272344];
+  }
+
+  .bc-input {
+    @apply w-full border border-[#c9c9c9] rounded-[5px] px-4 py-3 text-base font-body;
+  }
+
+  .bc-hero__grid {
+    @apply grid grid-cols-1 lg:grid-cols-[1fr_642px] gap-10 items-start;
+  }
+
+  .bc-hero__title {
+    @apply font-body text-[clamp(36px,5vw,64px)] font-medium leading-[1.05] m-0 text-[#272344];
+  }
+
+  .bc-hero__subtitle {
+    @apply font-body text-[clamp(18px,2.5vw,24px)] leading-[1.55] m-0 mt-6 text-[#272344] max-w-[659px];
+  }
+
+  .bc-hero__actions {
+    @apply flex flex-wrap gap-3 mt-8;
+  }
+
+  .bc-hero__stats {
+    @apply grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mt-12 pt-8 border-t border-[#efefef];
+  }
+
+  .bc-hero__stat-label {
+    @apply text-[#272344] text-[clamp(16px,2vw,24px)] font-medium mb-2;
+  }
+
+  .bc-hero__stat-value {
+    @apply text-[#272344] text-sm leading-relaxed;
+  }
+
+  .bc-hero__media {
+    @apply relative;
+  }
+
+  .bc-hero__photo {
+    @apply w-full h-auto rounded-[20px] object-cover;
+  }
+
+  .bc-hero__discount {
+    @apply absolute -top-5 right-8 z-[2] w-[100px] h-[100px] rounded-full bg-[#f8f7e4] flex items-center justify-center text-[#272344] text-[34px] font-semibold;
+  }
+
+  .bc-reasons {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
+
+  .bc-reason {
+    @apply flex items-start gap-4 bg-[#f9f8e8] rounded-[20px] p-5;
+  }
+
+  .bc-reason__num {
+    @apply text-[#3b3758] font-medium shrink-0;
+  }
+
+  .bc-reason__icon {
+    @apply w-12 h-12 shrink-0 object-contain;
+  }
+
+  .bc-reason__text {
+    @apply m-0 text-sm leading-relaxed text-[#3b3758];
+  }
+
+  .bc-audience {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-5;
+  }
+
+  .bc-audience__card {
+    @apply bg-white rounded-[20px] p-6;
+  }
+
+  .bc-audience__icon {
+    @apply w-16 h-16 mb-4 object-contain;
+  }
+
+  .bc-audience__title {
+    @apply font-body text-lg font-medium m-0 mb-3 text-[#3b3758];
+  }
+
+  .bc-audience__text {
+    @apply m-0 text-sm leading-relaxed text-[#3b3758];
+  }
+
+  .bc-not-psychologist {
+    @apply mt-8 bg-white rounded-[20px] p-6 md:p-8;
+  }
+
+  .bc-not-psychologist__title {
+    @apply font-body text-xl font-medium m-0 mb-3 text-[#3b3758];
+  }
+
+  .bc-not-psychologist__text {
+    @apply m-0 text-sm leading-relaxed text-[#3b3758];
+  }
+
+  .bc-steps {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-10 items-center;
+  }
+
+  .bc-steps__list {
+    @apply m-0 pl-5 space-y-3 text-[#3b3758] text-base leading-relaxed;
+  }
+
+  .bc-steps__actions {
+    @apply flex flex-wrap items-center gap-4 mt-8;
+  }
+
+  .bc-steps__label {
+    @apply text-[#3b3758] font-medium;
+  }
+
+  .bc-about {
+    @apply grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 items-start;
+  }
+
+  .bc-about__list {
+    @apply m-0 pl-5 space-y-3 text-[#3b3758] text-sm leading-relaxed;
+  }
+
+  .bc-about__subtitle {
+    @apply font-body text-xl font-medium mt-8 mb-0 text-[#3b3758];
+  }
+
+  .bc-about__images {
+    @apply flex flex-col gap-4 items-center;
+  }
+
+  .bc-about__img {
+    @apply w-full max-w-[280px] h-auto object-contain;
+  }
+
+  .bc-about__img--small {
+    @apply max-w-[200px];
+  }
+
+  .bc-program {
+    @apply max-w-[900px] mx-auto flex flex-col gap-3;
+  }
+
+  .bc-program__item {
+    @apply bg-[#f9f8e8] rounded-[20px] overflow-hidden;
+  }
+
+  .bc-program__summary {
+    @apply cursor-pointer list-none px-6 py-5 text-[#3b3758] font-medium text-base;
+  }
+
+  .bc-program__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .bc-reviews {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-5;
+  }
+
+  .bc-review {
+    @apply m-0 bg-white rounded-[20px] p-6 text-sm leading-relaxed text-[#3b3758];
+  }
+
+  .bc-tariffs {
+    @apply grid grid-cols-1 lg:grid-cols-3 gap-5;
+  }
+
+  .bc-tariff {
+    @apply relative bg-[#f9f8e8] rounded-[20px] p-6 flex flex-col;
+  }
+
+  .bc-tariff--featured {
+    @apply bg-[#3b3758] text-white;
+  }
+
+  .bc-tariff--featured .bc-tariff__old,
+  .bc-tariff--featured .bc-tariff__mid,
+  .bc-tariff--featured .bc-tariff__features {
+    @apply text-white/80;
+  }
+
+  .bc-tariff--featured .bc-tariff__price {
+    @apply text-white;
+  }
+
+  .bc-tariff__discount {
+    @apply absolute top-4 right-4 bg-[#f8f7e4] text-[#272344] rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  .bc-tariff--featured .bc-tariff__discount {
+    @apply text-[#272344];
+  }
+
+  .bc-tariff__name {
+    @apply font-body text-2xl font-medium m-0 mb-4 uppercase;
+  }
+
+  .bc-tariff__prices {
+    @apply flex flex-col gap-1 mb-6;
+  }
+
+  .bc-tariff__old,
+  .bc-tariff__mid {
+    @apply text-sm line-through opacity-60;
+  }
+
+  .bc-tariff__price {
+    @apply text-2xl font-semibold text-[#3b3758];
+  }
+
+  .bc-tariff__features {
+    @apply m-0 pl-5 flex-1 space-y-2 text-sm leading-relaxed mb-6 text-[#3b3758];
+  }
+
+  .bc-tariff__btn {
+    @apply w-full mt-auto;
+  }
+
+  .bc-creator {
+    @apply grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-10 items-start;
+  }
+
+  .bc-creator__photo {
+    @apply w-full h-auto rounded-[20px] object-cover;
+  }
+
+  .bc-creator__name {
+    @apply font-body text-2xl font-medium m-0 mb-3 text-[#3b3758];
+  }
+
+  .bc-creator__quote {
+    @apply text-[#3b3758] italic m-0 mb-4;
+  }
+
+  .bc-creator__credentials {
+    @apply m-0 pl-5 mb-6 space-y-2 text-sm text-[#3b3758];
+  }
+
+  .bc-creator__bio {
+    @apply m-0 text-sm leading-relaxed text-[#3b3758];
+  }
+
+  .bc-final__inner {
+    @apply max-w-[640px] mx-auto text-center;
+  }
+
+  .bc-final__btn {
+    @apply min-w-[240px];
+  }
+
+  .bc-final__note {
+    @apply text-sm text-muted mt-4 m-0;
+  }
 }
