@@ -69,8 +69,8 @@
     will-change: transform;
   }
 
-  .group:hover .btn-resonance,
-  .group:focus-visible .btn-resonance {
+  .btn-resonance:hover,
+  .btn-resonance:focus-visible {
     transform: translateY(8px);
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
   }
@@ -85,7 +85,12 @@
 
   /* lifeinstitute.ru — секция «Что вам откликается» (rec1502165731 + rec1361812121) */
   .resonance-section {
-    @apply py-[70px];
+    @apply pb-[70px] pt-0 -mt-12;
+  }
+
+  .resonance-section__header {
+    @apply flex items-start justify-center;
+    min-height: 152px;
   }
 
   .resonance-section__title {
@@ -95,7 +100,9 @@
   }
 
   .resonance-carousel {
-    @apply relative mt-0;
+    @apply relative w-full;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
   }
 
   .resonance-carousel__track {
@@ -122,7 +129,9 @@
 
   .resonance-card {
     @apply relative shrink-0 overflow-hidden snap-start;
-    width: 360px;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 360px;
     aspect-ratio: 3 / 4;
     border-radius: 20px;
   }
@@ -143,14 +152,22 @@
   }
 
   .resonance-carousel__controls {
-    @apply absolute left-0 right-0 top-1/2 -translate-y-1/2 z-10 items-center justify-between pointer-events-none;
+    @apply absolute left-0 right-0 top-1/2 z-10 items-center justify-between pointer-events-none;
     display: none;
     padding-inline: 40px;
+    transform: translateY(-50%);
   }
 
   @media (min-width: 961px) {
     .resonance-carousel__controls {
       display: flex;
+    }
+
+    .resonance-carousel__track {
+      @apply justify-center;
+      overflow-x: visible;
+      scroll-snap-type: none;
+      cursor: default;
     }
   }
 
@@ -158,22 +175,28 @@
     @apply flex items-center justify-center w-10 h-10 rounded-[10px] bg-transparent border border-white p-0 cursor-pointer pointer-events-auto transition-colors;
   }
 
-  .resonance-carousel__control--next {
-    transform: rotate(0.5turn);
-  }
-
   .resonance-carousel__control svg path {
     transition: stroke 0.2s ease-in-out;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 960px) {
+    .resonance-section__header {
+      min-height: 112px;
+    }
+
+    .resonance-carousel__controls {
+      display: none;
+    }
+
     .resonance-carousel__track {
       gap: 10px;
       padding-inline: 20px;
     }
 
     .resonance-card {
+      flex: 0 0 280px;
       width: 280px;
+      max-width: none;
     }
 
     .resonance-card__title {

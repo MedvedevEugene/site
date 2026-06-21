@@ -12,6 +12,8 @@ function CarouselArrow({
   direction: "prev" | "next";
   onClick: () => void;
 }) {
+  const path = direction === "prev" ? "M23 13L15.5 20L23 27" : "M17 13L24.5 20L17 27";
+
   return (
     <button
       type="button"
@@ -28,7 +30,7 @@ function CarouselArrow({
         className="w-full h-full"
       >
         <path
-          d="M23 13L15.5 20L23 27"
+          d={path}
           stroke="#ffffff"
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
@@ -58,7 +60,7 @@ export function ResonanceCarousel() {
 
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
     const track = trackRef.current;
-    if (!track || event.button !== 0) return;
+    if (!track || event.button !== 0 || track.scrollWidth <= track.clientWidth) return;
 
     dragRef.current = {
       active: true,
@@ -98,65 +100,65 @@ export function ResonanceCarousel() {
   }
 
   return (
-    <section className="resonance-section bg-white overflow-hidden">
-      <div className="container-site">
+    <section className="resonance-section bg-white">
+      <div className="container-site resonance-section__header">
         <h2 className="resonance-section__title">
           Что вам откликается
           <br />
           сейчас?
         </h2>
+      </div>
 
-        <div className="resonance-carousel relative">
-          <div
-            ref={trackRef}
-            className={`resonance-carousel__track${dragging ? " resonance-carousel__track--dragging" : ""}`}
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={endDrag}
-            onPointerCancel={endDrag}
-            onLostPointerCapture={() => {
-              dragRef.current.active = false;
-              setDragging(false);
-            }}
-          >
-            {RESONANCE_CARDS.map((card) => (
-              <Link
-                key={card.href + card.titleLines.join("-")}
-                href={card.href}
-                onClick={onCardClick}
+      <div className="resonance-carousel">
+        <div
+          ref={trackRef}
+          className={`resonance-carousel__track${dragging ? " resonance-carousel__track--dragging" : ""}`}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          onLostPointerCapture={() => {
+            dragRef.current.active = false;
+            setDragging(false);
+          }}
+        >
+          {RESONANCE_CARDS.map((card) => (
+            <Link
+              key={card.href + card.titleLines.join("-")}
+              href={card.href}
+              onClick={onCardClick}
+              draggable={false}
+              className="resonance-card"
+            >
+              <Image
+                src={card.image}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(max-width: 960px) 280px, 20vw"
                 draggable={false}
-                className="resonance-card group snap-start"
-              >
-                <Image
-                  src={card.image}
-                  alt=""
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  sizes="(max-width: 480px) 280px, 360px"
-                  draggable={false}
-                />
-                <div className="resonance-card__filter" />
-                <div className="resonance-card__content">
-                  <p className="resonance-card__title">
-                    {card.titleLines.map((line) => (
-                      <span key={line}>
-                        {line}
-                        <br />
-                      </span>
-                    ))}
-                  </p>
-                  <div className="resonance-card__btn-wrapper">
-                    <span className="btn-resonance">Откликается</span>
-                  </div>
+              />
+              <div className="resonance-card__filter" />
+              <div className="resonance-card__content">
+                <p className="resonance-card__title">
+                  {card.titleLines.map((line) => (
+                    <span key={line}>
+                      {line}
+                      <br />
+                    </span>
+                  ))}
+                </p>
+                <div className="resonance-card__btn-wrapper">
+                  <span className="btn-resonance">Откликается</span>
                 </div>
-              </Link>
-            ))}
-          </div>
+              </div>
+            </Link>
+          ))}
+        </div>
 
-          <div className="resonance-carousel__controls" aria-hidden={false}>
-            <CarouselArrow direction="prev" onClick={() => scroll(-1)} />
-            <CarouselArrow direction="next" onClick={() => scroll(1)} />
-          </div>
+        <div className="resonance-carousel__controls">
+          <CarouselArrow direction="prev" onClick={() => scroll(-1)} />
+          <CarouselArrow direction="next" onClick={() => scroll(1)} />
         </div>
       </div>
     </section>
