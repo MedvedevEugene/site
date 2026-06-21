@@ -2043,8 +2043,11 @@
     border-radius: 20px;
   }
 
-  .blog-card__link {
-    @apply block no-underline text-inherit;
+  .blog-card__title {
+    @apply m-0 border-0 bg-transparent p-0 text-left font-body text-[#3b3758] cursor-pointer transition-opacity hover:opacity-70;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.35;
   }
 
   .blog-card__media {
@@ -2061,13 +2064,6 @@
 
   .blog-card__body {
     padding: 0 20px 18px;
-  }
-
-  .blog-card__title {
-    @apply m-0 font-body text-[#3b3758];
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.35;
   }
 
   .blog-card__excerpt {
@@ -2160,6 +2156,83 @@
     .blog-card__media {
       height: auto;
       aspect-ratio: 1 / 1;
+    }
+  }
+
+  .blog-popup {
+    @apply fixed inset-0 z-[220] bg-white overflow-y-auto;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(24px);
+    transition: opacity 0.32s ease, transform 0.32s ease;
+  }
+
+  .blog-popup--visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+
+  .blog-popup__topbar {
+    @apply fixed top-0 left-0 right-0 z-[225] flex items-center justify-center bg-white;
+    height: 56px;
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
+  .blog-popup__back {
+    @apply absolute left-5 top-1/2 inline-flex items-center justify-center border-0 bg-transparent p-0 cursor-pointer hover:opacity-70;
+    transform: translateY(-50%);
+  }
+
+  .blog-popup__feed-title {
+    @apply m-0 font-body text-[#000];
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .blog-popup__panel {
+    @apply mx-auto;
+    width: min(1200px, 100%);
+    padding: 95px 20px 60px;
+  }
+
+  .blog-popup__content {
+    width: min(760px, 100%);
+    margin: 0 auto;
+  }
+
+  .blog-popup__title {
+    @apply m-0 font-body text-[#000];
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.23;
+  }
+
+  .blog-popup__date {
+    @apply block font-body;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-top: 0;
+  }
+
+  .blog-popup__image {
+    @apply block w-full;
+    margin: 15px 0 30px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 639px) {
+    .blog-popup__panel {
+      padding-top: 72px;
+      padding-bottom: 40px;
+    }
+
+    .blog-popup__title {
+      font-size: 28px;
     }
   }
 

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { BlogPageSection } from "@/components/blog/BlogPageSection";
 import { BLOG_FALLBACK_POSTS, type BlogPostItem } from "@/lib/blog-data";
 import { getPublishedNews } from "@/lib/content";
-import { FOOTER_PLACEHOLDER_HREF } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Блог",
@@ -10,16 +9,13 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-function mapDbPosts(
-  posts: Awaited<ReturnType<typeof getPublishedNews>>,
-): BlogPostItem[] {
+function mapDbPosts(posts: Awaited<ReturnType<typeof getPublishedNews>>): BlogPostItem[] {
   return posts.map((post) => ({
     id: post.id,
     title: post.title,
     excerpt: post.excerpt ?? "",
-    publishedAt: post.publishedAt,
+    publishedAt: post.publishedAt.toISOString(),
     imageUrl: post.imageUrl ?? BLOG_FALLBACK_POSTS[0].imageUrl,
-    href: FOOTER_PLACEHOLDER_HREF,
   }));
 }
 
