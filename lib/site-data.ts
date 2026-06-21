@@ -202,33 +202,35 @@ export const VIDEO_TABS = [
   { id: "lecture", label: "Онлайн лекция", youtubeId: "asdasdasd" },
 ] as const;
 
+export const FOOTER_PLACEHOLDER_HREF = "/coming-soon";
+
 export const FOOTER_COLUMNS = {
   programs: {
     title: "Образовательные программы",
     links: [
-      { label: "Базовый курс расстановкам", href: "/base-cource" },
-      { label: "Расстановки PRO", href: "/business-cource" },
-      { label: "Сонаставнический практикум", href: "/base-cource" },
+      { label: "Базовый курс расстановкам", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "Расстановки PRO", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "Сонаставнический практикум", href: FOOTER_PLACEHOLDER_HREF },
     ],
   },
   about: {
     title: "Об ИРЖ",
     links: [
-      { label: "О нас", href: "/information-about-the-educational-organization" },
-      { label: "Статьи", href: "/blog" },
-      { label: "Расписание", href: "/timetable" },
-      { label: "Расстановочные группы", href: "/rasstanovochnye-gruppy" },
-      { label: "Психологическая помощь", href: "/individual-consultations" },
-      { label: "Маркет развивающих товаров", href: "/market" },
-      { label: "Индивидуальные расстановки", href: "/individual-consultations" },
-      { label: "Вебинары", href: "/video-materials" },
+      { label: "О нас", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "Статьи", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "Расписание", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "Расстановочные группы", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "Психологическая помощь", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "Маркет развивающих товаров", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "Индивидуальные расстановки", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "Вебинары", href: FOOTER_PLACEHOLDER_HREF },
     ],
   },
   extra: {
     title: "Дополнительная информация",
     links: [
-      { label: "Политика конфиденциальности", href: "/privacy" },
-      { label: "Политика обработки персональных данных", href: "/privacy" },
+      { label: "Политика конфиденциальности", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "Политика обработки персональных данных", href: FOOTER_PLACEHOLDER_HREF },
     ],
   },
 } as const;

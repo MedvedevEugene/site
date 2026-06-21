@@ -1001,7 +1001,7 @@
   .site-footer__phone-country.phone-country-input {
     @apply min-h-[55px];
     border: 0;
-    border-radius: 10px 0 0 10px;
+    border-radius: 10px;
     overflow: hidden;
     background: #fff;
   }
@@ -1386,17 +1386,12 @@
   }
 
   .site-footer__input-row {
-    @apply flex w-full;
-    gap: 0;
+    @apply grid gap-2.5;
+    grid-template-columns: 1fr 1fr;
   }
 
   .site-footer__phone-country {
-    @apply min-w-0 flex-1;
-  }
-
-  .site-footer__input-row > .site-footer__input[type="email"] {
-    @apply min-w-0 flex-1;
-    border-radius: 0 10px 10px 0;
+    @apply min-w-0;
   }
 
   .site-footer__checkbox {
@@ -1615,15 +1610,7 @@
     }
 
     .site-footer__input-row {
-      @apply flex-col gap-2.5;
-    }
-
-    .site-footer__phone-country.phone-country-input {
-      border-radius: 10px;
-    }
-
-    .site-footer__input-row > .site-footer__input[type="email"] {
-      border-radius: 10px;
+      grid-template-columns: 1fr;
     }
 
     .site-footer__grid {
