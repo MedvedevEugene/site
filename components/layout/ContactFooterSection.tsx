@@ -137,21 +137,23 @@ export function ContactFooterSection() {
             <div className="site-footer__col site-footer__col--contacts">
               <h4 className="site-footer__col-title">Контакты</h4>
               <div className="site-footer__col-divider" aria-hidden="true" />
-              <div className="site-footer__contacts">
-                <a href={`tel:${SITE.phoneAlt.replace(/[\s()-]/g, "")}`} className="site-footer__link">
-                  {SITE.phoneAlt}
-                </a>
-                <a href={`mailto:${SITE.email}`} className="site-footer__link">
-                  {SITE.email}
-                </a>
-              </div>
-              <div className="site-footer__socials">
-                <a href="#" className="site-footer__social" aria-label="VK">
-                  <Image src={IMAGES.footerSocialVk} alt="" width={47} height={47} />
-                </a>
-                <a href="#" className="site-footer__social" aria-label="Telegram">
-                  <Image src={IMAGES.footerSocialTg} alt="" width={47} height={47} />
-                </a>
+              <div className="site-footer__contact-row">
+                <div className="site-footer__contacts">
+                  <a href={`tel:${SITE.phoneAlt.replace(/[\s()-]/g, "")}`} className="site-footer__link">
+                    {SITE.phoneAlt}
+                  </a>
+                  <a href={`mailto:${SITE.email}`} className="site-footer__link site-footer__link--email">
+                    {SITE.email}
+                  </a>
+                </div>
+                <div className="site-footer__socials">
+                  <a href="#" className="site-footer__social" aria-label="VK">
+                    <Image src={IMAGES.footerSocialVk} alt="" width={47} height={47} />
+                  </a>
+                  <a href="#" className="site-footer__social" aria-label="Telegram">
+                    <Image src={IMAGES.footerSocialTg} alt="" width={47} height={47} />
+                  </a>
+                </div>
               </div>
 
               <div className="site-footer__extra">

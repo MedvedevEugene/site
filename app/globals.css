@@ -1140,13 +1140,23 @@
     @apply w-full max-w-[300px] h-auto mt-10;
   }
 
+  .site-footer__contact-row {
+    @apply flex items-center justify-between gap-4;
+    width: 100%;
+    max-width: 360px;
+  }
+
   .site-footer__contacts {
-    @apply flex flex-col;
+    @apply flex flex-col min-w-0;
     gap: 10px;
   }
 
+  .site-footer__link--email {
+    @apply underline;
+  }
+
   .site-footer__socials {
-    @apply flex items-center gap-2.5 mt-4;
+    @apply flex items-center gap-2.5 shrink-0;
   }
 
   .site-footer__social {
