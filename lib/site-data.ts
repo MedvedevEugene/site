@@ -86,6 +86,7 @@ export const CATALOG_PROGRAMS = [
     tag: "Внутренний курс",
     title: "Продвинутый курс по расстановкам",
     meta: "10 мес. / 777 часов",
+    callbackVariant: "advanced-course" as const,
   },
   {
     href: "/individual-consultations",
@@ -101,6 +102,7 @@ export const CATALOG_PROGRAMS = [
     tag: "Мероприятия",
     title: "Расстановочные группы",
     meta: "Очно / онлайн",
+    callbackVariant: "constellation-groups" as const,
   },
   {
     href: "/market",

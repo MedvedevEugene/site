@@ -827,6 +827,10 @@
     text-underline-offset: 2px;
   }
 
+  .callback-popup__descr + .callback-popup__descr {
+    margin-top: 0.55em;
+  }
+
   .callback-popup__form {
     @apply flex flex-col;
   }
@@ -1083,6 +1087,16 @@
 
   .catalog-card {
     @apply relative overflow-hidden rounded-[20px] px-[30px] py-[30px] min-h-[242px] flex flex-col transition-transform duration-200 hover:-translate-y-1;
+  }
+
+  .catalog-card--button {
+    @apply block w-full border-0 p-0 text-left cursor-pointer;
+    font: inherit;
+    color: inherit;
+  }
+
+  .catalog-card--button.catalog-card {
+    padding: 30px;
   }
 
   .catalog-card--featured {

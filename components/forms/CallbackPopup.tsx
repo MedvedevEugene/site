@@ -2,6 +2,11 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { CONTACT_METHOD_PLACEHOLDERS, type ContactMethod } from "@/lib/contact-form-data";
+import {
+  CALLBACK_POPUP_VARIANTS,
+  DEFAULT_CALLBACK_POPUP_VARIANT,
+  type CallbackPopupVariantId,
+} from "@/lib/callback-popup-variants";
 import { buildFullPhoneNumber } from "@/lib/phone-format";
 import { DEFAULT_PHONE_COUNTRY } from "@/lib/phone-countries";
 import { ContactMethodPicker } from "@/components/forms/ContactMethodPicker";
@@ -10,6 +15,7 @@ import { getPhoneCountryByIso, PhoneCountryInput } from "@/components/forms/Phon
 interface CallbackPopupProps {
   open: boolean;
   onClose: () => void;
+  variant?: CallbackPopupVariantId;
 }
 
 function CloseIcon() {
@@ -23,11 +29,12 @@ function CloseIcon() {
   );
 }
 
-export function CallbackPopup({ open, onClose }: CallbackPopupProps) {
+export function CallbackPopup({ open, onClose, variant = "default" }: CallbackPopupProps) {
   const [sent, setSent] = useState(false);
   const [contactMethod, setContactMethod] = useState<ContactMethod>("phone");
   const [phoneValue, setPhoneValue] = useState("");
   const [phoneCountryIso, setPhoneCountryIso] = useState(DEFAULT_PHONE_COUNTRY.iso);
+  const variantConfig = CALLBACK_POPUP_VARIANTS[variant] ?? DEFAULT_CALLBACK_POPUP_VARIANT;
 
   useEffect(() => {
     if (!open) {
@@ -70,7 +77,7 @@ export function CallbackPopup({ open, onClose }: CallbackPopupProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          type: "callback",
+          type: variantConfig.formType,
           name: data.get("name"),
           phone,
           contact: contactMethod,
@@ -87,7 +94,7 @@ export function CallbackPopup({ open, onClose }: CallbackPopupProps) {
   const textPlaceholder = CONTACT_METHOD_PLACEHOLDERS[contactMethod];
 
   return (
-    <div className="callback-popup" role="dialog" aria-modal="true" aria-label="Задайте нам вопрос">
+    <div className="callback-popup" role="dialog" aria-modal="true" aria-label={variantConfig.ariaLabel}>
       <button type="button" className="callback-popup__overlay" aria-label="Закрыть" onClick={onClose} />
       <button type="button" className="callback-popup__close" aria-label="Закрыть диалоговое окно" onClick={onClose}>
         <CloseIcon />
@@ -108,10 +115,18 @@ export function CallbackPopup({ open, onClose }: CallbackPopupProps) {
         ) : (
           <div className="callback-popup__wrapper">
             <div className="callback-popup__head">
-              <h3 className="callback-popup__title">Задайте нам вопрос</h3>
-              <p className="callback-popup__descr">
-                Мы свяжемся с вами в будние дни <u>с 10:00 до 18:00</u>.
-              </p>
+              <h3 className="callback-popup__title">{variantConfig.title}</h3>
+              {variant === "default" ? (
+                <p className="callback-popup__descr">
+                  Мы свяжемся с вами в будние дни <u>с 10:00 до 18:00</u>.
+                </p>
+              ) : (
+                variantConfig.paragraphs.map((paragraph) => (
+                  <p key={paragraph} className="callback-popup__descr">
+                    {paragraph}
+                  </p>
+                ))
+              )}
             </div>
 
             <form onSubmit={handleSubmit} className="callback-popup__form">
@@ -168,7 +183,7 @@ export function CallbackPopup({ open, onClose }: CallbackPopupProps) {
 
               <button type="submit" className="callback-popup__submit">
                 <span className="callback-popup__submit-icon" aria-hidden="true">→</span>
-                <span>Заказать обратный звонок</span>
+                <span>{variantConfig.submitLabel}</span>
               </button>
             </form>
           </div>
