@@ -263,28 +263,52 @@
   }
 
   .video-tabs {
-    @apply flex flex-wrap items-center justify-center gap-2 mb-8;
+    @apply flex items-stretch mx-auto mb-10;
+    max-width: 560px;
+    gap: 10px;
   }
 
   .video-tab {
-    @apply inline-flex items-center justify-center h-10 px-5 text-base font-semibold whitespace-nowrap transition-colors;
+    @apply flex-1 inline-flex items-center justify-center font-heading font-normal whitespace-nowrap transition-[color,background-color,box-shadow,font-weight] duration-300;
+    padding: 18px 24px;
+    font-size: 14px;
+    line-height: 1.35;
     color: #272344;
-    border: 1px solid #272344;
-    border-radius: 30px;
-    line-height: 1.55;
+    background: #ffffff;
+    border: 0;
+    border-radius: 40px;
+    box-shadow: inset 0 0 0 1px #272344;
+    box-sizing: border-box;
   }
 
-  .video-tab:hover,
   .video-tab--active {
-    @apply bg-[#272344] text-white border-[#272344];
+    @apply font-semibold text-white;
+    background: #272344;
+    box-shadow:
+      inset 0 0 0 1px #272344,
+      0 4px 10px rgba(39, 35, 68, 0.15);
+  }
+
+  .video-player {
+    @apply relative mx-auto;
+    max-width: 960px;
+    aspect-ratio: 960 / 520;
   }
 
   .video-frame {
-    @apply mx-auto w-full;
-    max-width: 1160px;
-    min-height: 560px;
-    border-radius: 40px;
-    background-color: #f9f9f9;
+    @apply absolute inset-0 overflow-hidden rounded-[40px] bg-[#f9f9f9];
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .video-frame--active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .video-frame iframe {
+    @apply block h-full w-full border-0;
   }
 
   @media (max-width: 639px) {
@@ -297,9 +321,189 @@
       font-size: 16px;
     }
 
+    .video-tabs {
+      @apply flex-col mb-8;
+      max-width: 100%;
+    }
+
+    .video-tab {
+      @apply w-full;
+    }
+
+    .video-tab + .video-tab {
+      margin-top: 0;
+    }
+
+    .video-player {
+      aspect-ratio: auto;
+      min-height: 240px;
+    }
+
     .video-frame {
-      min-height: 320px;
       border-radius: 20px;
+    }
+  }
+
+  /* lifeinstitute.ru — «Ваш путь в ИРЖ» (rec1359591441) */
+  .path-section {
+    @apply bg-white overflow-hidden;
+  }
+
+  .path-section__stage {
+    @apply relative mx-auto;
+    max-width: 1200px;
+    height: 420px;
+  }
+
+  .path-section__cloud {
+    @apply absolute pointer-events-none select-none;
+    top: -61px;
+    left: 230px;
+    width: 249px;
+    height: auto;
+    z-index: 1;
+  }
+
+  .path-section__cap {
+    @apply absolute pointer-events-none select-none;
+    top: 243px;
+    left: 753px;
+    width: 219px;
+    height: auto;
+    z-index: 1;
+  }
+
+  .path-section__content {
+    @apply relative z-[2] text-center;
+    padding-top: 95px;
+  }
+
+  .path-section__title {
+    @apply font-body font-semibold m-0;
+    color: #1e1e1e;
+    font-size: 36px;
+    line-height: 1.3;
+  }
+
+  .path-section__subtitle {
+    @apply font-body font-normal mx-auto m-0;
+    margin-top: 17px;
+    max-width: 676px;
+    color: #1e1e1e;
+    font-size: 36px;
+    line-height: 1.3;
+  }
+
+  .path-section__btn {
+    @apply inline-flex items-center justify-center font-body font-semibold uppercase no-underline transition-opacity hover:opacity-90;
+    margin-top: 32px;
+    width: 200px;
+    height: 55px;
+    font-size: 12px;
+    line-height: 1.3;
+    color: #ffffff;
+    background: #272344;
+    border-radius: 10px;
+  }
+
+  .path-section__curve {
+    @apply bg-primary-footer;
+    height: 48px;
+    border-radius: 50% 50% 0 0 / 24px 24px 0 0;
+  }
+
+  @media (max-width: 1199px) {
+    .path-section__cloud {
+      left: 109px;
+    }
+
+    .path-section__cap {
+      left: 632px;
+    }
+  }
+
+  @media (max-width: 959px) {
+    .path-section__cloud {
+      top: -60px;
+      left: -63px;
+    }
+
+    .path-section__cap {
+      top: 220px;
+      left: 463px;
+    }
+
+    .path-section__subtitle {
+      max-width: 432px;
+      font-size: 24px;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .path-section__stage {
+      height: 350px;
+    }
+
+    .path-section__cloud {
+      top: -41px;
+      left: -32px;
+      width: 190px;
+    }
+
+    .path-section__cap {
+      top: 217px;
+      left: 321px;
+      width: 168px;
+    }
+
+    .path-section__content {
+      padding-top: 80px;
+    }
+
+    .path-section__title {
+      font-size: 28px;
+    }
+
+    .path-section__subtitle {
+      max-width: 413px;
+      font-size: 24px;
+    }
+
+    .path-section__btn {
+      margin-top: 24px;
+      width: 180px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .path-section__stage {
+      height: 420px;
+    }
+
+    .path-section__cloud {
+      top: -33px;
+      left: -22px;
+      width: 151px;
+    }
+
+    .path-section__cap {
+      top: 320px;
+      left: 208px;
+      width: 124px;
+    }
+
+    .path-section__title {
+      max-width: 155px;
+      margin-inline: auto;
+    }
+
+    .path-section__subtitle {
+      max-width: 300px;
+      font-size: 20px;
+    }
+
+    .path-section__content {
+      padding-top: 80px;
     }
   }
 

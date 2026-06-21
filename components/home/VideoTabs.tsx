@@ -14,11 +14,13 @@ export function VideoTabs() {
       </div>
 
       <div className="container-site">
-        <div className="video-tabs">
+        <div className="video-tabs" role="tablist" aria-label="Формат видео">
           {VIDEO_TABS.map((tab) => (
             <button
               key={tab.id}
               type="button"
+              role="tab"
+              aria-selected={active === tab.id}
               onClick={() => setActive(tab.id)}
               className={`video-tab${active === tab.id ? " video-tab--active" : ""}`}
             >
@@ -27,7 +29,25 @@ export function VideoTabs() {
           ))}
         </div>
 
-        <div className="video-frame" aria-label={VIDEO_TABS.find((tab) => tab.id === active)?.label} />
+        <div className="video-player">
+          {VIDEO_TABS.map((tab) => (
+            <div
+              key={tab.id}
+              className={`video-frame${active === tab.id ? " video-frame--active" : ""}`}
+              role="tabpanel"
+              aria-hidden={active !== tab.id}
+              aria-label={tab.label}
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${tab.youtubeId}?enablejsapi=1`}
+                title={tab.label}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
