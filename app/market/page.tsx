@@ -1,11 +1,10 @@
-import { PageShell, createPageMetadata } from "@/components/ui/PageShell";
+import type { Metadata } from "next";
+import { MarketPageSection } from "@/components/market/MarketPageSection";
 
-export const metadata = createPageMetadata("Маркет");
+export const metadata: Metadata = {
+  title: "Маркет развивающих товаров",
+};
 
 export default function MarketPage() {
-  return (
-    <PageShell title="Маркет развивающих товаров" description="Материалы и товары для развития." breadcrumbs={[{ label: "Маркет" }]}>
-      <p className="text-muted">Раздел в разработке — контент будет перенесён с Tilda.</p>
-    </PageShell>
-  );
-}
+  return <MarketPageSection />;
+};
