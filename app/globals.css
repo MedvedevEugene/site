@@ -774,6 +774,188 @@
     opacity: 0.4;
   }
 
+  /* lifeinstitute.ru — popup callback (T702, rec2034362131) */
+  .callback-popup {
+    @apply fixed inset-0 z-[200] flex items-center justify-center p-4;
+  }
+
+  .callback-popup__overlay {
+    @apply absolute inset-0 border-0 p-0 cursor-pointer;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .callback-popup__close {
+    @apply fixed top-5 right-5 z-[210] border-0 bg-transparent p-2 cursor-pointer;
+  }
+
+  .callback-popup__container {
+    @apply relative z-[205] w-full max-w-[560px] bg-white rounded-[10px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.25)];
+  }
+
+  .callback-popup__wrapper {
+    padding: 40px 45px;
+  }
+
+  .callback-popup__head {
+    @apply text-center;
+    margin-bottom: 24px;
+  }
+
+  .callback-popup__title {
+    @apply m-0 font-body font-normal text-[#000];
+    font-size: 36px;
+    line-height: 1.23;
+    margin-bottom: 11px;
+  }
+
+  .callback-popup__descr {
+    @apply m-0 font-body text-[#000];
+    font-size: 16px;
+    line-height: 1.55;
+    opacity: 0.7;
+  }
+
+  .callback-popup__descr u {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .callback-popup__form {
+    @apply flex flex-col;
+  }
+
+  .callback-popup__field {
+    margin-bottom: 25px;
+  }
+
+  .callback-popup__field:last-child {
+    margin-bottom: 0;
+  }
+
+  .callback-popup__input,
+  .callback-popup__textarea {
+    @apply w-full box-border font-body text-base text-[#000] bg-white outline-none;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+    padding: 0 14px;
+    min-height: 50px;
+  }
+
+  .callback-popup__input::placeholder,
+  .callback-popup__textarea::placeholder {
+    color: #000;
+    opacity: 0.5;
+  }
+
+  .callback-popup__textarea {
+    min-height: 102px;
+    height: 102px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    resize: vertical;
+  }
+
+  .callback-popup__methods {
+    @apply flex items-start justify-between gap-2;
+  }
+
+  .callback-popup__method {
+    @apply flex flex-col items-center gap-2 flex-1 min-w-0 cursor-pointer;
+  }
+
+  .callback-popup__method-input {
+    @apply sr-only;
+  }
+
+  .callback-popup__method-icon {
+    @apply flex items-center justify-center shrink-0;
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+  }
+
+  .callback-popup__method--active .callback-popup__method-icon {
+    background: #272344;
+  }
+
+  .callback-popup__method-label {
+    @apply text-center font-body text-[#000];
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .callback-popup__phone {
+    @apply flex items-stretch w-full;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+    overflow: hidden;
+    min-height: 50px;
+  }
+
+  .callback-popup__phone-prefix {
+    @apply inline-flex items-center gap-2 shrink-0 font-body text-base text-[#000];
+    padding: 0 12px 0 14px;
+    border-right: 1px solid #c9c9c9;
+    background: #fff;
+  }
+
+  .callback-popup__phone-flag {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .callback-popup__input--phone {
+    @apply border-0 rounded-none min-h-[48px];
+    flex: 1;
+  }
+
+  .callback-popup__submit {
+    @apply inline-flex w-full items-center justify-center gap-2 border-0 font-body font-semibold text-white cursor-pointer;
+    min-height: 50px;
+    margin-top: 25px;
+    padding: 0 30px;
+    border-radius: 10px;
+    background: #272344;
+    font-size: 16px;
+    transition: opacity 0.2s ease;
+  }
+
+  .callback-popup__submit:hover {
+    opacity: 0.92;
+  }
+
+  .callback-popup__submit-icon {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  @media (max-width: 640px) {
+    .callback-popup__wrapper {
+      padding: 20px;
+    }
+
+    .callback-popup__title {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .callback-popup__descr {
+      font-size: 14px;
+    }
+
+    .callback-popup__head {
+      margin-bottom: 14px;
+    }
+
+    .callback-popup__methods {
+      @apply gap-1;
+    }
+
+    .callback-popup__method-label {
+      font-size: 11px;
+    }
+  }
+
   .site-nav {
     box-shadow: 0 1px 0 rgba(239, 239, 239, 0.9);
   }

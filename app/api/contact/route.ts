@@ -12,6 +12,7 @@ export async function POST(request: Request) {
     `Телефон: ${body.phone || "—"}`,
     body.email ? `Email: ${body.email}` : null,
     body.contact ? `Связь: ${body.contact}` : null,
+    body.comment ? `Комментарий: ${body.comment}` : null,
   ]
     .filter(Boolean)
     .join("\n");
