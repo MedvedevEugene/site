@@ -77,10 +77,12 @@ export function MarketProductPopup({ product, onClose }: MarketProductPopupProps
         </button>
 
         <div className="market-popup__layout">
-          <div className="market-popup__media">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={product.image} alt="" className="market-popup__image" />
-          </div>
+          <div
+            className="market-popup__media"
+            role="img"
+            aria-label={product.title}
+            style={{ backgroundImage: `url("${product.image}")` }}
+          />
 
           <div className="market-popup__content">
             <h2 className="market-popup__title">{product.title}</h2>

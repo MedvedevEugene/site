@@ -14,10 +14,13 @@ function formatPrice(value: number) {
 export function MarketProductCard({ product, onDetails }: MarketProductCardProps) {
   return (
     <article className="market-card">
-      <div className="market-card__media">
+      <div
+        className="market-card__media"
+        role="img"
+        aria-label={product.title}
+        style={{ backgroundImage: `url("${product.image}")` }}
+      >
         {product.onSale ? <span className="market-card__sale">SALE</span> : null}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={product.image} alt="" className="market-card__image" />
       </div>
 
       <div className="market-card__body">

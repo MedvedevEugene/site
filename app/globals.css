@@ -1273,12 +1273,15 @@
   }
 
   .market-card__media {
-    @apply relative flex items-center justify-center overflow-hidden;
+    @apply relative overflow-hidden;
     width: 260px;
     max-width: 100%;
     height: 286px;
     border-radius: 20px;
-    background: #f0f0f0;
+    background-color: #f6f6f6;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
     margin-bottom: 15px;
   }
 
@@ -1291,11 +1294,6 @@
     background: #ff4a4a;
   }
 
-  .market-card__image {
-    @apply w-full h-full object-contain;
-    max-height: 286px;
-    border-radius: 20px;
-  }
 
   .market-card__body {
     @apply flex flex-col flex-1;
@@ -1414,15 +1412,13 @@
   }
 
   .market-popup__media {
-    @apply flex items-center justify-center overflow-hidden bg-[#f0f0f0];
+    @apply overflow-hidden;
     border-radius: 20px;
     min-height: 420px;
-    padding: 0;
-  }
-
-  .market-popup__image {
-    @apply w-full h-auto max-h-[360px] object-contain;
-    border-radius: 20px;
+    background-color: #f6f6f6;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
   }
 
   .market-popup__content {
