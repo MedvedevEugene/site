@@ -99,7 +99,11 @@ export function Header({ onCallbackClick }: HeaderProps) {
                           className="nav-edu-menu__icon"
                         />
                         <div className="nav-edu-menu__text">
-                          <div className="nav-edu-menu__title">{item.label}</div>
+                          <div className="nav-edu-menu__title">
+                            {item.titleLines[0]}
+                            <br />
+                            {item.titleLines[1]}
+                          </div>
                           <div className="nav-edu-menu__meta">{item.meta}</div>
                         </div>
                       </Link>
