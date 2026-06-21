@@ -44,10 +44,10 @@ export function IndividualConsultationsSection() {
                 формат дальнейшей работы.
               </p>
               <div className="ic-page__hero-actions">
-                <button type="button" className="ic-page__btn ic-page__btn--primary" onClick={() => scrollTo("specialists")}>
+                <button type="button" className="ic-page__btn ic-page__btn--hero ic-page__btn--primary" onClick={() => scrollTo("specialists")}>
                   Выбрать специалиста
                 </button>
-                <button type="button" className="ic-page__btn ic-page__btn--outline" onClick={() => scrollTo("quiz")}>
+                <button type="button" className="ic-page__btn ic-page__btn--hero ic-page__btn--outline" onClick={() => scrollTo("quiz")}>
                   Получить консультацию
                 </button>
               </div>
