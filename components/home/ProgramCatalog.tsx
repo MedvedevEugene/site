@@ -18,7 +18,7 @@ function CatalogLightningIcon() {
 
 export function ProgramCatalog() {
   return (
-    <section id="catalog" className="bg-white scroll-mt-24">
+    <section id="catalog" className="bg-white scroll-mt-24 pt-[70px] pb-[70px]">
       <div className="container-site section-heading-band">
         <h2 className="section-title">
           Каталог наших
