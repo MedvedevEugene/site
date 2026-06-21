@@ -25,11 +25,7 @@ export function MarketPageSection() {
               Всё для личного роста, практики и вдохновения — от авторов и выпускников ИРЖ.
             </p>
           </div>
-        </div>
-      </section>
 
-      <section className="market-page__catalog">
-        <div className="container-site">
           <div className="market-page__grid">
             {MARKET_PRODUCTS.map((product) => (
               <MarketProductCard key={product.id} product={product} onDetails={setActiveProduct} />

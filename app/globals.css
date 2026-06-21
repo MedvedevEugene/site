@@ -1219,6 +1219,7 @@
 
   .market-page {
     padding-top: 60px;
+    padding-bottom: 100px;
   }
 
   .market-page__breadcrumbs {
@@ -1260,25 +1261,23 @@
     margin-top: 24px;
   }
 
-  .market-page__catalog {
-    background: #222222;
-    padding: 40px 0 100px;
-  }
-
   .market-page__grid {
-    @apply grid gap-8;
+    @apply grid;
+    gap: 20px;
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .market-card {
-    @apply flex flex-col;
+    @apply flex flex-col items-start text-left;
   }
 
   .market-card__media {
-    @apply relative flex items-center justify-center bg-white;
+    @apply relative flex items-center justify-center w-full;
+    background: #f0f0f0;
     border-radius: 20px;
-    min-height: 320px;
-    padding: 24px;
+    aspect-ratio: 1 / 1;
+    padding: 28px;
+    margin-bottom: 20px;
   }
 
   .market-card__sale {
@@ -1291,42 +1290,42 @@
   }
 
   .market-card__image {
-    @apply w-full h-auto max-h-[260px] object-contain;
+    @apply w-full h-full object-contain;
+    max-height: 100%;
   }
 
   .market-card__body {
-    @apply flex flex-col flex-1 text-white;
-    padding-top: 24px;
+    @apply flex flex-col flex-1 w-full;
   }
 
   .market-card__title {
-    @apply m-0 font-body font-medium text-white;
-    font-size: 18px;
+    @apply m-0 font-body font-medium text-[#000];
+    font-size: 16px;
     line-height: 1.35;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   .market-card__description {
-    @apply m-0 font-body text-white/75;
-    font-size: 13px;
+    @apply m-0 font-body text-[#666];
+    font-size: 12px;
     line-height: 1.55;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
   .market-card__prices {
-    @apply flex flex-wrap items-baseline gap-3;
+    @apply flex flex-wrap items-baseline gap-2;
     margin-bottom: 19px;
   }
 
   .market-card__price {
-    @apply font-body font-medium text-white;
-    font-size: 18px;
+    @apply font-body font-medium text-[#000];
+    font-size: 16px;
     line-height: 1.2;
   }
 
   .market-card__price-old {
-    @apply font-body text-white/45 line-through;
-    font-size: 16px;
+    @apply font-body text-[#999] line-through;
+    font-size: 14px;
     line-height: 1.2;
   }
 
@@ -1336,30 +1335,44 @@
   }
 
   .market-card__btn {
-    @apply inline-flex items-center justify-center border font-body text-sm transition-opacity;
-    min-height: 40px;
-    padding: 0 18px;
+    @apply inline-flex items-center justify-center border font-body transition-all duration-200 ease-in-out;
+    min-height: 36px;
+    padding: 0 16px;
     border-radius: 5px;
+    font-size: 12px;
     line-height: 1.2;
   }
 
   .market-card__btn--details {
-    @apply bg-transparent text-white cursor-pointer hover:opacity-85;
-    border-color: rgba(255, 255, 255, 0.55);
+    @apply text-white border-transparent cursor-pointer hover:opacity-90;
+    background: #3b3758;
   }
 
   .market-card__btn--cart {
-    @apply text-white border-transparent cursor-not-allowed;
-    background: #3b3758;
+    @apply bg-white text-[#000] cursor-not-allowed;
+    border-color: #000;
     opacity: 0.45;
   }
 
   .market-popup {
     @apply fixed inset-0 z-[220];
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.32s ease;
+  }
+
+  .market-popup--visible {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .market-popup__overlay {
     @apply absolute inset-0 border-0 p-0 cursor-pointer;
+    background: rgba(0, 0, 0, 0);
+    transition: background-color 0.32s ease;
+  }
+
+  .market-popup--visible .market-popup__overlay {
     background: rgba(0, 0, 0, 0.6);
   }
 
@@ -1370,6 +1383,14 @@
     margin-top: 20px;
     padding: 28px 30px 40px;
     border-radius: 10px;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.36s ease, transform 0.36s ease;
+  }
+
+  .market-popup--visible .market-popup__panel {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .market-popup__back {
@@ -1385,7 +1406,7 @@
   }
 
   .market-popup__media {
-    @apply flex items-center justify-center bg-[#f5f5f5];
+    @apply flex items-center justify-center bg-[#f0f0f0];
     border-radius: 20px;
     min-height: 420px;
     padding: 32px;
@@ -1449,11 +1470,11 @@
   }
 
   .market-popup__cart {
-    @apply inline-flex items-center justify-center border-0 font-body font-medium text-white cursor-not-allowed;
+    @apply inline-flex items-center justify-center border border-[#000] font-body font-medium text-[#000] cursor-not-allowed;
     min-height: 44px;
     padding: 0 24px;
     border-radius: 5px;
-    background: #3b3758;
+    background: #fff;
     opacity: 0.45;
     font-size: 14px;
   }
@@ -1463,6 +1484,14 @@
     font-size: 16px;
     line-height: 1.55;
     max-width: 520px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease 0.08s, transform 0.4s ease 0.08s;
+  }
+
+  .market-popup--visible .market-popup__description {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   @media (max-width: 960px) {
@@ -1476,6 +1505,10 @@
   }
 
   @media (max-width: 639px) {
+    .market-page {
+      padding-bottom: 60px;
+    }
+
     .market-page__title {
       font-size: 32px;
       line-height: 1.55;
@@ -1492,11 +1525,8 @@
       grid-template-columns: 1fr;
     }
 
-    .market-page__catalog {
-      padding-bottom: 60px;
-    }
-
     .market-card__media {
+      aspect-ratio: auto;
       min-height: 280px;
     }
 

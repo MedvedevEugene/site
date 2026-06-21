@@ -14,23 +14,43 @@ function formatPrice(value: number) {
 
 export function MarketProductPopup({ product, onClose }: MarketProductPopupProps) {
   const [quantity, setQuantity] = useState(1);
+  const [visible, setVisible] = useState(false);
+  const [closing, setClosing] = useState(false);
 
   useEffect(() => {
-    if (!product) return;
+    if (!product) {
+      setVisible(false);
+      setClosing(false);
+      return;
+    }
+
     setQuantity(1);
+    setClosing(false);
+    const frame = window.requestAnimationFrame(() => setVisible(true));
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") handleClose();
     };
 
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
+      window.cancelAnimationFrame(frame);
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [product, onClose]);
+  }, [product]);
+
+  function handleClose() {
+    if (closing) return;
+    setClosing(true);
+    setVisible(false);
+    window.setTimeout(() => {
+      onClose();
+      setClosing(false);
+    }, 320);
+  }
 
   if (!product) return null;
 
@@ -43,11 +63,16 @@ export function MarketProductPopup({ product, onClose }: MarketProductPopupProps
   }
 
   return (
-    <div className="market-popup" role="dialog" aria-modal="true" aria-label={product.title}>
-      <button type="button" className="market-popup__overlay" aria-label="Закрыть" onClick={onClose} />
+    <div
+      className={`market-popup${visible ? " market-popup--visible" : ""}${closing ? " market-popup--closing" : ""}`}
+      role="dialog"
+      aria-modal="true"
+      aria-label={product.title}
+    >
+      <button type="button" className="market-popup__overlay" aria-label="Закрыть" onClick={handleClose} />
 
       <div className="market-popup__panel">
-        <button type="button" className="market-popup__back" onClick={onClose}>
+        <button type="button" className="market-popup__back" onClick={handleClose}>
           ← Назад
         </button>
 
