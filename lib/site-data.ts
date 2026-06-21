@@ -35,11 +35,11 @@ export const IMAGES = {
   methodIcon5: `${CDN}/tild6530-3633-4430-a230-366336663936/10.png`,
   methodIcon6: `${CDN}/tild3233-3435-4833-b932-653365333737/Vector_6.svg`,
   methodIcon7: `${CDN}/tild3535-6631-4934-b261-393030323063/7.png`,
-  resonance1: `${CDN}/tild3438-6436-4930-b338-313839333232/1.png`,
-  resonance2: `${CDN}/tild3338-3832-4565-b337-646138363537/2.png`,
-  resonance3: `${CDN}/tild6233-6531-4932-a233-346161383565/3.png`,
-  resonance4: `${CDN}/tild3934-6166-4835-b633-383837626663/4.png`,
-  resonance5: `${CDN}/tild6566-3466-4533-b037-373464633131/5.png`,
+  resonance1: "/images/resonance/1.png",
+  resonance2: "/images/resonance/2.png",
+  resonance3: "/images/resonance/3.png",
+  resonance4: "/images/resonance/4.png",
+  resonance5: "/images/resonance/5.png",
   topic1: `${CDN}/tild6433-6434-4538-b932-306265666464/1.png`,
   topic2: `${CDN}/tild3631-3166-4738-a237-616561316665/2.png`,
   topic3: `${CDN}/tild3966-3965-4662-b464-626135343363/3.png`,
@@ -109,11 +109,31 @@ export const CATALOG_PROGRAMS = [
 ] as const;
 
 export const RESONANCE_CARDS = [
-  { title: "Стать расстановщиком", image: IMAGES.resonance1, href: "/base-cource" },
-  { title: "Личная терапия в безопасном формате", image: IMAGES.resonance2, href: "/individual-consultations" },
-  { title: "Наладить отношения в семье", image: IMAGES.resonance3, href: "/individual-consultations" },
-  { title: "Снять тревогу и вернуть энергию", image: IMAGES.resonance4, href: "/individual-consultations" },
-  { title: "Деньги и карьерные развилки", image: IMAGES.resonance5, href: "/business-cource" },
+  {
+    titleLines: ["Стать", "расстановщиком"],
+    image: IMAGES.resonance1,
+    href: "/base-cource",
+  },
+  {
+    titleLines: ["Личная терапия", "в безопасном", "формате"],
+    image: IMAGES.resonance2,
+    href: "/individual-consultations",
+  },
+  {
+    titleLines: ["Наладить отношения", "в семье"],
+    image: IMAGES.resonance3,
+    href: "/individual-consultations",
+  },
+  {
+    titleLines: ["Снять тревогу", "и вернуть энергию"],
+    image: IMAGES.resonance4,
+    href: "/individual-consultations",
+  },
+  {
+    titleLines: ["Деньги и карьерные", "развилки"],
+    image: IMAGES.resonance5,
+    href: "/business-cource",
+  },
 ] as const;
 
 export const SUPPORT_TABS = [

@@ -1,57 +1,149 @@
 "use client";
 
-import { useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { RESONANCE_CARDS } from "@/lib/site-data";
 
+function CarouselArrow({
+  direction,
+  onClick,
+}: {
+  direction: "prev" | "next";
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={direction === "prev" ? "Предыдущий слайд" : "Следующий слайд"}
+      onClick={onClick}
+      className={`resonance-carousel__control resonance-carousel__control--${direction}`}
+    >
+      <svg
+        viewBox="0 0 40 40"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
+        aria-hidden
+        className="w-full h-full"
+      >
+        <path
+          d="M23 13L15.5 20L23 27"
+          stroke="#ffffff"
+          strokeWidth="1"
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
+    </button>
+  );
+}
+
 export function ResonanceCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef({ active: false, startX: 0, scrollLeft: 0, moved: false });
+  const [dragging, setDragging] = useState(false);
+
+  const scrollStep = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return 400;
+    const card = track.querySelector<HTMLElement>(".resonance-card");
+    if (!card) return 400;
+    const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "40");
+    return card.offsetWidth + gap;
+  }, []);
 
   function scroll(dir: -1 | 1) {
-    trackRef.current?.scrollBy({ left: dir * 400, behavior: "smooth" });
+    trackRef.current?.scrollBy({ left: dir * scrollStep(), behavior: "smooth" });
+  }
+
+  function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
+    const track = trackRef.current;
+    if (!track || event.button !== 0) return;
+
+    dragRef.current = {
+      active: true,
+      startX: event.clientX,
+      scrollLeft: track.scrollLeft,
+      moved: false,
+    };
+    setDragging(true);
+    track.setPointerCapture(event.pointerId);
+  }
+
+  function onPointerMove(event: React.PointerEvent<HTMLDivElement>) {
+    const track = trackRef.current;
+    if (!track || !dragRef.current.active) return;
+
+    const delta = event.clientX - dragRef.current.startX;
+    if (Math.abs(delta) > 4) dragRef.current.moved = true;
+    track.scrollLeft = dragRef.current.scrollLeft - delta;
+  }
+
+  function endDrag(event: React.PointerEvent<HTMLDivElement>) {
+    const track = trackRef.current;
+    if (!track || !dragRef.current.active) return;
+
+    dragRef.current.active = false;
+    setDragging(false);
+    if (track.hasPointerCapture(event.pointerId)) {
+      track.releasePointerCapture(event.pointerId);
+    }
+  }
+
+  function onCardClick(event: React.MouseEvent<HTMLAnchorElement>) {
+    if (dragRef.current.moved) {
+      event.preventDefault();
+      dragRef.current.moved = false;
+    }
   }
 
   return (
-    <section className="section bg-white overflow-hidden">
+    <section className="resonance-section bg-white overflow-hidden">
       <div className="container-site">
-        <h2 className="section-title">Что вам откликается сейчас?</h2>
-        <div className="relative mt-10">
-          <button
-            type="button"
-            aria-label="Назад"
-            onClick={() => scroll(-1)}
-            className="hidden md:flex absolute -left-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-xl bg-primary/90 text-white items-center justify-center border-0"
-          >
-            ‹
-          </button>
+        <h2 className="resonance-section__title">
+          Что вам откликается
+          <br />
+          сейчас?
+        </h2>
+
+        <div className="resonance-carousel relative">
           <div
             ref={trackRef}
-            className="flex gap-5 md:gap-10 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className={`resonance-carousel__track${dragging ? " resonance-carousel__track--dragging" : ""}`}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={endDrag}
+            onPointerCancel={endDrag}
+            onLostPointerCapture={() => {
+              dragRef.current.active = false;
+              setDragging(false);
+            }}
           >
             {RESONANCE_CARDS.map((card) => (
               <Link
-                key={card.title}
+                key={card.href + card.titleLines.join("-")}
                 href={card.href}
-                className="relative shrink-0 w-[280px] sm:w-[320px] md:w-[360px] aspect-[3/4] rounded-[28px] overflow-hidden snap-start group"
+                onClick={onCardClick}
+                draggable={false}
+                className="resonance-card group snap-start"
               >
                 <Image
                   src={card.image}
                   alt=""
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  sizes="360px"
+                  sizes="(max-width: 480px) 280px, 360px"
+                  draggable={false}
                 />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(to bottom, rgba(39, 35, 68, 0.4) 0%, rgba(39, 35, 68, 0) 100%)",
-                  }}
-                />
-                <div className="absolute inset-0 px-[30px] py-5 flex flex-col items-center text-center text-white">
-                  <p className="font-body text-[20px] md:text-[26px] font-normal mb-auto leading-snug">
-                    {card.title}
+                <div className="resonance-card__filter" />
+                <div className="resonance-card__content">
+                  <p className="resonance-card__title">
+                    {card.titleLines.map((line) => (
+                      <span key={line}>
+                        {line}
+                        <br />
+                      </span>
+                    ))}
                   </p>
                   <div className="resonance-card__btn-wrapper">
                     <span className="btn-resonance">Откликается</span>
@@ -60,14 +152,11 @@ export function ResonanceCarousel() {
               </Link>
             ))}
           </div>
-          <button
-            type="button"
-            aria-label="Вперёд"
-            onClick={() => scroll(1)}
-            className="hidden md:flex absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-xl bg-primary/90 text-white items-center justify-center border-0"
-          >
-            ›
-          </button>
+
+          <div className="resonance-carousel__controls" aria-hidden={false}>
+            <CarouselArrow direction="prev" onClick={() => scroll(-1)} />
+            <CarouselArrow direction="next" onClick={() => scroll(1)} />
+          </div>
         </div>
       </div>
     </section>
