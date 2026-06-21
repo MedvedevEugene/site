@@ -58,7 +58,7 @@ export function BlogPostPopup({ post, onClose }: BlogPostPopupProps) {
       <div className="blog-popup__topbar">
         <button type="button" className="blog-popup__back" aria-label="Закрыть пост" onClick={handleClose}>
           <svg aria-hidden="true" width="11" height="20" viewBox="0 0 11 20" fill="none">
-            <path d="M1 1L10 10L1 19" stroke="#000000" strokeWidth="2" />
+            <path d="M10 1L1 10L10 19" stroke="#000000" strokeWidth="2" />
           </svg>
         </button>
         <p className="blog-popup__feed-title">{BLOG_FEED_TITLE}</p>
