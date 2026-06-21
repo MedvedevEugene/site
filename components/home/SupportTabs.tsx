@@ -11,7 +11,7 @@ export function SupportTabs() {
   return (
     <section className="support-section">
       <div className="container-site section-heading-band">
-        <h2 className="section-title">
+        <h2 className="section-title section-title--support">
           Поддерживаем и{"\u00a0"}помогаем
           <br />
           прийти к результату

@@ -3,21 +3,26 @@ import { FEATURE_PILLARS } from "@/lib/site-data";
 
 export function FeaturePillars() {
   return (
-    <section className="section bg-white">
+    <section className="feature-pillars-section">
       <div className="container-site">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="feature-pillars-grid">
           {FEATURE_PILLARS.map((item) => (
-            <div
-              key={item.title}
-              className={`rounded-[28px] p-8 min-h-[320px] flex flex-col items-center text-center ${
-                item.tint === "blue" ? "bg-[#eef2fb]" : "bg-cream-pill"
-              }`}
+            <article
+              key={item.titleLines.join("-")}
+              className={`feature-pillar${item.tint === "blue" ? " feature-pillar--blue" : ""}`}
             >
-              <div className="relative w-[140px] h-[140px] mb-8">
-                <Image src={item.image} alt="" fill className="object-contain" sizes="140px" />
+              <div className="feature-pillar__icon">
+                <Image src={item.image} alt="" width={150} height={150} className="h-auto w-[150px] object-contain" />
               </div>
-              <p className="font-heading text-lg font-medium m-0 leading-snug">{item.title}</p>
-            </div>
+              <p className="feature-pillar__title">
+                {item.titleLines.map((line, index) => (
+                  <span key={line}>
+                    {index > 0 ? <br /> : null}
+                    {line}
+                  </span>
+                ))}
+              </p>
+            </article>
           ))}
         </div>
       </div>

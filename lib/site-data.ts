@@ -14,12 +14,12 @@ export const IMAGES = {
   supportMentors: "/images/support/mentors.png",
   supportChat: "/images/support/chat.png",
   /** Фон блока дипломов */
-  diplomaBg: `${CDN}/tild3634-3466-4365-a233-386430663137/Rectangle_71.png`,
-  featureCompass: `${CDN}/tild3838-3430-4339-b238-363035623439/image_17.png`,
-  featureAtom: `${CDN}/tild3764-3864-4939-b437-303535336566/image_18.png`,
-  featureMixer: `${CDN}/tild3764-3333-4532-b031-623163313531/image_19.png`,
-  diploma: `${CDN}/tild6266-3664-4961-b563-323138343337/diplom.jpg`,
-  certificate: `${CDN}/tild3435-6536-4536-a462-373262326366/telegram-cloud-docum.png`,
+  diplomaBg: "/images/diplomas/bg.png",
+  featureCompass: "/images/features/compass.png",
+  featureAtom: "/images/features/atom.png",
+  featureMixer: "/images/features/mixer.png",
+  diploma: "/images/diplomas/diploma.jpg",
+  certificate: "/images/diplomas/certificate.png",
   pathCloud: `${CDN}/tild6336-3530-4139-b964-313032653332/2334f0c3-5471-4549-9.png`,
   /** 3D-шапка на облаке — блок «Ваш путь в ИРЖ» */
   pathGradCap: `${CDN}/tild6439-3761-4838-b130-303234303536/2d6688fa-356a-47ed-9.png`,
@@ -168,9 +168,21 @@ export const SUPPORT_TABS = [
 ] as const;
 
 export const FEATURE_PILLARS = [
-  { title: "Работа на себя и в удовольствие.", image: IMAGES.featureCompass, tint: "cream" },
-  { title: "Вдохновляющее окружение, которое с вами.", image: IMAGES.featureAtom, tint: "cream" },
-  { title: "Управление жизнью — ваш новый навык.", image: IMAGES.featureMixer, tint: "blue" },
+  {
+    titleLines: ["Работа на себя", "и в удовольствие."],
+    image: IMAGES.featureCompass,
+    tint: "cream" as const,
+  },
+  {
+    titleLines: ["Вдохновляющее окружение,", "которое с вами."],
+    image: IMAGES.featureAtom,
+    tint: "cream" as const,
+  },
+  {
+    titleLines: ["Управление жизнью —", "ваш новый навык."],
+    image: IMAGES.featureMixer,
+    tint: "blue" as const,
+  },
 ] as const;
 
 export const VIDEO_TABS = [
