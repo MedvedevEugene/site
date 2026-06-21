@@ -53,7 +53,15 @@ export function IndividualConsultationsSection() {
               </div>
             </div>
             <div className="ic-page__hero-media">
-              <Image src={IC_HERO_IMAGE} alt="" fill className="object-contain object-right-top" sizes="(max-width: 1024px) 100vw, 520px" priority />
+              <Image
+                src={IC_HERO_IMAGE}
+                alt=""
+                width={520}
+                height={374}
+                className="ic-page__hero-image"
+                sizes="(max-width: 1024px) 100vw, 520px"
+                priority
+              />
             </div>
           </div>
 
