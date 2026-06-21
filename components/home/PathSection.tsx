@@ -33,7 +33,7 @@ export function PathSection() {
           </Link>
         </div>
       </div>
-      <div className="path-section__curve" />
+      <div className="path-section__spacer" aria-hidden="true" />
     </section>
   );
 }

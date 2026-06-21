@@ -61,8 +61,9 @@ function FooterLeadForm() {
 
 export function ContactFooterSection() {
   return (
-    <footer className="footer-dark pt-0">
-      <div className="container-site pt-12 pb-10">
+    <footer className="footer-dark">
+      <div className="footer-dark__shell">
+      <div className="container-site pt-[100px] pb-10">
         <div className="bg-primary-card rounded-[32px] p-8 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14">
           <div>
             <h2 className="font-heading text-[clamp(22px,3vw,32px)] font-medium m-0 mb-4 text-white leading-snug">
@@ -124,6 +125,7 @@ export function ContactFooterSection() {
           <span>© {new Date().getFullYear()} {SITE.name}</span>
           <Link href="/privacy" className="hover:text-white">Политика конфиденциальности</Link>
         </div>
+      </div>
       </div>
     </footer>
   );

@@ -406,10 +406,9 @@
     border-radius: 10px;
   }
 
-  .path-section__curve {
-    @apply bg-primary-footer;
-    height: 48px;
-    border-radius: 50% 50% 0 0 / 24px 24px 0 0;
+  .path-section__spacer {
+    @apply bg-white;
+    height: 100px;
   }
 
   @media (max-width: 1199px) {
@@ -977,7 +976,18 @@
   }
 
   .footer-dark {
-    @apply bg-primary-footer text-white;
+    @apply bg-white text-white;
+  }
+
+  .footer-dark__shell {
+    @apply bg-[#272344] text-white;
+    border-radius: 60px 60px 0 0;
+  }
+
+  @media (max-width: 959px) {
+    .footer-dark__shell {
+      border-radius: 40px 40px 0 0;
+    }
   }
 
   .footer-col-title {
