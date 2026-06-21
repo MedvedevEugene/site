@@ -7,6 +7,9 @@ export const IMAGES = {
   quoteIcon: `${CDN}/tild3765-6635-4265-b734-613031326165/Ellipse_3.svg`,
   logoCircle: `${CDN}/tild3633-3262-4161-a430-353230613533/logo-circle.svg`,
   logoWhite: `${CDN}/tild3934-3966-4163-a230-616634613964/logo-white.svg`,
+  /** Иконки соцсетей в футере (rec1359663041) */
+  footerSocialVk: `${CDN}/tild6131-3963-4562-a538-303632663636/color.svg`,
+  footerSocialTg: `${CDN}/tild6161-6231-4365-b061-653139623038/color.svg`,
   /** Декор на карточке «Базовый курс» — завитушка, не фото */
   catalogDecor: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
   spiral: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
@@ -201,8 +204,9 @@ export const FOOTER_COLUMNS = {
     ],
   },
   about: {
-    title: "ОБ ИРЖ",
+    title: "Об ИРЖ",
     links: [
+      { label: "О нас", href: "/information-about-the-educational-organization" },
       { label: "Статьи", href: "/blog" },
       { label: "Расписание", href: "/timetable" },
       { label: "Расстановочные группы", href: "/rasstanovochnye-gruppy" },
