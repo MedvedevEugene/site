@@ -2036,7 +2036,131 @@
   }
 
   .blog-card {
-    @apply rounded-[28px] overflow-hidden bg-cream-pill;
+    @apply overflow-hidden;
+    width: 260px;
+    max-width: 100%;
+    background: #f9f8e9;
+    border-radius: 20px;
+  }
+
+  .blog-card__link {
+    @apply block no-underline text-inherit;
+  }
+
+  .blog-card__media {
+    @apply block overflow-hidden;
+    width: 100%;
+    height: 260px;
+    margin-bottom: 20px;
+    border-radius: 20px 20px 0 0;
+    background-color: #f6f6f6;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .blog-card__body {
+    padding: 0 20px 18px;
+  }
+
+  .blog-card__title {
+    @apply m-0 font-body text-[#3b3758];
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .blog-card__excerpt {
+    @apply m-0 font-body text-[#3b3758];
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.55;
+    margin-top: 8px;
+  }
+
+  .blog-card__date {
+    @apply block font-body text-[#3b3758];
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-top: 8px;
+  }
+
+  .blog-page {
+    padding-top: 60px;
+    padding-bottom: 100px;
+  }
+
+  .blog-page__breadcrumbs {
+    @apply flex flex-wrap items-center gap-1 font-body text-[#1e1e1e];
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.55;
+    padding-bottom: 30px;
+  }
+
+  .blog-page__breadcrumbs a {
+    @apply text-[#1e1e1e] no-underline transition-colors hover:text-[#9e9e9e];
+    font-weight: 300;
+  }
+
+  .blog-page__breadcrumbs-sep {
+    @apply text-[#858585];
+    font-weight: 300;
+  }
+
+  .blog-page__head {
+    margin-bottom: 40px;
+  }
+
+  .blog-page__title {
+    @apply m-0 font-body text-[#000];
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 74px;
+    max-width: 746px;
+  }
+
+  .blog-page__intro {
+    @apply m-0 font-body text-[#000];
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.55;
+    max-width: 1019px;
+    margin-top: 0;
+  }
+
+  .blog-page__grid {
+    @apply flex flex-wrap justify-start;
+    gap: 40px;
+  }
+
+  @media (max-width: 639px) {
+    .blog-page {
+      padding-bottom: 60px;
+    }
+
+    .blog-page__title {
+      font-size: 32px;
+      line-height: 1.55;
+      max-width: 460px;
+    }
+
+    .blog-page__intro {
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 460px;
+    }
+
+    .blog-card,
+    .blog-card__media {
+      width: 100%;
+    }
+
+    .blog-card__media {
+      height: auto;
+      aspect-ratio: 1 / 1;
+    }
   }
 
   .curve-top {

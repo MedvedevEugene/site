@@ -217,7 +217,7 @@ export const FOOTER_COLUMNS = {
     title: "Об ИРЖ",
     links: [
       { label: "О нас", href: FOOTER_PLACEHOLDER_HREF },
-      { label: "Статьи", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "Статьи", href: "/blog" },
       { label: "Расписание", href: FOOTER_PLACEHOLDER_HREF },
       { label: "Расстановочные группы", href: FOOTER_PLACEHOLDER_HREF },
       { label: "Психологическая помощь", href: FOOTER_PLACEHOLDER_HREF },
