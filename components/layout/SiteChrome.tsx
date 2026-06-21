@@ -91,10 +91,16 @@ export function Header({ onCallbackClick }: HeaderProps) {
                   <div className="nav-edu-menu">
                     {EDUCATION_LINKS.map((item) => (
                       <Link key={item.href} href={item.href} className="nav-edu-menu__item">
-                        <SafeImage src={item.icon} alt="" width={40} height={40} className="shrink-0" />
-                        <div>
-                          <div className="text-sm leading-snug">{item.label}</div>
-                          <div className="text-xs text-muted mt-1">{item.meta}</div>
+                        <SafeImage
+                          src={item.icon}
+                          alt=""
+                          width={40}
+                          height={40}
+                          className="nav-edu-menu__icon"
+                        />
+                        <div className="nav-edu-menu__text">
+                          <div className="nav-edu-menu__title">{item.label}</div>
+                          <div className="nav-edu-menu__meta">{item.meta}</div>
                         </div>
                       </Link>
                     ))}

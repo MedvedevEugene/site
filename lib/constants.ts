@@ -39,9 +39,9 @@ export const EDUCATION_LINKS = [
     icon: "https://static.tildacdn.com/tild6532-3836-4639-a337-376536323337/base.svg",
   },
   {
-    label: "Курс бизнес-расстановок",
+    label: "Курс бизнес расстановок",
     href: "/business-cource",
-    meta: "126ч. / 6 мес.",
+    meta: "126ч. 6 мес.",
     icon: "https://static.tildacdn.com/tild6533-3437-4239-b366-323565346534/business.svg",
   },
 ] as const;
