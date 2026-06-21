@@ -135,7 +135,7 @@ export function ResonanceCarousel() {
                 alt=""
                 fill
                 className="object-cover"
-                sizes="(max-width: 960px) 280px, 20vw"
+                sizes="(max-width: 480px) 280px, 360px"
                 draggable={false}
               />
               <div className="resonance-card__filter" />

@@ -85,12 +85,12 @@
 
   /* lifeinstitute.ru — секция «Что вам откликается» (rec1502165731 + rec1361812121) */
   .resonance-section {
-    @apply pb-[70px] pt-0 -mt-12;
+    @apply pb-[70px] pt-10;
   }
 
   .resonance-section__header {
-    @apply flex items-start justify-center;
-    min-height: 152px;
+    @apply flex items-start justify-center pb-2;
+    min-height: 94px;
   }
 
   .resonance-section__title {
@@ -129,9 +129,8 @@
 
   .resonance-card {
     @apply relative shrink-0 overflow-hidden snap-start;
-    flex: 1 1 0;
-    min-width: 0;
-    max-width: 360px;
+    flex: 0 0 360px;
+    width: 360px;
     aspect-ratio: 3 / 4;
     border-radius: 20px;
   }
@@ -147,7 +146,7 @@
   }
 
   .resonance-card__title {
-    @apply font-body font-normal mb-auto leading-snug m-0;
+    @apply font-body font-normal mb-auto leading-snug m-0 w-full;
     font-size: 26px;
   }
 
@@ -162,13 +161,6 @@
     .resonance-carousel__controls {
       display: flex;
     }
-
-    .resonance-carousel__track {
-      @apply justify-center;
-      overflow-x: visible;
-      scroll-snap-type: none;
-      cursor: default;
-    }
   }
 
   .resonance-carousel__control {
@@ -181,13 +173,15 @@
 
   @media (max-width: 960px) {
     .resonance-section__header {
-      min-height: 112px;
+      min-height: 72px;
     }
 
     .resonance-carousel__controls {
       display: none;
     }
+  }
 
+  @media (max-width: 480px) {
     .resonance-carousel__track {
       gap: 10px;
       padding-inline: 20px;
@@ -196,7 +190,6 @@
     .resonance-card {
       flex: 0 0 280px;
       width: 280px;
-      max-width: none;
     }
 
     .resonance-card__title {
