@@ -182,7 +182,7 @@ export const FEATURE_PILLARS = [
     tint: "cream" as const,
   },
   {
-    titleLines: ["Управление жизнью\u00a0—", "ваш новый навык."],
+    titleLines: ["Управление\u00a0жизнью\u00a0—", "ваш новый навык."],
     image: IMAGES.featureMixer,
     tint: "blue" as const,
   },

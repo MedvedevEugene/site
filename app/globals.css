@@ -221,10 +221,6 @@
     max-width: 271px;
   }
 
-  .feature-pillar--blue .feature-pillar__title {
-    line-height: 1.55;
-  }
-
   @media (max-width: 639px) {
     .feature-pillar {
       min-height: 300px;
