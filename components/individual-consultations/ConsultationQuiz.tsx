@@ -149,18 +149,18 @@ export function ConsultationQuiz() {
             <ContactMethodPicker value={contactMethod} onChange={setContactMethod} />
             {usesPhoneInput ? (
               <PhoneCountryInput
-                name="contactValue"
-                countryFieldName="contactValueCountry"
                 value={phoneValue}
+                onChange={setPhoneValue}
                 countryIso={phoneCountryIso}
-                onValueChange={setPhoneValue}
                 onCountryChange={setPhoneCountryIso}
+                inputName="contactValue"
+                inputClassName="ic-quiz__input"
               />
             ) : (
               <input
                 name="contactValue"
                 required
-                placeholder={CONTACT_METHOD_PLACEHOLDERS[contactMethod]}
+                placeholder={CONTACT_METHOD_PLACEHOLDERS[contactMethod] ?? ""}
                 className="ic-quiz__input"
               />
             )}
