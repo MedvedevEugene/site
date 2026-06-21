@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { RESONANCE_CARDS } from "@/lib/site-data";
@@ -43,7 +43,47 @@ function CarouselArrow({
 export function ResonanceCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef({ active: false, startX: 0, scrollLeft: 0, moved: false });
+  const initialScrollDone = useRef(false);
   const [dragging, setDragging] = useState(false);
+  const [trackCentered, setTrackCentered] = useState(false);
+
+  const syncTrackLayout = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const overflow = track.scrollWidth - track.clientWidth;
+    const fits = overflow <= 1;
+
+    setTrackCentered(fits);
+    track.classList.toggle("resonance-carousel__track--centered", fits);
+
+    if (fits) {
+      track.scrollLeft = 0;
+      initialScrollDone.current = false;
+      return;
+    }
+
+    if (!initialScrollDone.current) {
+      track.scrollLeft = overflow / 2;
+      initialScrollDone.current = true;
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    syncTrackLayout();
+
+    const observer = new ResizeObserver(syncTrackLayout);
+    observer.observe(track);
+
+    window.addEventListener("resize", syncTrackLayout);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", syncTrackLayout);
+    };
+  }, [syncTrackLayout]);
 
   const scrollStep = useCallback(() => {
     const track = trackRef.current;
@@ -112,7 +152,7 @@ export function ResonanceCarousel() {
       <div className="resonance-carousel">
         <div
           ref={trackRef}
-          className={`resonance-carousel__track${dragging ? " resonance-carousel__track--dragging" : ""}`}
+          className={`resonance-carousel__track${trackCentered ? " resonance-carousel__track--centered" : ""}${dragging ? " resonance-carousel__track--dragging" : ""}`}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={endDrag}
@@ -137,6 +177,7 @@ export function ResonanceCarousel() {
                 className="object-cover"
                 sizes="(max-width: 480px) 280px, 360px"
                 draggable={false}
+                onLoad={syncTrackLayout}
               />
               <div className="resonance-card__filter" />
               <div className="resonance-card__content">

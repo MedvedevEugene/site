@@ -127,6 +127,13 @@
     pointer-events: none;
   }
 
+  .resonance-carousel__track--centered {
+    @apply justify-center;
+    overflow-x: hidden;
+    scroll-snap-type: none;
+    cursor: default;
+  }
+
   .resonance-card {
     @apply relative shrink-0 overflow-hidden snap-start;
     flex: 0 0 360px;
