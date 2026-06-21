@@ -789,11 +789,18 @@
   }
 
   .callback-popup__container {
-    @apply relative z-[205] w-full max-w-[560px] bg-white rounded-[10px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.25)];
+    @apply relative z-[205] w-full max-w-[560px] bg-white rounded-[10px] shadow-[0_4px_20px_rgba(0,0,0,0.25)];
+    overflow: visible;
   }
 
   .callback-popup__wrapper {
     padding: 40px 45px;
+    overflow: visible;
+  }
+
+  .callback-popup__field {
+    margin-bottom: 25px;
+    overflow: visible;
   }
 
   .callback-popup__head {
@@ -826,6 +833,7 @@
 
   .callback-popup__field {
     margin-bottom: 25px;
+    overflow: visible;
   }
 
   .callback-popup__field:last-child {
@@ -866,7 +874,7 @@
     @apply relative inline-flex items-center cursor-pointer border border-transparent;
     gap: 4px;
     padding: 8px 9px;
-    border-radius: 0;
+    border-radius: 4px;
   }
 
   .callback-popup__method-input,
@@ -932,10 +940,10 @@
   }
 
   .phone-country-input__dropdown {
-    @apply absolute left-0 top-full z-[220] m-0 list-none bg-white border border-[#c9c9c9] shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-auto;
-    width: min(320px, 80vw);
-    max-height: 240px;
+    @apply z-[300] m-0 list-none bg-white border border-[#c9c9c9] shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-auto;
+    max-height: 280px;
     padding: 6px 0;
+    border-radius: 5px;
   }
 
   .phone-country-input__option {
@@ -970,12 +978,11 @@
     opacity: 0.5;
   }
 
-  .callback-popup__phone,
-  .site-footer__phone-country.phone-country-input {
-    border: 0;
-    border-radius: 0;
-    min-height: 0;
-    background: transparent;
+  .callback-popup__phone.phone-country-input {
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+    min-height: 50px;
+    background: #fff;
   }
 
   .callback-popup__phone .phone-country-input__select-wrap,
@@ -987,7 +994,7 @@
     @apply min-h-[55px];
     border: 0;
     border-radius: 10px;
-    overflow: hidden;
+    overflow: visible;
     background: #fff;
   }
 

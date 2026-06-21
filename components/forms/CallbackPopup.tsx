@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import type { ContactMethod } from "@/lib/contact-form-data";
+import { CONTACT_METHOD_PLACEHOLDERS, type ContactMethod } from "@/lib/contact-form-data";
 import { buildFullPhoneNumber } from "@/lib/phone-format";
 import { DEFAULT_PHONE_COUNTRY } from "@/lib/phone-countries";
 import { ContactMethodPicker } from "@/components/forms/ContactMethodPicker";
@@ -61,9 +61,9 @@ export function CallbackPopup({ open, onClose }: CallbackPopupProps) {
     const countryIso = data.get("contactValueCountry")?.toString() || DEFAULT_PHONE_COUNTRY.iso;
     const country = getPhoneCountryByIso(countryIso);
     const phone =
-      contactMethod === "telegram"
-        ? contactValue
-        : buildFullPhoneNumber(country, contactValue);
+      contactMethod === "phone" || contactMethod === "whatsapp"
+        ? buildFullPhoneNumber(country, contactValue)
+        : contactValue;
 
     try {
       await fetch("/api/contact", {
@@ -83,7 +83,8 @@ export function CallbackPopup({ open, onClose }: CallbackPopupProps) {
     }
   }
 
-  const usesPhoneInput = contactMethod === "phone" || contactMethod === "whatsapp" || contactMethod === "max";
+  const usesPhoneInput = contactMethod === "phone" || contactMethod === "whatsapp";
+  const textPlaceholder = CONTACT_METHOD_PLACEHOLDERS[contactMethod];
 
   return (
     <div className="callback-popup" role="dialog" aria-modal="true" aria-label="Задайте нам вопрос">
@@ -147,7 +148,7 @@ export function CallbackPopup({ open, onClose }: CallbackPopupProps) {
                   <input
                     name="contactValue"
                     required
-                    placeholder="Username или номер телефона"
+                    placeholder={textPlaceholder ?? ""}
                     className="callback-popup__input"
                   />
                 )}

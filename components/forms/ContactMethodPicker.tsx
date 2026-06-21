@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { CONTACT_METHODS, type ContactMethod } from "@/lib/contact-form-data";
 
 interface ContactMethodPickerProps {
@@ -25,7 +24,8 @@ export function ContactMethodPicker({ value, onChange, className = "" }: Contact
             onChange={() => onChange(method.id)}
             className="contact-method-picker__input"
           />
-          <Image src={method.icon} alt="" width={18} height={18} className="contact-method-picker__icon" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={method.icon} alt="" width={18} height={18} className="contact-method-picker__icon" />
           <span className="contact-method-picker__label">{method.label}</span>
         </label>
       ))}
