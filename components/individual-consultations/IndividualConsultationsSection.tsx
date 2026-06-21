@@ -56,10 +56,9 @@ export function IndividualConsultationsSection() {
               <Image
                 src={IC_HERO_IMAGE}
                 alt=""
-                width={520}
-                height={374}
+                fill
                 className="ic-page__hero-image"
-                sizes="(max-width: 1024px) 100vw, 520px"
+                sizes="(max-width: 1024px) 100vw, 620px"
                 priority
               />
             </div>
