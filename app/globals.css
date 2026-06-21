@@ -871,10 +871,13 @@
 
   .callback-popup__method,
   .contact-method-picker__item {
-    @apply relative inline-flex items-center cursor-pointer border border-transparent;
+    @apply relative inline-flex items-center cursor-pointer;
     gap: 4px;
     padding: 8px 9px;
-    border-radius: 4px;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+    background: #fff;
+    transition: border-color 0.15s ease;
   }
 
   .callback-popup__method-input,
@@ -903,7 +906,7 @@
     @apply flex items-stretch w-full;
     border: 1px solid #c9c9c9;
     border-radius: 5px;
-    overflow: visible;
+    overflow: hidden;
     min-height: 50px;
     background: #fff;
   }
@@ -978,14 +981,15 @@
     opacity: 0.5;
   }
 
-  .callback-popup__phone.phone-country-input {
+  .callback-popup__phone-input.phone-country-input {
     border: 1px solid #c9c9c9;
     border-radius: 5px;
     min-height: 50px;
     background: #fff;
+    overflow: hidden;
   }
 
-  .callback-popup__phone .phone-country-input__select-wrap,
+  .callback-popup__phone-input .phone-country-input__select-wrap,
   .site-footer__phone-country .phone-country-input__select-wrap {
     border-right: 1px solid #c9c9c9;
   }

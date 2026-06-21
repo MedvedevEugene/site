@@ -135,7 +135,7 @@ export function CallbackPopup({ open, onClose }: CallbackPopupProps) {
                 />
               </div>
 
-              <div className="callback-popup__field">
+              <div className="callback-popup__field" key={contactMethod}>
                 {usesPhoneInput ? (
                   <PhoneCountryInput
                     value={phoneValue}
@@ -143,11 +143,13 @@ export function CallbackPopup({ open, onClose }: CallbackPopupProps) {
                     countryIso={phoneCountryIso}
                     onCountryChange={setPhoneCountryIso}
                     inputName="contactValue"
+                    className="callback-popup__phone-input"
                   />
                 ) : (
                   <input
                     name="contactValue"
                     required
+                    type="text"
                     placeholder={textPlaceholder ?? ""}
                     className="callback-popup__input"
                   />
