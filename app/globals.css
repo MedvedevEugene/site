@@ -1001,8 +1001,8 @@
   .site-footer__phone-country.phone-country-input {
     @apply min-h-[55px];
     border: 0;
-    border-radius: 10px;
-    overflow: visible;
+    border-radius: 10px 0 0 10px;
+    overflow: hidden;
     background: #fff;
   }
 
@@ -1011,10 +1011,13 @@
     padding: 0 8px;
   }
 
-  .site-footer__phone-country .phone-country-input__field {
+  .site-footer__phone-country .phone-country-input__field,
+  .site-footer__phone-country .phone-country-input__field.site-footer__input {
     min-height: 55px;
+    height: 55px;
     font-size: 13px;
     padding: 0 16px;
+    border-radius: 0;
   }
 
   .site-footer__phone-country .phone-country-input__code {
@@ -1383,12 +1386,17 @@
   }
 
   .site-footer__input-row {
-    @apply grid gap-2.5;
-    grid-template-columns: 1fr 1fr;
+    @apply flex w-full;
+    gap: 0;
   }
 
   .site-footer__phone-country {
-    @apply min-w-0;
+    @apply min-w-0 flex-1;
+  }
+
+  .site-footer__input-row > .site-footer__input[type="email"] {
+    @apply min-w-0 flex-1;
+    border-radius: 0 10px 10px 0;
   }
 
   .site-footer__checkbox {
@@ -1607,7 +1615,15 @@
     }
 
     .site-footer__input-row {
-      grid-template-columns: 1fr;
+      @apply flex-col gap-2.5;
+    }
+
+    .site-footer__phone-country.phone-country-input {
+      border-radius: 10px;
+    }
+
+    .site-footer__input-row > .site-footer__input[type="email"] {
+      border-radius: 10px;
     }
 
     .site-footer__grid {
