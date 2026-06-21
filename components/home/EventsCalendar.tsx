@@ -1,4 +1,4 @@
-import { TimetableCalendar } from "@/components/calendar/TimetableCalendar";
+import { AdminEventsCalendar } from "@/components/calendar/AdminEventsCalendar";
 
 export function EventsCalendar() {
   return (
@@ -11,9 +11,7 @@ export function EventsCalendar() {
         </h2>
       </div>
       <div className="container-site">
-        <div className="calendar-shell mt-10">
-          <TimetableCalendar compact />
-        </div>
+        <AdminEventsCalendar shellClassName="mt-10" />
       </div>
     </section>
   );
