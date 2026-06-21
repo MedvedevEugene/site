@@ -736,11 +736,11 @@
   }
 
   .nav-edu-menu {
-    @apply inline-flex items-start max-w-[580px] bg-white rounded-[10px] p-5 shadow-[0_5px_15px_rgba(0,0,0,0.05)];
+    @apply flex items-start w-[580px] max-w-[580px] box-border bg-white rounded-[10px] p-5 shadow-[0_5px_15px_rgba(0,0,0,0.05)];
   }
 
   .nav-edu-menu__item {
-    @apply flex items-start min-w-0 transition-opacity hover:opacity-80;
+    @apply flex flex-1 items-start min-w-0 transition-opacity hover:opacity-80;
   }
 
   .nav-edu-menu__item:not(:last-child) {
@@ -755,7 +755,7 @@
   }
 
   .nav-edu-menu__text {
-    @apply min-w-0;
+    @apply min-w-0 flex-1;
   }
 
   .nav-edu-menu__title {
