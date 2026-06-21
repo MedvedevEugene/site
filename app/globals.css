@@ -85,12 +85,12 @@
 
   /* lifeinstitute.ru — секция «Что вам откликается» (rec1502165731 + rec1361812121) */
   .resonance-section {
-    @apply pb-[70px] pt-10;
+    @apply pb-[70px] pt-0;
   }
 
   .resonance-section__header {
-    @apply flex items-start justify-center pb-2;
-    min-height: 94px;
+    @apply flex items-center justify-center;
+    min-height: 152px;
   }
 
   .resonance-section__title {
@@ -180,7 +180,7 @@
 
   @media (max-width: 960px) {
     .resonance-section__header {
-      min-height: 72px;
+      min-height: 112px;
     }
 
     .resonance-carousel__controls {
@@ -218,6 +218,11 @@
 
   .section-title {
     @apply font-body text-center text-[clamp(24px,3vw,36px)] font-semibold m-0 mb-3 text-primary;
+  }
+
+  /* lifeinstitute.ru — rec1295192071 */
+  .events-section__title {
+    @apply leading-[1.3] mx-auto max-w-[454px];
   }
 
   .section-subtitle {
