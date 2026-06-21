@@ -174,16 +174,22 @@ export const FEATURE_PILLARS = [
   {
     titleLines: ["Работа на себя", "и в удовольствие."],
     image: IMAGES.featureCompass,
+    imageWidth: 150,
+    imageHeight: 151,
     tint: "cream" as const,
   },
   {
     titleLines: ["Вдохновляющее окружение,", "которое с вами."],
     image: IMAGES.featureAtom,
+    imageWidth: 160,
+    imageHeight: 144,
     tint: "cream" as const,
   },
   {
     titleLines: ["Управление\u00a0жизнью\u00a0—", "ваш новый навык."],
     image: IMAGES.featureMixer,
+    imageWidth: 172,
+    imageHeight: 111,
     tint: "blue" as const,
   },
 ] as const;

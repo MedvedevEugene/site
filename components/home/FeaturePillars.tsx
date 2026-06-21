@@ -12,7 +12,14 @@ export function FeaturePillars() {
               className={`feature-pillar${item.tint === "blue" ? " feature-pillar--blue" : ""}`}
             >
               <div className="feature-pillar__icon">
-                <Image src={item.image} alt="" width={150} height={150} className="h-auto w-[150px] object-contain" />
+                <Image
+                  src={item.image}
+                  alt=""
+                  width={item.imageWidth}
+                  height={item.imageHeight}
+                  className="h-auto object-contain"
+                  style={{ width: item.imageWidth, maxWidth: "100%" }}
+                />
               </div>
               <p className="feature-pillar__title">
                 {item.titleLines.map((line, index) => (
