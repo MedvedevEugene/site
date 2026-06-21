@@ -53,11 +53,11 @@
 
   /* lifeinstitute.ru — блок «Что вам откликается» (rec1361812121) */
   .resonance-card__btn-wrapper {
-    @apply w-full -translate-y-5;
+    @apply w-full flex justify-center -translate-y-5;
   }
 
   .btn-resonance {
-    @apply inline-flex items-center justify-center w-full rounded-[30px] border border-white/30 bg-white/20 text-white px-6 text-sm font-semibold font-body;
+    @apply inline-flex items-center justify-center rounded-[30px] border border-white/30 bg-white/20 text-white px-[30px] text-sm font-semibold font-body whitespace-nowrap;
     height: 45px;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
