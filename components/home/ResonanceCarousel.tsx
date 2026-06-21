@@ -140,9 +140,9 @@ export function ResonanceCarousel() {
   }
 
   return (
-    <section className="resonance-section bg-white">
-      <div className="container-site resonance-section__header">
-        <h2 className="resonance-section__title">
+    <section className="resonance-section">
+      <div className="container-site section-heading-band">
+        <h2 className="section-title">
           Что вам откликается
           <br />
           сейчас?

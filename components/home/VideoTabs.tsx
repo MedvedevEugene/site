@@ -7,9 +7,11 @@ export function VideoTabs() {
   const [active, setActive] = useState<(typeof VIDEO_TABS)[number]["id"]>(VIDEO_TABS[0].id);
 
   return (
-    <section className="section bg-white">
-      <div className="container-site">
+    <section className="bg-white pb-[70px]">
+      <div className="container-site section-heading-band">
         <h2 className="section-title">Как это выглядит на деле</h2>
+      </div>
+      <div className="container-site">
         <p className="section-subtitle">Короткие отрывки из живых расстановок и групп.</p>
 
         <div className="video-tab-bar">

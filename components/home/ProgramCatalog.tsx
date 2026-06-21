@@ -18,14 +18,16 @@ function CatalogLightningIcon() {
 
 export function ProgramCatalog() {
   return (
-    <section id="catalog" className="section bg-white scroll-mt-24">
-      <div className="container-site">
+    <section id="catalog" className="bg-white scroll-mt-24">
+      <div className="container-site section-heading-band">
         <h2 className="section-title">
           Каталог наших
           <br />
           программ
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
+      </div>
+      <div className="container-site">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {CATALOG_PROGRAMS.map((p) => {
             const featured = "featured" in p && p.featured;
             const wide = featured || ("wide" in p && p.wide);

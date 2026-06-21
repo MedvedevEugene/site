@@ -9,9 +9,11 @@ export function SupportTabs() {
   const tab = SUPPORT_TABS.find((t) => t.id === active) ?? SUPPORT_TABS[0];
 
   return (
-    <section className="section bg-white">
-      <div className="container-site">
+    <section className="bg-white pb-[70px]">
+      <div className="container-site section-heading-band">
         <h2 className="section-title">Поддерживаем и помогаем прийти к результату</h2>
+      </div>
+      <div className="container-site">
         <div className="bg-cream-bg rounded-[40px] p-6 md:p-10 border border-border">
           <div className="flex flex-wrap gap-3 mb-8 justify-center">
             {SUPPORT_TABS.map((t) => (
