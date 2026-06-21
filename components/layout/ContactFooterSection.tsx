@@ -5,13 +5,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { SITE } from "@/lib/constants";
 import { FOOTER_COLUMNS, IMAGES } from "@/lib/site-data";
+import { buildFullPhoneNumber } from "@/lib/phone-format";
+import { DEFAULT_PHONE_COUNTRY } from "@/lib/phone-countries";
+import { getPhoneCountryByIso, PhoneCountryInput } from "@/components/forms/PhoneCountryInput";
 
 function FooterLeadForm() {
   const [sent, setSent] = useState(false);
+  const [phoneValue, setPhoneValue] = useState("");
+  const [phoneCountryIso, setPhoneCountryIso] = useState(DEFAULT_PHONE_COUNTRY.iso);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    const country = getPhoneCountryByIso(data.get("phoneCountry")?.toString() || DEFAULT_PHONE_COUNTRY.iso);
+    const phone = buildFullPhoneNumber(country, data.get("phone")?.toString() || phoneValue);
+
     try {
       await fetch("/api/contact", {
         method: "POST",
@@ -19,7 +27,7 @@ function FooterLeadForm() {
         body: JSON.stringify({
           type: "lead",
           name: data.get("name"),
-          phone: data.get("phone"),
+          phone,
           email: data.get("email"),
         }),
       });
@@ -42,18 +50,15 @@ function FooterLeadForm() {
         className="site-footer__input site-footer__input--full"
       />
       <div className="site-footer__input-row">
-        <div className="site-footer__phone-field">
-          <span className="site-footer__phone-flag" aria-hidden="true">
-            🇷🇺
-          </span>
-          <input
-            name="phone"
-            type="tel"
-            required
-            placeholder="(000) 000-00-00"
-            className="site-footer__input site-footer__input--phone"
-          />
-        </div>
+        <PhoneCountryInput
+          value={phoneValue}
+          onChange={setPhoneValue}
+          countryIso={phoneCountryIso}
+          onCountryChange={setPhoneCountryIso}
+          inputName="phone"
+          inputClassName="site-footer__input site-footer__input--phone"
+          className="site-footer__phone-country"
+        />
         <input
           name="email"
           type="email"

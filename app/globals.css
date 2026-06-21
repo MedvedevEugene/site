@@ -855,58 +855,155 @@
     resize: vertical;
   }
 
-  .callback-popup__methods {
-    @apply flex items-start justify-between gap-2;
+  .callback-popup__methods,
+  .contact-method-picker {
+    @apply flex flex-wrap items-start;
+    gap: 6px;
   }
 
-  .callback-popup__method {
-    @apply flex flex-col items-center gap-2 flex-1 min-w-0 cursor-pointer;
+  .callback-popup__method,
+  .contact-method-picker__item {
+    @apply relative inline-flex items-center cursor-pointer border border-transparent;
+    gap: 4px;
+    padding: 8px 9px;
+    border-radius: 0;
   }
 
-  .callback-popup__method-input {
+  .callback-popup__method-input,
+  .contact-method-picker__input {
     @apply sr-only;
   }
 
-  .callback-popup__method-icon {
-    @apply flex items-center justify-center shrink-0;
-    width: 40px;
-    height: 40px;
-    border-radius: 9999px;
+  .contact-method-picker__item--active {
+    border-color: rgba(0, 0, 0, 0.4);
   }
 
-  .callback-popup__method--active .callback-popup__method-icon {
-    background: #272344;
+  .contact-method-picker__icon {
+    @apply shrink-0;
+    width: 18px;
+    height: 18px;
   }
 
+  .contact-method-picker__label,
   .callback-popup__method-label {
-    @apply text-center font-body text-[#000];
-    font-size: 12px;
+    @apply font-body text-[#000] whitespace-nowrap;
+    font-size: max(12px, 1rem);
     line-height: 1.2;
   }
 
-  .callback-popup__phone {
+  .phone-country-input {
     @apply flex items-stretch w-full;
     border: 1px solid #c9c9c9;
     border-radius: 5px;
-    overflow: hidden;
+    overflow: visible;
     min-height: 50px;
-  }
-
-  .callback-popup__phone-prefix {
-    @apply inline-flex items-center gap-2 shrink-0 font-body text-base text-[#000];
-    padding: 0 12px 0 14px;
-    border-right: 1px solid #c9c9c9;
     background: #fff;
   }
 
-  .callback-popup__phone-flag {
-    font-size: 18px;
-    line-height: 1;
+  .phone-country-input__select-wrap {
+    @apply relative shrink-0;
+    border-right: 1px solid #c9c9c9;
   }
 
-  .callback-popup__input--phone {
-    @apply border-0 rounded-none min-h-[48px];
-    flex: 1;
+  .phone-country-input__select {
+    @apply inline-flex items-center gap-2 h-full border-0 bg-white font-body text-base text-[#000] cursor-pointer;
+    padding: 0 10px;
+    min-height: 48px;
+  }
+
+  .phone-country-input__flag {
+    display: inline-block;
+    width: 16px;
+    min-width: 16px;
+    height: 11px;
+    background-image: url("/images/forms/flags7.png");
+    background-repeat: no-repeat;
+  }
+
+  .phone-country-input__code {
+    @apply whitespace-nowrap;
+    font-size: 14px;
+  }
+
+  .phone-country-input__caret {
+    font-size: 10px;
+    line-height: 1;
+    opacity: 0.6;
+  }
+
+  .phone-country-input__dropdown {
+    @apply absolute left-0 top-full z-[220] m-0 list-none bg-white border border-[#c9c9c9] shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-auto;
+    width: min(320px, 80vw);
+    max-height: 240px;
+    padding: 6px 0;
+  }
+
+  .phone-country-input__option {
+    @apply flex w-full items-center gap-2 border-0 bg-white text-left font-body text-[#000] cursor-pointer;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .phone-country-input__option:hover,
+  .phone-country-input__option--active {
+    background: #f5f5f5;
+  }
+
+  .phone-country-input__option-label {
+    @apply flex-1 min-w-0 truncate;
+  }
+
+  .phone-country-input__option-code {
+    @apply shrink-0 text-muted;
+    font-size: 12px;
+  }
+
+  .phone-country-input__field {
+    @apply flex-1 min-w-0 border-0 bg-white font-body text-base text-[#000] outline-none;
+    padding: 0 14px;
+    min-height: 48px;
+    border-radius: 0;
+  }
+
+  .phone-country-input__field::placeholder {
+    color: #000;
+    opacity: 0.5;
+  }
+
+  .callback-popup__phone,
+  .site-footer__phone-country.phone-country-input {
+    border: 0;
+    border-radius: 0;
+    min-height: 0;
+    background: transparent;
+  }
+
+  .callback-popup__phone .phone-country-input__select-wrap,
+  .site-footer__phone-country .phone-country-input__select-wrap {
+    border-right: 1px solid #c9c9c9;
+  }
+
+  .site-footer__phone-country.phone-country-input {
+    @apply min-h-[55px];
+    border: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .site-footer__phone-country .phone-country-input__select {
+    min-height: 55px;
+    padding: 0 8px;
+  }
+
+  .site-footer__phone-country .phone-country-input__field {
+    min-height: 55px;
+    font-size: 13px;
+    padding: 0 16px;
+  }
+
+  .site-footer__phone-country .phone-country-input__code {
+    font-size: 13px;
   }
 
   .callback-popup__submit {
@@ -947,12 +1044,13 @@
       margin-bottom: 14px;
     }
 
-    .callback-popup__methods {
-      @apply gap-1;
+    .callback-popup__methods,
+    .contact-method-picker {
+      gap: 4px;
     }
 
-    .callback-popup__method-label {
-      font-size: 11px;
+    .contact-method-picker__label {
+      font-size: 12px;
     }
   }
 
@@ -1264,16 +1362,8 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  .site-footer__phone-field {
-    @apply relative;
-  }
-
-  .site-footer__phone-flag {
-    @apply absolute left-3 top-1/2 -translate-y-1/2 text-base leading-none pointer-events-none;
-  }
-
-  .site-footer__input--phone {
-    padding-left: 36px;
+  .site-footer__phone-country {
+    @apply min-w-0;
   }
 
   .site-footer__checkbox {
