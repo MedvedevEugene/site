@@ -11,11 +11,13 @@ export function TimetablePageSection() {
           <span aria-current="page">Расписание</span>
         </nav>
 
-        <h1 className="timetable-page__title">Расписание</h1>
-        <p className="timetable-page__intro">
-          В этом разделе вы найдёте расписание всех наших программ, занятий и групп — выберите подходящее
-          время, чтобы присоединиться.
-        </p>
+        <div className="timetable-page__head">
+          <h1 className="timetable-page__title">Расписание</h1>
+          <p className="timetable-page__intro">
+            В этом разделе вы найдёте расписание всех наших программ, занятий и групп — выберите подходящее
+            время, чтобы присоединиться.
+          </p>
+        </div>
 
         <AdminEventsCalendar shellClassName="timetable-page__calendar" />
       </div>
