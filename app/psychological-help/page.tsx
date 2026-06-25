@@ -84,7 +84,7 @@ export default function PsychologicalHelpPage() {
         <div className="container-site">
           <h2 className="section-title">Цифровые НЛП/НЛУ-инструменты</h2>
           <p className="section-subtitle">
-            Самостоятельное исследование → базовый результат → расширенный ИИ-разбор (после оплаты)
+            Самостоятельное исследование → карта ответов → бесплатный ИИ-разбор (тестовый режим)
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {TOOLS.map((tool) => (
