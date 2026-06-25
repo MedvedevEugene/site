@@ -1,8 +1,14 @@
 type ChatMessage = { role: "system" | "user" | "assistant"; content: string };
 
-export async function generateAiCompletion(prompt: string): Promise<string | null> {
-  const openRouterKey = process.env.OPENROUTER_API_KEY;
-  const openAiKey = process.env.OPENAI_API_KEY;
+export type AiCompletionResult = {
+  content: string | null;
+  error?: string;
+  hasKey: boolean;
+};
+
+export async function generateAiCompletion(prompt: string): Promise<AiCompletionResult> {
+  const openRouterKey = process.env.OPENROUTER_API_KEY?.trim();
+  const openAiKey = process.env.OPENAI_API_KEY?.trim();
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ||
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://psychologydemo-ten.vercel.app");
@@ -12,9 +18,8 @@ export async function generateAiCompletion(prompt: string): Promise<string | nul
     { role: "user", content: prompt },
   ];
 
-  const model =
-    process.env.AI_MODEL ||
-    (openRouterKey ? "meta-llama/llama-3.3-70b-instruct:free" : "gpt-4o-mini");
+  const model = (process.env.AI_MODEL?.trim() ||
+    (openRouterKey ? "meta-llama/llama-3.3-70b-instruct:free" : "gpt-4o-mini")) as string;
 
   const body = {
     model,
@@ -22,6 +27,11 @@ export async function generateAiCompletion(prompt: string): Promise<string | nul
     max_tokens: 2500,
     temperature: 0.7,
   };
+
+  const hasKey = Boolean(openRouterKey || openAiKey);
+  if (!hasKey) {
+    return { content: null, error: "no_key", hasKey: false };
+  }
 
   try {
     if (openRouterKey) {
@@ -35,12 +45,26 @@ export async function generateAiCompletion(prompt: string): Promise<string | nul
         },
         body: JSON.stringify(body),
       });
+      const raw = await res.text();
       if (!res.ok) {
-        console.error("[ai] OpenRouter error", res.status, await res.text().catch(() => ""));
-        return null;
+        console.error("[ai] OpenRouter error", res.status, raw);
+        let message = `openrouter_${res.status}`;
+        try {
+          const parsed = JSON.parse(raw) as { error?: { message?: string } };
+          if (parsed.error?.message) message = parsed.error.message;
+        } catch {
+          // keep status-based message
+        }
+        return { content: null, error: message, hasKey: true };
       }
-      const data = await res.json();
-      return (data.choices?.[0]?.message?.content as string) || null;
+      const data = JSON.parse(raw) as {
+        choices?: Array<{ message?: { content?: string } }>;
+      };
+      return {
+        content: data.choices?.[0]?.message?.content || null,
+        hasKey: true,
+        error: data.choices?.[0]?.message?.content ? undefined : "empty_response",
+      };
     }
 
     if (openAiKey) {
@@ -52,17 +76,24 @@ export async function generateAiCompletion(prompt: string): Promise<string | nul
         },
         body: JSON.stringify(body),
       });
+      const raw = await res.text();
       if (!res.ok) {
-        console.error("[ai] OpenAI error", res.status, await res.text().catch(() => ""));
-        return null;
+        console.error("[ai] OpenAI error", res.status, raw);
+        return { content: null, error: `openai_${res.status}`, hasKey: true };
       }
-      const data = await res.json();
-      return (data.choices?.[0]?.message?.content as string) || null;
+      const data = JSON.parse(raw) as {
+        choices?: Array<{ message?: { content?: string } }>;
+      };
+      return {
+        content: data.choices?.[0]?.message?.content || null,
+        hasKey: true,
+        error: data.choices?.[0]?.message?.content ? undefined : "empty_response",
+      };
     }
   } catch (error) {
     console.error("[ai] request failed", error);
-    return null;
+    return { content: null, error: "network_error", hasKey: true };
   }
 
-  return null;
+  return { content: null, error: "unknown", hasKey };
 }

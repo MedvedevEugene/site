@@ -4,18 +4,30 @@ import { buildToolPrompt } from "@/lib/ai-prompts";
 import { getToolSession, saveToolSessionAiReport } from "@/lib/tool-sessions";
 import type { ToolId } from "@/lib/tool-sessions";
 
-function fallbackAnalysis(tool: string, payload: Record<string, unknown>) {
+function fallbackAnalysis(
+  tool: string,
+  payload: Record<string, unknown>,
+  reason?: string,
+  hasKey?: boolean
+) {
   const topic =
     (payload.topic as string) ||
     (payload.query as string) ||
     (payload.pso as string) ||
     "ваш запрос";
 
+  let hint = "Добавьте `OPENROUTER_API_KEY` и `AI_MODEL` в Vercel → Redeploy.";
+  if (hasKey && reason) {
+    hint = `Ключ на сервере есть, но OpenRouter вернул ошибку: ${reason}. Проверьте значение \`AI_MODEL\` (должно быть \`meta-llama/llama-3.3-70b-instruct:free\`) и лимиты на openrouter.ai.`;
+  } else if (hasKey) {
+    hint = "Ключ на сервере есть, но ответ пустой. Попробуйте другую модель в `AI_MODEL` или повторите позже.";
+  }
+
   return `## Предварительный разбор (демо-режим)
 
 Тема исследования: **${topic}**
 
-Добавьте \`OPENROUTER_API_KEY\` или \`OPENAI_API_KEY\` в переменные окружения Vercel для полного ИИ-разбора.
+${hint}
 
 ### Что видно в ваших ответах
 - Есть повторяющиеся смысловые линии вокруг темы «${topic}».
@@ -51,13 +63,19 @@ export async function POST(request: Request) {
     }
 
     const prompt = buildToolPrompt(resolvedTool, payload);
-    const analysis = (await generateAiCompletion(prompt)) || fallbackAnalysis(resolvedTool, payload);
+    const ai = await generateAiCompletion(prompt);
+    const analysis =
+      ai.content || fallbackAnalysis(resolvedTool, payload, ai.error, ai.hasKey);
 
     if (sessionId) {
       await saveToolSessionAiReport(sessionId, analysis).catch(() => {});
     }
 
-    return NextResponse.json({ analysis });
+    return NextResponse.json({
+      analysis,
+      mode: ai.content ? "ai" : "fallback",
+      ...(ai.error ? { aiError: ai.error } : {}),
+    });
   } catch (error) {
     console.error("[ai-analysis]", error);
     return NextResponse.json({ error: "Analysis failed" }, { status: 500 });
