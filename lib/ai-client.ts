@@ -4,7 +4,61 @@ export type AiCompletionResult = {
   content: string | null;
   error?: string;
   hasKey: boolean;
+  modelUsed?: string;
 };
+
+const FREE_MODEL_FALLBACKS = [
+  "qwen/qwen3-next-80b-a3b-instruct:free",
+  "meta-llama/llama-3.3-70b-instruct:free",
+  "meta-llama/llama-3.2-3b-instruct:free",
+  "openrouter/free",
+] as const;
+
+function uniqueModels(models: string[]) {
+  return [...new Set(models.filter(Boolean))];
+}
+
+async function callOpenRouter(
+  apiKey: string,
+  siteUrl: string,
+  model: string,
+  messages: ChatMessage[]
+): Promise<{ content: string | null; error?: string }> {
+  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+      "HTTP-Referer": siteUrl,
+      "X-Title": "IZHSIZ",
+    },
+    body: JSON.stringify({
+      model,
+      messages,
+      max_tokens: 2500,
+      temperature: 0.7,
+    }),
+  });
+
+  const raw = await res.text();
+  if (!res.ok) {
+    console.error("[ai] OpenRouter error", model, res.status, raw);
+    let message = `openrouter_${res.status}`;
+    try {
+      const parsed = JSON.parse(raw) as { error?: { message?: string } };
+      if (parsed.error?.message) message = parsed.error.message;
+    } catch {
+      // keep status-based message
+    }
+    return { content: null, error: message };
+  }
+
+  const data = JSON.parse(raw) as {
+    choices?: Array<{ message?: { content?: string } }>;
+  };
+  const content = data.choices?.[0]?.message?.content || null;
+  return { content, error: content ? undefined : "empty_response" };
+}
 
 export async function generateAiCompletion(prompt: string): Promise<AiCompletionResult> {
   const openRouterKey = process.env.OPENROUTER_API_KEY?.trim();
@@ -18,16 +72,6 @@ export async function generateAiCompletion(prompt: string): Promise<AiCompletion
     { role: "user", content: prompt },
   ];
 
-  const model = (process.env.AI_MODEL?.trim() ||
-    (openRouterKey ? "meta-llama/llama-3.3-70b-instruct:free" : "gpt-4o-mini")) as string;
-
-  const body = {
-    model,
-    messages,
-    max_tokens: 2500,
-    temperature: 0.7,
-  };
-
   const hasKey = Boolean(openRouterKey || openAiKey);
   if (!hasKey) {
     return { content: null, error: "no_key", hasKey: false };
@@ -35,46 +79,42 @@ export async function generateAiCompletion(prompt: string): Promise<AiCompletion
 
   try {
     if (openRouterKey) {
-      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${openRouterKey}`,
-          "Content-Type": "application/json",
-          "HTTP-Referer": siteUrl,
-          "X-Title": "IZHSIZ",
-        },
-        body: JSON.stringify(body),
-      });
-      const raw = await res.text();
-      if (!res.ok) {
-        console.error("[ai] OpenRouter error", res.status, raw);
-        let message = `openrouter_${res.status}`;
-        try {
-          const parsed = JSON.parse(raw) as { error?: { message?: string } };
-          if (parsed.error?.message) message = parsed.error.message;
-        } catch {
-          // keep status-based message
+      const preferred = process.env.AI_MODEL?.trim();
+      const models = uniqueModels([preferred || "", ...FREE_MODEL_FALLBACKS]);
+      let lastError = "unknown";
+
+      for (const model of models) {
+        const result = await callOpenRouter(openRouterKey, siteUrl, model, messages);
+        if (result.content) {
+          return { content: result.content, hasKey: true, modelUsed: model };
         }
-        return { content: null, error: message, hasKey: true };
+        lastError = result.error || "unknown";
+        const retryable =
+          lastError.includes("Provider returned error") ||
+          lastError.includes("rate") ||
+          lastError.includes("429") ||
+          lastError.includes("503") ||
+          lastError.includes("empty_response");
+        if (!retryable) break;
       }
-      const data = JSON.parse(raw) as {
-        choices?: Array<{ message?: { content?: string } }>;
-      };
-      return {
-        content: data.choices?.[0]?.message?.content || null,
-        hasKey: true,
-        error: data.choices?.[0]?.message?.content ? undefined : "empty_response",
-      };
+
+      return { content: null, error: lastError, hasKey: true };
     }
 
     if (openAiKey) {
+      const model = process.env.AI_MODEL?.trim() || "gpt-4o-mini";
       const res = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${openAiKey}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify({
+          model,
+          messages,
+          max_tokens: 2500,
+          temperature: 0.7,
+        }),
       });
       const raw = await res.text();
       if (!res.ok) {
@@ -88,6 +128,7 @@ export async function generateAiCompletion(prompt: string): Promise<AiCompletion
         content: data.choices?.[0]?.message?.content || null,
         hasKey: true,
         error: data.choices?.[0]?.message?.content ? undefined : "empty_response",
+        modelUsed: model,
       };
     }
   } catch (error) {
