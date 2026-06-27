@@ -125,16 +125,24 @@ export function IndividualConsultationsSection() {
       </section>
 
       <section className="ic-page__section ic-page__section--methods">
-        <div className="container-site">
-          <h2 className="ic-page__title ic-page__title--light">Методы работы</h2>
+        <div className="container-site ic-page__methods-wrap">
+          <h2 className="ic-page__title ic-page__title--center ic-page__title--methods">Методы работы</h2>
           <div className="ic-page__methods">
             {IC_METHODS.map((method) => (
               <article key={method.title} className={`ic-method ic-method--${method.tone}`}>
                 <div className="ic-method__icon">
-                  <Image src={method.icon} alt="" width={48} height={48} className="object-contain" />
+                  <Image
+                    src={method.icon}
+                    alt=""
+                    width={150}
+                    height={150}
+                    className="ic-method__icon-img"
+                  />
                 </div>
-                <h3 className="ic-method__title">{method.title}</h3>
-                <p className="ic-method__text">{method.text}</p>
+                <div className="ic-method__body">
+                  <h3 className="ic-method__title">{method.title}</h3>
+                  <p className="ic-method__text">{method.text}</p>
+                </div>
               </article>
             ))}
           </div>
