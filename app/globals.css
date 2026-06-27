@@ -2237,11 +2237,11 @@
   }
 
   .ic-page {
-    @apply bg-cream-bg;
+    @apply bg-white;
   }
 
   .ic-page__hero {
-    background: #f9f8e8;
+    @apply bg-white;
     padding-top: 30px;
     padding-bottom: 50px;
   }
@@ -2287,7 +2287,7 @@
   }
 
   .ic-page__hero-actions {
-    @apply flex flex-wrap gap-3;
+    @apply flex flex-row flex-nowrap items-center gap-3;
     margin-top: 32px;
   }
 
@@ -2385,12 +2385,14 @@
 
   .ic-page__btn--hero {
     min-height: 60px;
-    min-width: 240px;
+    min-width: 0;
+    width: auto;
     padding: 0 36px;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.02em;
     text-transform: uppercase;
+    white-space: nowrap;
   }
 
   .ic-page__btn--sm {
@@ -2787,11 +2789,12 @@
       width: 100%;
     }
 
-    .ic-page__btn--hero {
-      min-height: 52px;
+    .ic-page__hero-actions .ic-page__btn--hero {
+      width: auto;
+      flex: 1 1 0;
       min-width: 0;
-      padding: 0 24px;
-      font-size: 15px;
+      padding: 0 16px;
+      font-size: 11px;
     }
 
     .ic-page__title {
