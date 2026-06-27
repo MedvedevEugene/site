@@ -2381,16 +2381,16 @@
     padding: 32px;
   }
 
-  .ic-method-tone-white {
+  .ic-method--white {
     @apply bg-white;
   }
 
-  .ic-method-tone-cream {
-    background-color: #f9f8e8;
+  .ic-method--cream {
+    @apply bg-[#f9f8e8];
   }
 
-  .ic-method-tone-blue {
-    background-color: #f6f9ff;
+  .ic-method--blue {
+    @apply bg-[#f6f9ff];
   }
 
   .ic-method__icon {
