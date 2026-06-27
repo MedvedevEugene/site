@@ -81,8 +81,7 @@ export function IndividualConsultationsSection() {
           <div className="ic-page__topics">
             {IC_TOPICS.map((topic) => (
               <article key={topic.title} className="ic-topic">
-                <Image src={topic.image} alt="" fill className="object-cover object-center" sizes="(max-width: 768px) 100vw, 33vw" />
-                <div className="ic-topic__overlay" />
+                <Image src={topic.image} alt="" fill className="ic-topic__image" sizes="(max-width: 768px) 100vw, 33vw" />
                 <span className="ic-topic__arrow" aria-hidden="true">
                   <Image src={IC_TOPIC_ARROW} alt="" width={30} height={30} />
                 </span>
