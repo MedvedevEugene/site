@@ -98,12 +98,23 @@ export function TimetableCalendar({ compact }: { compact?: boolean }) {
 
   const loadEvents = useCallback(async () => {
     setLoading(true);
-    const res = await fetch(
-      `/api/public/events?from=${range.start.toISOString()}&to=${range.end.toISOString()}`
-    );
-    const data = await res.json();
-    setEvents(data.events || []);
-    setLoading(false);
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 6000);
+
+    try {
+      const res = await fetch(
+        `/api/public/events?from=${range.start.toISOString()}&to=${range.end.toISOString()}`,
+        { signal: controller.signal },
+      );
+      if (!res.ok) throw new Error("Failed to load events");
+      const data = await res.json();
+      setEvents(data.events || []);
+    } catch {
+      setEvents([]);
+    } finally {
+      window.clearTimeout(timeoutId);
+      setLoading(false);
+    }
   }, [range.start, range.end]);
 
   useEffect(() => {

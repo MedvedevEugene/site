@@ -95,22 +95,20 @@ export function IndividualConsultationsSection() {
         </div>
       </section>
 
-      <section className="ic-page__section">
+      <section className="ic-page__section ic-page__section--pricing">
         <div className="container-site">
-          <h2 className="ic-page__title">Форматы и стоимость</h2>
+          <h2 className="ic-page__title ic-page__title--center ic-page__title--pricing">Форматы и стоимость</h2>
           <div className="ic-page__pricing">
             {IC_PRICING.map((item) => (
               <article key={item.title} className="ic-price-card">
-                <div className="ic-price-card__icon">
-                  <Image src={item.icon} alt="" fill className="object-contain" sizes="80px" />
+                <div className="ic-price-card__head">
+                  <h3 className="ic-price-card__title">{item.title}</h3>
+                  <div className="ic-price-card__icon">
+                    <Image src={item.icon} alt="" width={142} height={142} className="object-contain" />
+                  </div>
                 </div>
-                <h3 className="ic-price-card__title">{item.title}</h3>
                 <p className="ic-price-card__text">{item.description}</p>
-                <button
-                  type="button"
-                  className={`ic-page__btn ic-page__btn--sm ${item.outline ? "ic-page__btn--outline-dark" : "ic-page__btn--primary"}`}
-                  onClick={() => openCallbackPopup()}
-                >
+                <button type="button" className="ic-page__btn ic-page__btn--price" onClick={() => openCallbackPopup()}>
                   {item.cta}
                 </button>
               </article>
