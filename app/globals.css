@@ -2236,8 +2236,12 @@
     }
   }
 
+  .ic-page {
+    @apply bg-cream-bg;
+  }
+
   .ic-page__hero {
-    @apply bg-white;
+    background: #f9f8e8;
     padding-top: 30px;
     padding-bottom: 50px;
   }
@@ -2291,15 +2295,14 @@
     @apply relative;
     width: 100%;
     max-width: 620px;
-    min-height: 420px;
+    min-height: 440px;
     margin-left: auto;
   }
 
   .ic-page__hero-image {
     object-fit: contain;
-    object-position: right center;
-    transform: scale(1.08);
-    transform-origin: right center;
+    object-position: right bottom;
+    transform: none;
   }
 
   .ic-page__features {
@@ -2338,6 +2341,7 @@
 
   .ic-page__section--cream {
     background: #f9f8e8;
+    padding-top: 0;
   }
 
   .ic-page__section--methods {
@@ -2383,8 +2387,10 @@
     min-height: 60px;
     min-width: 240px;
     padding: 0 36px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
 
   .ic-page__btn--sm {
@@ -2418,7 +2424,7 @@
 
   .ic-topic {
     @apply relative overflow-hidden;
-    min-height: 360px;
+    min-height: 400px;
     border-radius: 20px;
     padding: 32px;
     display: flex;
@@ -2428,18 +2434,19 @@
   }
 
   .ic-topic__overlay {
-    @apply absolute inset-0;
-    background: linear-gradient(180deg, rgba(39, 35, 68, 0.15) 0%, rgba(39, 35, 68, 0.92) 100%);
+    @apply absolute inset-0 z-[1];
+    background: linear-gradient(180deg, rgba(39, 35, 68, 0.05) 0%, rgba(39, 35, 68, 0.55) 45%, rgba(39, 35, 68, 0.92) 100%);
   }
 
   .ic-topic__content {
-    @apply relative z-[1] h-full flex flex-col justify-end;
+    @apply relative z-[2] flex flex-col justify-end;
   }
 
   .ic-topic__arrow {
-    @apply absolute top-8 left-8 inline-flex items-center justify-center rounded-full bg-white/90;
-    width: 36px;
-    height: 36px;
+    @apply absolute top-8 left-8 z-[2] inline-flex items-center justify-center;
+    width: 30px;
+    height: 30px;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.12));
   }
 
   .ic-topic__title {

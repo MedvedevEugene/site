@@ -25,7 +25,7 @@ export function IndividualConsultationsSection() {
   }
 
   return (
-    <>
+    <div className="ic-page">
       <section className="ic-page__hero">
         <div className="container-site">
           <nav className="ic-page__breadcrumbs" aria-label="Хлебные крошки">
@@ -45,10 +45,10 @@ export function IndividualConsultationsSection() {
               </p>
               <div className="ic-page__hero-actions">
                 <button type="button" className="ic-page__btn ic-page__btn--hero ic-page__btn--primary" onClick={() => scrollTo("specialists")}>
-                  Выбрать специалиста
+                  ВЫБРАТЬ СПЕЦИАЛИСТА
                 </button>
                 <button type="button" className="ic-page__btn ic-page__btn--hero ic-page__btn--outline" onClick={() => scrollTo("quiz")}>
-                  Получить консультацию
+                  ПОЛУЧИТЬ КОНСУЛЬТАЦИЮ
                 </button>
               </div>
             </div>
@@ -77,16 +77,16 @@ export function IndividualConsultationsSection() {
 
       <section className="ic-page__section ic-page__section--cream">
         <div className="container-site">
-          <h2 className="ic-page__title">Когда это помогает?</h2>
+          <h2 className="ic-page__title ic-page__title--center">Когда это помогает?</h2>
           <div className="ic-page__topics">
             {IC_TOPICS.map((topic) => (
               <article key={topic.title} className="ic-topic">
-                <Image src={topic.image} alt="" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 33vw" />
+                <Image src={topic.image} alt="" fill className="object-cover object-center" sizes="(max-width: 768px) 100vw, 33vw" />
                 <div className="ic-topic__overlay" />
+                <span className="ic-topic__arrow" aria-hidden="true">
+                  <Image src={IC_TOPIC_ARROW} alt="" width={30} height={30} />
+                </span>
                 <div className="ic-topic__content">
-                  <span className="ic-topic__arrow" aria-hidden="true">
-                    <Image src={IC_TOPIC_ARROW} alt="" width={12} height={20} />
-                  </span>
                   <h3 className="ic-topic__title">{topic.title}</h3>
                   <p className="ic-topic__text">{topic.text}</p>
                 </div>
@@ -189,6 +189,6 @@ export function IndividualConsultationsSection() {
           <FAQ items={[...IC_FAQ]} />
         </div>
       </section>
-    </>
+    </div>
   );
 }
