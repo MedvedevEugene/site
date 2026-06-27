@@ -9,27 +9,15 @@ interface FAQItem {
 
 function AccordionToggleIcon({ open }: { open: boolean }) {
   return (
-    <span className="ic-accordion__icon" aria-hidden>
-      <span className={`ic-accordion__icon-circle${open ? " is-visible" : ""}`} />
-      <svg
-        className={`ic-accordion__icon-svg${open ? " ic-accordion__icon-svg--open" : ""}`}
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <g
-          fill="none"
-          fillRule="evenodd"
-          stroke="#222222"
-          strokeLinecap="square"
-          strokeWidth="1"
-          transform="translate(1 1)"
-        >
-          <path d="M0 11h22" />
-          <path d="M11 0v22" />
-        </g>
-      </svg>
+    <span className="ic-accordion__icon-stack" aria-hidden>
+      <span className="ic-accordion__icon ic-accordion__icon--default">
+        <span className={`ic-accordion__icon-lines${open ? " is-open" : ""}`} />
+        <span className="ic-accordion__icon-circle" />
+      </span>
+      <span className="ic-accordion__icon ic-accordion__icon--hover">
+        <span className={`ic-accordion__icon-lines${open ? " is-open" : ""}`} />
+        <span className="ic-accordion__icon-circle is-visible" />
+      </span>
     </span>
   );
 }
@@ -51,18 +39,22 @@ export function FAQ({
           return (
             <article key={item.question} className="ic-accordion__item">
               <div className={`ic-accordion__card${isOpen ? " is-open" : ""}`}>
-                <button
-                  type="button"
-                  className="ic-accordion__trigger"
-                  aria-expanded={isOpen}
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
-                >
-                  <span className="ic-accordion__question">{item.question}</span>
-                  <AccordionToggleIcon open={isOpen} />
-                </button>
+                <div className="ic-accordion__header">
+                  <button
+                    type="button"
+                    className="ic-accordion__trigger"
+                    aria-expanded={isOpen}
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                  >
+                    <span className="ic-accordion__question">{item.question}</span>
+                    <AccordionToggleIcon open={isOpen} />
+                  </button>
+                </div>
                 <div className="ic-accordion__panel" aria-hidden={!isOpen}>
                   <div className="ic-accordion__panel-inner">
-                    <p className="ic-accordion__answer">{item.answer}</p>
+                    <div className="ic-accordion__textwrapper">
+                      <p className="ic-accordion__answer">{item.answer}</p>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -2598,6 +2598,7 @@
   }
 
   .ic-page__title--steps {
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
     font-size: 42px;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -2614,52 +2615,119 @@
   .ic-accordion__card {
     @apply bg-[#f9f8e8];
     border-radius: 20px;
-    transition: background-color 0.25s ease;
+  }
+
+  .ic-accordion__header {
+    @apply relative;
   }
 
   .ic-accordion__trigger {
-    @apply flex w-full cursor-pointer items-center justify-between gap-6 border-0 bg-transparent text-left font-body text-[#3b3758];
-    padding: 30px;
+    @apply relative w-full cursor-pointer border-0 bg-transparent text-left text-[#3b3758];
+    padding: 30px 80px 30px 30px;
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
     font-size: 20px;
     font-weight: 400;
     line-height: 1.35;
   }
 
   .ic-accordion__question {
-    flex: 1;
-    min-width: 0;
-    padding-right: 12px;
+    display: inline-block;
+    padding-right: 30px;
+  }
+
+  .ic-accordion__icon-stack {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    transform: translateY(-50%);
   }
 
   .ic-accordion__icon {
-    @apply relative flex shrink-0 items-center justify-center;
-    width: 40px;
-    height: 40px;
+    position: absolute;
+    inset: 0;
+    width: 24px;
+    height: 24px;
+    padding: 8px;
+    box-sizing: content-box;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .ic-accordion__icon--default {
+    opacity: 1;
+  }
+
+  .ic-accordion__icon--hover {
+    opacity: 0;
+  }
+
+  .ic-accordion__card.is-open .ic-accordion__icon--default,
+  .ic-accordion__header:hover .ic-accordion__icon--default {
+    opacity: 0;
+  }
+
+  .ic-accordion__card.is-open .ic-accordion__icon--hover,
+  .ic-accordion__header:hover .ic-accordion__icon--hover {
+    opacity: 1;
   }
 
   .ic-accordion__icon-circle {
-    @apply absolute inset-0 rounded-full;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     background-color: transparent;
-    transition: background-color 0.25s ease;
   }
 
   .ic-accordion__icon-circle.is-visible {
     background-color: #eeeeee;
   }
 
-  .ic-accordion__icon-svg {
-    @apply relative z-[1];
-    transition: transform 0.35s ease;
+  .ic-accordion__icon-lines {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin: 1px;
+    transition: transform 0.3s ease-in-out;
+    transform: rotate(0deg);
   }
 
-  .ic-accordion__icon-svg--open {
-    transform: rotate(45deg);
+  .ic-accordion__icon-lines::before,
+  .ic-accordion__icon-lines::after {
+    content: "";
+    position: absolute;
+    background-color: #222222;
+  }
+
+  .ic-accordion__icon-lines::before {
+    top: 50%;
+    left: 0;
+    width: 22px;
+    height: 1px;
+    transform: translateY(-50%);
+  }
+
+  .ic-accordion__icon-lines::after {
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 22px;
+    transform: translateX(-50%);
+  }
+
+  .ic-accordion__icon-lines.is-open {
+    transform: rotate(-45deg);
   }
 
   .ic-accordion__panel {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 0.45s ease;
+    transition: grid-template-rows 0.3s ease-in-out;
   }
 
   .ic-accordion__card.is-open .ic-accordion__panel {
@@ -2670,22 +2738,40 @@
     overflow: hidden;
   }
 
-  .ic-accordion__answer {
-    @apply m-0 font-body text-[#3b3758];
+  .ic-accordion__textwrapper {
     padding: 0 30px 30px;
+  }
+
+  .ic-accordion__answer {
+    @apply m-0 text-[#3b3758];
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1.55;
     opacity: 0;
-    transform: translateY(-6px);
-    transition:
-      opacity 0.35s ease 0.05s,
-      transform 0.35s ease 0.05s;
+    transition: opacity 0.3s ease-in-out;
   }
 
   .ic-accordion__card.is-open .ic-accordion__answer {
     opacity: 1;
-    transform: translateY(0);
+  }
+
+  @media (max-width: 960px) {
+    .ic-accordion__header:hover .ic-accordion__icon--default {
+      opacity: 1;
+    }
+
+    .ic-accordion__header:hover .ic-accordion__icon--hover {
+      opacity: 0;
+    }
+
+    .ic-accordion__card.is-open .ic-accordion__icon--default {
+      opacity: 0;
+    }
+
+    .ic-accordion__card.is-open .ic-accordion__icon--hover {
+      opacity: 1;
+    }
   }
 
   .ic-page .accordion-item {
@@ -3000,11 +3086,15 @@
     }
 
     .ic-accordion__trigger {
-      padding: 24px;
+      padding: 24px 72px 24px 24px;
       font-size: 18px;
     }
 
-    .ic-accordion__answer {
+    .ic-accordion__icon-stack {
+      right: 24px;
+    }
+
+    .ic-accordion__textwrapper {
       padding: 0 24px 24px;
     }
 
