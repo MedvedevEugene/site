@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import Image from "next/image";
 import { CONTACT_METHOD_PLACEHOLDERS, type ContactMethod } from "@/lib/contact-form-data";
 import { IC_QUIZ } from "@/lib/individual-consultations-data";
@@ -11,14 +11,103 @@ import { getPhoneCountryByIso, PhoneCountryInput } from "@/components/forms/Phon
 
 function QuizConsultant() {
   return (
-    <div className="ic-quiz__consultant">
-      <div className="ic-quiz__consultant-bubble">
-        <div className="ic-quiz__consultant-meta">
-          <span className="ic-quiz__consultant-name">{IC_QUIZ.consultant.name}</span>
-          <span className="ic-quiz__consultant-role">{IC_QUIZ.consultant.role}</span>
-        </div>
-        <p className="ic-quiz__consultant-msg">{IC_QUIZ.consultant.greeting}</p>
+    <div className="ic-quiz__consultant-bubble">
+      <div className="ic-quiz__consultant-meta">
+        <span className="ic-quiz__consultant-name">{IC_QUIZ.consultant.name}</span>
+        <span className="ic-quiz__consultant-role">{IC_QUIZ.consultant.role}</span>
       </div>
+      <p className="ic-quiz__consultant-msg">{IC_QUIZ.consultant.greeting}</p>
+    </div>
+  );
+}
+
+function QuizSidebar() {
+  return (
+    <aside className="ic-quiz__sidebar">
+      <p className="ic-quiz__sidebar-text">
+        {IC_QUIZ.sidebarDescription}
+        <br />
+        {IC_QUIZ.sidebarPhone}
+      </p>
+      <QuizConsultant />
+      <p className="ic-quiz__sidebar-hint">{IC_QUIZ.footerHint}</p>
+    </aside>
+  );
+}
+
+type QuizFooterProps = {
+  stepNumber: number;
+  onBack: () => void;
+  onNext?: () => void;
+  nextLabel?: string;
+  nextDisabled?: boolean;
+  submitForm?: boolean;
+  submitting?: boolean;
+};
+
+function QuizFooter({
+  stepNumber,
+  onBack,
+  onNext,
+  nextLabel = "Далее",
+  nextDisabled = false,
+  submitForm = false,
+  submitting = false,
+}: QuizFooterProps) {
+  return (
+    <div className="ic-quiz__footer">
+      <div className="ic-quiz__footer-meta">
+        <span className="ic-quiz__step-counter">
+          Шаг {stepNumber}/{IC_QUIZ.totalSteps}
+        </span>
+      </div>
+      <div className="ic-quiz__footer-actions">
+        <button type="button" className="ic-quiz__btn ic-quiz__btn--back" aria-label="Назад" onClick={onBack}>
+          ←
+        </button>
+        {submitForm ? (
+          <button type="submit" className="ic-quiz__btn ic-quiz__btn--next" disabled={submitting}>
+            {submitting ? "Отправка..." : IC_QUIZ.submitLabel}
+          </button>
+        ) : (
+          <button type="button" className="ic-quiz__btn ic-quiz__btn--next" disabled={nextDisabled} onClick={onNext}>
+            {nextLabel} →
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+type QuizStepLayoutProps = QuizFooterProps & {
+  children: ReactNode;
+};
+
+function QuizStepLayout({
+  children,
+  stepNumber,
+  onBack,
+  onNext,
+  nextLabel,
+  nextDisabled,
+  submitForm,
+  submitting,
+}: QuizStepLayoutProps) {
+  return (
+    <div className="ic-quiz__body">
+      <div className="ic-quiz__main">
+        <div className="ic-quiz__main-inner">{children}</div>
+        <QuizFooter
+          stepNumber={stepNumber}
+          onBack={onBack}
+          onNext={onNext}
+          nextLabel={nextLabel}
+          nextDisabled={nextDisabled}
+          submitForm={submitForm}
+          submitting={submitting}
+        />
+      </div>
+      <QuizSidebar />
     </div>
   );
 }
@@ -31,8 +120,8 @@ export function ConsultationQuiz() {
   const [phoneCountryIso, setPhoneCountryIso] = useState(DEFAULT_PHONE_COUNTRY.iso);
   const [submitting, setSubmitting] = useState(false);
 
-  const totalSteps = IC_QUIZ.steps.length + 2;
-  const progress = step === 0 ? 0 : Math.min(100, Math.round((step / (totalSteps - 1)) * 100));
+  const progress =
+    step === 0 ? 0 : Math.min(100, Math.round((step / IC_QUIZ.totalSteps) * 100));
 
   function handleStart() {
     setStep(1);
@@ -127,22 +216,19 @@ export function ConsultationQuiz() {
       ) : null}
 
       {step >= 1 && step <= IC_QUIZ.steps.length ? (
-        <div className="ic-quiz__panel">
-          <div className="ic-quiz__panel-head">
-            <button type="button" className="ic-quiz__back" aria-label="Назад" onClick={handleBack}>
-              ←
-            </button>
-            <span className="ic-quiz__step-label">
-              Шаг: {step}/{IC_QUIZ.steps.length}
-            </span>
-          </div>
-          <div className="ic-quiz__question-row">
-            <h3 className="ic-quiz__question">{IC_QUIZ.steps[step - 1].question}</h3>
-            <QuizConsultant />
-          </div>
+        <QuizStepLayout
+          stepNumber={step}
+          onBack={handleBack}
+          onNext={handleNext}
+          nextDisabled={!answers[step - 1]}
+        >
+          <h3 className="ic-quiz__question">{IC_QUIZ.steps[step - 1].question}</h3>
           <div className="ic-quiz__options">
             {IC_QUIZ.steps[step - 1].options.map((option) => (
-              <label key={option} className="ic-quiz__option">
+              <label
+                key={option}
+                className={`ic-quiz__option${answers[step - 1] === option ? " ic-quiz__option--selected" : ""}`}
+              >
                 <input
                   type="radio"
                   name={`quiz-step-${step}`}
@@ -154,53 +240,44 @@ export function ConsultationQuiz() {
               </label>
             ))}
           </div>
-          <button
-            type="button"
-            className="ic-quiz__btn"
-            disabled={!answers[step - 1]}
-            onClick={handleNext}
-          >
-            Далее
-          </button>
-        </div>
+        </QuizStepLayout>
       ) : null}
 
       {step === IC_QUIZ.steps.length + 1 ? (
-        <form className="ic-quiz__panel" onSubmit={handleSubmit}>
-          <div className="ic-quiz__panel-head">
-            <button type="button" className="ic-quiz__back" aria-label="Назад" onClick={handleBack}>
-              ←
-            </button>
-            <span className="ic-quiz__step-label">Получить подбор специалиста</span>
+        <form className="ic-quiz__body ic-quiz__body--form" onSubmit={handleSubmit}>
+          <div className="ic-quiz__main">
+            <div className="ic-quiz__main-inner">
+              <h3 className="ic-quiz__question">Как с вами удобнее связаться?</h3>
+              <div className="ic-quiz__form">
+                <input name="name" required placeholder="Ваше имя" className="ic-quiz__input" />
+                <ContactMethodPicker value={contactMethod} onChange={setContactMethod} className="ic-quiz__methods" />
+                {usesPhoneInput ? (
+                  <PhoneCountryInput
+                    value={phoneValue}
+                    onChange={setPhoneValue}
+                    countryIso={phoneCountryIso}
+                    onCountryChange={setPhoneCountryIso}
+                    inputName="contactValue"
+                    inputClassName="ic-quiz__input"
+                  />
+                ) : (
+                  <input
+                    name="contactValue"
+                    required
+                    placeholder={CONTACT_METHOD_PLACEHOLDERS[contactMethod] ?? ""}
+                    className="ic-quiz__input"
+                  />
+                )}
+              </div>
+            </div>
+            <QuizFooter
+              stepNumber={IC_QUIZ.totalSteps}
+              onBack={handleBack}
+              submitForm
+              submitting={submitting}
+            />
           </div>
-          <div className="ic-quiz__question-row">
-            <h3 className="ic-quiz__question">Как с вами удобнее связаться?</h3>
-            <QuizConsultant />
-          </div>
-          <div className="ic-quiz__form">
-            <input name="name" required placeholder="Ваше имя" className="ic-quiz__input" />
-            <ContactMethodPicker value={contactMethod} onChange={setContactMethod} className="ic-quiz__methods" />
-            {usesPhoneInput ? (
-              <PhoneCountryInput
-                value={phoneValue}
-                onChange={setPhoneValue}
-                countryIso={phoneCountryIso}
-                onCountryChange={setPhoneCountryIso}
-                inputName="contactValue"
-                inputClassName="ic-quiz__input"
-              />
-            ) : (
-              <input
-                name="contactValue"
-                required
-                placeholder={CONTACT_METHOD_PLACEHOLDERS[contactMethod] ?? ""}
-                className="ic-quiz__input"
-              />
-            )}
-          </div>
-          <button type="submit" className="ic-quiz__btn" disabled={submitting}>
-            {submitting ? "Отправка..." : "Отправить"}
-          </button>
+          <QuizSidebar />
         </form>
       ) : null}
 
