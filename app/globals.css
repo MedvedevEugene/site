@@ -3118,4 +3118,57 @@
   .bc-final__note {
     @apply text-sm text-muted mt-4 m-0;
   }
+
+  /* AI tools */
+  .tool-card {
+    @apply bg-white border border-border rounded-[20px] p-7 shadow-[0_5px_15px_rgba(0,0,0,0.05)];
+  }
+
+  .tool-mini-card {
+    @apply bg-[#f9f8e8] rounded-[12px] p-4;
+  }
+
+  .tool-input {
+    @apply w-full border border-border rounded-[10px] px-4 py-3.5 text-base font-body text-[#3b3758] outline-none focus:border-primary;
+  }
+
+  .tool-btn-add {
+    @apply text-sm text-[#774bd9] font-medium bg-transparent border-0 cursor-pointer hover:opacity-80;
+  }
+
+  .tool-btn-ghost {
+    @apply w-9 h-9 rounded-[8px] border border-border bg-white text-lg text-muted cursor-pointer hover:bg-cream-bg;
+  }
+
+  .tool-check-row {
+    @apply flex items-start gap-3 p-3 rounded-[10px] border border-border cursor-pointer hover:bg-cream-bg;
+  }
+
+  .tool-pair-row {
+    @apply flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4;
+  }
+
+  .assoc-tree__grid {
+    @apply flex gap-3 min-w-max;
+  }
+
+  .assoc-tree__col {
+    @apply bg-[#f9f8e8] rounded-[12px] p-4 min-w-[140px] flex-1;
+  }
+
+  .assoc-tree__col-title {
+    @apply text-xs font-semibold uppercase tracking-wide text-[#774bd9] mb-1;
+  }
+
+  .assoc-tree__col-num {
+    @apply text-[10px] text-muted mb-2;
+  }
+
+  .assoc-tree__list {
+    @apply m-0 pl-4 text-sm space-y-1 text-[#3b3758];
+  }
+
+  .assoc-tree__dup {
+    @apply text-[#774bd9];
+  }
 }

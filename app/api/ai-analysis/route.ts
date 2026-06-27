@@ -1,40 +1,83 @@
 import { NextResponse } from "next/server";
+import { generateAiCompletion } from "@/lib/ai-client";
+import { buildToolPrompt } from "@/lib/ai-prompts";
+import { getToolSession, saveToolSessionAiReport } from "@/lib/tool-sessions";
+import type { ToolId } from "@/lib/tool-sessions";
 
-export async function POST(request: Request) {
-  const { toolName, topic, answers, steps } = await request.json();
-  const apiKey = process.env.OPENAI_API_KEY;
+function fallbackAnalysis(
+  tool: string,
+  payload: Record<string, unknown>,
+  reason?: string,
+  hasKey?: boolean
+) {
+  const topic =
+    (payload.topic as string) ||
+    (payload.query as string) ||
+    (payload.pso as string) ||
+    "ваш запрос";
 
-  const prompt = [
-    `Ты — бережный психологический ассистент института ИЖСИЗ.`,
-    `Инструмент: ${toolName}`,
-    `Тема клиента: ${topic}`,
-    ...steps.map((q: string, i: number) => `${q}: ${answers[i + 1] || "—"}`),
-    `Сформируй структурированный разбор: ключевые темы, возможные связи, бережные рекомендации. Без медицинских обещаний.`,
-  ].join("\n");
-
-  if (apiKey) {
-    try {
-      const res = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "gpt-4o-mini",
-          messages: [{ role: "user", content: prompt }],
-          max_tokens: 1500,
-        }),
-      });
-      const data = await res.json();
-      const analysis = data.choices?.[0]?.message?.content;
-      if (analysis) return NextResponse.json({ analysis });
-    } catch {
-      /* fallback below */
-    }
+  let hint = "Добавьте `OPENROUTER_API_KEY` и `AI_MODEL` в Vercel → Redeploy.";
+  if (hasKey && reason) {
+    hint = `Ключ на сервере есть, но OpenRouter вернул ошибку: ${reason}. Проверьте значение \`AI_MODEL\` (должно быть \`meta-llama/llama-3.3-70b-instruct:free\`) и лимиты на openrouter.ai.`;
+  } else if (hasKey) {
+    hint = "Ключ на сервере есть, но ответ пустой. Попробуйте другую модель в `AI_MODEL` или повторите позже.";
   }
 
-  return NextResponse.json({
-    analysis: `Расширенный разбор по теме «${topic}»\n\n1. Ключевой запрос связан с темой «${topic}» и затрагивает несколько уровней восприятия.\n\n2. В ваших ответах прослеживаются повторяющиеся паттерны — это хорошая точка для более глубокой работы со специалистом.\n\n3. Рекомендуем обратиться на индивидуальную консультацию для персонального сопровождения.\n\n(Демо-режим: подключите OPENAI_API_KEY и оплату для полного ИИ-разбора)`,
-  });
+  return `## Предварительный разбор (демо-режим)
+
+Тема исследования: **${topic}**
+
+${hint}
+
+### Что видно в ваших ответах
+- Есть повторяющиеся смысловые линии вокруг темы «${topic}».
+- Карта показывает зоны внутреннего напряжения — их стоит исследовать бережно.
+- Часть формулировок может указывать на жёсткие причинно-следственные связки.
+
+### Рекомендация
+Запишитесь на консультацию специалиста Института для персонального сопровождения.
+
+_Инструмент: ${tool}_`;
+}
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const tool = body.tool as ToolId | undefined;
+    const sessionId = body.sessionId as string | undefined;
+    let payload = body.payload as Record<string, unknown> | undefined;
+    let resolvedTool = tool;
+
+    if (sessionId) {
+      const session = await getToolSession(sessionId);
+      if (!session) return NextResponse.json({ error: "Session not found" }, { status: 404 });
+      if (session.aiReport) {
+        return NextResponse.json({ analysis: session.aiReport, cached: true });
+      }
+      resolvedTool = session.tool as ToolId;
+      payload = session.payload as Record<string, unknown>;
+    }
+
+    if (!resolvedTool || !payload) {
+      return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+    }
+
+    const prompt = buildToolPrompt(resolvedTool, payload);
+    const ai = await generateAiCompletion(prompt);
+    const analysis =
+      ai.content || fallbackAnalysis(resolvedTool, payload, ai.error, ai.hasKey);
+
+    if (sessionId) {
+      await saveToolSessionAiReport(sessionId, analysis).catch(() => {});
+    }
+
+    return NextResponse.json({
+      analysis,
+      mode: ai.content ? "ai" : "fallback",
+      ...(ai.error ? { aiError: ai.error } : {}),
+    });
+  } catch (error) {
+    console.error("[ai-analysis]", error);
+    return NextResponse.json({ error: "Analysis failed" }, { status: 500 });
+  }
 }
