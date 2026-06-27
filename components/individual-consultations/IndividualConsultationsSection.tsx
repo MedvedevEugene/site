@@ -17,12 +17,6 @@ import {
   IC_TOPICS,
 } from "@/lib/individual-consultations-data";
 
-const METHOD_TONE_CLASS = {
-  white: "ic-method--white",
-  cream: "ic-method--cream",
-  blue: "ic-method--blue",
-} as const;
-
 export function IndividualConsultationsSection() {
   const { openCallbackPopup } = useCallbackPopup();
 
@@ -135,7 +129,7 @@ export function IndividualConsultationsSection() {
           <h2 className="ic-page__title ic-page__title--center ic-page__title--methods">Методы работы</h2>
           <div className="ic-page__methods">
             {IC_METHODS.map((method) => (
-              <article key={method.title} className={`ic-method ${METHOD_TONE_CLASS[method.tone]}`}>
+              <article key={method.title} className="ic-method">
                 <div className="ic-method__icon">
                   <Image
                     src={method.icon}
