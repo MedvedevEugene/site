@@ -9,6 +9,20 @@ import { DEFAULT_PHONE_COUNTRY } from "@/lib/phone-countries";
 import { ContactMethodPicker } from "@/components/forms/ContactMethodPicker";
 import { getPhoneCountryByIso, PhoneCountryInput } from "@/components/forms/PhoneCountryInput";
 
+function QuizConsultant() {
+  return (
+    <div className="ic-quiz__consultant">
+      <div className="ic-quiz__consultant-bubble">
+        <div className="ic-quiz__consultant-meta">
+          <span className="ic-quiz__consultant-name">{IC_QUIZ.consultant.name}</span>
+          <span className="ic-quiz__consultant-role">{IC_QUIZ.consultant.role}</span>
+        </div>
+        <p className="ic-quiz__consultant-msg">{IC_QUIZ.consultant.greeting}</p>
+      </div>
+    </div>
+  );
+}
+
 export function ConsultationQuiz() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<string[]>(["", "", ""]);
@@ -87,10 +101,23 @@ export function ConsultationQuiz() {
 
       {step === 0 ? (
         <div className="ic-quiz__cover">
-          <Image src={IC_QUIZ.coverImage} alt="" fill className="object-cover" sizes="(max-width: 768px) 100vw, 1160px" priority />
-          <div className="ic-quiz__cover-overlay" />
+          <Image
+            src={IC_QUIZ.coverImage}
+            alt=""
+            fill
+            className="ic-quiz__cover-image object-cover"
+            sizes="(max-width: 768px) 100vw, 1160px"
+            priority
+          />
           <div className="ic-quiz__cover-content">
-            <h3 className="ic-quiz__cover-title">{IC_QUIZ.coverTitle}</h3>
+            <h3 className="ic-quiz__cover-title">
+              {IC_QUIZ.coverTitleLines.map((line) => (
+                <span key={line}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+            </h3>
             <p className="ic-quiz__cover-text">{IC_QUIZ.coverDescription}</p>
             <button type="button" className="ic-quiz__btn ic-quiz__btn--start" onClick={handleStart}>
               Начать
@@ -109,7 +136,10 @@ export function ConsultationQuiz() {
               Шаг: {step}/{IC_QUIZ.steps.length}
             </span>
           </div>
-          <h3 className="ic-quiz__question">{IC_QUIZ.steps[step - 1].question}</h3>
+          <div className="ic-quiz__question-row">
+            <h3 className="ic-quiz__question">{IC_QUIZ.steps[step - 1].question}</h3>
+            <QuizConsultant />
+          </div>
           <div className="ic-quiz__options">
             {IC_QUIZ.steps[step - 1].options.map((option) => (
               <label key={option} className="ic-quiz__option">
@@ -143,10 +173,13 @@ export function ConsultationQuiz() {
             </button>
             <span className="ic-quiz__step-label">Получить подбор специалиста</span>
           </div>
-          <h3 className="ic-quiz__question">Как с вами удобнее связаться?</h3>
+          <div className="ic-quiz__question-row">
+            <h3 className="ic-quiz__question">Как с вами удобнее связаться?</h3>
+            <QuizConsultant />
+          </div>
           <div className="ic-quiz__form">
             <input name="name" required placeholder="Ваше имя" className="ic-quiz__input" />
-            <ContactMethodPicker value={contactMethod} onChange={setContactMethod} />
+            <ContactMethodPicker value={contactMethod} onChange={setContactMethod} className="ic-quiz__methods" />
             {usesPhoneInput ? (
               <PhoneCountryInput
                 value={phoneValue}
@@ -173,11 +206,20 @@ export function ConsultationQuiz() {
 
       {step === IC_QUIZ.steps.length + 2 ? (
         <div className="ic-quiz__success">
+          <div className="ic-quiz__success-copy">
+            <h3 className="ic-quiz__success-title">{IC_QUIZ.successTitle}</h3>
+            <p className="ic-quiz__success-text">
+              {IC_QUIZ.successTextLines.map((line) => (
+                <span key={line}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+            </p>
+          </div>
           <div className="ic-quiz__success-image">
             <Image src={IC_QUIZ.successImage} alt="" fill className="object-cover" sizes="400px" />
           </div>
-          <h3 className="ic-quiz__success-title">{IC_QUIZ.successTitle}</h3>
-          <p className="ic-quiz__success-text">{IC_QUIZ.successText}</p>
         </div>
       ) : null}
     </div>

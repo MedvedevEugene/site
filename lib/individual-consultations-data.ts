@@ -1,3 +1,5 @@
+import { IMAGES } from "@/lib/site-data";
+
 const IMG = "/images/individual-consultations";
 
 export const IC_FEATURES = [
@@ -217,14 +219,25 @@ export const IC_FAQ = [
 ] as const;
 
 export const IC_QUIZ = {
-  coverTitle: "Ответьте на несколько вопросов и мы подберем вам специалиста",
+  coverTitleLines: [
+    "Ответьте на несколько вопросов и мы подберем",
+    "вам специалиста",
+  ],
   coverDescription:
     "Квиз займёт 1–2 минуты. По вашим ответам мы предложим подходящий формат работы и поможем выбрать специалиста под ваш запрос.",
-  coverImage: `${IMG}/quiz-cover.png`,
-  successImage: `${IMG}/quiz-success.jpg`,
+  coverImage: IMAGES.quizCover,
+  successImage:
+    "https://static.tildacdn.com/tild6165-3236-4831-a536-613231653133/jonathan-borba-RTHwe.jpg",
   successTitle: "Благодарим, Ваша заявка отправлена!",
-  successText:
-    "Мы получили ваши ответы и подберём подходящего специалиста под ваш запрос. Свяжемся с вами в ближайшее время, чтобы предложить формат работы и удобное время консультации.",
+  successTextLines: [
+    "Мы получили ваши ответы и подберём подходящего специалиста под ваш запрос.",
+    "Свяжемся с вами в ближайшее время, чтобы предложить формат работы и удобное время консультации.",
+  ],
+  consultant: {
+    name: "Василиса Премудрая",
+    role: "Менеджер по заботушке",
+    greeting: "Привет-привет!",
+  },
   steps: [
     {
       question: "С чем хотите разобраться?",

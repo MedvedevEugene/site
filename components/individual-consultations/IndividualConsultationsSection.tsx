@@ -151,7 +151,7 @@ export function IndividualConsultationsSection() {
 
       <section className="ic-page__section" id="quiz">
         <div className="container-site">
-          <h2 className="ic-page__title">Подберем вам специалиста</h2>
+          <h2 className="ic-page__title ic-page__title--quiz">Подберем вам специалиста</h2>
           <ConsultationQuiz />
         </div>
       </section>
