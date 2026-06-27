@@ -115,8 +115,8 @@ export function IndividualConsultationsSection() {
         </div>
       </section>
 
-      <section className="ic-page__section">
-        <div className="container-site ic-page__narrow">
+      <section className="ic-page__section ic-page__section--steps">
+        <div className="container-site ic-page__steps">
           <h2 className="ic-page__title ic-page__title--center ic-page__title--steps">
             Как проходит работа?
           </h2>

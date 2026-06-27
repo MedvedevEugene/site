@@ -10,9 +10,9 @@ interface FAQItem {
 function AccordionToggleIcon({ open }: { open: boolean }) {
   return (
     <span className="ic-accordion__icon" aria-hidden>
-      <span className="ic-accordion__icon-circle" />
+      <span className={`ic-accordion__icon-circle${open ? " is-visible" : ""}`} />
       <svg
-        className={`ic-accordion__icon-svg ${open ? "ic-accordion__icon-svg--open" : ""}`}
+        className={`ic-accordion__icon-svg${open ? " ic-accordion__icon-svg--open" : ""}`}
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -26,8 +26,8 @@ function AccordionToggleIcon({ open }: { open: boolean }) {
           strokeWidth="1"
           transform="translate(1 1)"
         >
-          <path className="ic-accordion__icon-h" d="M0 11h22" />
-          <path className="ic-accordion__icon-v" d="M11 0v22" />
+          <path d="M0 11h22" />
+          <path d="M11 0v22" />
         </g>
       </svg>
     </span>
@@ -60,11 +60,11 @@ export function FAQ({
                   <span className="ic-accordion__question">{item.question}</span>
                   <AccordionToggleIcon open={isOpen} />
                 </button>
-                {isOpen && (
-                  <div className="ic-accordion__panel">
+                <div className="ic-accordion__panel" aria-hidden={!isOpen}>
+                  <div className="ic-accordion__panel-inner">
                     <p className="ic-accordion__answer">{item.answer}</p>
                   </div>
-                )}
+                </div>
               </div>
             </article>
           );
