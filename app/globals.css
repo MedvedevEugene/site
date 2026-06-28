@@ -2658,7 +2658,7 @@
     font-family: var(--font-montserrat), Montserrat, sans-serif;
     font-size: 20px;
     font-weight: 400;
-    line-height: 1.35;
+    line-height: 27px;
   }
 
   .ic-accordion__question {
@@ -2767,6 +2767,12 @@
 
   .ic-accordion__panel-inner {
     overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .ic-accordion__card.is-open .ic-accordion__panel-inner {
+    opacity: 1;
   }
 
   .ic-accordion__textwrapper {
@@ -2775,16 +2781,10 @@
 
   .ic-accordion__answer {
     @apply m-0 text-[#3b3758];
-    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    font-family: var(--font-unbounded), Unbounded, sans-serif;
     font-size: 16px;
     font-weight: 300;
-    line-height: 1.55;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-  }
-
-  .ic-accordion__card.is-open .ic-accordion__answer {
-    opacity: 1;
+    line-height: 24.8px;
   }
 
   @media (max-width: 960px) {
@@ -2834,13 +2834,25 @@
     margin-bottom: 40px;
   }
 
-  .ic-page__title--specialists {
+  .ic-page__title--specialists,
+  .ic-page__title--faq {
     font-family: var(--font-montserrat), Montserrat, sans-serif;
     font-size: 36px;
     font-weight: 600;
     line-height: 47px;
     color: #3b3758;
+  }
+
+  .ic-page__title--specialists {
     margin-bottom: 40px;
+  }
+
+  .ic-page__title--faq {
+    margin-bottom: 56px;
+  }
+
+  .ic-page__faq {
+    max-width: 1160px;
   }
 
   .ic-page__section--specialists {
@@ -2986,7 +2998,8 @@
       padding-inline: 20px;
     }
 
-    .ic-page__title--specialists {
+    .ic-page__title--specialists,
+    .ic-page__title--faq {
       font-size: 28px;
       line-height: 1.3;
     }
@@ -3069,6 +3082,16 @@
 
     .ic-page__title--quiz {
       font-size: 26px;
+    }
+
+    .ic-page__title--specialists,
+    .ic-page__title--faq {
+      font-size: 28px;
+      line-height: 1.3;
+    }
+
+    .ic-page__title--faq {
+      margin-bottom: 40px;
     }
 
     .ic-page__title {

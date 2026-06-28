@@ -165,9 +165,9 @@ export function IndividualConsultationsSection() {
       </section>
 
       <section className="ic-page__section ic-page__section--faq">
-        <div className="container-site ic-page__narrow">
-          <h2 className="ic-page__title ic-page__title--center">Ответы на вопросы</h2>
-          <FAQ items={[...IC_FAQ]} />
+        <div className="container-site ic-page__faq">
+          <h2 className="ic-page__title ic-page__title--center ic-page__title--faq m-0">Ответы на вопросы</h2>
+          <FAQ items={[...IC_FAQ]} variant="ic-accordion" />
         </div>
       </section>
     </div>

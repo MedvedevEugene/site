@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 
 type Specialist = {
@@ -147,13 +146,6 @@ export function IcSpecialistsCarousel({ specialists, onBook }: IcSpecialistsCaro
     onBook();
   }
 
-  function onLinkClick(event: React.MouseEvent<HTMLAnchorElement>) {
-    if (dragRef.current.moved) {
-      event.preventDefault();
-      dragRef.current.moved = false;
-    }
-  }
-
   return (
     <div className="ic-specialists-carousel">
       <div
@@ -193,14 +185,6 @@ export function IcSpecialistsCarousel({ specialists, onBook }: IcSpecialistsCaro
                   >
                     Запись
                   </button>
-                  <Link
-                    href={`/teachers/${specialist.slug}`}
-                    className="ic-specialist__btn ic-specialist__btn--outline"
-                    onClick={onLinkClick}
-                    draggable={false}
-                  >
-                    О специалисте
-                  </Link>
                 </div>
               </div>
             </div>
