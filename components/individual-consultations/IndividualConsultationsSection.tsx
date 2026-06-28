@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FAQ } from "@/components/ui/FAQ";
 import { ConsultationQuiz } from "@/components/individual-consultations/ConsultationQuiz";
+import { IcSpecialistsCarousel } from "@/components/individual-consultations/IcSpecialistsCarousel";
 import { useCallbackPopup } from "@/components/layout/CallbackPopupContext";
 import {
   IC_FAQ,
@@ -156,36 +157,16 @@ export function IndividualConsultationsSection() {
         </div>
       </section>
 
-      <section className="ic-page__section" id="specialists">
+      <section className="ic-page__section ic-page__section--specialists" id="specialists">
         <div className="container-site">
           <div className="ic-page__specialists-head">
-            <h2 className="ic-page__title m-0">Наши специалисты</h2>
+            <h2 className="ic-page__title ic-page__title--center m-0">Наши специалисты</h2>
             <Link href="/specialists" className="ic-page__btn ic-page__btn--outline-dark ic-page__btn--sm">
               Все специалисты
             </Link>
           </div>
-          <div className="ic-page__specialists">
-            {IC_SPECIALISTS.map((specialist) => (
-              <article key={specialist.slug} className="ic-specialist">
-                <div className="ic-specialist__photo">
-                  <Image src={specialist.photo} alt={specialist.name} fill className="object-cover object-top" sizes="280px" />
-                </div>
-                <div className="ic-specialist__body">
-                  <p className="ic-specialist__name">{specialist.name}</p>
-                  <p className="ic-specialist__role">{specialist.role}</p>
-                  <div className="ic-specialist__actions">
-                    <button type="button" className="ic-page__btn ic-page__btn--primary ic-page__btn--sm" onClick={() => scrollTo("quiz")}>
-                      Запись
-                    </button>
-                    <Link href={`/teachers/${specialist.slug}`} className="ic-page__btn ic-page__btn--outline-dark ic-page__btn--sm">
-                      О специалисте
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
         </div>
+        <IcSpecialistsCarousel specialists={IC_SPECIALISTS} onBook={() => scrollTo("quiz")} />
       </section>
 
       <section className="ic-page__section ic-page__section--faq">

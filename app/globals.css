@@ -75,6 +75,17 @@
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
   }
 
+  .btn-resonance--ghost {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.45);
+  }
+
+  .btn-resonance--ghost:hover,
+  .btn-resonance--ghost:focus-visible {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.65);
+  }
+
   @media (max-width: 639px) {
     .btn-resonance {
       height: 50px;
@@ -640,6 +651,40 @@
     font-size: 26px;
   }
 
+  .resonance-card__content--specialist {
+    justify-content: flex-start;
+    padding-bottom: 28px;
+  }
+
+  .resonance-card__content--specialist .resonance-card__title {
+    margin-bottom: 0;
+  }
+
+  .resonance-card__copy {
+    @apply w-full mb-auto;
+  }
+
+  .resonance-card__subtitle {
+    @apply font-body m-0 w-full leading-snug;
+    font-size: 14px;
+    margin-top: 10px;
+    opacity: 0.92;
+  }
+
+  .resonance-card__actions {
+    @apply flex w-full flex-col gap-2;
+    margin-top: 16px;
+  }
+
+  .resonance-card__actions .btn-resonance {
+    @apply w-full justify-center;
+  }
+
+  .resonance-card--specialist .resonance-card__filter {
+    background:
+      linear-gradient(to bottom, rgba(39, 35, 68, 0.55) 0%, rgba(39, 35, 68, 0.08) 42%, rgba(39, 35, 68, 0.45) 100%);
+  }
+
   .resonance-carousel__controls {
     @apply absolute left-0 right-0 top-1/2 z-10 items-center justify-between pointer-events-none;
     display: none;
@@ -680,6 +725,11 @@
 
     .resonance-card__title {
       font-size: 20px;
+    }
+
+    .resonance-card__subtitle {
+      font-size: 12px;
+      margin-top: 8px;
     }
   }
 
@@ -2835,49 +2885,16 @@
   }
 
   .ic-page__specialists-head {
-    @apply flex flex-wrap items-end justify-between gap-4;
-    margin-bottom: 32px;
+    @apply flex flex-col items-center gap-4 text-center;
+    margin-bottom: 8px;
   }
 
-  .ic-page__specialists {
-    @apply flex gap-5 overflow-x-auto pb-2;
-    scroll-snap-type: x mandatory;
+  .ic-page__section--specialists {
+    padding-bottom: 70px;
   }
 
-  .ic-specialist {
-    @apply relative shrink-0 overflow-hidden;
-    width: 280px;
-    scroll-snap-align: start;
-    border-radius: 20px;
-  }
-
-  .ic-specialist__photo {
-    @apply relative;
-    aspect-ratio: 3 / 4;
-  }
-
-  .ic-specialist__body {
-    @apply relative z-[1] mx-3 -mt-8 mb-3 rounded-[20px] bg-white p-5;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  }
-
-  .ic-specialist__name {
-    @apply m-0 font-body font-semibold text-[#3b3758];
-    font-size: 14px;
-    margin-bottom: 4px;
-  }
-
-  .ic-specialist__role {
-    @apply m-0 font-body text-[#3b3758];
-    font-size: 12px;
-    line-height: 1.45;
-    min-height: 52px;
-    margin-bottom: 16px;
-    opacity: 0.75;
-  }
-
-  .ic-specialist__actions {
-    @apply flex flex-col gap-2;
+  .ic-specialists-carousel {
+    margin-top: 32px;
   }
 
   @media (max-width: 1023px) {
