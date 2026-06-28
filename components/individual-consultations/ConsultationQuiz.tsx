@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type AnimationEvent, type FormEvent, type ReactNode } from "react";
 import Image from "next/image";
 import { CONTACT_METHOD_PLACEHOLDERS, CONTACT_METHODS, type ContactMethod } from "@/lib/contact-form-data";
 import { IC_QUIZ } from "@/lib/individual-consultations-data";
@@ -15,6 +15,13 @@ const QUIZ_CONTACT_LABELS: Record<ContactMethod, string> = {
   whatsapp: "WhatsApp",
   max: "Max",
 };
+
+type QuizMotion = "fade" | "fade-with-move";
+
+function getStepMotion(step: number): QuizMotion {
+  if (step === 0 || step === IC_QUIZ.steps.length + 2) return "fade";
+  return "fade-with-move";
+}
 
 function IconArrowRight() {
   return (
@@ -69,6 +76,7 @@ type QuizFooterProps = {
   nextDisabled?: boolean;
   submitForm?: boolean;
   submitting?: boolean;
+  hidden?: boolean;
 };
 
 function QuizFooter({
@@ -78,7 +86,10 @@ function QuizFooter({
   nextDisabled = false,
   submitForm = false,
   submitting = false,
+  hidden = false,
 }: QuizFooterProps) {
+  if (hidden) return null;
+
   return (
     <div className="ic-quiz__footer-sticky">
       <div className="ic-quiz__footer">
@@ -112,32 +123,6 @@ function QuizFooter({
   );
 }
 
-type QuizStepLayoutProps = QuizFooterProps & {
-  children: ReactNode;
-  question: string;
-};
-
-function QuizStepLayout({ children, question, ...footerProps }: QuizStepLayoutProps) {
-  return (
-    <div className="ic-quiz__wrapper">
-      <QuizSidebar />
-      <div className="ic-quiz__content">
-        <div className="ic-quiz__content-inner">
-          <div className="ic-quiz__main">
-            <div className="ic-quiz__screen">
-              <div className="ic-quiz__header">
-                <h3 className="ic-quiz__question">{question}</h3>
-              </div>
-              {children}
-            </div>
-            <QuizFooter {...footerProps} />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function QuizRadioOptions({
   step,
   options,
@@ -165,7 +150,7 @@ function QuizRadioOptions({
             onChange={() => onSelect(option)}
           />
           <span className="ic-quiz__radio-indicator" aria-hidden="true" />
-          <span>{option}</span>
+          <span className="ic-quiz__radio-label">{option}</span>
         </label>
       ))}
     </div>
@@ -203,6 +188,68 @@ function QuizContactMethods({
   );
 }
 
+function useQuizStepTransition(step: number) {
+  const [renderStep, setRenderStep] = useState(step);
+  const [motion, setMotion] = useState<"in" | "out" | "idle">("idle");
+  const pendingStep = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (step === renderStep) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setRenderStep(step);
+      setMotion("idle");
+      pendingStep.current = null;
+      return;
+    }
+
+    pendingStep.current = step;
+    setMotion("out");
+  }, [step, renderStep]);
+
+  const handleAnimationEnd = useCallback(
+    (event: React.AnimationEvent<HTMLDivElement>) => {
+      if (event.target !== event.currentTarget) return;
+
+      if (motion === "out" && pendingStep.current !== null) {
+        setRenderStep(pendingStep.current);
+        pendingStep.current = null;
+        setMotion("in");
+        return;
+      }
+
+      if (motion === "in") {
+        setMotion("idle");
+      }
+    },
+    [motion],
+  );
+
+  const screenClassName = [
+    "ic-quiz__screen-stage",
+    motion === "in" ? `ic-quiz__screen-stage--in-${getStepMotion(renderStep)}` : "",
+    motion === "out" ? `ic-quiz__screen-stage--out-${getStepMotion(renderStep)}` : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return { renderStep, screenClassName, handleAnimationEnd };
+}
+
+type AnimatedScreenProps = {
+  className: string;
+  onAnimationEnd: (event: AnimationEvent<HTMLDivElement>) => void;
+  children: ReactNode;
+};
+
+function AnimatedScreen({ className, onAnimationEnd, children }: AnimatedScreenProps) {
+  return (
+    <div className={className} onAnimationEnd={onAnimationEnd}>
+      {children}
+    </div>
+  );
+}
+
 export function ConsultationQuiz() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<string[]>(["", "", ""]);
@@ -211,7 +258,10 @@ export function ConsultationQuiz() {
   const [phoneCountryIso, setPhoneCountryIso] = useState(DEFAULT_PHONE_COUNTRY.iso);
   const [submitting, setSubmitting] = useState(false);
 
-  const progress = step === 0 ? 0 : Math.min(100, Math.round((step / IC_QUIZ.totalSteps) * 100));
+  const { renderStep, screenClassName, handleAnimationEnd } = useQuizStepTransition(step);
+  const showSidebar = renderStep >= 1 && renderStep <= IC_QUIZ.steps.length + 1;
+  const showFooter = renderStep >= 1 && renderStep <= IC_QUIZ.steps.length + 1;
+  const progress = renderStep === 0 ? 0 : Math.min(100, Math.round((renderStep / IC_QUIZ.totalSteps) * 100));
 
   function handleStart() {
     setStep(1);
@@ -268,6 +318,108 @@ export function ConsultationQuiz() {
 
   const usesPhoneInput = contactMethod === "phone" || contactMethod === "whatsapp";
 
+  function renderScreenContent(currentStep: number) {
+    if (currentStep === 0) {
+      return (
+        <div className="ic-quiz__cover">
+          <Image
+            src={IC_QUIZ.coverImage}
+            alt=""
+            fill
+            className="ic-quiz__cover-image object-cover"
+            sizes="(max-width: 768px) 100vw, 1160px"
+            priority
+          />
+          <div className="ic-quiz__cover-overlay">
+            <h3 className="ic-quiz__cover-title">
+              {IC_QUIZ.coverTitleLines.map((line) => (
+                <span key={line}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+            </h3>
+            <p className="ic-quiz__cover-text">{IC_QUIZ.coverDescription}</p>
+            <button type="button" className="ic-quiz__btn ic-quiz__btn--start" onClick={handleStart}>
+              <IconArrowRight />
+              Начать
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    if (currentStep >= 1 && currentStep <= IC_QUIZ.steps.length) {
+      return (
+        <div className="ic-quiz__screen">
+          <div className="ic-quiz__header">
+            <h3 className="ic-quiz__question">{IC_QUIZ.steps[currentStep - 1].question}</h3>
+          </div>
+          <QuizRadioOptions
+            step={currentStep}
+            options={IC_QUIZ.steps[currentStep - 1].options}
+            value={answers[currentStep - 1]}
+            onSelect={handleSelect}
+          />
+        </div>
+      );
+    }
+
+    if (currentStep === IC_QUIZ.steps.length + 1) {
+      return (
+        <div className="ic-quiz__screen">
+          <div className="ic-quiz__header">
+            <h3 className="ic-quiz__question">Как с вами удобнее связаться?</h3>
+          </div>
+          <div className="ic-quiz__form">
+            <input name="name" required placeholder="Ваше имя" className="ic-quiz__input" />
+            <QuizContactMethods value={contactMethod} onChange={setContactMethod} />
+            {usesPhoneInput ? (
+              <div className="ic-quiz__phone">
+                <PhoneCountryInput
+                  value={phoneValue}
+                  onChange={setPhoneValue}
+                  countryIso={phoneCountryIso}
+                  onCountryChange={setPhoneCountryIso}
+                  inputName="contactValue"
+                  inputClassName="ic-quiz__input"
+                />
+              </div>
+            ) : (
+              <input
+                name="contactValue"
+                required
+                placeholder={CONTACT_METHOD_PLACEHOLDERS[contactMethod] ?? ""}
+                className="ic-quiz__input"
+              />
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="ic-quiz__success">
+        <div className="ic-quiz__success-copy">
+          <h3 className="ic-quiz__success-title">{IC_QUIZ.successTitle}</h3>
+          <p className="ic-quiz__success-text">
+            {IC_QUIZ.successTextLines.map((line) => (
+              <span key={line}>
+                {line}
+                <br />
+              </span>
+            ))}
+          </p>
+        </div>
+        <div className="ic-quiz__success-image">
+          <Image src={IC_QUIZ.successImage} alt="" fill className="object-cover" sizes="400px" />
+        </div>
+      </div>
+    );
+  }
+
+  const isContactStep = renderStep === IC_QUIZ.steps.length + 1;
+
   return (
     <div className="ic-quiz">
       <div className="ic-quiz__shell">
@@ -277,120 +429,32 @@ export function ConsultationQuiz() {
           </div>
         </div>
 
-        {step === 0 ? (
-          <div className="ic-quiz__wrapper">
-            <QuizSidebar />
-            <div className="ic-quiz__content">
-              <div className="ic-quiz__cover">
-                <Image
-                  src={IC_QUIZ.coverImage}
-                  alt=""
-                  fill
-                  className="ic-quiz__cover-image object-cover"
-                  sizes="(max-width: 768px) 100vw, 1160px"
-                  priority
+        <form
+          className={`ic-quiz__wrapper${showSidebar ? "" : " ic-quiz__wrapper--panel-hidden"}`}
+          onSubmit={isContactStep ? handleSubmit : undefined}
+        >
+          {showSidebar ? <QuizSidebar /> : null}
+
+          <div className="ic-quiz__content">
+            <div className="ic-quiz__content-inner">
+              <div className="ic-quiz__main">
+                <AnimatedScreen className={screenClassName} onAnimationEnd={handleAnimationEnd}>
+                  {renderScreenContent(renderStep)}
+                </AnimatedScreen>
+
+                <QuizFooter
+                  stepNumber={renderStep >= 1 && renderStep <= IC_QUIZ.steps.length ? renderStep : IC_QUIZ.totalSteps}
+                  onBack={handleBack}
+                  onNext={handleNext}
+                  nextDisabled={renderStep >= 1 && renderStep <= IC_QUIZ.steps.length ? !answers[renderStep - 1] : false}
+                  submitForm={isContactStep}
+                  submitting={submitting}
+                  hidden={!showFooter}
                 />
-                <div className="ic-quiz__cover-overlay">
-                  <h3 className="ic-quiz__cover-title">
-                    {IC_QUIZ.coverTitleLines.map((line) => (
-                      <span key={line}>
-                        {line}
-                        <br />
-                      </span>
-                    ))}
-                  </h3>
-                  <p className="ic-quiz__cover-text">{IC_QUIZ.coverDescription}</p>
-                  <button type="button" className="ic-quiz__btn ic-quiz__btn--start" onClick={handleStart}>
-                    <IconArrowRight />
-                    Начать
-                  </button>
-                </div>
               </div>
             </div>
           </div>
-        ) : null}
-
-        {step >= 1 && step <= IC_QUIZ.steps.length ? (
-          <QuizStepLayout
-            question={IC_QUIZ.steps[step - 1].question}
-            stepNumber={step}
-            onBack={handleBack}
-            onNext={handleNext}
-            nextDisabled={!answers[step - 1]}
-          >
-            <QuizRadioOptions
-              step={step}
-              options={IC_QUIZ.steps[step - 1].options}
-              value={answers[step - 1]}
-              onSelect={handleSelect}
-            />
-          </QuizStepLayout>
-        ) : null}
-
-        {step === IC_QUIZ.steps.length + 1 ? (
-          <form className="ic-quiz__wrapper" onSubmit={handleSubmit}>
-            <QuizSidebar />
-            <div className="ic-quiz__content">
-              <div className="ic-quiz__content-inner">
-                <div className="ic-quiz__main">
-                  <div className="ic-quiz__screen">
-                    <div className="ic-quiz__header">
-                      <h3 className="ic-quiz__question">Как с вами удобнее связаться?</h3>
-                    </div>
-                    <div className="ic-quiz__form">
-                      <input name="name" required placeholder="Ваше имя" className="ic-quiz__input" />
-                      <QuizContactMethods value={contactMethod} onChange={setContactMethod} />
-                      {usesPhoneInput ? (
-                        <div className="ic-quiz__phone">
-                          <PhoneCountryInput
-                            value={phoneValue}
-                            onChange={setPhoneValue}
-                            countryIso={phoneCountryIso}
-                            onCountryChange={setPhoneCountryIso}
-                            inputName="contactValue"
-                            inputClassName="ic-quiz__input"
-                          />
-                        </div>
-                      ) : (
-                        <input
-                          name="contactValue"
-                          required
-                          placeholder={CONTACT_METHOD_PLACEHOLDERS[contactMethod] ?? ""}
-                          className="ic-quiz__input"
-                        />
-                      )}
-                    </div>
-                  </div>
-                  <QuizFooter
-                    stepNumber={IC_QUIZ.totalSteps}
-                    onBack={handleBack}
-                    submitForm
-                    submitting={submitting}
-                  />
-                </div>
-              </div>
-            </div>
-          </form>
-        ) : null}
-
-        {step === IC_QUIZ.steps.length + 2 ? (
-          <div className="ic-quiz__success">
-            <div className="ic-quiz__success-copy">
-              <h3 className="ic-quiz__success-title">{IC_QUIZ.successTitle}</h3>
-              <p className="ic-quiz__success-text">
-                {IC_QUIZ.successTextLines.map((line) => (
-                  <span key={line}>
-                    {line}
-                    <br />
-                  </span>
-                ))}
-              </p>
-            </div>
-            <div className="ic-quiz__success-image">
-              <Image src={IC_QUIZ.successImage} alt="" fill className="object-cover" sizes="400px" />
-            </div>
-          </div>
-        ) : null}
+        </form>
       </div>
     </div>
   );
