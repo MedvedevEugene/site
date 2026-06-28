@@ -170,36 +170,38 @@ export function IcSpecialistsCarousel({ specialists, onBook }: IcSpecialistsCaro
       >
         {specialists.map((specialist) => (
           <article key={specialist.slug} className="ic-specialist">
-            <div className="ic-specialist__photo">
+            <div className="ic-specialist__media">
               <Image
                 src={specialist.photo}
                 alt={specialist.name}
                 fill
                 className="object-cover object-top"
-                sizes="(max-width: 480px) 280px, 300px"
+                sizes="360px"
                 draggable={false}
                 onLoad={syncTrackLayout}
               />
             </div>
-            <div className="ic-specialist__body">
-              <p className="ic-specialist__name">{specialist.name}</p>
-              <p className="ic-specialist__role">{specialist.role}</p>
-              <div className="ic-specialist__actions">
-                <button
-                  type="button"
-                  className="ic-page__btn ic-page__btn--primary ic-page__btn--sm"
-                  onClick={onBookClick}
-                >
-                  Запись
-                </button>
-                <Link
-                  href={`/teachers/${specialist.slug}`}
-                  className="ic-page__btn ic-page__btn--outline ic-page__btn--sm"
-                  onClick={onLinkClick}
-                  draggable={false}
-                >
-                  О специалисте
-                </Link>
+            <div className="ic-specialist__content">
+              <div className="ic-specialist__body">
+                <p className="ic-specialist__name">{specialist.name}</p>
+                <p className="ic-specialist__role">{specialist.role}</p>
+                <div className="ic-specialist__actions">
+                  <button
+                    type="button"
+                    className="ic-specialist__btn ic-specialist__btn--primary"
+                    onClick={onBookClick}
+                  >
+                    Запись
+                  </button>
+                  <Link
+                    href={`/teachers/${specialist.slug}`}
+                    className="ic-specialist__btn ic-specialist__btn--outline"
+                    onClick={onLinkClick}
+                    draggable={false}
+                  >
+                    О специалисте
+                  </Link>
+                </div>
               </div>
             </div>
           </article>
