@@ -25,7 +25,7 @@ function CarouselArrow({
       type="button"
       aria-label={direction === "prev" ? "Предыдущий слайд" : "Следующий слайд"}
       onClick={onClick}
-      className={`resonance-carousel__control resonance-carousel__control--${direction}`}
+      className={`ic-specialists-carousel__control ic-specialists-carousel__control--${direction}`}
     >
       <svg
         viewBox="0 0 40 40"
@@ -35,7 +35,7 @@ function CarouselArrow({
         aria-hidden
         className="w-full h-full"
       >
-        <path d={path} stroke="#ffffff" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+        <path d={path} stroke="#ffffff" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
       </svg>
     </button>
   );
@@ -61,7 +61,7 @@ export function IcSpecialistsCarousel({ specialists, onBook }: IcSpecialistsCaro
     const fits = overflow <= 1;
 
     setTrackCentered(fits);
-    track.classList.toggle("resonance-carousel__track--centered", fits);
+    track.classList.toggle("ic-specialists-carousel__track--centered", fits);
 
     if (fits) {
       track.scrollLeft = 0;
@@ -94,7 +94,7 @@ export function IcSpecialistsCarousel({ specialists, onBook }: IcSpecialistsCaro
   const scrollStep = useCallback(() => {
     const track = trackRef.current;
     if (!track) return 400;
-    const card = track.querySelector<HTMLElement>(".resonance-card");
+    const card = track.querySelector<HTMLElement>(".ic-specialist");
     if (!card) return 400;
     const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "40");
     return card.offsetWidth + gap;
@@ -155,10 +155,10 @@ export function IcSpecialistsCarousel({ specialists, onBook }: IcSpecialistsCaro
   }
 
   return (
-    <div className="resonance-carousel ic-specialists-carousel">
+    <div className="ic-specialists-carousel">
       <div
         ref={trackRef}
-        className={`resonance-carousel__track${trackCentered ? " resonance-carousel__track--centered" : ""}${dragging ? " resonance-carousel__track--dragging" : ""}`}
+        className={`ic-specialists-carousel__track${trackCentered ? " ic-specialists-carousel__track--centered" : ""}${dragging ? " ic-specialists-carousel__track--dragging" : ""}`}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
@@ -169,29 +169,32 @@ export function IcSpecialistsCarousel({ specialists, onBook }: IcSpecialistsCaro
         }}
       >
         {specialists.map((specialist) => (
-          <article key={specialist.slug} className="resonance-card resonance-card--specialist">
-            <Image
-              src={specialist.photo}
-              alt={specialist.name}
-              fill
-              className="object-cover object-top"
-              sizes="(max-width: 480px) 280px, 360px"
-              draggable={false}
-              onLoad={syncTrackLayout}
-            />
-            <div className="resonance-card__filter" />
-            <div className="resonance-card__content resonance-card__content--specialist">
-              <div className="resonance-card__copy">
-                <p className="resonance-card__title">{specialist.name}</p>
-                <p className="resonance-card__subtitle">{specialist.role}</p>
-              </div>
-              <div className="resonance-card__actions">
-                <button type="button" className="btn-resonance" onClick={onBookClick}>
+          <article key={specialist.slug} className="ic-specialist">
+            <div className="ic-specialist__photo">
+              <Image
+                src={specialist.photo}
+                alt={specialist.name}
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 480px) 280px, 300px"
+                draggable={false}
+                onLoad={syncTrackLayout}
+              />
+            </div>
+            <div className="ic-specialist__body">
+              <p className="ic-specialist__name">{specialist.name}</p>
+              <p className="ic-specialist__role">{specialist.role}</p>
+              <div className="ic-specialist__actions">
+                <button
+                  type="button"
+                  className="ic-page__btn ic-page__btn--primary ic-page__btn--sm"
+                  onClick={onBookClick}
+                >
                   Запись
                 </button>
                 <Link
                   href={`/teachers/${specialist.slug}`}
-                  className="btn-resonance btn-resonance--ghost"
+                  className="ic-page__btn ic-page__btn--outline ic-page__btn--sm"
                   onClick={onLinkClick}
                   draggable={false}
                 >
@@ -203,7 +206,7 @@ export function IcSpecialistsCarousel({ specialists, onBook }: IcSpecialistsCaro
         ))}
       </div>
 
-      <div className="resonance-carousel__controls">
+      <div className="ic-specialists-carousel__controls">
         <CarouselArrow direction="prev" onClick={() => scroll(-1)} />
         <CarouselArrow direction="next" onClick={() => scroll(1)} />
       </div>
