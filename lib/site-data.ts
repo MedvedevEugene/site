@@ -10,6 +10,7 @@ export const IMAGES = {
   /** Иконки соцсетей в футере (rec1359663041) */
   footerSocialVk: `${CDN}/tild6131-3963-4562-a538-303632663636/color.svg`,
   footerSocialTg: `${CDN}/tild6161-6231-4365-b061-653139623038/color.svg`,
+  footerSocialMax: "/images/forms/contact-methods/max.svg",
   /** Декор на карточке «Базовый курс» — завитушка, не фото */
   catalogDecor: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
   spiral: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
@@ -208,29 +209,35 @@ export const FOOTER_COLUMNS = {
   programs: {
     title: "Образовательные программы",
     links: [
-      { label: "Базовый курс расстановкам", href: FOOTER_PLACEHOLDER_HREF },
-      { label: "Расстановки PRO", href: FOOTER_PLACEHOLDER_HREF },
-      { label: "Сонаставнический практикум", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "Базовый курс расстановкам", href: "/base-cource" },
+      { label: "Расстановки PRO", href: "/telese-terapiya" },
+      { label: "Сонаставнический практикум", href: "/coming-soon" },
     ],
   },
   about: {
-    title: "Об ИРЖ",
+    title: "Об ИЖСИЗ",
     links: [
-      { label: "О нас", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "О нас", href: "/information-about-the-educational-organization" },
       { label: "Статьи", href: "/blog" },
-      { label: "Расписание", href: FOOTER_PLACEHOLDER_HREF },
-      { label: "Расстановочные группы", href: FOOTER_PLACEHOLDER_HREF },
-      { label: "Психологическая помощь", href: FOOTER_PLACEHOLDER_HREF },
-      { label: "Маркет развивающих товаров", href: FOOTER_PLACEHOLDER_HREF },
-      { label: "Индивидуальные расстановки", href: FOOTER_PLACEHOLDER_HREF },
-      { label: "Вебинары", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "Расписание", href: "/timetable" },
+      { label: "Расстановочные группы", href: "/rasstanovochnye-gruppy" },
+      { label: "Психологическая помощь", href: "/psychological-help" },
+      { label: "Маркет развивающих товаров", href: "/market" },
+      { label: "Индивидуальные расстановки", href: "/individual-consultations" },
+      { label: "Вебинары", href: "/video-materials" },
     ],
   },
   extra: {
     title: "Дополнительная информация",
     links: [
-      { label: "Политика конфиденциальности", href: FOOTER_PLACEHOLDER_HREF },
-      { label: "Политика обработки персональных данных", href: FOOTER_PLACEHOLDER_HREF },
+      { label: "Политика конфиденциальности", href: "/privacy" },
+      { label: "Политика обработки персональных данных", href: "/privacy" },
     ],
   },
 } as const;
+
+export const FOOTER_SOCIALS = [
+  { label: "VK", href: "https://vk.com/", icon: IMAGES.footerSocialVk },
+  { label: "Telegram", href: "https://t.me/", icon: IMAGES.footerSocialTg },
+  { label: "Max", href: "#", icon: IMAGES.footerSocialMax },
+] as const;

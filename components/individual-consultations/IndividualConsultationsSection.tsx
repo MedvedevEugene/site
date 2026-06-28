@@ -159,14 +159,14 @@ export function IndividualConsultationsSection() {
 
       <section className="ic-page__section ic-page__section--specialists" id="specialists">
         <div className="container-site">
-          <h2 className="ic-page__title ic-page__title--center ic-page__title--specialists m-0">Наши специалисты</h2>
+          <h2 className="ic-page__title--center ic-page__title--specialists m-0">Наши специалисты</h2>
         </div>
         <IcSpecialistsCarousel specialists={IC_SPECIALISTS} onBook={() => scrollTo("quiz")} />
       </section>
 
       <section className="ic-page__section ic-page__section--faq">
         <div className="container-site ic-page__faq">
-          <h2 className="ic-page__title ic-page__title--center ic-page__title--faq m-0">Ответы на вопросы</h2>
+          <h2 className="ic-page__title--center ic-page__title--faq m-0">Ответы на вопросы</h2>
           <FAQ items={[...IC_FAQ]} variant="ic-accordion" />
         </div>
       </section>

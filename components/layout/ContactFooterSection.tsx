@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { SITE } from "@/lib/constants";
-import { FOOTER_COLUMNS, IMAGES } from "@/lib/site-data";
+import { FOOTER_COLUMNS, FOOTER_SOCIALS, IMAGES } from "@/lib/site-data";
 import { buildFullPhoneNumber } from "@/lib/phone-format";
 import { DEFAULT_PHONE_COUNTRY } from "@/lib/phone-countries";
 import { getPhoneCountryByIso, PhoneCountryInput } from "@/components/forms/PhoneCountryInput";
@@ -130,7 +130,7 @@ export function ContactFooterSection() {
               <FooterColumn title={FOOTER_COLUMNS.programs.title} links={FOOTER_COLUMNS.programs.links} />
               <Image
                 src={IMAGES.logoWhite}
-                alt={SITE.fullName}
+                alt={`${SITE.name} — ${SITE.fullName}`}
                 width={300}
                 height={48}
                 className="site-footer__logo"
@@ -152,12 +152,17 @@ export function ContactFooterSection() {
                   </a>
                 </div>
                 <div className="site-footer__socials">
-                  <a href="#" className="site-footer__social" aria-label="VK">
-                    <Image src={IMAGES.footerSocialVk} alt="" width={47} height={47} />
-                  </a>
-                  <a href="#" className="site-footer__social" aria-label="Telegram">
-                    <Image src={IMAGES.footerSocialTg} alt="" width={47} height={47} />
-                  </a>
+                  {FOOTER_SOCIALS.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      className="site-footer__social"
+                      aria-label={social.label}
+                      {...(social.href === "#" ? { "aria-disabled": true, tabIndex: -1 } : {})}
+                    >
+                      <Image src={social.icon} alt="" width={47} height={47} />
+                    </a>
+                  ))}
                 </div>
               </div>
 

@@ -2836,11 +2836,11 @@
 
   .ic-page__title--specialists,
   .ic-page__title--faq {
+    @apply m-0 text-center font-body text-[#3b3758];
     font-family: var(--font-montserrat), Montserrat, sans-serif;
     font-size: 36px;
     font-weight: 600;
     line-height: 47px;
-    color: #3b3758;
   }
 
   .ic-page__title--specialists {
@@ -2852,7 +2852,13 @@
   }
 
   .ic-page__faq {
+    width: 100%;
+  }
+
+  .ic-page__faq .ic-accordion {
+    width: 100%;
     max-width: 1160px;
+    margin-inline: auto;
   }
 
   .ic-page__section--specialists {
@@ -2960,6 +2966,12 @@
     @apply bg-transparent text-[#3b3758];
     border: 1px solid #3b3758;
     padding: 11px 30px;
+  }
+
+  .ic-specialist__btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 
   .ic-specialists-carousel__controls {
@@ -3084,6 +3096,10 @@
       font-size: 26px;
     }
 
+    .ic-page__title {
+      font-size: 30px;
+    }
+
     .ic-page__title--specialists,
     .ic-page__title--faq {
       font-size: 28px;
@@ -3092,10 +3108,6 @@
 
     .ic-page__title--faq {
       margin-bottom: 40px;
-    }
-
-    .ic-page__title {
-      font-size: 30px;
     }
 
     .ic-price-card {

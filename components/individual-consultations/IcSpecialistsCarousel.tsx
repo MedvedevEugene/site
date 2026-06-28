@@ -185,6 +185,9 @@ export function IcSpecialistsCarousel({ specialists, onBook }: IcSpecialistsCaro
                   >
                     Запись
                   </button>
+                  <button type="button" className="ic-specialist__btn ic-specialist__btn--outline" disabled>
+                    О специалисте
+                  </button>
                 </div>
               </div>
             </div>
