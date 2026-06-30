@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FAQ } from "@/components/ui/FAQ";
 import { BaseCoursePopup } from "@/components/base-course/BaseCoursePopup";
+import { BaseCourseReviewsCarousel } from "@/components/base-course/BaseCourseReviewsCarousel";
 import {
   BASE_COURSE_ABOUT,
   BASE_COURSE_AUDIENCE,
@@ -40,17 +41,17 @@ export function BaseCoursePage() {
           </nav>
         </div>
 
-        {/* Hero */}
+        {/* Hero — rec1458816781 */}
         <section className="bc-section bc-hero">
           <div className="container-site bc-hero__grid">
             <div className="bc-hero__content">
               <h1 className="bc-hero__title">{BASE_COURSE_HERO.title}</h1>
               <p className="bc-hero__subtitle">{BASE_COURSE_HERO.subtitle}</p>
               <div className="bc-hero__actions">
-                <button type="button" className="bc-btn bc-btn--dark" onClick={openPopup(setPopup, "application")}>
+                <button type="button" className="bc-btn bc-btn--dark bc-btn--hero" onClick={openPopup(setPopup, "application")}>
                   заявка на обучение
                 </button>
-                <button type="button" className="bc-btn bc-btn--outline" onClick={openPopup(setPopup, "consultation")}>
+                <button type="button" className="bc-btn bc-btn--outline bc-btn--hero" onClick={openPopup(setPopup, "consultation")}>
                   Получить консультацию
                 </button>
               </div>
@@ -64,8 +65,17 @@ export function BaseCoursePage() {
               </div>
             </div>
             <div className="bc-hero__media">
+              <Image
+                src={BASE_COURSE_IMAGES.heroDecor}
+                alt=""
+                width={120}
+                height={120}
+                className="bc-hero__decor"
+                aria-hidden
+              />
               <div className="bc-hero__discount">
-                <span>{BASE_COURSE_HERO.discount}</span>
+                <span className="bc-hero__discount-value">{BASE_COURSE_HERO.discount}</span>
+                <span className="bc-hero__discount-label">скидка</span>
               </div>
               <Image
                 src={BASE_COURSE_IMAGES.hero}
@@ -79,7 +89,7 @@ export function BaseCoursePage() {
           </div>
         </section>
 
-        {/* 8 reasons */}
+        {/* 8 reasons — rec1458878661 */}
         <section className="bc-section">
           <div className="container-site">
             <h2 className="bc-section-title">8 причин пойти на курс</h2>
@@ -95,7 +105,7 @@ export function BaseCoursePage() {
           </div>
         </section>
 
-        {/* Audience */}
+        {/* Audience — rec1458816791 */}
         <section className="bc-section bc-section--cream">
           <div className="container-site">
             <h2 className="bc-section-title">Для кого предназначен курс?</h2>
@@ -113,14 +123,14 @@ export function BaseCoursePage() {
               <p className="bc-not-psychologist__text">{BASE_COURSE_NOT_PSYCHOLOGIST.text}</p>
             </div>
             <div className="bc-center mt-10">
-              <button type="button" className="bc-btn bc-btn--dark" onClick={openPopup(setPopup, "consultation")}>
+              <button type="button" className="bc-btn bc-btn--dark bc-btn--hero" onClick={openPopup(setPopup, "consultation")}>
                 Получить консультацию
               </button>
             </div>
           </div>
         </section>
 
-        {/* 7 steps */}
+        {/* 7 steps — rec1458973181 */}
         <section className="bc-section">
           <div className="container-site bc-steps">
             <div className="bc-steps__content">
@@ -132,18 +142,18 @@ export function BaseCoursePage() {
               </ol>
               <div className="bc-steps__actions">
                 <span className="bc-steps__label">К новой профессии</span>
-                <button type="button" className="bc-btn bc-btn--dark" onClick={openPopup(setPopup, "application")}>
+                <button type="button" className="bc-btn bc-btn--dark bc-btn--hero" onClick={openPopup(setPopup, "application")}>
                   начать учиться
                 </button>
               </div>
             </div>
             <div className="bc-steps__media">
-              <Image src={BASE_COURSE_IMAGES.steps} alt="" width={400} height={400} className="w-full h-auto max-w-[360px]" />
+              <Image src={BASE_COURSE_IMAGES.steps} alt="" width={400} height={400} className="bc-steps__photo" />
             </div>
           </div>
         </section>
 
-        {/* About constellations */}
+        {/* About constellations — rec1458816801 */}
         <section className="bc-section bc-section--cream">
           <div className="container-site bc-about">
             <div className="bc-about__content">
@@ -161,19 +171,19 @@ export function BaseCoursePage() {
             </div>
           </div>
           <div className="container-site bc-center mt-10">
-            <button type="button" className="bc-btn bc-btn--dark" onClick={openPopup(setPopup, "consultation")}>
+            <button type="button" className="bc-btn bc-btn--dark bc-btn--hero" onClick={openPopup(setPopup, "consultation")}>
               Получить консультацию
             </button>
           </div>
         </section>
 
-        {/* Program */}
+        {/* Program — rec1458816831, t668 */}
         <section className="bc-section">
           <div className="container-site">
             <h2 className="bc-section-title">Программа курса</h2>
             <div className="bc-program">
-              {BASE_COURSE_MODULES.map((module, index) => (
-                <details key={module} className="bc-program__item" open={index === 0}>
+              {BASE_COURSE_MODULES.map((module) => (
+                <details key={module} className="bc-program__item">
                   <summary className="bc-program__summary">{module}</summary>
                 </details>
               ))}
@@ -181,41 +191,36 @@ export function BaseCoursePage() {
           </div>
         </section>
 
-        {/* Reviews placeholder */}
-        <section className="bc-section bc-section--cream">
+        {/* Reviews — rec1458816841 + rec1458816851 t994 */}
+        <section className="bc-section bc-section--cream bc-reviews-section">
           <div className="container-site">
             <h2 className="bc-section-title">Отзывы</h2>
             <p className="bc-section-subtitle">Люди говорят о результатах</p>
-            <div className="bc-reviews">
-              {[
-                "Курс изменил моё понимание себя и отношений в семье.",
-                "Получила профессию, которую давно искала, и уверенность в практике.",
-                "Структура обучения и поддержка сонаставников — на высшем уровне.",
-              ].map((text) => (
-                <blockquote key={text} className="bc-review">
-                  {text}
-                </blockquote>
-              ))}
-            </div>
+            <BaseCourseReviewsCarousel />
             <div className="bc-center mt-8">
-              <button type="button" className="bc-btn bc-btn--dark" onClick={openPopup(setPopup, "application")}>
+              <button type="button" className="bc-btn bc-btn--dark bc-btn--hero" onClick={openPopup(setPopup, "application")}>
                 хочу жизнь мечты
               </button>
             </div>
           </div>
         </section>
 
-        {/* Tariffs */}
-        <section className="bc-section">
+        {/* Tariffs — rec1458816871 */}
+        <section className="bc-section bc-tariffs-section">
+          <Image
+            src={BASE_COURSE_IMAGES.tariffsDecor}
+            alt=""
+            width={1400}
+            height={400}
+            className="bc-tariffs-section__decor"
+            aria-hidden
+          />
           <div className="container-site">
             <h2 className="bc-section-title">Выбирай свой формат участия</h2>
             <p className="bc-section-subtitle">Три уровня поддержки для твоего развития</p>
             <div className="bc-tariffs">
               {BASE_COURSE_TARIFFS.map((tariff) => (
-                <article
-                  key={tariff.id}
-                  className={`bc-tariff ${"featured" in tariff && tariff.featured ? "bc-tariff--featured" : ""}`}
-                >
+                <article key={tariff.id} className="bc-tariff">
                   <div className="bc-tariff__discount">-11%</div>
                   <h3 className="bc-tariff__name">{tariff.name}</h3>
                   <div className="bc-tariff__prices">
@@ -241,16 +246,16 @@ export function BaseCoursePage() {
           </div>
         </section>
 
-        {/* FAQ */}
-        <section className="bc-section bc-section--cream">
+        {/* FAQ — rec1458816891, t668 */}
+        <section className="bc-section bc-section--cream bc-faq-section">
           <div className="container-site">
-            <h2 className="bc-section-title">Ответы на частые вопросы</h2>
+            <h2 className="bc-section-title bc-faq-section__title">Ответы на частые вопросы</h2>
             <p className="bc-section-subtitle">А что если:</p>
-            <FAQ items={[...BASE_COURSE_FAQ]} />
+            <FAQ items={[...BASE_COURSE_FAQ]} variant="ic-accordion" />
           </div>
         </section>
 
-        {/* Creator */}
+        {/* Creator — rec1458816911 */}
         <section className="bc-section">
           <div className="container-site bc-creator">
             <div className="bc-creator__photo-wrap">
