@@ -67,8 +67,8 @@ export function BaseCoursePage() {
                 <Image
                   src={BASE_COURSE_IMAGES.hero}
                   alt=""
-                  width={642}
-                  height={420}
+                  width={520}
+                  height={340}
                   priority
                   className="bc-hero__photo"
                 />
