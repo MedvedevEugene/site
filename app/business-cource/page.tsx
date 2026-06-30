@@ -1,26 +1,8 @@
-import Link from "next/link";
-import { PageShell, createPageMetadata } from "@/components/ui/PageShell";
-import { ContactForm } from "@/components/forms/CallbackPopup";
+import { BusinessCoursePage } from "@/components/business-course/BusinessCoursePage";
+import { createPageMetadata } from "@/components/ui/PageShell";
 
-export const metadata = createPageMetadata("Курс бизнес-расстановок");
+export const metadata = createPageMetadata("Бизнес курс ИЖСИЗ");
 
-export default function BusinessCoursePage() {
-  return (
-    <>
-      <PageShell
-        title="Курс обучения бизнес-расстановкам"
-        description="6 месяцев, 400 часов. Для предпринимателей, специалистов и руководителей."
-        breadcrumbs={[{ label: "Бизнес-курс" }]}
-      >
-        <Link href="#contact" className="btn btn-primary">Получить информацию</Link>
-      </PageShell>
-      <section className="section-cream" id="contact">
-        <div className="container-site">
-          <div className="bg-gradient-to-br from-primary to-[#5a5478] rounded-[20px] p-12 max-w-xl text-white">
-            <ContactForm title="Заявка на бизнес-курс" />
-          </div>
-        </div>
-      </section>
-    </>
-  );
+export default function BusinessCourseRoute() {
+  return <BusinessCoursePage />;
 }
