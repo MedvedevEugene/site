@@ -43,48 +43,50 @@ export function BaseCoursePage() {
 
         {/* Hero — rec1458816781 */}
         <section className="bc-section bc-hero">
-          <div className="container-site bc-hero__grid">
-            <div className="bc-hero__content">
-              <h1 className="bc-hero__title">{BASE_COURSE_HERO.title}</h1>
-              <p className="bc-hero__subtitle">{BASE_COURSE_HERO.subtitle}</p>
-              <div className="bc-hero__actions">
-                <button type="button" className="bc-btn bc-btn--dark bc-btn--hero" onClick={openPopup(setPopup, "application")}>
-                  заявка на обучение
-                </button>
-                <button type="button" className="bc-btn bc-btn--outline bc-btn--hero" onClick={openPopup(setPopup, "consultation")}>
-                  Получить консультацию
-                </button>
+          <div className="container-site bc-hero__wrapper">
+            <div className="bc-hero__main">
+              <div className="bc-hero__content">
+                <h1 className="bc-hero__title">
+                  <span className="bc-hero__title-line">
+                    {BASE_COURSE_HERO.titleLine1}
+                    <span className="bc-hero__discount" aria-label="Скидка 11%">
+                      <span className="bc-hero__discount-label">скидка</span>
+                      <span className="bc-hero__discount-value">{BASE_COURSE_HERO.discount}</span>
+                    </span>
+                  </span>
+                  <span className="bc-hero__title-line">{BASE_COURSE_HERO.titleLine2}</span>
+                </h1>
+                <p className="bc-hero__subtitle">{BASE_COURSE_HERO.subtitle}</p>
+                <div className="bc-hero__actions">
+                  <button type="button" className="bc-btn bc-btn--dark bc-btn--hero" onClick={openPopup(setPopup, "application")}>
+                    заявка на обучение
+                  </button>
+                  <button type="button" className="bc-btn bc-btn--outline bc-btn--hero bc-btn--hero-outline" onClick={openPopup(setPopup, "consultation")}>
+                    Получить консультацию
+                  </button>
+                </div>
               </div>
-              <div className="bc-hero__stats">
-                {BASE_COURSE_HERO.stats.map((item) => (
-                  <div key={item.label} className="bc-hero__stat">
-                    <div className="bc-hero__stat-label">{item.label}</div>
-                    <div className="bc-hero__stat-value">{item.value}</div>
-                  </div>
-                ))}
+              <div className="bc-hero__media">
+                <Image
+                  src={BASE_COURSE_IMAGES.hero}
+                  alt=""
+                  width={642}
+                  height={420}
+                  priority
+                  className="bc-hero__photo"
+                />
               </div>
             </div>
-            <div className="bc-hero__media">
-              <Image
-                src={BASE_COURSE_IMAGES.heroDecor}
-                alt=""
-                width={120}
-                height={120}
-                className="bc-hero__decor"
-                aria-hidden
-              />
-              <div className="bc-hero__discount">
-                <span className="bc-hero__discount-value">{BASE_COURSE_HERO.discount}</span>
-                <span className="bc-hero__discount-label">скидка</span>
-              </div>
-              <Image
-                src={BASE_COURSE_IMAGES.hero}
-                alt=""
-                width={642}
-                height={420}
-                priority
-                className="bc-hero__photo"
-              />
+            <div className="bc-hero__stats">
+              {BASE_COURSE_HERO.stats.map((item) => (
+                <div key={item.label} className="bc-hero__stat">
+                  <div className="bc-hero__stat-head">
+                    <span className="bc-hero__stat-dot" aria-hidden />
+                    <div className="bc-hero__stat-label">{item.label}</div>
+                  </div>
+                  <div className="bc-hero__stat-value">{item.value}</div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
