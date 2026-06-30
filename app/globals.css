@@ -3482,6 +3482,7 @@
     .bc-hero__media {
       justify-self: end;
       margin-top: -40px;
+      transform: translateX(24px);
     }
   }
 
