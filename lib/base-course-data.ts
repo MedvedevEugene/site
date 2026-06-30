@@ -66,18 +66,21 @@ export const BASE_COURSE_AUDIENCE = [
     image: BASE_COURSE_IMAGES.audiencePsychologist,
     text: "Освоите новый метод работы с клиентом, который дает быстрые, достоверные и устойчивые результаты. Много отработок на курсе, можно сразу практиковать",
     titleWeight: 600,
+    textMaxWidth: "325px",
   },
   {
     title: "Расстановщик",
     image: BASE_COURSE_IMAGES.audienceConstellator,
     text: "Прокачаете системное восприятие, будете видеть как на ладони динамики клиента и подбирать наиболее эффективные способы решения запросов.",
     titleWeight: 700,
+    textMaxWidth: "325px",
   },
   {
     title: "эзотерик",
     image: BASE_COURSE_IMAGES.audienceEsoteric,
     text: "Углубите понимание взаимодействия энергий и их истинные источники, соберете свои знания в единую систему и сможете помогать людям обрести личную силу и подпитку рода",
     titleWeight: 700,
+    textMaxWidth: "352px",
   },
   {
     title: "А если я не психолог?",
@@ -85,6 +88,7 @@ export const BASE_COURSE_AUDIENCE = [
     text: "На курс можно пойти и для себя. Получите инструмент для того, чтобы разобрать любую жизненную ситуацию и всегда чувствовать себя в ресурсе и в безопасности",
     variant: "dark" as const,
     titleWeight: 700,
+    textMaxWidth: "343px",
   },
 ] as const;
 
