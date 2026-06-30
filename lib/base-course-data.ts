@@ -5,9 +5,11 @@ export const BASE_COURSE_IMAGES = {
   heroDecor: `${CDN}/tild3163-3835-4638-a561-656430663865/Group_130.png`,
   /** rec1458878661 — circular diagram with dashed ring and blobs */
   reasonsDiagram: `${CDN}/tild3163-3835-4638-a561-656430663865/Group_130.png`,
-  audiencePsychologist: `${CDN}/tild3538-3938-4661-a236-373736333735/icon-1.png`,
-  audienceConstellator: `${CDN}/tild3735-3136-4265-b536-386534383334/icon-2.png`,
-  audienceEsoteric: `${CDN}/tild6633-6139-4565-b036-316633346332/icon-3.png`,
+  /** rec1458816791 — audience card icons (142×142) */
+  audiencePsychologist: `${CDN}/tild3530-3731-4261-a632-613638636262/Group_141.png`,
+  audienceConstellator: `${CDN}/tild6166-6331-4237-a564-373739656134/Group_134.png`,
+  audienceEsoteric: `${CDN}/tild6364-3330-4431-b335-636466366565/Group_107.png`,
+  audienceNotPsychologist: `${CDN}/tild3936-3632-4864-b439-363536633033/Group_108.png`,
   steps: `${CDN}/tild3763-6162-4334-b863-373038343366/10.png`,
   about1: `${CDN}/tild6532-6432-4231-b239-613364653032/_1.png`,
   about2: `${CDN}/tild3863-3763-4562-a234-393639336263/22222.png`,
@@ -57,28 +59,34 @@ export const BASE_COURSE_REASONS = [
   { text: "Глубокая проработка своих травм и сценариев", top: 83.16, left: 63.57, width: 19.5 },
 ] as const;
 
+/** rec1458816791 — 2×2 audience grid */
 export const BASE_COURSE_AUDIENCE = [
   {
     title: "Психолог",
     image: BASE_COURSE_IMAGES.audiencePsychologist,
     text: "Освоите новый метод работы с клиентом, который дает быстрые, достоверные и устойчивые результаты. Много отработок на курсе, можно сразу практиковать",
+    titleWeight: 600,
   },
   {
     title: "Расстановщик",
     image: BASE_COURSE_IMAGES.audienceConstellator,
     text: "Прокачаете системное восприятие, будете видеть как на ладони динамики клиента и подбирать наиболее эффективные способы решения запросов.",
+    titleWeight: 700,
   },
   {
     title: "эзотерик",
     image: BASE_COURSE_IMAGES.audienceEsoteric,
     text: "Углубите понимание взаимодействия энергий и их истинные источники, соберете свои знания в единую систему и сможете помогать людям обрести личную силу и подпитку рода",
+    titleWeight: 700,
+  },
+  {
+    title: "А если я не психолог?",
+    image: BASE_COURSE_IMAGES.audienceNotPsychologist,
+    text: "На курс можно пойти и для себя. Получите инструмент для того, чтобы разобрать любую жизненную ситуацию и всегда чувствовать себя в ресурсе и в безопасности",
+    variant: "dark" as const,
+    titleWeight: 700,
   },
 ] as const;
-
-export const BASE_COURSE_NOT_PSYCHOLOGIST = {
-  title: "А если я не психолог?",
-  text: "На курс можно пойти и для себя. Получите инструмент для того, чтобы разобрать любую жизненную ситуацию и всегда чувствовать себя в ресурсе и в безопасности",
-} as const;
 
 export const BASE_COURSE_STEPS = [
   "Прослушать лекции",

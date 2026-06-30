@@ -15,7 +15,7 @@ export function BaseCourseReasonsSection() {
             sizes="(min-width: 960px) 86vw, 100vw"
           />
           <h2 id="bc-reasons-title" className="bc-reasons-panel__title">
-            8 причин пойти на курс
+            8 причин пойти на&nbsp;курс
           </h2>
           <ol className="bc-reasons-panel__list">
             {BASE_COURSE_REASONS.map((item, index) => (
