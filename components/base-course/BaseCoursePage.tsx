@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FAQ } from "@/components/ui/FAQ";
 import { BaseCoursePopup } from "@/components/base-course/BaseCoursePopup";
 import { BaseCourseReviewsCarousel } from "@/components/base-course/BaseCourseReviewsCarousel";
+import { BaseCourseReasonsSection } from "@/components/base-course/BaseCourseReasonsSection";
 import {
   BASE_COURSE_ABOUT,
   BASE_COURSE_AUDIENCE,
@@ -15,7 +16,6 @@ import {
   BASE_COURSE_IMAGES,
   BASE_COURSE_MODULES,
   BASE_COURSE_NOT_PSYCHOLOGIST,
-  BASE_COURSE_REASONS,
   BASE_COURSE_STEPS,
   BASE_COURSE_TARIFFS,
   type BaseCoursePopupKind,
@@ -89,20 +89,7 @@ export function BaseCoursePage() {
         </section>
 
         {/* 8 reasons — rec1458878661 */}
-        <section className="bc-section">
-          <div className="container-site">
-            <h2 className="bc-section-title">8 причин пойти на курс</h2>
-            <div className="bc-reasons">
-              {BASE_COURSE_REASONS.map((item, index) => (
-                <div key={item.text} className="bc-reason">
-                  <div className="bc-reason__num">{index + 1}.</div>
-                  <Image src={item.image} alt="" width={48} height={48} className="bc-reason__icon" />
-                  <p className="bc-reason__text">{item.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <BaseCourseReasonsSection />
 
         {/* Audience — rec1458816791 */}
         <section className="bc-section bc-section--cream">

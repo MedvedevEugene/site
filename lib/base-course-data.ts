@@ -3,14 +3,8 @@ const CDN = "https://static.tildacdn.com";
 export const BASE_COURSE_IMAGES = {
   hero: `${CDN}/tild3538-3362-4361-a438-643231313961/snapedit_17603574673.png`,
   heroDecor: `${CDN}/tild3163-3835-4638-a561-656430663865/Group_130.png`,
-  reason1: `${CDN}/tild3136-6536-4663-b563-373732383538/1.png`,
-  reason2: `${CDN}/tild6132-3838-4135-b134-316661326236/2.png`,
-  reason3: `${CDN}/tild3062-6533-4366-b565-663136316334/3.png`,
-  reason4: `${CDN}/tild6463-6433-4634-b739-373030396333/4.png`,
-  reason5: `${CDN}/tild3432-6463-4335-b634-353461643330/5.png`,
-  reason6: `${CDN}/tild3061-3132-4131-b632-636234646537/6.png`,
-  reason7: `${CDN}/tild3837-6665-4134-b035-626237376261/7.png`,
-  reason8: `${CDN}/tild3161-3539-4534-b334-393838633633/8.png`,
+  /** rec1458878661 — circular diagram with dashed ring and blobs */
+  reasonsDiagram: `${CDN}/tild3163-3835-4638-a561-656430663865/Group_130.png`,
   audiencePsychologist: `${CDN}/tild3538-3938-4661-a236-373736333735/icon-1.png`,
   audienceConstellator: `${CDN}/tild3735-3136-4265-b536-386534383334/icon-2.png`,
   audienceEsoteric: `${CDN}/tild6633-6139-4565-b036-316633346332/icon-3.png`,
@@ -51,15 +45,16 @@ export const BASE_COURSE_HERO = {
   ],
 } as const;
 
+/** rec1458878661 — positions within 1400×873 panel (percent) */
 export const BASE_COURSE_REASONS = [
-  { image: BASE_COURSE_IMAGES.reason1, text: "Обучение новой профессии расстановщика" },
-  { image: BASE_COURSE_IMAGES.reason2, text: "Получите инструмент для решения как повседневных проблем, так и важных вопросов" },
-  { image: BASE_COURSE_IMAGES.reason3, text: "Единомышленники и теплое пространство обучения" },
-  { image: BASE_COURSE_IMAGES.reason4, text: "20 недель курса заменят 2 года терапии с психологом" },
-  { image: BASE_COURSE_IMAGES.reason5, text: "Наладите общение в семье и с детьми и построите гармоничные отношения" },
-  { image: BASE_COURSE_IMAGES.reason6, text: "Узнаете законы, по которым взаимодействуют люди" },
-  { image: BASE_COURSE_IMAGES.reason7, text: "Решите проблемы на работе или поменяете профессию" },
-  { image: BASE_COURSE_IMAGES.reason8, text: "Глубокая проработка своих травм и сценариев" },
+  { text: "Обучение новой профессии расстановщика", top: 24.17, left: 15.71, width: 19.5 },
+  { text: "Получите инструмент для решения как повседневных проблем, так и важных вопросов", top: 40.44, left: 7.14, width: 21.71 },
+  { text: "Единомышленники и теплое пространство обучения", top: 66.55, left: 7.86, width: 21.71 },
+  { text: "20 недель курса заменят 2 года терапии с психологом", top: 83.73, left: 17.86, width: 21.71 },
+  { text: "Наладите общение в семье и с детьми и построите гармоничные отношения", top: 24.17, left: 65.71, width: 19.5 },
+  { text: "Узнаете законы, по которым взаимодействуют люди", top: 40.21, left: 73.36, width: 19.5 },
+  { text: "Решите проблемы на работе или поменяете профессию", top: 66.32, left: 73.36, width: 19.5 },
+  { text: "Глубокая проработка своих травм и сценариев", top: 83.16, left: 63.57, width: 19.5 },
 ] as const;
 
 export const BASE_COURSE_AUDIENCE = [
