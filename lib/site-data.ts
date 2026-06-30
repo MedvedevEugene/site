@@ -85,7 +85,7 @@ export const CATALOG_PROGRAMS = [
     href: "/telese-terapiya",
     tone: "cream" as const,
     tag: "Внутренний курс",
-    title: "Продвинутый курс по расстановкам",
+    title: "Телесно ориентированная терапия",
     meta: "10 мес. / 777 часов",
     callbackVariant: "advanced-course" as const,
   },
