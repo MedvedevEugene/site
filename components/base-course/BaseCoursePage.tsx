@@ -46,16 +46,13 @@ export function BaseCoursePage() {
           <div className="container-site bc-hero__wrapper">
             <div className="bc-hero__main">
               <div className="bc-hero__content">
-                <h1 className="bc-hero__title">
-                  <span className="bc-hero__title-line">
-                    {BASE_COURSE_HERO.titleLine1}
-                    <span className="bc-hero__discount" aria-label="Скидка 11%">
-                      <span className="bc-hero__discount-label">скидка</span>
-                      <span className="bc-hero__discount-value">{BASE_COURSE_HERO.discount}</span>
-                    </span>
-                  </span>
-                  <span className="bc-hero__title-line">{BASE_COURSE_HERO.titleLine2}</span>
-                </h1>
+                <div className="bc-hero__title-wrap">
+                  <h1 className="bc-hero__title">{BASE_COURSE_HERO.title}</h1>
+                  <div className="bc-hero__discount" aria-label="Скидка 11%">
+                    <span className="bc-hero__discount-label">скидка</span>
+                    <span className="bc-hero__discount-value">{BASE_COURSE_HERO.discount}</span>
+                  </div>
+                </div>
                 <p className="bc-hero__subtitle">{BASE_COURSE_HERO.subtitle}</p>
                 <div className="bc-hero__actions">
                   <button type="button" className="bc-btn bc-btn--dark bc-btn--hero" onClick={openPopup(setPopup, "application")}>
