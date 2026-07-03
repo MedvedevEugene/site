@@ -14,7 +14,7 @@ export function AiToolsSection({ variant = "default", id = "ai-tools" }: AiTools
       <div className="container-site">
         <h2 className={isIc ? "ic-page__title" : "section-title"}>Цифровые НЛП/НЛУ-инструменты</h2>
         <p className={isIc ? "ic-page__subtitle" : "section-subtitle"}>
-          Самостоятельное исследование → карта ответов → бесплатный ИИ-разбор
+          Самостоятельное исследование → карта ответов → ИИ-разбор
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {AI_TOOLS.map((tool) => (
