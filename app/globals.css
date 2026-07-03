@@ -2446,6 +2446,12 @@
     @apply text-white;
   }
 
+  .ic-page__subtitle {
+    @apply text-muted max-w-[720px] mb-10;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
   .ic-page__btn {
     @apply inline-flex items-center justify-center border font-body font-semibold transition-opacity hover:opacity-90 cursor-pointer;
     min-height: 57px;

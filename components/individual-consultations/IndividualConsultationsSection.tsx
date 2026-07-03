@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FAQ } from "@/components/ui/FAQ";
 import { ConsultationQuiz } from "@/components/individual-consultations/ConsultationQuiz";
 import { IcSpecialistsCarousel } from "@/components/individual-consultations/IcSpecialistsCarousel";
+import { AiToolsSection } from "@/components/tools/AiToolsSection";
 import { useCallbackPopup } from "@/components/layout/CallbackPopupContext";
 import {
   IC_FAQ,
@@ -95,6 +96,8 @@ export function IndividualConsultationsSection() {
           </div>
         </div>
       </section>
+
+      <AiToolsSection variant="ic" id="ai-tools" />
 
       <section className="ic-page__section ic-page__section--pricing">
         <div className="container-site">
