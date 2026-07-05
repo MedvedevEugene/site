@@ -4,12 +4,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AssociationsTree } from "@/components/tools/AssociationsTree";
 import { AiReportView, saveToolSession, useAiAnalysis } from "@/components/tools/AiReportView";
-import { ToolDisclaimer } from "@/components/tools/ToolDisclaimer";
+import { ToolAccessGate } from "@/components/tools/ToolAccessGate";
 import { pairWords } from "@/lib/tool-config";
 
 export function SixteenAssociationsWizard() {
   const router = useRouter();
-  const [accepted, setAccepted] = useState(false);
   const [step, setStep] = useState(0);
   const [query, setQuery] = useState("");
   const [level1, setLevel1] = useState(Array(16).fill(""));
@@ -18,7 +17,7 @@ export function SixteenAssociationsWizard() {
   const [level4, setLevel4] = useState(Array(2).fill(""));
   const [finalWord, setFinalWord] = useState("");
   const [done, setDone] = useState(false);
-  const { analysis, loading, run } = useAiAnalysis();
+  const { analysis, loading, run, emailSent, userEmail } = useAiAnalysis();
 
   const pairs1 = pairWords(level1);
   const pairs2 = pairWords(level2);
@@ -61,36 +60,32 @@ export function SixteenAssociationsWizard() {
     run("sixteen_associations", payload, null);
   }
 
-  if (!accepted) return <ToolDisclaimer onAccept={() => setAccepted(true)} />;
-
-  if (done) {
-    const columns = [
-      { title: "16 ассоциаций", words: level1.map((w) => w.trim()) },
-      { title: "8 слов", words: level2.map((w) => w.trim()) },
-      { title: "4 слова", words: level3.map((w) => w.trim()) },
-      { title: "2 направления", words: level4.map((w) => w.trim()) },
-      { title: "Ключ", words: [finalWord.trim()] },
-    ];
-
-    return (
-      <div className="max-w-4xl mx-auto">
-        <div className="tool-card">
-          <h3 className="font-heading text-xl m-0 mb-2">Ваша карта ассоциаций</h3>
-          <p className="text-sm text-muted m-0 mb-6">
-            Запрос: <strong>{query.trim()}</strong> → Ключ: <strong>{finalWord.trim()}</strong>
-          </p>
-          <AssociationsTree columns={columns} />
-          <p className="text-xs text-muted m-0 mt-4">
-            Не удалось сохранить сессию — разбор показан здесь. Для постоянной ссылки пройдите тест снова позже.
-          </p>
-        </div>
-        <AiReportView text={analysis} loading={loading} />
-      </div>
-    );
-  }
-
   return (
-    <div className="tool-card max-w-2xl mx-auto">
+    <ToolAccessGate>
+      {done ? (
+        <div className="max-w-4xl mx-auto">
+          <div className="tool-card">
+            <h3 className="font-heading text-xl m-0 mb-2">Ваша карта ассоциаций</h3>
+            <p className="text-sm text-muted m-0 mb-6">
+              Запрос: <strong>{query.trim()}</strong> → Ключ: <strong>{finalWord.trim()}</strong>
+            </p>
+            <AssociationsTree
+              columns={[
+                { title: "16 ассоциаций", words: level1.map((w) => w.trim()) },
+                { title: "8 слов", words: level2.map((w) => w.trim()) },
+                { title: "4 слова", words: level3.map((w) => w.trim()) },
+                { title: "2 направления", words: level4.map((w) => w.trim()) },
+                { title: "Ключ", words: [finalWord.trim()] },
+              ]}
+            />
+            <p className="text-xs text-muted m-0 mt-4">
+              Не удалось сохранить сессию — разбор показан здесь. Для постоянной ссылки пройдите тест снова позже.
+            </p>
+          </div>
+          <AiReportView text={analysis} loading={loading} emailSent={emailSent} userEmail={userEmail} />
+        </div>
+      ) : (
+        <div className="tool-card max-w-2xl mx-auto">
       <p className="text-sm text-muted m-0 mb-2">Шаг {step + 1} из 6</p>
 
       {step === 0 && (
@@ -228,6 +223,8 @@ export function SixteenAssociationsWizard() {
           {step === 5 ? "Получить карту и ИИ-разбор" : "Далее →"}
         </button>
       </div>
-    </div>
+        </div>
+      )}
+    </ToolAccessGate>
   );
 }

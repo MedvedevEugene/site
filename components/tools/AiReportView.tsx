@@ -3,7 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 
-export function AiReportView({ text, loading }: { text: string | null; loading: boolean }) {
+export function AiReportView({
+  text,
+  loading,
+  emailSent,
+  userEmail,
+}: {
+  text: string | null;
+  loading: boolean;
+  emailSent?: boolean;
+  userEmail?: string | null;
+}) {
   if (loading) {
     return (
       <div className="tool-card mt-8">
@@ -35,6 +45,11 @@ export function AiReportView({ text, loading }: { text: string | null; loading: 
           );
         })}
       </div>
+      {emailSent && userEmail && (
+        <p className="text-sm text-green-700 bg-green-50 rounded-lg px-4 py-3 mt-4 m-0">
+          Разбор также отправлен на <strong>{userEmail}</strong>
+        </p>
+      )}
       <Link href="/individual-consultations" className="btn btn-primary mt-6 inline-flex">
         Записаться на консультацию
       </Link>
@@ -56,9 +71,13 @@ export async function saveToolSession(tool: string, payload: Record<string, unkn
 export function useAiAnalysis() {
   const [analysis, setAnalysis] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
 
   async function run(tool: string, payload: Record<string, unknown>, sessionId?: string | null) {
     setLoading(true);
+    setEmailSent(false);
+    setUserEmail(null);
     try {
       const res = await fetch("/api/ai-analysis", {
         method: "POST",
@@ -67,6 +86,8 @@ export function useAiAnalysis() {
       });
       const data = await res.json();
       setAnalysis(data.analysis || "Не удалось сформировать разбор.");
+      setEmailSent(!!data.emailSent);
+      setUserEmail(data.userEmail || null);
     } catch {
       setAnalysis("Не удалось сформировать разбор. Попробуйте позже.");
     } finally {
@@ -74,5 +95,5 @@ export function useAiAnalysis() {
     }
   }
 
-  return { analysis, loading, run, setAnalysis };
+  return { analysis, loading, run, setAnalysis, emailSent, userEmail };
 }

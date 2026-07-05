@@ -27,7 +27,7 @@ export function AssociationResultView({ sessionId }: { sessionId: string }) {
   const [payload, setPayload] = useState<Payload | null>(null);
   const [error, setError] = useState(false);
   const [cachedReport, setCachedReport] = useState<string | null>(null);
-  const { analysis, loading, run } = useAiAnalysis();
+  const { analysis, loading, run, emailSent, userEmail } = useAiAnalysis();
 
   useEffect(() => {
     fetch(`/api/tool-sessions?id=${sessionId}`)
@@ -73,7 +73,12 @@ export function AssociationResultView({ sessionId }: { sessionId: string }) {
         </p>
         <AssociationsTree columns={columns} />
       </div>
-      <AiReportView text={cachedReport || analysis} loading={loading && !cachedReport} />
+      <AiReportView
+        text={cachedReport || analysis}
+        loading={loading && !cachedReport}
+        emailSent={emailSent}
+        userEmail={userEmail}
+      />
       <div className="text-center mt-6">
         <Link href="/16-associations" className="btn btn-outline">
           Пройти снова
