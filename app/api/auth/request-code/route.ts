@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/db";
+import { createPendingLoginToken, PENDING_COOKIE } from "@/lib/auth-pending";
 import { sendAuthCodeEmail } from "@/lib/email";
 import { generateAuthCode, isValidEmail, normalizeEmail } from "@/lib/user-auth";
 
@@ -13,22 +13,33 @@ export async function POST(request: Request) {
     }
 
     const code = generateAuthCode();
-    const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
-
-    await prisma.authCode.deleteMany({ where: { email } });
-    await prisma.authCode.create({ data: { email, code, expiresAt } });
-
+    const pendingToken = await createPendingLoginToken(email, code);
     const sent = await sendAuthCodeEmail(email, code);
+
     if (!sent.ok && !sent.skipped) {
-      return NextResponse.json({ error: "Не удалось отправить письмо" }, { status: 502 });
+      return NextResponse.json({ error: "Не удалось отправить письмо. Проверьте RESEND_API_KEY." }, { status: 502 });
     }
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       ok: true,
       devCode: sent.skipped ? code : undefined,
     });
+
+    response.cookies.set(PENDING_COOKIE, pendingToken, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 15 * 60,
+    });
+
+    return response;
   } catch (error) {
     console.error("[auth/request-code]", error);
-    return NextResponse.json({ error: "Request failed" }, { status: 500 });
+    const message =
+      error instanceof Error && error.message.includes("USER_SESSION_SECRET")
+        ? "Сервер не настроен: добавьте USER_SESSION_SECRET в Vercel"
+        : "Не удалось отправить код. Попробуйте позже.";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

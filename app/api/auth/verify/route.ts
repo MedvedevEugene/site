@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { prisma } from "@/lib/db";
+import { PENDING_COOKIE, verifyPendingLoginToken } from "@/lib/auth-pending";
 import {
   createUserSessionToken,
   isValidEmail,
@@ -17,32 +19,37 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Некорректные данные" }, { status: 400 });
     }
 
-    const authCode = await prisma.authCode.findFirst({
-      where: { email, code },
-      orderBy: { createdAt: "desc" },
-    });
+    const cookieStore = await cookies();
+    const pendingToken = cookieStore.get(PENDING_COOKIE)?.value;
+    if (!pendingToken) {
+      return NextResponse.json({ error: "Сначала запросите код на почту" }, { status: 400 });
+    }
 
-    if (!authCode || authCode.expiresAt < new Date()) {
+    const pending = await verifyPendingLoginToken(pendingToken);
+    if (!pending || pending.email !== email || pending.code !== code) {
       return NextResponse.json({ error: "Код неверный или истёк" }, { status: 401 });
     }
 
-    const user = await prisma.user.upsert({
-      where: { email },
-      create: { email },
-      update: {},
-    });
+    let userId = email;
+    let name: string | null = null;
 
-    await prisma.authCode.deleteMany({ where: { email } });
+    try {
+      const user = await prisma.user.upsert({
+        where: { email },
+        create: { email },
+        update: {},
+      });
+      userId = user.id;
+      name = user.name;
+    } catch (dbError) {
+      console.error("[auth/verify] user upsert failed, using email id", dbError);
+    }
 
-    const token = await createUserSessionToken({
-      id: user.id,
-      email: user.email,
-      name: user.name,
-    });
+    const token = await createUserSessionToken({ id: userId, email, name });
 
     const response = NextResponse.json({
       ok: true,
-      user: { id: user.id, email: user.email, name: user.name },
+      user: { id: userId, email, name },
     });
 
     response.cookies.set(USER_SESSION_COOKIE, token, {
@@ -53,9 +60,15 @@ export async function POST(request: Request) {
       maxAge: 60 * 60 * 24 * 30,
     });
 
+    response.cookies.set(PENDING_COOKIE, "", {
+      httpOnly: true,
+      path: "/",
+      maxAge: 0,
+    });
+
     return response;
   } catch (error) {
     console.error("[auth/verify]", error);
-    return NextResponse.json({ error: "Verify failed" }, { status: 500 });
+    return NextResponse.json({ error: "Не удалось войти. Попробуйте снова." }, { status: 500 });
   }
 }

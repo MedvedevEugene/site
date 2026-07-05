@@ -8,7 +8,7 @@ export default function SixteenAssociationsPage() {
   return (
     <ToolShell
       title="16 ассоциаций"
-      description="Постройте ассоциативную цепочку от 16 слов до одного ключевого смысла. Сохраните результат по ссылке и получите ИИ-разбор — бесплатно на этапе тестирования."
+      description="Постройте ассоциативную цепочку от 16 слов до одного ключевого смысла. Сохраните результат по ссылке и получите ИИ-разбор на email."
     >
       <SixteenAssociationsWizard />
     </ToolShell>

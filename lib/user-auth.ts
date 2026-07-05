@@ -50,10 +50,14 @@ export async function getCurrentUser(): Promise<UserSession | null> {
   const session = await verifyUserSessionToken(token);
   if (!session) return null;
 
-  const user = await prisma.user.findUnique({ where: { id: session.id } });
-  if (!user) return null;
+  try {
+    const user = await prisma.user.findUnique({ where: { id: session.id } });
+    if (user) return { id: user.id, email: user.email, name: user.name };
+  } catch {
+    // User table may be missing — fall back to JWT payload
+  }
 
-  return { id: user.id, email: user.email, name: user.name };
+  return { id: session.id, email: session.email, name: null };
 }
 
 export function normalizeEmail(email: string) {
