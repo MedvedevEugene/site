@@ -17,13 +17,15 @@ export async function POST(request: Request) {
     const sent = await sendAuthCodeEmail(email, code);
 
     if (!sent.ok && !sent.skipped) {
-      const isResendSandbox =
-        "error" in sent && sent.error?.toLowerCase().includes("only send testing emails");
+      const detail = "error" in sent ? sent.error : "";
+      const isResendSandbox = detail?.toLowerCase().includes("only send testing emails");
       return NextResponse.json(
         {
           error: isResendSandbox
-            ? "Сейчас письма с кодом отправляются только на почту владельца Resend. Для входа с любого email нужно подключить домен в resend.com/domains и обновить EMAIL_FROM в Vercel."
-            : "Не удалось отправить письмо. Попробуйте позже или напишите нам через форму на сайте.",
+            ? "Resend в тестовом режиме. Настройте SMTP Yandex (SMTP_HOST, SMTP_USER, SMTP_PASS) в Vercel или подключите домен в Resend."
+            : detail
+              ? `Не удалось отправить письмо: ${detail}`
+              : "Не удалось отправить письмо. Проверьте настройки SMTP в Vercel.",
         },
         { status: 502 }
       );
@@ -31,7 +33,7 @@ export async function POST(request: Request) {
 
     const response = NextResponse.json({
       ok: true,
-      devCode: sent.skipped ? code : undefined,
+      devCode: !sent.ok && "skipped" in sent && sent.skipped ? code : undefined,
     });
 
     response.cookies.set(PENDING_COOKIE, pendingToken, {

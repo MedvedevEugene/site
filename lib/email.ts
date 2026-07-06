@@ -1,8 +1,9 @@
 const RESEND_API = "https://api.resend.com/emails";
 
-function getFromAddress() {
-  return process.env.EMAIL_FROM || "ИЖСИЗ <onboarding@resend.dev>";
-}
+type SendResult =
+  | { ok: true }
+  | { ok: false; skipped: true }
+  | { ok: false; skipped: false; error?: string };
 
 function getSiteUrl() {
   return (
@@ -11,12 +12,55 @@ function getSiteUrl() {
   );
 }
 
-async function sendEmail(to: string, subject: string, html: string) {
-  const apiKey = process.env.RESEND_API_KEY?.trim();
-  if (!apiKey) {
-    console.log("[email] RESEND_API_KEY not set — skip send to", to, subject);
-    return { ok: false as const, skipped: true as const };
+function getFromAddress() {
+  return (
+    process.env.SMTP_FROM?.trim() ||
+    process.env.EMAIL_FROM?.trim() ||
+    (process.env.SMTP_USER ? `ИЖСИЗ <${process.env.SMTP_USER}>` : "ИЖСИЗ <onboarding@resend.dev>")
+  );
+}
+
+function isSmtpConfigured() {
+  return Boolean(
+    process.env.SMTP_HOST?.trim() &&
+      process.env.SMTP_USER?.trim() &&
+      process.env.SMTP_PASS?.trim()
+  );
+}
+
+async function sendViaSmtp(to: string, subject: string, html: string): Promise<SendResult | null> {
+  if (!isSmtpConfigured()) return null;
+
+  const nodemailer = await import("nodemailer");
+  const port = Number(process.env.SMTP_PORT || 465);
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST!.trim(),
+    port,
+    secure: port === 465,
+    auth: {
+      user: process.env.SMTP_USER!.trim(),
+      pass: process.env.SMTP_PASS!.trim(),
+    },
+  });
+
+  try {
+    await transporter.sendMail({
+      from: getFromAddress(),
+      to,
+      subject,
+      html,
+    });
+    return { ok: true };
+  } catch (error) {
+    console.error("[email/smtp]", error);
+    const message = error instanceof Error ? error.message : "SMTP send failed";
+    return { ok: false, skipped: false, error: message };
   }
+}
+
+async function sendViaResend(to: string, subject: string, html: string): Promise<SendResult | null> {
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  if (!apiKey) return null;
 
   const res = await fetch(RESEND_API, {
     method: "POST",
@@ -34,7 +78,7 @@ async function sendEmail(to: string, subject: string, html: string) {
 
   if (!res.ok) {
     const text = await res.text().catch(() => "");
-    console.error("[email] send failed", res.status, text);
+    console.error("[email/resend]", res.status, text);
     let hint = "";
     try {
       const parsed = JSON.parse(text) as { message?: string };
@@ -42,10 +86,21 @@ async function sendEmail(to: string, subject: string, html: string) {
     } catch {
       /* ignore */
     }
-    return { ok: false as const, skipped: false as const, error: hint || `HTTP ${res.status}` };
+    return { ok: false, skipped: false, error: hint || `HTTP ${res.status}` };
   }
 
-  return { ok: true as const };
+  return { ok: true };
+}
+
+async function sendEmail(to: string, subject: string, html: string): Promise<SendResult> {
+  const smtpResult = await sendViaSmtp(to, subject, html);
+  if (smtpResult) return smtpResult;
+
+  const resendResult = await sendViaResend(to, subject, html);
+  if (resendResult) return resendResult;
+
+  console.log("[email] no provider configured — skip send to", to, subject);
+  return { ok: false, skipped: true };
 }
 
 export async function sendAuthCodeEmail(email: string, code: string) {
