@@ -1,9 +1,22 @@
 import { NextResponse } from "next/server";
+import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import { requireAdminApi } from "@/lib/require-admin";
 import type { LeadStatus } from "@/lib/lead-labels";
 
 const VALID_STATUSES: LeadStatus[] = ["new", "in_progress", "done", "spam"];
+
+function leadsDbError(error: unknown) {
+  if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    if (error.code === "P2021") {
+      return "Таблица заявок ещё не создана в базе. Перезапустите деплой на Vercel или выполните: npx prisma db push";
+    }
+  }
+  if (error instanceof Error && /does not exist/i.test(error.message)) {
+    return "Таблица заявок ещё не создана в базе. Перезапустите деплой на Vercel или выполните: npx prisma db push";
+  }
+  return "Не удалось загрузить заявки. Проверьте DATABASE_URL и логи Vercel.";
+}
 
 export async function GET(request: Request) {
   const denied = await requireAdminApi();
@@ -42,7 +55,7 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     console.error("[admin/leads GET]", error);
-    return NextResponse.json({ error: "Failed to load leads" }, { status: 500 });
+    return NextResponse.json({ error: leadsDbError(error) }, { status: 500 });
   }
 }
 
@@ -69,6 +82,6 @@ export async function PATCH(request: Request) {
     });
   } catch (error) {
     console.error("[admin/leads PATCH]", error);
-    return NextResponse.json({ error: "Failed to update lead" }, { status: 500 });
+    return NextResponse.json({ error: leadsDbError(error) }, { status: 500 });
   }
 }
