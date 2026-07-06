@@ -11,6 +11,7 @@ const NAV = [
   { href: "/admin/tariffs", label: "Тарифы" },
   { href: "/admin/specialists", label: "Специалисты" },
   { href: "/admin/media", label: "Фото" },
+  { href: "/admin/users", label: "Пользователи" },
 ];
 
 export function AdminShell({ children }: { children: ReactNode }) {
@@ -18,8 +19,11 @@ export function AdminShell({ children }: { children: ReactNode }) {
   const router = useRouter();
 
   async function logout() {
-    await fetch("/api/admin/logout", { method: "POST" });
-    router.push("/admin/login");
+    await Promise.all([
+      fetch("/api/admin/logout", { method: "POST" }),
+      fetch("/api/auth/logout", { method: "POST" }),
+    ]);
+    router.push("/account");
     router.refresh();
   }
 
@@ -32,7 +36,9 @@ export function AdminShell({ children }: { children: ReactNode }) {
             <div className="text-xs text-white/70">Расписание · новости · тарифы · специалисты · фото</div>
           </div>
           <div className="flex items-center gap-3">
-            <Link href="/" className="text-sm text-white/80 hover:text-white">На сайт</Link>
+            <Link href="/account" className="text-sm text-white/80 hover:text-white">
+              Профиль
+            </Link>
             <button type="button" onClick={logout} className="text-sm bg-white/15 px-3 py-1.5 rounded-lg border-0 text-white">
               Выйти
             </button>

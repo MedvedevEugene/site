@@ -8,6 +8,7 @@ import {
   normalizeEmail,
   USER_SESSION_COOKIE,
 } from "@/lib/user-auth";
+import { isAdminEmail, resolveUserRole } from "@/lib/admin-access";
 
 export async function POST(request: Request) {
   try {
@@ -30,26 +31,31 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Код неверный или истёк" }, { status: 401 });
     }
 
+    const role = isAdminEmail(email) ? "admin" : "user";
+
     let userId = email;
     let name: string | null = null;
+    let userRole: "user" | "admin" = role;
 
     try {
       const user = await prisma.user.upsert({
         where: { email },
-        create: { email },
-        update: {},
+        create: { email, role },
+        update: role === "admin" ? { role: "admin" } : {},
       });
       userId = user.id;
       name = user.name;
+      userRole = resolveUserRole(user.email, user.role);
     } catch (dbError) {
       console.error("[auth/verify] user upsert failed, using email id", dbError);
+      userRole = role;
     }
 
-    const token = await createUserSessionToken({ id: userId, email, name });
+    const token = await createUserSessionToken({ id: userId, email, name, role: userRole });
 
     const response = NextResponse.json({
       ok: true,
-      user: { id: userId, email, name },
+      user: { id: userId, email, name, role: userRole },
     });
 
     response.cookies.set(USER_SESSION_COOKIE, token, {

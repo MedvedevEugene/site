@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AdminCard, Field, inputClass } from "@/components/admin/AdminShell";
 
@@ -36,6 +37,11 @@ export function LoginForm() {
         <AdminCard title="Вход в админ-панель">
           <p className="text-sm text-muted m-0 mb-5">
             Управление расписанием, новостями, тарифами и фото на сайте.
+            Или{" "}
+            <Link href="/account" className="text-primary underline">
+              войдите по email
+            </Link>
+            , если у вашего аккаунта есть роль admin.
           </p>
           <form onSubmit={handleSubmit}>
             <Field label="Пароль">

@@ -1,6 +1,7 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/db";
+import { isAdminEmail, resolveUserRole, type UserRole } from "@/lib/admin-access";
 
 export const USER_SESSION_COOKIE = "izhsiz_user";
 
@@ -8,6 +9,7 @@ export type UserSession = {
   id: string;
   email: string;
   name: string | null;
+  role: UserRole;
 };
 
 function getSecret() {
@@ -20,7 +22,7 @@ export async function createUserSessionToken(user: UserSession) {
   const secret = getSecret();
   if (!secret) throw new Error("USER_SESSION_SECRET not configured");
 
-  return new SignJWT({ role: "user", sub: user.id, email: user.email })
+  return new SignJWT({ role: user.role, sub: user.id, email: user.email })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime("30d")
@@ -33,10 +35,14 @@ export async function verifyUserSessionToken(token: string) {
 
   try {
     const { payload } = await jwtVerify(token, secret);
-    if (payload.role !== "user" || typeof payload.sub !== "string" || typeof payload.email !== "string") {
+    if (typeof payload.sub !== "string" || typeof payload.email !== "string") {
       return null;
     }
-    return { id: payload.sub, email: payload.email };
+    const role: UserRole =
+      payload.role === "admin"
+        ? "admin"
+        : resolveUserRole(payload.email, typeof payload.role === "string" ? payload.role : null);
+    return { id: payload.sub, email: payload.email, role };
   } catch {
     return null;
   }
@@ -52,12 +58,33 @@ export async function getCurrentUser(): Promise<UserSession | null> {
 
   try {
     const user = await prisma.user.findUnique({ where: { id: session.id } });
-    if (user) return { id: user.id, email: user.email, name: user.name };
+    if (user) {
+      return {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: resolveUserRole(user.email, user.role),
+      };
+    }
+    const byEmail = await prisma.user.findUnique({ where: { email: session.email } });
+    if (byEmail) {
+      return {
+        id: byEmail.id,
+        email: byEmail.email,
+        name: byEmail.name,
+        role: resolveUserRole(byEmail.email, byEmail.role),
+      };
+    }
   } catch {
-    // User table may be missing — fall back to JWT payload
+    // User table may be missing
   }
 
-  return { id: session.id, email: session.email, name: null };
+  return {
+    id: session.id,
+    email: session.email,
+    name: null,
+    role: session.role,
+  };
 }
 
 export function normalizeEmail(email: string) {
