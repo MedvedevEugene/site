@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { TOOL_LABELS } from "@/lib/admin-access";
+import { TOOL_LABELS } from "@/lib/tool-labels";
 import { prisma } from "@/lib/db";
 import { getCurrentUser } from "@/lib/user-auth";
 

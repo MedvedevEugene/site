@@ -11,7 +11,7 @@ export function HeaderAccountLink() {
       .then((r) => r.json())
       .then((d) => {
         if (d.user?.email) {
-          setLabel(d.user.role === "admin" ? "Профиль · admin" : "Профиль");
+          setLabel("Профиль");
         }
       })
       .catch(() => {});

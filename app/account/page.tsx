@@ -19,7 +19,7 @@ export default function AccountPage() {
         </nav>
         <h1 className="font-heading text-[clamp(28px,4vw,42px)] font-medium m-0 mb-4">Мой аккаунт</h1>
         <p className="text-lg text-muted max-w-[640px] m-0 mb-10">
-          Вход по email, история прохождений ИИ-инструментов и доступ к админ-панели для администраторов.
+          Вход по email и история ваших прохождений ИИ-инструментов.
         </p>
         <Suspense fallback={null}>
           <AccountNoAdminNotice />

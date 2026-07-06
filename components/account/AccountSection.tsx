@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { ToolLogin, type AuthUser } from "@/components/tools/ToolLogin";
-import { TOOL_LABELS } from "@/lib/admin-access";
+import { TOOL_LABELS } from "@/lib/tool-labels";
 
 type SessionRow = {
   id: string;
@@ -76,33 +76,43 @@ export function AccountSection() {
     <div className="max-w-2xl mx-auto flex flex-col gap-6">
       <div className="tool-card">
         <h2 className="font-heading text-xl m-0 mb-4">Профиль</h2>
-        <p className="m-0 mb-2">
+        <p className="m-0 mb-6">
           <span className="text-muted">Email: </span>
           <strong>{user.email}</strong>
         </p>
-        <p className="m-0 mb-6">
-          <span className="text-muted">Роль: </span>
-          {user.role === "admin" ? (
-            <span className="inline-block bg-[#272344] text-white text-xs font-semibold px-3 py-1 rounded-full">
-              Администратор
-            </span>
-          ) : (
-            <span className="text-sm">Пользователь</span>
-          )}
-        </p>
-        <div className="flex flex-wrap gap-3">
-          {user.role === "admin" && (
-            <Link href="/admin" className="btn btn-primary">
-              Админ-панель
+        {user.role === "admin" && (
+          <>
+            <p className="m-0 mb-6">
+              <span className="text-muted">Роль: </span>
+              <span className="inline-block bg-[#272344] text-white text-xs font-semibold px-3 py-1 rounded-full">
+                Администратор
+              </span>
+            </p>
+            <div className="flex flex-wrap gap-3 mb-0">
+              <Link href="/admin" className="btn btn-primary">
+                Админ-панель
+              </Link>
+            </div>
+            <div className="flex flex-wrap gap-3 mt-3">
+              <Link href="/psychological-help#ai-tools" className="btn btn-outline">
+                ИИ-инструменты
+              </Link>
+              <button type="button" className="btn btn-outline" onClick={logout}>
+                Выйти
+              </button>
+            </div>
+          </>
+        )}
+        {user.role !== "admin" && (
+          <div className="flex flex-wrap gap-3">
+            <Link href="/psychological-help#ai-tools" className="btn btn-outline">
+              ИИ-инструменты
             </Link>
-          )}
-          <Link href="/psychological-help#ai-tools" className="btn btn-outline">
-            ИИ-инструменты
-          </Link>
-          <button type="button" className="btn btn-outline" onClick={logout}>
-            Выйти
-          </button>
-        </div>
+            <button type="button" className="btn btn-outline" onClick={logout}>
+              Выйти
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="tool-card">

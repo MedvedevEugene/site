@@ -17,13 +17,13 @@ export async function POST(request: Request) {
     const sent = await sendAuthCodeEmail(email, code);
 
     if (!sent.ok && !sent.skipped) {
-      const resendHint =
-        "error" in sent && sent.error?.includes("only send testing emails")
-          ? " Resend в тестовом режиме: письма уходят только на email владельца аккаунта Resend. Подключите свой домен в resend.com/domains."
-          : "";
+      const isResendSandbox =
+        "error" in sent && sent.error?.toLowerCase().includes("only send testing emails");
       return NextResponse.json(
         {
-          error: `Не удалось отправить письмо.${resendHint} Проверьте RESEND_API_KEY и EMAIL_FROM.`,
+          error: isResendSandbox
+            ? "Сейчас письма с кодом отправляются только на почту владельца Resend. Для входа с любого email нужно подключить домен в resend.com/domains и обновить EMAIL_FROM в Vercel."
+            : "Не удалось отправить письмо. Попробуйте позже или напишите нам через форму на сайте.",
         },
         { status: 502 }
       );
