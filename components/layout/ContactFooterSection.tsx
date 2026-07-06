@@ -159,7 +159,8 @@ export function ContactFooterSection() {
                       href={social.href}
                       className="site-footer__social"
                       aria-label={social.label}
-                      {...(social.href === "#" ? { "aria-disabled": true, tabIndex: -1 } : {})}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       <Image src={social.icon} alt="" width={47} height={47} />
                     </a>

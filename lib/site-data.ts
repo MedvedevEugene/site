@@ -207,35 +207,35 @@ export const FOOTER_COLUMNS = {
   programs: {
     title: "Образовательные программы",
     links: [
-      { label: "Базовый курс расстановкам", href: "/base-cource" },
-      { label: "Расстановки PRO", href: "/telese-terapiya" },
-      { label: "Сонаставнический практикум", href: "/coming-soon" },
+      { label: "Базовый курс по расстановкам", href: "/base-cource" },
+      { label: "Курс бизнес-расстановок", href: "/business-cource" },
+      { label: "Расстановочные группы", href: "/rasstanovochnye-gruppy" },
     ],
   },
   about: {
-    title: "Об ИЖСИЗ",
+    title: "Психологическая помощь",
     links: [
-      { label: "О нас", href: "/information-about-the-educational-organization" },
-      { label: "Статьи", href: "/blog" },
-      { label: "Расписание", href: "/timetable" },
-      { label: "Расстановочные группы", href: "/rasstanovochnye-gruppy" },
+      { label: "Индивидуальные консультации", href: "/individual-consultations" },
       { label: "Психологическая помощь", href: "/psychological-help" },
-      { label: "Маркет развивающих товаров", href: "/market" },
-      { label: "Индивидуальные расстановки", href: "/individual-consultations" },
-      { label: "Вебинары", href: "/video-materials" },
+      { label: "Телесно-ориентированная терапия", href: "/telese-terapiya" },
+      { label: "Каталог услуг", href: "/catalog" },
+      { label: "Специалисты", href: "/specialists" },
+      { label: "Расписание", href: "/timetable" },
+      { label: "Статьи", href: "/blog" },
+      { label: "О нас", href: "/information-about-the-educational-organization" },
     ],
   },
   extra: {
     title: "Дополнительная информация",
     links: [
+      { label: "Маркет", href: "/market" },
+      { label: "Видеоматериалы", href: "/video-materials" },
       { label: "Политика конфиденциальности", href: "/privacy" },
-      { label: "Политика обработки персональных данных", href: "/privacy" },
     ],
   },
 } as const;
 
 export const FOOTER_SOCIALS = [
-  { label: "VK", href: "https://vk.com/", icon: IMAGES.footerSocialVk },
-  { label: "Telegram", href: "https://t.me/", icon: IMAGES.footerSocialTg },
-  { label: "Max", href: "#", icon: IMAGES.footerSocialMax },
+  { label: "VK", href: "https://vk.com/lifeinstitute", icon: IMAGES.footerSocialVk },
+  { label: "Telegram", href: "https://t.me/lifeinstitute", icon: IMAGES.footerSocialTg },
 ] as const;

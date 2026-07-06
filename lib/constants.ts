@@ -26,6 +26,8 @@ export const MORE_LINKS = [
   { label: "Каталог услуг", href: "/catalog" },
   { label: "Специалисты", href: "/specialists" },
   { label: "Расстановочные группы", href: "/rasstanovochnye-gruppy" },
+  { label: "Телесная терапия", href: "/telese-terapiya" },
+  { label: "Психологическая помощь", href: "/psychological-help" },
   { label: "Видеоматериалы", href: "/video-materials" },
   { label: "О нас", href: "/information-about-the-educational-organization" },
   { label: "Маркет", href: "/market" },

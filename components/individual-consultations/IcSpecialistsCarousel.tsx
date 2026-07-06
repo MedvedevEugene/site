@@ -2,6 +2,7 @@
 
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 type Specialist = {
   slug: string;
@@ -185,9 +186,18 @@ export function IcSpecialistsCarousel({ specialists, onBook }: IcSpecialistsCaro
                   >
                     Запись
                   </button>
-                  <button type="button" className="ic-specialist__btn ic-specialist__btn--outline" disabled>
+                  <Link
+                    href={`/teachers/${specialist.slug}`}
+                    className="ic-specialist__btn ic-specialist__btn--outline"
+                    onClick={(event) => {
+                      if (dragRef.current.moved) {
+                        event.preventDefault();
+                        dragRef.current.moved = false;
+                      }
+                    }}
+                  >
                     О специалисте
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

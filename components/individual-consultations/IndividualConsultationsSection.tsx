@@ -13,13 +13,17 @@ import {
   IC_HERO_IMAGE,
   IC_METHODS,
   IC_PRICING,
-  IC_SPECIALISTS,
   IC_STEPS,
   IC_TOPIC_ARROW,
   IC_TOPICS,
 } from "@/lib/individual-consultations-data";
+import type { SpecialistCarouselItem } from "@/lib/specialists-display";
 
-export function IndividualConsultationsSection() {
+type IndividualConsultationsSectionProps = {
+  specialists: SpecialistCarouselItem[];
+};
+
+export function IndividualConsultationsSection({ specialists }: IndividualConsultationsSectionProps) {
   const { openCallbackPopup } = useCallbackPopup();
 
   function scrollTo(id: string) {
@@ -164,7 +168,7 @@ export function IndividualConsultationsSection() {
         <div className="container-site">
           <h2 className="ic-page__title--center ic-page__title--specialists m-0">Наши специалисты</h2>
         </div>
-        <IcSpecialistsCarousel specialists={IC_SPECIALISTS} onBook={() => scrollTo("quiz")} />
+        <IcSpecialistsCarousel specialists={specialists} onBook={() => scrollTo("quiz")} />
       </section>
 
       <section className="ic-page__section ic-page__section--faq">
