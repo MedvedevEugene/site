@@ -35,7 +35,14 @@ async function sendEmail(to: string, subject: string, html: string) {
   if (!res.ok) {
     const text = await res.text().catch(() => "");
     console.error("[email] send failed", res.status, text);
-    return { ok: false as const, skipped: false as const };
+    let hint = "";
+    try {
+      const parsed = JSON.parse(text) as { message?: string };
+      if (parsed.message) hint = parsed.message;
+    } catch {
+      /* ignore */
+    }
+    return { ok: false as const, skipped: false as const, error: hint || `HTTP ${res.status}` };
   }
 
   return { ok: true as const };

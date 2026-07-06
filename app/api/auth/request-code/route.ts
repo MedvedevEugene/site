@@ -17,7 +17,16 @@ export async function POST(request: Request) {
     const sent = await sendAuthCodeEmail(email, code);
 
     if (!sent.ok && !sent.skipped) {
-      return NextResponse.json({ error: "Не удалось отправить письмо. Проверьте RESEND_API_KEY." }, { status: 502 });
+      const resendHint =
+        "error" in sent && sent.error?.includes("only send testing emails")
+          ? " Resend в тестовом режиме: письма уходят только на email владельца аккаунта Resend. Подключите свой домен в resend.com/domains."
+          : "";
+      return NextResponse.json(
+        {
+          error: `Не удалось отправить письмо.${resendHint} Проверьте RESEND_API_KEY и EMAIL_FROM.`,
+        },
+        { status: 502 }
+      );
     }
 
     const response = NextResponse.json({

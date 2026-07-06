@@ -26,6 +26,7 @@ function FooterLeadForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "lead",
+          source: "footer",
           name: data.get("name"),
           phone,
           email: data.get("email"),

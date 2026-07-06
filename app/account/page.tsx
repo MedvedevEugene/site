@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { AccountSection } from "@/components/account/AccountSection";
+import { AccountNoAdminNotice } from "@/components/account/AccountNoAdminNotice";
 
 export const metadata: Metadata = {
   title: "Мой аккаунт",
@@ -19,6 +21,9 @@ export default function AccountPage() {
         <p className="text-lg text-muted max-w-[640px] m-0 mb-10">
           Вход по email, история прохождений ИИ-инструментов и доступ к админ-панели для администраторов.
         </p>
+        <Suspense fallback={null}>
+          <AccountNoAdminNotice />
+        </Suspense>
         <AccountSection />
       </div>
     </section>

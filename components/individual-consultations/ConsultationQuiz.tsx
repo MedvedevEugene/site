@@ -302,6 +302,7 @@ export function ConsultationQuiz() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "consultation-quiz",
+          source: "individual-consultations",
           name: data.get("name"),
           phone,
           contact: contactMethod,
