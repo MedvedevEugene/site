@@ -1084,6 +1084,18 @@
     @apply bg-white border border-border rounded-[20px] p-7 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-200;
   }
 
+  .card-accent {
+    background: linear-gradient(135deg, #3b3758 0%, #5a5478 100%);
+    color: #fff;
+    border: none;
+  }
+
+  .card-accent .btn-outline {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
   .card-cream {
     @apply bg-cream-pill border-0 rounded-[24px] p-7;
   }
