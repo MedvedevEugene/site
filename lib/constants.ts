@@ -23,11 +23,7 @@ export const NAV_LINKS = [
 ] as const;
 
 export const MORE_LINKS = [
-  { label: "Каталог услуг", href: "/catalog" },
-  { label: "Специалисты", href: "/specialists" },
   { label: "Расстановочные группы", href: "/rasstanovochnye-gruppy" },
-  { label: "Видеоматериалы", href: "/video-materials" },
-  { label: "О нас", href: "/information-about-the-educational-organization" },
   { label: "Маркет", href: "/market" },
 ] as const;
 
@@ -60,10 +56,8 @@ export const FOOTER_LINKS = {
     { label: "Телесная терапия", href: "/telese-terapiya" },
   ],
   info: [
-    { label: "О нас", href: "/information-about-the-educational-organization" },
     { label: "Статьи", href: "/blog" },
     { label: "Расписание", href: "/timetable" },
-    { label: "Каталог услуг", href: "/catalog" },
   ],
 } as const;
 

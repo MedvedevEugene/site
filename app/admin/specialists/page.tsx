@@ -93,7 +93,7 @@ export default function AdminSpecialistsPage() {
         <AdminCard title="Специалисты ИЖСИЗ">
           <p className="text-sm text-muted mb-4">
             Карточки отображаются на странице{" "}
-            <a href="/specialists" className="text-primary underline">/specialists</a> и в блоке консультаций.
+            <a href="/individual-consultations" className="text-primary underline">/individual-consultations</a> и в блоке консультаций.
           </p>
           <div className="space-y-3">
             {specialists.map((s) => (

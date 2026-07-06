@@ -51,7 +51,7 @@ export default async function TeacherPage({ params }: { params: Promise<{ slug: 
       <PageShell
         title={teacher.name}
         description={teacher.role}
-        breadcrumbs={[{ label: "Специалисты", href: "/specialists" }, { label: teacher.name }]}
+        breadcrumbs={[{ label: "Консультации", href: "/individual-consultations" }, { label: teacher.name }]}
       >
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10">
           <Image src={teacher.photo} alt={teacher.name} width={280} height={360} className="w-full rounded-[20px] object-cover aspect-[3/4]" />

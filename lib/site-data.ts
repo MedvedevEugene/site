@@ -217,14 +217,12 @@ export const FOOTER_COLUMNS = {
   about: {
     title: "Об ИЖСИЗ",
     links: [
-      { label: "О нас", href: "/information-about-the-educational-organization" },
       { label: "Статьи", href: "/blog" },
       { label: "Расписание", href: "/timetable" },
       { label: "Расстановочные группы", href: "/rasstanovochnye-gruppy" },
       { label: "Психологическая помощь", href: "/psychological-help" },
       { label: "Маркет развивающих товаров", href: "/market" },
       { label: "Индивидуальные расстановки", href: "/individual-consultations" },
-      { label: "Вебинары", href: "/video-materials" },
     ],
   },
   extra: {
