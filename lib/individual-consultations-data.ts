@@ -227,7 +227,7 @@ export const IC_QUIZ = {
     "Квиз займёт 1–2 минуты. По вашим ответам мы предложим подходящий формат работы и поможем выбрать специалиста под ваш запрос.",
   coverImage: IMAGES.quizCover,
   successImage:
-    "https://static.tildacdn.com/tild6165-3236-4831-a536-613231653133/jonathan-borba-RTHwe.jpg",
+    "/images/site/tild6165-3236-4831-a536-613231653133__jonathan-borba-RTHwe.jpg",
   successTitle: "Благодарим, Ваша заявка отправлена!",
   successTextLines: [
     "Мы получили ваши ответы и подберём подходящего специалиста под ваш запрос.",

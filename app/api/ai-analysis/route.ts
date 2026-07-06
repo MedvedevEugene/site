@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
 import { generateAiCompletion } from "@/lib/ai-client";
+import { sendAiReportEmail } from "@/lib/email";
 import { buildToolPrompt } from "@/lib/ai-prompts";
 import { getToolSession, saveToolSessionAiReport } from "@/lib/tool-sessions";
 import type { ToolId } from "@/lib/tool-sessions";
+import { getCurrentUser } from "@/lib/user-auth";
+import { prisma } from "@/lib/db";
 
 function fallbackAnalysis(
   tool: string,
@@ -71,9 +74,29 @@ export async function POST(request: Request) {
       await saveToolSessionAiReport(sessionId, analysis).catch(() => {});
     }
 
+    const user = await getCurrentUser();
+    let emailSent = false;
+
+    if (user && ai.content) {
+      const session = sessionId ? await getToolSession(sessionId).catch(() => null) : null;
+      if (!session?.emailSent) {
+        const result = await sendAiReportEmail(user.email, resolvedTool, analysis, sessionId);
+        emailSent = result.ok;
+        if (emailSent && sessionId) {
+          await prisma.toolSession
+            .update({ where: { id: sessionId }, data: { emailSent: true } })
+            .catch(() => {});
+        }
+      } else {
+        emailSent = true;
+      }
+    }
+
     return NextResponse.json({
       analysis,
       mode: ai.content ? "ai" : "fallback",
+      emailSent,
+      userEmail: user?.email,
       ...(ai.error ? { aiError: ai.error } : {}),
     });
   } catch (error) {

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FAQ } from "@/components/ui/FAQ";
 import { ConsultationQuiz } from "@/components/individual-consultations/ConsultationQuiz";
 import { IcSpecialistsCarousel } from "@/components/individual-consultations/IcSpecialistsCarousel";
+import { AiToolsSection } from "@/components/tools/AiToolsSection";
 import { useCallbackPopup } from "@/components/layout/CallbackPopupContext";
 import {
   IC_FAQ,
@@ -12,13 +13,17 @@ import {
   IC_HERO_IMAGE,
   IC_METHODS,
   IC_PRICING,
-  IC_SPECIALISTS,
   IC_STEPS,
   IC_TOPIC_ARROW,
   IC_TOPICS,
 } from "@/lib/individual-consultations-data";
+import type { SpecialistCarouselItem } from "@/lib/specialists-display";
 
-export function IndividualConsultationsSection() {
+type IndividualConsultationsSectionProps = {
+  specialists: SpecialistCarouselItem[];
+};
+
+export function IndividualConsultationsSection({ specialists }: IndividualConsultationsSectionProps) {
   const { openCallbackPopup } = useCallbackPopup();
 
   function scrollTo(id: string) {
@@ -96,6 +101,8 @@ export function IndividualConsultationsSection() {
         </div>
       </section>
 
+      <AiToolsSection variant="ic" id="ai-tools" />
+
       <section className="ic-page__section ic-page__section--pricing">
         <div className="container-site">
           <h2 className="ic-page__title ic-page__title--center ic-page__title--pricing">Форматы и стоимость</h2>
@@ -161,7 +168,7 @@ export function IndividualConsultationsSection() {
         <div className="container-site">
           <h2 className="ic-page__title--center ic-page__title--specialists m-0">Наши специалисты</h2>
         </div>
-        <IcSpecialistsCarousel specialists={IC_SPECIALISTS} onBook={() => scrollTo("quiz")} />
+        <IcSpecialistsCarousel specialists={specialists} onBook={() => scrollTo("quiz")} />
       </section>
 
       <section className="ic-page__section ic-page__section--faq">

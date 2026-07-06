@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { AiToolsSection } from "@/components/tools/AiToolsSection";
 export const metadata: Metadata = {
   title: "Психологическая помощь",
 };
@@ -12,30 +13,6 @@ const TOPICS = [
   "Жизненные сценарии",
   "Деньги и реализация",
   "Тело и состояние",
-];
-
-const TOOLS = [
-  {
-    id: "16-associations",
-    badge: "Инструмент 1",
-    title: "16 ассоциаций",
-    description: "Исследование скрытых ассоциаций, внутренних смыслов и неочевидных связей вокруг важной темы.",
-    href: "/16-associations",
-  },
-  {
-    id: "nlu",
-    badge: "Инструмент 2",
-    title: "НЛУ",
-    description: "Исследование уровней восприятия, убеждений, поведения, ценностей и внутренней структуры запроса.",
-    href: "/nlu",
-  },
-  {
-    id: "insightograph",
-    badge: "Инструмент 3",
-    title: "Инсайтограф",
-    description: "Выявление внутренних ограничений, связей, причин, последствий и скрытых убеждений.",
-    href: "/ptichno-rybko",
-  },
 ];
 
 export default function PsychologicalHelpPage() {
@@ -61,7 +38,7 @@ export default function PsychologicalHelpPage() {
               </div>
             </div>
             <div className="relative rounded-[20px] overflow-hidden aspect-[4/3] bg-cream-bg">
-              <Image src="https://static.tildacdn.com/tild6433-6434-4538-b932-306265666464/1.png" alt="" fill className="object-cover" />
+              <Image src="/images/site/tild6433-6434-4538-b932-306265666464__1.png" alt="" fill className="object-cover" />
             </div>
           </div>
         </div>
@@ -80,28 +57,7 @@ export default function PsychologicalHelpPage() {
         </div>
       </section>
 
-      <section className="section" id="tools">
-        <div className="container-site">
-          <h2 className="section-title">Цифровые НЛП/НЛУ-инструменты</h2>
-          <p className="section-subtitle">
-            Самостоятельное исследование → карта ответов → бесплатный ИИ-разбор (тестовый режим)
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TOOLS.map((tool) => (
-              <div key={tool.id} className="bg-white rounded-[20px] border-2 border-primary p-8 relative overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#774bd9] to-primary" />
-                <span className="inline-block bg-cream rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wide mb-4">{tool.badge}</span>
-                <h3 className="font-heading text-lg font-medium m-0 mb-2.5">{tool.title}</h3>
-                <p className="text-muted text-[15px] m-0 mb-5">{tool.description}</p>
-                <div className="flex flex-col gap-2.5">
-                  <Link href={tool.href} className="btn btn-primary">Пройти {tool.title}</Link>
-                  <Link href={tool.href} className="btn btn-outline">Подробнее об инструменте</Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <AiToolsSection id="tools" />
 
       <section className="section-cream" id="formats">
         <div className="container-site">

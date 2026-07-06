@@ -21,7 +21,7 @@ export const MARKET_PRODUCTS: MarketProduct[] = [
     price: 79,
     oldPrice: 200,
     onSale: true,
-    image: "https://static.tildacdn.com/tild3032-6163-4564-a163-653733393831/image.png",
+    image: "/images/site/tild3032-6163-4564-a163-653733393831__image.png",
     showCartButton: true,
   },
   {
@@ -31,7 +31,7 @@ export const MARKET_PRODUCTS: MarketProduct[] = [
     detailDescription:
       "Add here some interesting details about the product. Help people realize that this product is exactly what they need. It could be practical and useful information as well: the size of the product, material that it is made of, or care instructions.",
     price: 90,
-    image: "https://static.tildacdn.com/tild3438-3261-4236-a531-356133386533/image.png",
+    image: "/images/site/tild3438-3261-4236-a531-356133386533__image.png",
   },
   {
     id: "sac-marin-yellow",
@@ -41,6 +41,6 @@ export const MARKET_PRODUCTS: MarketProduct[] = [
     detailDescription:
       "Add here some interesting details about the product. Help people realize that this product is exactly what they need. It could be practical and useful information as well: the size of the product, material that it is made of, or care instructions.",
     price: 108,
-    image: "https://static.tildacdn.com/tild3262-3937-4162-b961-663562666366/image.png",
+    image: "/images/site/tild3262-3937-4162-b961-663562666366__image.png",
   },
 ];

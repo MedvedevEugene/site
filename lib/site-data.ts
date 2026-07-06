@@ -1,19 +1,17 @@
-const CDN = "https://static.tildacdn.com";
-
 export const IMAGES = {
   /** Портрет в hero (как на lifeinstitute.ru) */
-  heroPortrait: `${CDN}/tild3865-3764-4963-b439-373761633561/01b0e4cc-d423-4d42-9.png`,
+  heroPortrait: `/images/site/tild3865-3764-4963-b439-373761633561__01b0e4cc-d423-4d42-9.png`,
   /** Кавычки в hero-цитате (как на lifeinstitute.ru) */
-  quoteIcon: `${CDN}/tild3765-6635-4265-b734-613031326165/Ellipse_3.svg`,
-  logoCircle: `${CDN}/tild3633-3262-4161-a430-353230613533/logo-circle.svg`,
-  logoWhite: `${CDN}/tild3934-3966-4163-a230-616634613964/logo-white.svg`,
+  quoteIcon: `/images/site/tild3765-6635-4265-b734-613031326165__Ellipse_3.svg`,
+  logoCircle: `/images/site/tild3633-3262-4161-a430-353230613533__logo-circle.svg`,
+  logoWhite: `/images/site/tild3934-3966-4163-a230-616634613964__logo-white.svg`,
   /** Иконки соцсетей в футере (rec1359663041) */
-  footerSocialVk: `${CDN}/tild6131-3963-4562-a538-303632663636/color.svg`,
-  footerSocialTg: `${CDN}/tild6161-6231-4365-b061-653139623038/color.svg`,
+  footerSocialVk: `/images/site/tild6131-3963-4562-a538-303632663636__color.svg`,
+  footerSocialTg: `/images/site/tild6161-6231-4365-b061-653139623038__color.svg`,
   footerSocialMax: "/images/forms/contact-methods/max.svg",
   /** Декор на карточке «Базовый курс» — завитушка, не фото */
-  catalogDecor: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
-  spiral: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
+  catalogDecor: `/images/site/tild3738-6362-4233-b064-633765623561__Vector.svg`,
+  spiral: `/images/site/tild3738-6362-4233-b064-633765623561__Vector.svg`,
   /** Сонаставники — скрин с Tilda */
   supportMentors: "/images/support/mentors.png",
   supportChat: "/images/support/chat.png",
@@ -24,36 +22,36 @@ export const IMAGES = {
   featureMixer: "/images/features/mixer.png",
   diploma: "/images/diplomas/diploma.jpg",
   certificate: "/images/diplomas/certificate.png",
-  pathCloud: `${CDN}/tild6336-3530-4139-b964-313032653332/2334f0c3-5471-4549-9.png`,
+  pathCloud: `/images/site/tild6336-3530-4139-b964-313032653332__2334f0c3-5471-4549-9.png`,
   /** 3D-шапка на облаке — блок «Ваш путь в ИРЖ» */
-  pathGradCap: `${CDN}/tild6439-3761-4838-b130-303234303536/2d6688fa-356a-47ed-9.png`,
-  pathGrad: `${CDN}/tild6263-3362-4234-b739-363836656135/Ellipse_3.svg`,
+  pathGradCap: `/images/site/tild6439-3761-4838-b130-303234303536__2d6688fa-356a-47ed-9.png`,
+  pathGrad: `/images/site/tild6263-3362-4234-b739-363836656135__Ellipse_3.svg`,
   /** Hero страницы консультаций */
-  consultHero: `${CDN}/tild6639-3137-4664-a163-613334333333/Frame_133.png`,
+  consultHero: `/images/site/tild6639-3137-4664-a163-613334333333__Frame_133.png`,
   /** Фон квиза «Подберём специалиста» */
-  quizCover: `${CDN}/tild6366-6338-4565-a237-326139383261/Frame_137.png`,
-  methodIcon1: `${CDN}/tild6238-3634-4230-b434-643963376437/Vector_6.svg`,
-  methodIcon2: `${CDN}/tild6631-6464-4137-b766-373432616262/Vector_6.svg`,
-  methodIcon3: `${CDN}/tild3833-3365-4832-b439-313839326666/Vector_6.svg`,
-  methodIcon4: `${CDN}/tild6366-6239-4665-b330-353432306138/Vector_6.svg`,
-  methodIcon5: `${CDN}/tild6530-3633-4430-a230-366336663936/10.png`,
-  methodIcon6: `${CDN}/tild3233-3435-4833-b932-653365333737/Vector_6.svg`,
-  methodIcon7: `${CDN}/tild3535-6631-4934-b261-393030323063/7.png`,
+  quizCover: `/images/site/tild6366-6338-4565-a237-326139383261__Frame_137.png`,
+  methodIcon1: `/images/site/tild6238-3634-4230-b434-643963376437__Vector_6.svg`,
+  methodIcon2: `/images/site/tild6631-6464-4137-b766-373432616262__Vector_6.svg`,
+  methodIcon3: `/images/site/tild3833-3365-4832-b439-313839326666__Vector_6.svg`,
+  methodIcon4: `/images/site/tild6366-6239-4665-b330-353432306138__Vector_6.svg`,
+  methodIcon5: `/images/site/tild6530-3633-4430-a230-366336663936__10.png`,
+  methodIcon6: `/images/site/tild3233-3435-4833-b932-653365333737__Vector_6.svg`,
+  methodIcon7: `/images/site/tild3535-6631-4934-b261-393030323063__7.png`,
   resonance1: "/images/resonance/1.png",
   resonance2: "/images/resonance/2.png",
   resonance3: "/images/resonance/3.png",
   resonance4: "/images/resonance/4.png",
   resonance5: "/images/resonance/5.png",
-  topic1: `${CDN}/tild6433-6434-4538-b932-306265666464/1.png`,
-  topic2: `${CDN}/tild3631-3166-4738-a237-616561316665/2.png`,
-  topic3: `${CDN}/tild3966-3965-4662-b464-626135343363/3.png`,
-  topic4: `${CDN}/tild3864-6164-4531-b730-623830333762/4.png`,
-  topic5: `${CDN}/tild6463-3466-4462-a532-356134316639/5.png`,
-  topic6: `${CDN}/tild3766-3730-4565-b862-366638656461/6.png`,
-  price1: `${CDN}/tild3962-6464-4636-b632-636136303736/5.png`,
-  price2: `${CDN}/tild6433-3661-4864-a333-376238313063/2.png`,
-  price3: `${CDN}/tild6262-3038-4862-a239-366633633236/3.png`,
-  price4: `${CDN}/tild6437-6437-4364-b761-653463393464/8.png`,
+  topic1: `/images/site/tild6433-6434-4538-b932-306265666464__1.png`,
+  topic2: `/images/site/tild3631-3166-4738-a237-616561316665__2.png`,
+  topic3: `/images/site/tild3966-3965-4662-b464-626135343363__3.png`,
+  topic4: `/images/site/tild3864-6164-4531-b730-623830333762__4.png`,
+  topic5: `/images/site/tild6463-3466-4462-a532-356134316639__5.png`,
+  topic6: `/images/site/tild3766-3730-4565-b862-366638656461__6.png`,
+  price1: `/images/site/tild3962-6464-4636-b632-636136303736__5.png`,
+  price2: `/images/site/tild6433-3661-4864-a333-376238313063__2.png`,
+  price3: `/images/site/tild6262-3038-4862-a239-366633633236__3.png`,
+  price4: `/images/site/tild6437-6437-4364-b761-653463393464__8.png`,
 } as const;
 
 export const CALENDAR_EMBED_MONTH =
@@ -209,33 +207,31 @@ export const FOOTER_COLUMNS = {
   programs: {
     title: "Образовательные программы",
     links: [
-      { label: "Базовый курс расстановкам", href: "/base-cource" },
-      { label: "Расстановки PRO", href: "/telese-terapiya" },
-      { label: "Сонаставнический практикум", href: "/coming-soon" },
+      { label: "Базовый курс по расстановкам", href: "/base-cource" },
+      { label: "Курс бизнес-расстановок", href: "/business-cource" },
+      { label: "Расстановочные группы", href: "/rasstanovochnye-gruppy" },
     ],
   },
   about: {
-    title: "Об ИЖСИЗ",
+    title: "Психологическая помощь",
     links: [
-      { label: "Статьи", href: "/blog" },
-      { label: "Расписание", href: "/timetable" },
-      { label: "Расстановочные группы", href: "/rasstanovochnye-gruppy" },
+      { label: "Индивидуальные консультации", href: "/individual-consultations" },
       { label: "Психологическая помощь", href: "/psychological-help" },
-      { label: "Маркет развивающих товаров", href: "/market" },
-      { label: "Индивидуальные расстановки", href: "/individual-consultations" },
+      { label: "Телесно-ориентированная терапия", href: "/telese-terapiya" },
+      { label: "Расписание", href: "/timetable" },
+      { label: "Статьи", href: "/blog" },
     ],
   },
   extra: {
     title: "Дополнительная информация",
     links: [
+      { label: "Маркет", href: "/market" },
       { label: "Политика конфиденциальности", href: "/privacy" },
-      { label: "Политика обработки персональных данных", href: "/privacy" },
     ],
   },
 } as const;
 
 export const FOOTER_SOCIALS = [
-  { label: "VK", href: "https://vk.com/", icon: IMAGES.footerSocialVk },
-  { label: "Telegram", href: "https://t.me/", icon: IMAGES.footerSocialTg },
-  { label: "Max", href: "#", icon: IMAGES.footerSocialMax },
+  { label: "VK", href: "https://vk.com/lifeinstitute", icon: IMAGES.footerSocialVk },
+  { label: "Telegram", href: "https://t.me/lifeinstitute", icon: IMAGES.footerSocialTg },
 ] as const;

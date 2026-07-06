@@ -1,18 +1,16 @@
-const CDN = "https://static.tildacdn.com";
-
 export const BUSINESS_COURSE_IMAGES = {
-  heroBg: `${CDN}/tild3230-6139-4132-a233-653533323336/cc1d58be5a59d441e6ef.png`,
-  heroLogo: `${CDN}/tild6535-6536-4434-b237-396530303934/logo_b.svg`,
-  heroGift: `${CDN}/tild3563-3061-4965-b938-366634623866/image_81.png`,
-  methodImage: `${CDN}/tild6137-3031-4130-a638-363238663963/image_1319.png`,
-  formatDecor: `${CDN}/tild3736-3633-4064-b234-616435633739/123123.png`,
-  salesImage: `${CDN}/tild6430-6262-4934-b431-353166623034/Section.png`,
-  authorPhoto: `${CDN}/tild6166-6462-4337-a634-633432346431/image_1320.png`,
-  authorDecor: `${CDN}/tild6261-6364-4433-b439-373732323034/Group_45.png`,
-  authorFrame: `${CDN}/tild6162-3433-4331-b133-343066313539/___-.png`,
-  diplomaPhoto: `${CDN}/tild6166-6462-4337-a634-633432346431/image_1320.png`,
-  diplomaOverlay1: `${CDN}/tild3766-3639-4138-b931-353961343161/Overlay.svg`,
-  diplomaOverlay2: `${CDN}/tild6433-3162-4262-a162-613635633066/Overlay.svg`,
+  heroBg: `/images/site/tild3230-6139-4132-a233-653533323336__cc1d58be5a59d441e6ef.png`,
+  heroLogo: `/images/site/tild6535-6536-4434-b237-396530303934__logo_b.svg`,
+  heroGift: `/images/site/tild3563-3061-4965-b938-366634623866__image_81.png`,
+  methodImage: `/images/site/tild6137-3031-4130-a638-363238663963__image_1319.png`,
+  formatDecor: `/images/site/tild3736-3633-4064-b234-616435633739__123123.png`,
+  salesImage: `/images/site/tild6430-6262-4934-b431-353166623034__Section.png`,
+  authorPhoto: `/images/site/tild6166-6462-4337-a634-633432346431__image_1320.png`,
+  authorDecor: `/images/site/tild6261-6364-4433-b439-373732323034__Group_45.png`,
+  authorFrame: `/images/site/tild6162-3433-4331-b133-343066313539_____-.png`,
+  diplomaPhoto: `/images/site/tild6166-6462-4337-a634-633432346431__image_1320.png`,
+  diplomaOverlay1: `/images/site/tild3766-3639-4138-b931-353961343161__Overlay.svg`,
+  diplomaOverlay2: `/images/site/tild6433-3162-4262-a162-613635633066__Overlay.svg`,
 } as const;
 
 export const BUSINESS_COURSE_NAV = [

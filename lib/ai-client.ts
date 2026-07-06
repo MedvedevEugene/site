@@ -8,11 +8,27 @@ export type AiCompletionResult = {
 };
 
 const FREE_MODEL_FALLBACKS = [
-  "qwen/qwen3-next-80b-a3b-instruct:free",
   "meta-llama/llama-3.3-70b-instruct:free",
   "meta-llama/llama-3.2-3b-instruct:free",
+  "qwen/qwen3-next-80b-a3b-instruct:free",
   "openrouter/free",
 ] as const;
+
+const CJK_PATTERN = /[\u4e00-\u9fff\u3400-\u4dbf\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af]+/g;
+
+/** Qwen и другие азиатские модели иногда вставляют иероглифы — убираем их из текста. */
+export function sanitizeRussianAiText(text: string) {
+  return text
+    .replace(CJK_PATTERN, "")
+    .replace(/(\*\*[^*]+\*\*)\s{2,}/g, "$1 ")
+    .replace(/  +/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+export function hasCjkCharacters(text: string) {
+  return CJK_PATTERN.test(text);
+}
 
 function uniqueModels(models: string[]) {
   return [...new Set(models.filter(Boolean))];
@@ -57,7 +73,8 @@ async function callOpenRouter(
     choices?: Array<{ message?: { content?: string } }>;
   };
   const content = data.choices?.[0]?.message?.content || null;
-  return { content, error: content ? undefined : "empty_response" };
+  const sanitized = content ? sanitizeRussianAiText(content) : null;
+  return { content: sanitized, error: sanitized ? undefined : "empty_response" };
 }
 
 export async function generateAiCompletion(prompt: string): Promise<AiCompletionResult> {
@@ -68,7 +85,11 @@ export async function generateAiCompletion(prompt: string): Promise<AiCompletion
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://psychologydemo-ten.vercel.app");
 
   const messages: ChatMessage[] = [
-    { role: "system", content: "Ты помощник института ИЖСИЗ. Отвечай на русском языке." },
+    {
+      role: "system",
+      content:
+        "Ты помощник института ИЖСИЗ. Отвечай строго на русском языке. Никогда не используй китайские иероглифы, английский или другие языки.",
+    },
     { role: "user", content: prompt },
   ];
 
@@ -125,7 +146,9 @@ export async function generateAiCompletion(prompt: string): Promise<AiCompletion
         choices?: Array<{ message?: { content?: string } }>;
       };
       return {
-        content: data.choices?.[0]?.message?.content || null,
+        content: data.choices?.[0]?.message?.content
+          ? sanitizeRussianAiText(data.choices[0].message.content)
+          : null,
         hasKey: true,
         error: data.choices?.[0]?.message?.content ? undefined : "empty_response",
         modelUsed: model,

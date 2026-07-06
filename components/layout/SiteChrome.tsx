@@ -11,6 +11,7 @@ import {
   EDUCATION_LINKS,
   MORE_LINKS,
 } from "@/lib/constants";
+import { HeaderAccountLink } from "@/components/layout/HeaderAccountLink";
 
 interface HeaderProps {
   onCallbackClick: () => void;
@@ -120,6 +121,7 @@ export function Header({ onCallbackClick }: HeaderProps) {
                 {link.label}
               </Link>
             ))}
+            <HeaderAccountLink />
             <div className="relative">
               <button
                 type="button"
@@ -176,6 +178,9 @@ export function Header({ onCallbackClick }: HeaderProps) {
                 {item.label}
               </Link>
             ))}
+            <Link href="/account" onClick={() => setMobileOpen(false)}>
+              Мой аккаунт
+            </Link>
             <button type="button" className="btn btn-primary mt-2" onClick={() => { setMobileOpen(false); onCallbackClick(); }}>
               Заказать звонок
             </button>

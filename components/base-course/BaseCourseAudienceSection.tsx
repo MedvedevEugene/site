@@ -16,7 +16,7 @@ export function BaseCourseAudienceSection({ onConsultation }: BaseCourseAudience
           {BASE_COURSE_AUDIENCE.map((item) => (
             <article
               key={item.title}
-              className={`${styles.card}${item.variant === "dark" ? ` ${styles.cardDark}` : ""}`}
+              className={`${styles.card}${"variant" in item && item.variant === "dark" ? ` ${styles.cardDark}` : ""}`}
             >
               <h3
                 className={styles.cardTitle}

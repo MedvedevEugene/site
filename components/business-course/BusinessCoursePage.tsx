@@ -321,7 +321,7 @@ export function BusinessCoursePage() {
               {BUSINESS_COURSE_TARIFFS.map((tariff) => (
                 <article
                   key={tariff.id}
-                  className={`busc-tariff${tariff.featured ? " busc-tariff--featured" : ""}`}
+                  className={`busc-tariff${"featured" in tariff && tariff.featured ? " busc-tariff--featured" : ""}`}
                 >
                   <h3 className="busc-tariff__name">{tariff.name}</h3>
                   <div className="busc-tariff__price">{tariff.price}</div>

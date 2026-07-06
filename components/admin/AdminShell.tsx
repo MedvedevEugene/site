@@ -4,13 +4,18 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 
-const NAV = [
+const NAV_PRIMARY = [
   { href: "/admin", label: "Обзор" },
+  { href: "/admin/leads", label: "Заявки" },
   { href: "/admin/events", label: "Расписание" },
-  { href: "/admin/news", label: "Новости" },
-  { href: "/admin/tariffs", label: "Тарифы" },
   { href: "/admin/specialists", label: "Специалисты" },
   { href: "/admin/media", label: "Фото" },
+  { href: "/admin/users", label: "Доступ" },
+];
+
+const NAV_SECONDARY = [
+  { href: "/admin/tariffs", label: "Тарифы" },
+  { href: "/admin/news", label: "Новости" },
 ];
 
 export function AdminShell({ children }: { children: ReactNode }) {
@@ -18,8 +23,8 @@ export function AdminShell({ children }: { children: ReactNode }) {
   const router = useRouter();
 
   async function logout() {
-    await fetch("/api/admin/logout", { method: "POST" });
-    router.push("/admin/login");
+    await fetch("/api/auth/logout", { method: "POST" });
+    router.push("/account");
     router.refresh();
   }
 
@@ -29,10 +34,12 @@ export function AdminShell({ children }: { children: ReactNode }) {
         <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
           <div>
             <div className="font-heading font-medium">Админ-панель ИЖСИЗ</div>
-            <div className="text-xs text-white/70">Расписание · новости · тарифы · специалисты · фото</div>
+            <div className="text-xs text-white/70">Заявки · расписание · специалисты · доступ по email</div>
           </div>
           <div className="flex items-center gap-3">
-            <Link href="/" className="text-sm text-white/80 hover:text-white">На сайт</Link>
+            <Link href="/account" className="text-sm text-white/80 hover:text-white">
+              Профиль
+            </Link>
             <button type="button" onClick={logout} className="text-sm bg-white/15 px-3 py-1.5 rounded-lg border-0 text-white">
               Выйти
             </button>
@@ -40,13 +47,27 @@ export function AdminShell({ children }: { children: ReactNode }) {
         </div>
       </header>
       <nav className="bg-white border-b border-border">
-        <div className="max-w-6xl mx-auto px-5 flex gap-1 overflow-x-auto">
-          {NAV.map((item) => (
+        <div className="max-w-6xl mx-auto px-5 flex gap-1 overflow-x-auto items-stretch">
+          {NAV_PRIMARY.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={`px-4 py-3 text-sm whitespace-nowrap border-b-2 ${
                 pathname === item.href ? "border-primary text-primary font-medium" : "border-transparent text-muted"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <span className="w-px bg-border my-2 shrink-0" aria-hidden />
+          {NAV_SECONDARY.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`px-4 py-3 text-sm whitespace-nowrap border-b-2 ${
+                pathname === item.href
+                  ? "border-primary text-primary font-medium"
+                  : "border-transparent text-muted/80"
               }`}
             >
               {item.label}

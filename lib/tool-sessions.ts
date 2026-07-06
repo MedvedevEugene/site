@@ -3,9 +3,18 @@ import { prisma } from "@/lib/db";
 
 export type ToolId = "insightograph" | "sixteen_associations" | "nlu";
 
-export async function createToolSession(tool: ToolId, payload: Record<string, unknown>) {
+export async function createToolSession(
+  tool: ToolId,
+  payload: Record<string, unknown>,
+  userId?: string | null
+) {
   return prisma.toolSession.create({
-    data: { tool, payload: payload as Prisma.InputJsonValue, status: "completed" },
+    data: {
+      tool,
+      payload: payload as Prisma.InputJsonValue,
+      status: "completed",
+      ...(userId ? { userId } : {}),
+    },
   });
 }
 

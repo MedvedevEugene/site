@@ -1,14 +1,13 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { USER_SESSION_COOKIE } from "@/lib/user-auth";
 
-export const SESSION_COOKIE = "izhsiz_admin";
-
-/** Edge-safe: проверяем наличие cookie; полная верификация JWT — в API routes */
+/** Edge: только наличие cookie; полная проверка роли — в layout / API. */
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const token = request.cookies.get(SESSION_COOKIE)?.value;
+  const hasUserCookie = Boolean(request.cookies.get(USER_SESSION_COOKIE)?.value);
 
   if (pathname.startsWith("/admin") && !pathname.startsWith("/admin/login")) {
-    if (!token) {
+    if (!hasUserCookie) {
       const login = new URL("/admin/login", request.url);
       login.searchParams.set("next", pathname);
       return NextResponse.redirect(login);
@@ -16,7 +15,7 @@ export function middleware(request: NextRequest) {
   }
 
   if (pathname.startsWith("/api/admin") && !pathname.startsWith("/api/admin/login")) {
-    if (!token) {
+    if (!hasUserCookie) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
   }

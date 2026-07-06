@@ -1,58 +1,39 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { AdminCard, Field, inputClass } from "@/components/admin/AdminShell";
+import Link from "next/link";
+import { ToolLogin } from "@/components/tools/ToolLogin";
+import { AdminCard } from "@/components/admin/AdminShell";
 
 export function LoginForm() {
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get("next") || "/admin";
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    const res = await fetch("/api/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    });
-    setLoading(false);
-    if (!res.ok) {
-      setError("Неверный пароль");
-      return;
-    }
-    router.push(next);
-    router.refresh();
-  }
 
   return (
     <div className="min-h-screen bg-cream-bg flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <AdminCard title="Вход в админ-панель">
           <p className="text-sm text-muted m-0 mb-5">
-            Управление расписанием, новостями, тарифами и фото на сайте.
+            Доступ только для email с ролью <strong>admin</strong>. Войдите так же, как в ИИ-инструменты.
+            Нет доступа?{" "}
+            <Link href="/" className="text-primary underline">
+              На главную
+            </Link>
           </p>
-          <form onSubmit={handleSubmit}>
-            <Field label="Пароль">
-              <input
-                type="password"
-                className={inputClass}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                autoFocus
-              />
-            </Field>
-            {error && <p className="text-red-600 text-sm mb-3">{error}</p>}
-            <button type="submit" disabled={loading} className="btn btn-primary w-full">
-              {loading ? "Вход..." : "Войти"}
-            </button>
-          </form>
+          <ToolLogin
+            variant="inline"
+            title="Вход по email"
+            description="Код придёт на почту. После входа откроется админ-панель, если ваш email в списке администраторов."
+            onSuccess={(user) => {
+              if (user.role === "admin") {
+                router.push(next);
+                router.refresh();
+              } else {
+                router.push("/account?error=no-admin");
+              }
+            }}
+          />
         </AdminCard>
       </div>
     </div>
