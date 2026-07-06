@@ -4,7 +4,6 @@ import { Unbounded, Montserrat } from "next/font/google";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { SITE } from "@/lib/constants";
 import "./globals.css";
-import "./business-course.css";
 
 const unbounded = Unbounded({
   subsets: ["latin", "cyrillic"],
