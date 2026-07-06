@@ -38,7 +38,7 @@ export default function PsychologicalHelpPage() {
               </div>
             </div>
             <div className="relative rounded-[20px] overflow-hidden aspect-[4/3] bg-cream-bg">
-              <Image src="https://static.tildacdn.com/tild6433-6434-4538-b932-306265666464/1.png" alt="" fill className="object-cover" />
+              <Image src="/images/site/tild6433-6434-4538-b932-306265666464__1.png" alt="" fill className="object-cover" />
             </div>
           </div>
         </div>

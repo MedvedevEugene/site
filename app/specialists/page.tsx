@@ -15,7 +15,7 @@ const FALLBACK = [
     slug: "asya-bykovskaya",
     name: "Ася Быковская",
     role: "Руководитель института, преподаватель, расстановщик, терапевт",
-    photoUrl: "https://static.tildacdn.com/tild3962-6236-4536-a463-663630633963/8B7A2059_1.png",
+    photoUrl: "/images/site/tild3962-6236-4536-a463-663630633963__8B7A2059_1.png",
   },
 ];
 
