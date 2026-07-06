@@ -6,15 +6,16 @@ import Image from "next/image";
 import { FAQ } from "@/components/ui/FAQ";
 import { BaseCoursePopup } from "@/components/base-course/BaseCoursePopup";
 import { BaseCourseReviewsCarousel } from "@/components/base-course/BaseCourseReviewsCarousel";
-import { BaseCourseAudienceSection } from "@/components/base-course/BaseCourseAudienceSection";
 import { BaseCourseReasonsSection } from "@/components/base-course/BaseCourseReasonsSection";
 import {
   BASE_COURSE_ABOUT,
+  BASE_COURSE_AUDIENCE,
   BASE_COURSE_CREATOR,
   BASE_COURSE_FAQ,
   BASE_COURSE_HERO,
   BASE_COURSE_IMAGES,
   BASE_COURSE_MODULES,
+  BASE_COURSE_NOT_PSYCHOLOGIST,
   BASE_COURSE_STEPS,
   BASE_COURSE_TARIFFS,
   type BaseCoursePopupKind,
@@ -91,7 +92,29 @@ export function BaseCoursePage() {
         <BaseCourseReasonsSection />
 
         {/* Audience — rec1458816791 */}
-        <BaseCourseAudienceSection onConsultation={openPopup(setPopup, "consultation")} />
+        <section className="bc-section bc-section--cream">
+          <div className="container-site">
+            <h2 className="bc-section-title">Для кого предназначен курс?</h2>
+            <div className="bc-audience">
+              {BASE_COURSE_AUDIENCE.map((item) => (
+                <div key={item.title} className="bc-audience__card">
+                  <Image src={item.image} alt="" width={64} height={64} className="bc-audience__icon" />
+                  <h3 className="bc-audience__title">{item.title}</h3>
+                  <p className="bc-audience__text">{item.text}</p>
+                </div>
+              ))}
+            </div>
+            <div className="bc-not-psychologist">
+              <h3 className="bc-not-psychologist__title">{BASE_COURSE_NOT_PSYCHOLOGIST.title}</h3>
+              <p className="bc-not-psychologist__text">{BASE_COURSE_NOT_PSYCHOLOGIST.text}</p>
+            </div>
+            <div className="bc-center mt-10">
+              <button type="button" className="bc-btn bc-btn--dark bc-btn--hero" onClick={openPopup(setPopup, "consultation")}>
+                Получить консультацию
+              </button>
+            </div>
+          </div>
+        </section>
 
         {/* 7 steps — rec1458973181 */}
         <section className="bc-section">
