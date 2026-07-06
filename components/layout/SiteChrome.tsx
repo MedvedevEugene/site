@@ -35,9 +35,9 @@ function SearchIcon() {
 
 export function TopBar({ onCallbackClick }: HeaderProps) {
   return (
-    <div className="bg-white pt-[18px] pb-2 sm:pb-0">
-      <div className="container-site top-bar-mobile">
-        <form className="site-search hidden sm:flex flex-1 max-w-[350px]" onSubmit={(e) => e.preventDefault()}>
+    <div className="bg-white pt-[18px]">
+      <div className="container-site flex items-center justify-between gap-4 flex-wrap">
+        <form className="site-search hidden sm:flex" onSubmit={(e) => e.preventDefault()}>
           <div className="site-search__field">
             <input
               type="search"
@@ -51,16 +51,12 @@ export function TopBar({ onCallbackClick }: HeaderProps) {
             Найти
           </button>
         </form>
-        <div className="top-bar-mobile__actions sm:ml-auto">
-          <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="text-sm sm:text-base underline whitespace-nowrap">
+        <div className="flex items-center gap-4 flex-wrap ml-auto">
+          <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="text-base underline">
             {SITE.phoneDisplay}
           </a>
-          <span className="text-xs sm:text-base hidden sm:inline text-muted">{SITE.hours}</span>
-          <button
-            type="button"
-            onClick={onCallbackClick}
-            className="btn btn-primary-solid top-bar-mobile__cta"
-          >
+          <span className="text-base hidden md:inline">{SITE.hours}</span>
+          <button type="button" onClick={onCallbackClick} className="btn btn-primary-solid">
             Заказать звонок
           </button>
         </div>
@@ -79,8 +75,8 @@ export function Header({ onCallbackClick }: HeaderProps) {
       <div className="container-site">
         <div className="nav-shell">
           <div className="flex items-center gap-4 lg:gap-5 min-w-0">
-            <Link href="/" className="shrink-0 max-w-[180px] sm:max-w-[220px]">
-              <SafeImage src={LOGO} alt={SITE.name} width={220} height={42} className="h-[36px] sm:h-[42px] w-auto max-w-full" priority />
+            <Link href="/" className="shrink-0 max-w-[220px]">
+              <SafeImage src={LOGO} alt={SITE.name} width={220} height={42} className="h-[42px] w-auto max-w-full" priority />
             </Link>
 
             <div
@@ -166,7 +162,7 @@ export function Header({ onCallbackClick }: HeaderProps) {
         </div>
 
         {mobileOpen && (
-          <nav className="lg:hidden mt-4 p-4 bg-cream-bg rounded-[20px] border border-border flex flex-col gap-3 max-h-[70svh] overflow-y-auto">
+          <nav className="lg:hidden mt-4 p-4 bg-cream-bg rounded-[20px] border border-border flex flex-col gap-3">
             {EDUCATION_LINKS.map((item) => (
               <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}>
                 {item.label}

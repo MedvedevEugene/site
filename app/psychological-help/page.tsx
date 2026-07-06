@@ -31,11 +31,11 @@ export default function PsychologicalHelpPage() {
               <p className="text-lg text-muted m-0 mb-7">
                 Консультации, расстановки, телесно-ориентированные практики и цифровые инструменты для исследования внутренних запросов.
               </p>
-          <div className="flex flex-wrap gap-3">
-            <a href="#formats" className="btn btn-primary w-full sm:w-auto text-center">Выбрать формат помощи</a>
-            <a href="#tools" className="btn btn-outline w-full sm:w-auto text-center">Пройти онлайн-инструмент</a>
-            <Link href="/individual-consultations" className="btn btn-outline w-full sm:w-auto text-center">Записаться на консультацию</Link>
-          </div>
+              <div className="flex flex-wrap gap-3">
+                <a href="#formats" className="btn btn-primary">Выбрать формат помощи</a>
+                <a href="#tools" className="btn btn-outline">Пройти онлайн-инструмент</a>
+                <Link href="/individual-consultations" className="btn btn-outline">Записаться на консультацию</Link>
+              </div>
             </div>
             <div className="relative rounded-[20px] overflow-hidden aspect-[4/3] bg-cream-bg">
               <Image src="/images/site/tild6433-6434-4538-b932-306265666464__1.png" alt="" fill className="object-cover" />

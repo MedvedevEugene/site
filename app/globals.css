@@ -2781,10 +2781,6 @@
       font-size: 20px;
     }
 
-    .ic-page__features {
-      grid-template-columns: 1fr;
-    }
-
     .ic-page__btn {
       min-height: 48px;
       width: 100%;
