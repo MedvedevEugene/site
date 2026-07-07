@@ -57,29 +57,34 @@ export const BASE_COURSE_REASONS = [
   { text: "Глубокая проработка своих травм и сценариев", top: 83.16, left: 63.57, width: 19.5 },
 ] as const;
 
-/** rec1458816791 — audience cards */
+/** rec1458816791 — 2×2 audience grid */
 export const BASE_COURSE_AUDIENCE = [
   {
     title: "Психолог",
     image: BASE_COURSE_IMAGES.audiencePsychologist,
     text: "Освоите новый метод работы с клиентом, который дает быстрые, достоверные и устойчивые результаты. Много отработок на курсе, можно сразу практиковать",
+    titleWeight: 600,
   },
   {
     title: "Расстановщик",
     image: BASE_COURSE_IMAGES.audienceConstellator,
     text: "Прокачаете системное восприятие, будете видеть как на ладони динамики клиента и подбирать наиболее эффективные способы решения запросов.",
+    titleWeight: 700,
   },
   {
     title: "эзотерик",
     image: BASE_COURSE_IMAGES.audienceEsoteric,
     text: "Углубите понимание взаимодействия энергий и их истинные источники, соберете свои знания в единую систему и сможете помогать людям обрести личную силу и подпитку рода",
+    titleWeight: 700,
+  },
+  {
+    title: "А если я не психолог?",
+    image: BASE_COURSE_IMAGES.audienceNotPsychologist,
+    text: "На курс можно пойти и для себя. Получите инструмент для того, чтобы разобрать любую жизненную ситуацию и всегда чувствовать себя в ресурсе и в безопасности",
+    variant: "dark" as const,
+    titleWeight: 700,
   },
 ] as const;
-
-export const BASE_COURSE_NOT_PSYCHOLOGIST = {
-  title: "А если я не психолог?",
-  text: "На курс можно пойти и для себя. Получите инструмент для того, чтобы разобрать любую жизненную ситуацию и всегда чувствовать себя в ресурсе и в безопасности",
-} as const;
 
 export const BASE_COURSE_STEPS = [
   "Прослушать лекции",
