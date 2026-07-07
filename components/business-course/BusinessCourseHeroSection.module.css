@@ -2,73 +2,12 @@
   position: relative;
   min-height: 640px;
   overflow: hidden;
-  background: #12081f;
+  background: transparent;
 }
 
 @media (min-width: 1200px) {
   .section {
     min-height: 847px;
-  }
-}
-
-.bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 72% 38%, rgba(118, 62, 189, 0.45) 0%, rgba(118, 62, 189, 0) 48%),
-    linear-gradient(135deg, #1f1033 0%, #2a1248 45%, #12081f 100%);
-}
-
-.bgRings {
-  position: absolute;
-  top: 157px;
-  left: 24px;
-  z-index: 0;
-  display: block;
-  width: 237px;
-  height: 349px;
-  max-width: none;
-  object-fit: cover;
-  object-position: center center;
-  opacity: 0.95;
-}
-
-@media (min-width: 480px) {
-  .bgRings {
-    top: 180px;
-    left: 31px;
-    width: 357px;
-    height: 593px;
-  }
-}
-
-@media (min-width: 640px) {
-  .bgRings {
-    top: 220px;
-    left: 65px;
-    width: 449px;
-    height: 747px;
-  }
-}
-
-@media (min-width: 960px) {
-  .bgRings {
-    top: 122px;
-    left: calc(50% - 480px + 500px);
-    width: 460px;
-    height: 725px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .bgRings {
-    top: 123px;
-    left: calc(50% - 600px + 684px);
-    width: 460px;
-    height: 725px;
   }
 }
 
@@ -510,5 +449,5 @@
   height: 80px;
   transform: translateX(-50%);
   border-radius: 999px;
-  background: #0a0710;
+  background: #000000;
 }

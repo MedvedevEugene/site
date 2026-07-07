@@ -14,7 +14,6 @@ import { BusinessCourseFinalCtaSection } from "@/components/business-course/Busi
 import { BusinessCoursePopup } from "@/components/business-course/BusinessCoursePopup";
 import {
   BUSINESS_COURSE_AUDIENCE,
-  BUSINESS_COURSE_IMAGES,
   type BusinessCoursePopupKind,
 } from "@/lib/business-course-data";
 
@@ -28,11 +27,11 @@ export function BusinessCoursePage() {
   return (
     <>
       <div className="busc-page">
-        <div
-          className="busc-page__cover"
-          aria-hidden="true"
-          style={{ backgroundImage: `url("${BUSINESS_COURSE_IMAGES.pageBg}")` }}
-        />
+        <div className="busc-page__cover" aria-hidden="true">
+          <span className="busc-page__glow busc-page__glow--primary" />
+          <span className="busc-page__glow busc-page__glow--secondary" />
+          <span className="busc-page__glow busc-page__glow--tertiary" />
+        </div>
         <div className="busc-page__content">
         {/* Hero — rec2284896261 */}
         <BusinessCourseHeroSection

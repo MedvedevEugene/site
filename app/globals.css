@@ -3799,16 +3799,45 @@
     overflow-x: hidden;
   }
 
-  /* lifeinstitute.ru — T674 fixed cover (rec2196391911) */
+  /* lifeinstitute.ru/business-cource — black page with soft purple glows */
   .busc-page__cover {
     position: fixed;
     inset: 0;
     z-index: 0;
+    overflow: hidden;
     pointer-events: none;
-    background-color: #0a0710;
-    background-repeat: repeat;
-    background-position: center top;
-    background-size: auto;
+    background-color: #000000;
+  }
+
+  .busc-page__glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(90px);
+  }
+
+  .busc-page__glow--primary {
+    top: -8%;
+    right: -6%;
+    width: min(62vw, 760px);
+    height: min(62vw, 760px);
+    background: rgba(132, 68, 214, 0.62);
+  }
+
+  .busc-page__glow--secondary {
+    top: 38%;
+    right: 8%;
+    width: min(42vw, 520px);
+    height: min(42vw, 520px);
+    background: rgba(98, 44, 176, 0.34);
+  }
+
+  .busc-page__glow--tertiary {
+    bottom: -12%;
+    left: -10%;
+    width: min(48vw, 580px);
+    height: min(48vw, 580px);
+    background: rgba(72, 32, 132, 0.28);
   }
 
   .busc-page__content {
