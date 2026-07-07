@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FAQ } from "@/components/ui/FAQ";
 import { BusinessCourseHeroSection } from "@/components/business-course/BusinessCourseHeroSection";
 import { BusinessCourseMethodSection } from "@/components/business-course/BusinessCourseMethodSection";
+import { BusinessCourseProgramSection } from "@/components/business-course/BusinessCourseProgramSection";
 import { BusinessCoursePopup } from "@/components/business-course/BusinessCoursePopup";
 import {
   BUSINESS_COURSE_AUDIENCE,
@@ -15,8 +16,6 @@ import {
   BUSINESS_COURSE_FINAL,
   BUSINESS_COURSE_FORMAT,
   BUSINESS_COURSE_IMAGES,
-  BUSINESS_COURSE_MODULES,
-  BUSINESS_COURSE_PROGRAM_INTRO,
   BUSINESS_COURSE_SALES,
   BUSINESS_COURSE_TARIFFS,
   type BusinessCoursePopupKind,
@@ -60,48 +59,8 @@ export function BusinessCoursePage() {
           </div>
         </section>
 
-        {/* Program intro — rec2285022771 */}
-        <section className="busc-section busc-program-intro">
-          <div className="busc-container busc-section-head">
-            <span className="busc-label">{BUSINESS_COURSE_PROGRAM_INTRO.label}</span>
-            <h2 className="busc-section-title busc-section-title--lg">
-              {BUSINESS_COURSE_PROGRAM_INTRO.title}
-              <span className="busc-section-title__accent">{BUSINESS_COURSE_PROGRAM_INTRO.subtitle}</span>
-            </h2>
-            <p className="busc-section-subtitle">{BUSINESS_COURSE_PROGRAM_INTRO.text}</p>
-          </div>
-        </section>
-
-        {/* Modules — rec2196401591 */}
-        <section className="busc-section busc-modules" id="program">
-          <div className="busc-container busc-modules__list">
-            {BUSINESS_COURSE_MODULES.map((mod) => (
-              <details key={mod.num} className="busc-module">
-                <summary className="busc-module__summary">
-                  <span className="busc-module__title">
-                    <span className="busc-module__block">Блок </span>
-                    <span className="busc-module__num">{mod.num}</span>
-                    <span className="busc-module__name">{mod.title}</span>
-                  </span>
-                  <span className="busc-module__icon" aria-hidden />
-                </summary>
-                <div className="busc-module__body">
-                  <p className="busc-module__lead">Ваши результаты после прохождения блока:</p>
-                  <ul>
-                    {mod.results.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </details>
-            ))}
-          </div>
-          <div className="busc-container busc-modules__cta-wrap">
-            <button type="button" className="busc-btn busc-btn--primary busc-btn--lg" onClick={openPopup(setPopup, "apply")}>
-              Поступить в институт
-            </button>
-          </div>
-        </section>
+        {/* Program — rec2285022771 + rec2196401591 + rec2285026371 */}
+        <BusinessCourseProgramSection onApply={openPopup(setPopup, "apply")} />
 
         {/* Format — rec2302035251 */}
         <section className="busc-section busc-format">
