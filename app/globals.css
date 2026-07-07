@@ -3790,25 +3790,6 @@
     }
   }
 
-  .bc-final__inner {
-    max-width: 640px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .bc-final__btn {
-    min-width: 240px;
-  }
-
-  .bc-final__note {
-    margin: 16px 0 0;
-    font-family: var(--font-body), Montserrat, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 21px;
-    color: #858585;
-  }
-
   /* AI tools */
   .tool-card {
     @apply bg-white border border-border rounded-[20px] p-7 shadow-[0_5px_15px_rgba(0,0,0,0.05)];

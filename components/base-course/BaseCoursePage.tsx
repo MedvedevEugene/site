@@ -9,6 +9,7 @@ import { BaseCourseAudienceSection } from "@/components/base-course/BaseCourseAu
 import { BaseCourseReasonsSection } from "@/components/base-course/BaseCourseReasonsSection";
 import { BaseCourseAboutSection } from "@/components/base-course/BaseCourseAboutSection";
 import { BaseCourseCreatorSection } from "@/components/base-course/BaseCourseCreatorSection";
+import { BaseCourseFinalCtaSection } from "@/components/base-course/BaseCourseFinalCtaSection";
 import { BaseCourseFaqSection } from "@/components/base-course/BaseCourseFaqSection";
 import { BaseCourseProgramSection } from "@/components/base-course/BaseCourseProgramSection";
 import { BaseCourseStepsSection } from "@/components/base-course/BaseCourseStepsSection";
@@ -124,18 +125,8 @@ export function BaseCoursePage() {
         {/* Creator — rec1458816901 */}
         <BaseCourseCreatorSection />
 
-        {/* Final CTA */}
-        <section className="bc-section bc-section--cream bc-final">
-          <div className="container-site bc-final__inner">
-            <h2 className="bc-section-title">
-              Забронируйте скидку 11% и получите бесплатную консультацию
-            </h2>
-            <button type="button" className="bc-btn bc-btn--dark bc-final__btn" onClick={openPopup(setPopup, "discount")}>
-              Оставить заявку
-            </button>
-            <p className="bc-final__note">Мы свяжемся с вами в любое удобное для вас время</p>
-          </div>
-        </section>
+        {/* Final CTA — rec1461069691 */}
+        <BaseCourseFinalCtaSection />
       </div>
 
       <BaseCoursePopup kind={popup} onClose={() => setPopup(null)} />
