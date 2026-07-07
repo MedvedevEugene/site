@@ -8,11 +8,11 @@ import { BusinessCourseHeroSection } from "@/components/business-course/Business
 import { BusinessCourseMethodSection } from "@/components/business-course/BusinessCourseMethodSection";
 import { BusinessCourseFormatSection } from "@/components/business-course/BusinessCourseFormatSection";
 import { BusinessCourseProgramSection } from "@/components/business-course/BusinessCourseProgramSection";
+import { BusinessCourseAuthorSection } from "@/components/business-course/BusinessCourseAuthorSection";
 import { BusinessCourseSalesSection } from "@/components/business-course/BusinessCourseSalesSection";
 import { BusinessCoursePopup } from "@/components/business-course/BusinessCoursePopup";
 import {
   BUSINESS_COURSE_AUDIENCE,
-  BUSINESS_COURSE_AUTHOR,
   BUSINESS_COURSE_DIPLOMA,
   BUSINESS_COURSE_FAQ,
   BUSINESS_COURSE_FINAL,
@@ -69,50 +69,7 @@ export function BusinessCoursePage() {
         <BusinessCourseSalesSection onStartClick={openPopup(setPopup, "tariff-supervision")} />
 
         {/* Author — rec2302676631 */}
-        <section className="busc-section busc-author" id="author">
-          <div className="busc-container busc-author__grid">
-            <div className="busc-author__media">
-              <Image
-                src={BUSINESS_COURSE_IMAGES.authorDecor}
-                alt=""
-                width={520}
-                height={520}
-                className="busc-author__decor"
-              />
-              <Image
-                src={BUSINESS_COURSE_IMAGES.authorFrame}
-                alt=""
-                width={400}
-                height={480}
-                className="busc-author__frame"
-              />
-              <Image
-                src={BUSINESS_COURSE_IMAGES.authorPhoto}
-                alt=""
-                width={400}
-                height={480}
-                className="busc-author__photo"
-              />
-            </div>
-            <div className="busc-author__content">
-              <span className="busc-label">{BUSINESS_COURSE_AUTHOR.label}</span>
-              <h2 className="busc-section-title busc-section-title--left busc-author__title">
-                Эксперт-практик
-                <span className="busc-section-title__accent">с системным образованием</span>
-              </h2>
-              <p className="busc-author__text">{BUSINESS_COURSE_AUTHOR.text}</p>
-              <div className="busc-author__stats">
-                {BUSINESS_COURSE_AUTHOR.stats.map((item) => (
-                  <div key={item.label} className="busc-author__stat busc-card busc-card--glass">
-                    <span className="busc-author__stat-value">{item.value}</span>
-                    <span className="busc-author__stat-label">{item.label}</span>
-                  </div>
-                ))}
-              </div>
-              <p className="busc-author__quote">{BUSINESS_COURSE_AUTHOR.quote}</p>
-            </div>
-          </div>
-        </section>
+        <BusinessCourseAuthorSection />
 
         {/* Diploma — rec2302724901 */}
         <section className="busc-section busc-diploma">
