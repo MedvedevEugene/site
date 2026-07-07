@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { FAQ } from "@/components/ui/FAQ";
 import { BusinessCourseHeroSection } from "@/components/business-course/BusinessCourseHeroSection";
@@ -9,14 +8,13 @@ import { BusinessCourseMethodSection } from "@/components/business-course/Busine
 import { BusinessCourseFormatSection } from "@/components/business-course/BusinessCourseFormatSection";
 import { BusinessCourseProgramSection } from "@/components/business-course/BusinessCourseProgramSection";
 import { BusinessCourseAuthorSection } from "@/components/business-course/BusinessCourseAuthorSection";
+import { BusinessCourseDiplomaSection } from "@/components/business-course/BusinessCourseDiplomaSection";
 import { BusinessCourseSalesSection } from "@/components/business-course/BusinessCourseSalesSection";
 import { BusinessCoursePopup } from "@/components/business-course/BusinessCoursePopup";
 import {
   BUSINESS_COURSE_AUDIENCE,
-  BUSINESS_COURSE_DIPLOMA,
   BUSINESS_COURSE_FAQ,
   BUSINESS_COURSE_FINAL,
-  BUSINESS_COURSE_IMAGES,
   BUSINESS_COURSE_TARIFFS,
   type BusinessCoursePopupKind,
 } from "@/lib/business-course-data";
@@ -72,44 +70,7 @@ export function BusinessCoursePage() {
         <BusinessCourseAuthorSection />
 
         {/* Diploma — rec2302724901 */}
-        <section className="busc-section busc-diploma">
-          <div className="busc-container busc-diploma__grid">
-            <div className="busc-diploma__media">
-              <Image
-                src={BUSINESS_COURSE_IMAGES.diplomaOverlay1}
-                alt=""
-                width={120}
-                height={120}
-                className="busc-diploma__overlay busc-diploma__overlay--1"
-              />
-              <Image
-                src={BUSINESS_COURSE_IMAGES.diplomaOverlay2}
-                alt=""
-                width={120}
-                height={120}
-                className="busc-diploma__overlay busc-diploma__overlay--2"
-              />
-              <Image
-                src={BUSINESS_COURSE_IMAGES.diplomaPhoto}
-                alt=""
-                width={460}
-                height={520}
-                className="busc-diploma__photo"
-              />
-            </div>
-            <div className="busc-diploma__content">
-              <span className="busc-label">{BUSINESS_COURSE_DIPLOMA.label}</span>
-              <h2 className="busc-section-title busc-section-title--left">{BUSINESS_COURSE_DIPLOMA.title}</h2>
-              <p className="busc-diploma__text">{BUSINESS_COURSE_DIPLOMA.text}</p>
-              <p className="busc-diploma__license">{BUSINESS_COURSE_DIPLOMA.license}</p>
-              <ul className="busc-diploma__list">
-                {BUSINESS_COURSE_DIPLOMA.features.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
+        <BusinessCourseDiplomaSection />
 
         {/* Tariffs — rec2302981921 */}
         <section className="busc-section busc-tariffs" id="tariffs">

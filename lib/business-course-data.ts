@@ -12,7 +12,8 @@ export const BUSINESS_COURSE_IMAGES = {
   authorPhoto: `/images/site/tild6166-6462-4337-a634-633432346431__image_1320.png`,
   authorDecor: `/images/site/tild6261-6364-4433-b439-373732323034__Group_45.png`,
   authorFrame: `/images/site/tild6162-3433-4331-b133-343066313539_____-.png`,
-  diplomaPhoto: `/images/site/tild3736-3633-4064-b234-616435633739__123123.png`,
+  diplomaPhoto: `/images/site/tild6166-6462-4337-a634-633432346431__image_1320.png`,
+  diplomaCheckIcon: `/images/site/tild3766-3639-4138-b931-353961343161__Overlay.svg`,
   diplomaOverlay1: `/images/site/tild3766-3639-4138-b931-353961343161__Overlay.svg`,
   diplomaOverlay2: `/images/site/tild6433-3162-4262-a162-613635633066__Overlay.svg`,
 } as const;
