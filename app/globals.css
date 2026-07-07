@@ -3790,16 +3790,6 @@
     }
   }
 
-  /* FAQ on base course page */
-  .bc-faq-section .ic-accordion {
-    max-width: 1160px;
-    margin: 0 auto;
-  }
-
-  .bc-faq-section__title {
-    margin-bottom: 8px;
-  }
-
   /* Creator */
   .bc-creator {
     display: grid;

@@ -3,18 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FAQ } from "@/components/ui/FAQ";
 import { BaseCoursePopup } from "@/components/base-course/BaseCoursePopup";
 import { BaseCourseReviewsCarousel } from "@/components/base-course/BaseCourseReviewsCarousel";
 import { BaseCourseAudienceSection } from "@/components/base-course/BaseCourseAudienceSection";
 import { BaseCourseReasonsSection } from "@/components/base-course/BaseCourseReasonsSection";
 import { BaseCourseAboutSection } from "@/components/base-course/BaseCourseAboutSection";
+import { BaseCourseFaqSection } from "@/components/base-course/BaseCourseFaqSection";
 import { BaseCourseProgramSection } from "@/components/base-course/BaseCourseProgramSection";
 import { BaseCourseStepsSection } from "@/components/base-course/BaseCourseStepsSection";
 import { BaseCourseTariffsSection } from "@/components/base-course/BaseCourseTariffsSection";
 import {
   BASE_COURSE_CREATOR,
-  BASE_COURSE_FAQ,
   BASE_COURSE_HERO,
   BASE_COURSE_IMAGES,
   type BaseCoursePopupKind,
@@ -119,14 +118,8 @@ export function BaseCoursePage() {
         {/* Tariffs — rec1458816871 */}
         <BaseCourseTariffsSection onSelectTariff={(kind) => setPopup(kind)} />
 
-        {/* FAQ — rec1458816891, t668 */}
-        <section className="bc-section bc-section--cream bc-faq-section">
-          <div className="container-site">
-            <h2 className="bc-section-title bc-faq-section__title">Ответы на частые вопросы</h2>
-            <p className="bc-section-subtitle">А что если:</p>
-            <FAQ items={[...BASE_COURSE_FAQ]} variant="ic-accordion" />
-          </div>
-        </section>
+        {/* FAQ — rec1460075601 + rec1458816891, t668 */}
+        <BaseCourseFaqSection />
 
         {/* Creator — rec1458816911 */}
         <section className="bc-section">
