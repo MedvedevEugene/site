@@ -2,6 +2,7 @@ export const BUSINESS_COURSE_IMAGES = {
   heroBg: `/images/site/tild3230-6139-4132-a233-653533323336__cc1d58be5a59d441e6ef.png`,
   heroLogo: `/images/site/tild6535-6536-4434-b237-396530303934__logo_b.svg`,
   heroGift: `/images/site/tild3563-3061-4965-b938-366634623866__image_81.png`,
+  heroScroll: `/images/site/tild6533-3335-4566-a462-396230303664__Frame_1321317130.svg`,
   heroPhoto: `/images/site/tild3734-3538-4564-a436-373839386631__Group_44.png`,
   methodImage: `/images/site/tild6137-3031-4130-a638-363238663963__image_1319.png`,
   formatDecor: `/images/site/tild3736-3633-4064-b234-616435633739__123123.png`,

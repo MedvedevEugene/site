@@ -20,7 +20,16 @@ export function BusinessCourseHeroSection({
   return (
     <section className={styles.section} aria-labelledby="busc-hero-title">
       <Image src={BUSINESS_COURSE_IMAGES.heroBg} alt="" fill priority className={styles.bg} sizes="100vw" />
-      <div className={styles.overlay} aria-hidden />
+
+      <Image
+        src={BUSINESS_COURSE_IMAGES.heroPhoto}
+        alt=""
+        width={1086}
+        height={1138}
+        className={styles.photo}
+        priority
+        sizes="(min-width: 1200px) 1086px, 90vw"
+      />
 
       <div className={styles.wrap}>
         <header className={styles.header}>
@@ -41,60 +50,53 @@ export function BusinessCourseHeroSection({
           </nav>
         </header>
 
-        <div className={styles.layout}>
-          <div className={styles.content}>
-            <span className={styles.badge}>{BUSINESS_COURSE_HERO.badge}</span>
-            <h1 id="busc-hero-title" className={styles.title}>
-              {BUSINESS_COURSE_HERO.title}
-            </h1>
-            <p className={styles.subtitle}>{BUSINESS_COURSE_HERO.subtitle}</p>
+        <div className={styles.content}>
+          <span className={styles.badge}>{BUSINESS_COURSE_HERO.badge}</span>
+          <h1 id="busc-hero-title" className={styles.title}>
+            {BUSINESS_COURSE_HERO.title}
+          </h1>
+          <p className={styles.subtitle}>{BUSINESS_COURSE_HERO.subtitle}</p>
 
-            <div className={styles.offer}>
+          <div className={styles.offer}>
+            <span className={styles.offerIconWrap}>
               <Image
                 src={BUSINESS_COURSE_IMAGES.heroGift}
                 alt=""
-                width={45}
-                height={45}
+                width={40}
+                height={40}
                 className={styles.offerIcon}
               />
-              <span>{BUSINESS_COURSE_HERO.offer}</span>
-            </div>
-
-            <div className={styles.actions}>
-              <button type="button" className={styles.btnPrimary} onClick={onProgramClick}>
-                Получить программу курса
-              </button>
-              <button type="button" className={styles.btnGhost} onClick={onConsultationClick}>
-                Записаться на консультацию
-              </button>
-            </div>
-
-            <ul className={styles.stats}>
-              {BUSINESS_COURSE_HERO.stats.map((item) => (
-                <li key={item} className={styles.stat}>
-                  {item}
-                </li>
-              ))}
-            </ul>
+            </span>
+            <span className={styles.offerText}>{BUSINESS_COURSE_HERO.offer}</span>
           </div>
 
-          <div className={styles.visual} aria-hidden>
-            <Image
-              src={BUSINESS_COURSE_IMAGES.heroPhoto}
-              alt=""
-              width={920}
-              height={980}
-              className={styles.photo}
-              priority
-              sizes="(min-width: 960px) 58vw, 90vw"
-            />
+          <div className={styles.actions}>
+            <button type="button" className={styles.btnPrimary} onClick={onProgramClick}>
+              Получить программу курса
+            </button>
+            <button type="button" className={styles.btnGhost} onClick={onConsultationClick}>
+              Записаться на консультацию
+            </button>
+          </div>
+
+          <div className={styles.stats}>
+            {BUSINESS_COURSE_HERO.stats.map((item) => (
+              <div key={item} className={styles.stat}>
+                <span className={styles.statDot} aria-hidden />
+                <span>{item}</span>
+              </div>
+            ))}
           </div>
         </div>
 
         <div className={styles.scroll} aria-hidden>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          </svg>
+          <Image
+            src={BUSINESS_COURSE_IMAGES.heroScroll}
+            alt=""
+            width={28}
+            height={28}
+            className={styles.scrollIcon}
+          />
         </div>
       </div>
     </section>
