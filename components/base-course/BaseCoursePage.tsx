@@ -8,6 +8,7 @@ import { BaseCoursePopup } from "@/components/base-course/BaseCoursePopup";
 import { BaseCourseReviewsCarousel } from "@/components/base-course/BaseCourseReviewsCarousel";
 import { BaseCourseAudienceSection } from "@/components/base-course/BaseCourseAudienceSection";
 import { BaseCourseReasonsSection } from "@/components/base-course/BaseCourseReasonsSection";
+import { BaseCourseStepsSection } from "@/components/base-course/BaseCourseStepsSection";
 import {
   BASE_COURSE_ABOUT,
   BASE_COURSE_CREATOR,
@@ -15,7 +16,6 @@ import {
   BASE_COURSE_HERO,
   BASE_COURSE_IMAGES,
   BASE_COURSE_MODULES,
-  BASE_COURSE_STEPS,
   BASE_COURSE_TARIFFS,
   type BaseCoursePopupKind,
 } from "@/lib/base-course-data";
@@ -94,27 +94,7 @@ export function BaseCoursePage() {
         <BaseCourseAudienceSection onConsultation={openPopup(setPopup, "consultation")} />
 
         {/* 7 steps — rec1458973181 */}
-        <section className="bc-section">
-          <div className="container-site bc-steps">
-            <div className="bc-steps__content">
-              <h2 className="bc-section-title bc-section-title--left">7 шагов на курсе</h2>
-              <ol className="bc-steps__list">
-                {BASE_COURSE_STEPS.map((step) => (
-                  <li key={step}>{step}</li>
-                ))}
-              </ol>
-              <div className="bc-steps__actions">
-                <span className="bc-steps__label">К новой профессии</span>
-                <button type="button" className="bc-btn bc-btn--dark bc-btn--hero" onClick={openPopup(setPopup, "application")}>
-                  начать учиться
-                </button>
-              </div>
-            </div>
-            <div className="bc-steps__media">
-              <Image src={BASE_COURSE_IMAGES.steps} alt="" width={400} height={400} className="bc-steps__photo" />
-            </div>
-          </div>
-        </section>
+        <BaseCourseStepsSection onApply={openPopup(setPopup, "application")} />
 
         {/* About constellations — rec1458816801 */}
         <section className="bc-section bc-section--cream">

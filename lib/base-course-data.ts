@@ -10,7 +10,10 @@ export const BASE_COURSE_IMAGES = {
   audienceConstellator: `${CDN}/tild6166-6331-4237-a564-373739656134/Group_134.png`,
   audienceEsoteric: `${CDN}/tild6364-3330-4431-b335-636466366565/Group_107.png`,
   audienceNotPsychologist: `${CDN}/tild3936-3632-4864-b439-363536633033/Group_108.png`,
-  steps: `${CDN}/tild3763-6162-4334-b863-373038343366/10.png`,
+  /** rec1458973181 — woman cutout (682×787) */
+  steps: "/images/site/tild6532-6432-4231-b239-613364653032___1.png",
+  /** rec1458973181 — list bullet */
+  stepsDot: "/images/site/tild6134-6335-4664-b238-666232306165__dot.png",
   about1: `${CDN}/tild6532-6432-4231-b239-613364653032/_1.png`,
   about2: `${CDN}/tild3863-3763-4562-a234-393639336263/22222.png`,
   creator: `${CDN}/tild6432-3132-4636-b564-396230323534/photo.png`,
@@ -89,13 +92,13 @@ export const BASE_COURSE_AUDIENCE = [
 ] as const;
 
 export const BASE_COURSE_STEPS = [
+  "Записаться на курс",
   "Прослушать лекции",
   "Сдать домашние задания",
   "Посетить практики для закрепления знаний",
   "Провести выпускную расстановку под супервизией Анастасии",
   "Получить сертификат расстановщика",
   "Практиковать с готовой командой при нашей поддержке",
-  "Записаться на курс",
 ] as const;
 
 export const BASE_COURSE_ABOUT = [
