@@ -18,7 +18,7 @@ export function ToolShell({
         <nav className="text-sm text-muted mb-6">
           <Link href="/">Главная</Link>
           {" / "}
-          <Link href="/psychological-help">Психологическая помощь</Link>
+          <Link href="/individual-consultations">Индивидуальные консультации</Link>
           {" / "}
           <span>{title}</span>
         </nav>
