@@ -15,25 +15,25 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-color: #12081f;
-  background-image: url("/images/site/tild3230-6139-4132-a233-653533323336__cc1d58be5a59d441e6ef.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 72% 38%, rgba(118, 62, 189, 0.45) 0%, rgba(118, 62, 189, 0) 48%),
+    linear-gradient(135deg, #1f1033 0%, #2a1248 45%, #12081f 100%);
 }
 
 .bgRings {
   position: absolute;
   top: 157px;
   left: 24px;
-  z-index: 1;
+  z-index: 0;
   display: block;
   width: 237px;
   height: 349px;
   max-width: none;
-  pointer-events: none;
   object-fit: cover;
   object-position: center center;
+  opacity: 0.95;
 }
 
 @media (min-width: 480px) {
@@ -76,7 +76,7 @@
   position: absolute;
   top: 90px;
   left: calc(50% - 160px + -245px);
-  z-index: 2;
+  z-index: 1;
   display: block;
   width: auto;
   height: auto;

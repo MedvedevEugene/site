@@ -19,16 +19,17 @@ export function BusinessCourseHeroSection({
 }: BusinessCourseHeroSectionProps) {
   return (
     <section className={styles.section} aria-labelledby="busc-hero-title">
-      <div className={styles.bg} aria-hidden />
-      <Image
-        src={BUSINESS_COURSE_IMAGES.heroBg}
-        alt=""
-        width={842}
-        height={1263}
-        className={styles.bgRings}
-        priority
-        sizes="460px"
-      />
+      <div className={styles.bg} aria-hidden>
+        <Image
+          src={BUSINESS_COURSE_IMAGES.heroBg}
+          alt=""
+          width={842}
+          height={1263}
+          className={styles.bgRings}
+          priority
+          sizes="460px"
+        />
+      </div>
 
       <Image
         src={BUSINESS_COURSE_IMAGES.heroPhoto}
