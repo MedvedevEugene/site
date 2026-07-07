@@ -73,3 +73,11 @@ export function pairWords(words: string[]) {
   }
   return pairs;
 }
+
+export function pairIndices(count: number) {
+  const pairs: [number, number][] = [];
+  for (let i = 0; i < count; i += 2) {
+    pairs.push([i, i + 1]);
+  }
+  return pairs;
+}
