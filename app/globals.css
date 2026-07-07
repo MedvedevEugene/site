@@ -2362,6 +2362,16 @@
     line-height: 1.25;
   }
 
+  .ic-page__section--ai-tools {
+    background: #f9f8e8;
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  .ic-page__subtitle--center {
+    @apply mx-auto text-center;
+  }
+
   .ic-page__section--methods {
     background: #3b3758;
     padding-top: 100px;

@@ -38,7 +38,7 @@ export default function PsychologicalHelpPage() {
                 <a href="#formats" className="btn btn-primary">
                   Выбрать формат помощи
                 </a>
-                <a href="#tools" className="btn btn-outline">
+                <a href="#ai-tools" className="btn btn-outline">
                   Пройти онлайн-инструмент
                 </a>
                 <Link href="/individual-consultations" className="btn btn-outline">
@@ -73,7 +73,7 @@ export default function PsychologicalHelpPage() {
         </div>
       </section>
 
-      <AiToolsSection id="tools" />
+      <AiToolsSection />
 
       <section className="section-cream" id="formats">
         <div className="container-site">
