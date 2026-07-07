@@ -2,20 +2,19 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { FAQ } from "@/components/ui/FAQ";
 import { BusinessCourseHeroSection } from "@/components/business-course/BusinessCourseHeroSection";
 import { BusinessCourseMethodSection } from "@/components/business-course/BusinessCourseMethodSection";
 import { BusinessCourseFormatSection } from "@/components/business-course/BusinessCourseFormatSection";
 import { BusinessCourseProgramSection } from "@/components/business-course/BusinessCourseProgramSection";
 import { BusinessCourseAuthorSection } from "@/components/business-course/BusinessCourseAuthorSection";
 import { BusinessCourseDiplomaSection } from "@/components/business-course/BusinessCourseDiplomaSection";
+import { BusinessCourseFaqSection } from "@/components/business-course/BusinessCourseFaqSection";
 import { BusinessCourseSalesSection } from "@/components/business-course/BusinessCourseSalesSection";
+import { BusinessCourseTariffsSection } from "@/components/business-course/BusinessCourseTariffsSection";
 import { BusinessCoursePopup } from "@/components/business-course/BusinessCoursePopup";
 import {
   BUSINESS_COURSE_AUDIENCE,
-  BUSINESS_COURSE_FAQ,
   BUSINESS_COURSE_FINAL,
-  BUSINESS_COURSE_TARIFFS,
   type BusinessCoursePopupKind,
 } from "@/lib/business-course-data";
 
@@ -73,59 +72,12 @@ export function BusinessCoursePage() {
         <BusinessCourseDiplomaSection />
 
         {/* Tariffs — rec2302981921 */}
-        <section className="busc-section busc-tariffs" id="tariffs">
-          <div className="busc-container">
-            <div className="busc-section-head">
-              <span className="busc-label">Тарифы</span>
-              <h2 className="busc-section-title">
-                Выберите
-                <br />
-                формат обучения
-              </h2>
-              <p className="busc-section-subtitle">
-                Доступна рассрочка на 24 месяца без переплат и оплата от юридического лица.
-              </p>
-            </div>
-            <div className="busc-tariffs__grid">
-              {BUSINESS_COURSE_TARIFFS.map((tariff) => (
-                <article
-                  key={tariff.id}
-                  className={`busc-tariff${"featured" in tariff && tariff.featured ? " busc-tariff--featured" : ""}`}
-                >
-                  <h3 className="busc-tariff__name">{tariff.name}</h3>
-                  <div className="busc-tariff__price">{tariff.price}</div>
-                  <div className="busc-tariff__installment">{tariff.installment}</div>
-                  <ul className="busc-tariff__features">
-                    {tariff.features.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                  <button
-                    type="button"
-                    className="busc-btn busc-btn--primary busc-btn--block"
-                    onClick={openPopup(setPopup, `tariff-${tariff.id}` as BusinessCoursePopupKind)}
-                  >
-                    {tariff.cta}
-                  </button>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <BusinessCourseTariffsSection
+          onTariffClick={(tariffId) => openPopup(setPopup, `tariff-${tariffId}` as BusinessCoursePopupKind)()}
+        />
 
-        {/* FAQ — rec2303160161 */}
-        <section className="busc-section busc-faq">
-          <div className="busc-container">
-            <div className="busc-section-head">
-              <span className="busc-label">Вопросы</span>
-              <h2 className="busc-section-title">Часто задаваемые вопросы</h2>
-            </div>
-            <FAQ
-              items={BUSINESS_COURSE_FAQ.map((item) => ({ question: item.q, answer: item.a }))}
-              variant="ic-accordion"
-            />
-          </div>
-        </section>
+        {/* FAQ — rec2303158621 + rec2303160161 */}
+        <BusinessCourseFaqSection />
 
         {/* Final CTA — rec2303311491 */}
         <section className="busc-section busc-final">

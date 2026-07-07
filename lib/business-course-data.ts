@@ -252,6 +252,16 @@ export const BUSINESS_COURSE_TARIFFS = [
   },
 ] as const;
 
+export const BUSINESS_COURSE_TARIFFS_SECTION = {
+  label: "Тарифы",
+  subtitle:
+    "Доступна рассрочка на 24 месяца без переплат и оплата от юридического лица.",
+} as const;
+
+export const BUSINESS_COURSE_FAQ_SECTION = {
+  label: "Вопросы",
+} as const;
+
 export const BUSINESS_COURSE_FAQ = [
   {
     q: "Нужен ли опыт в расстановках или психологии?",
