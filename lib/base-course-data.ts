@@ -16,8 +16,13 @@ export const BASE_COURSE_IMAGES = {
   stepsDot: "/images/site/tild6134-6335-4664-b238-666232306165__dot.png",
   /** rec1458816801 — central diagram with icons */
   aboutDiagram: "/images/site/tild3037-6463-4332-a434-663438633466__asdasd.png",
+  /** rec1458816871 — tariff card icons */
+  tariffStandardIcon: "/images/site/tild3538-3938-4661-a236-373736333735__icon-1.png",
+  tariffProfiIcon: "/images/site/tild3735-3136-4265-b536-386534383334__icon-2.png",
+  tariffVipIcon: "/images/site/tild6633-6139-4565-b036-316633346332__icon-3.png",
+  /** rec1458816871 — certificate thumbnails */
+  tariffCertificates: "/images/site/tild3863-3763-4562-a234-393639336263__22222.png",
   creator: `${CDN}/tild6432-3132-4636-b564-396230323534/photo.png`,
-  tariffsDecor: `${CDN}/tild3530-3731-4261-a632-613638636262/Group_141.png`,
 } as const;
 
 /** lifeinstitute.ru/base-cource — rec1458816851, t994 slider (13 slides) */
@@ -125,6 +130,7 @@ export const BASE_COURSE_TARIFFS = [
   {
     id: "standard",
     name: "СТАНДАРТ",
+    icon: "/images/site/tild3538-3938-4661-a236-373736333735__icon-1.png",
     oldPrice: "180 000₽",
     midPrice: "150 000₽",
     price: "133 500₽",
@@ -133,15 +139,16 @@ export const BASE_COURSE_TARIFFS = [
       "Доступ к лекциям навсегда",
       "Общий чат с группой и кураторами в Телеграм",
       "Расстановка у Анастасии",
-      "Сертификат ученика ИЖСИЗ",
-      "Сертификат расстановщика ИЖСИЗ",
       "Выпускная расстановка с супервизией",
       "Диплом о проф. переподготовке (при наличии высшего образования)",
+      "Сертификат ученика ИРЖ",
+      "Сертификат расстановщика ИРЖ",
     ],
   },
   {
     id: "profi",
     name: "ПРОФИ",
+    icon: "/images/site/tild3735-3136-4265-b536-386534383334__icon-2.png",
     oldPrice: "220 000₽",
     midPrice: "175 000₽",
     price: "155 750₽",
@@ -154,10 +161,10 @@ export const BASE_COURSE_TARIFFS = [
   {
     id: "vip",
     name: "VIP",
+    icon: "/images/site/tild6633-6139-4565-b036-316633346332__icon-3.png",
     oldPrice: "260 000₽",
     midPrice: "200 000₽",
     price: "178 000₽",
-    featured: true,
     features: [
       "Всё из тарифа «Профи»",
       "Личное ведение Анастасии Быковской (персональное сопровождение в течение всего курса)",

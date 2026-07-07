@@ -11,12 +11,12 @@ import { BaseCourseReasonsSection } from "@/components/base-course/BaseCourseRea
 import { BaseCourseAboutSection } from "@/components/base-course/BaseCourseAboutSection";
 import { BaseCourseProgramSection } from "@/components/base-course/BaseCourseProgramSection";
 import { BaseCourseStepsSection } from "@/components/base-course/BaseCourseStepsSection";
+import { BaseCourseTariffsSection } from "@/components/base-course/BaseCourseTariffsSection";
 import {
   BASE_COURSE_CREATOR,
   BASE_COURSE_FAQ,
   BASE_COURSE_HERO,
   BASE_COURSE_IMAGES,
-  BASE_COURSE_TARIFFS,
   type BaseCoursePopupKind,
 } from "@/lib/base-course-data";
 
@@ -117,45 +117,7 @@ export function BaseCoursePage() {
         </section>
 
         {/* Tariffs — rec1458816871 */}
-        <section className="bc-section bc-tariffs-section">
-          <Image
-            src={BASE_COURSE_IMAGES.tariffsDecor}
-            alt=""
-            width={1400}
-            height={400}
-            className="bc-tariffs-section__decor"
-            aria-hidden
-          />
-          <div className="container-site">
-            <h2 className="bc-section-title">Выбирай свой формат участия</h2>
-            <p className="bc-section-subtitle">Три уровня поддержки для твоего развития</p>
-            <div className="bc-tariffs">
-              {BASE_COURSE_TARIFFS.map((tariff) => (
-                <article key={tariff.id} className="bc-tariff">
-                  <div className="bc-tariff__discount">-11%</div>
-                  <h3 className="bc-tariff__name">{tariff.name}</h3>
-                  <div className="bc-tariff__prices">
-                    <span className="bc-tariff__old">{tariff.oldPrice}</span>
-                    <span className="bc-tariff__mid">{tariff.midPrice}</span>
-                    <span className="bc-tariff__price">{tariff.price}</span>
-                  </div>
-                  <ul className="bc-tariff__features">
-                    {tariff.features.map((feature) => (
-                      <li key={feature}>{feature}</li>
-                    ))}
-                  </ul>
-                  <button
-                    type="button"
-                    className="bc-btn bc-btn--dark bc-tariff__btn"
-                    onClick={openPopup(setPopup, tariff.id as BaseCoursePopupKind)}
-                  >
-                    выбрать тариф
-                  </button>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <BaseCourseTariffsSection onSelectTariff={(kind) => setPopup(kind)} />
 
         {/* FAQ — rec1458816891, t668 */}
         <section className="bc-section bc-section--cream bc-faq-section">
