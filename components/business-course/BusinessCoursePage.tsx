@@ -8,6 +8,7 @@ import { BusinessCourseHeroSection } from "@/components/business-course/Business
 import { BusinessCourseMethodSection } from "@/components/business-course/BusinessCourseMethodSection";
 import { BusinessCourseFormatSection } from "@/components/business-course/BusinessCourseFormatSection";
 import { BusinessCourseProgramSection } from "@/components/business-course/BusinessCourseProgramSection";
+import { BusinessCourseSalesSection } from "@/components/business-course/BusinessCourseSalesSection";
 import { BusinessCoursePopup } from "@/components/business-course/BusinessCoursePopup";
 import {
   BUSINESS_COURSE_AUDIENCE,
@@ -16,7 +17,6 @@ import {
   BUSINESS_COURSE_FAQ,
   BUSINESS_COURSE_FINAL,
   BUSINESS_COURSE_IMAGES,
-  BUSINESS_COURSE_SALES,
   BUSINESS_COURSE_TARIFFS,
   type BusinessCoursePopupKind,
 } from "@/lib/business-course-data";
@@ -66,29 +66,7 @@ export function BusinessCoursePage() {
         <BusinessCourseFormatSection />
 
         {/* Sales — rec2302040081 */}
-        <section className="busc-section busc-sales">
-          <div className="busc-container busc-sales__grid">
-            <div className="busc-sales__content">
-              <span className="busc-label">{BUSINESS_COURSE_SALES.label}</span>
-              <h2 className="busc-section-title busc-section-title--left">{BUSINESS_COURSE_SALES.title}</h2>
-              <p className="busc-section-subtitle busc-section-subtitle--left">{BUSINESS_COURSE_SALES.subtitle}</p>
-              <ul className="busc-sales__list">
-                {BUSINESS_COURSE_SALES.items.map((item) => (
-                  <li key={item.title}>
-                    <strong>{item.title}</strong>
-                    <span>{item.text}</span>
-                  </li>
-                ))}
-              </ul>
-              <button type="button" className="busc-btn busc-btn--primary" onClick={openPopup(setPopup, "tariff-supervision")}>
-                Начать обучение
-              </button>
-            </div>
-            <div className="busc-sales__media">
-              <Image src={BUSINESS_COURSE_IMAGES.salesImage} alt="" width={560} height={420} className="busc-sales__image" />
-            </div>
-          </div>
-        </section>
+        <BusinessCourseSalesSection onStartClick={openPopup(setPopup, "tariff-supervision")} />
 
         {/* Author — rec2302676631 */}
         <section className="busc-section busc-author" id="author">

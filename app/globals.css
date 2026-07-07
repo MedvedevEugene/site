@@ -4006,50 +4006,7 @@
     }
   }
 
-  /* Sales */
-  .busc-sales__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 32px;
-    align-items: center;
-  }
-
-  @media (min-width: 960px) {
-    .busc-sales__grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .busc-sales__list {
-    margin: 24px 0 32px;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: 16px;
-  }
-
-  .busc-sales__list li {
-    display: grid;
-    gap: 4px;
-  }
-
-  .busc-sales__list strong {
-    color: #ffffff;
-    font-size: 18px;
-  }
-
-  .busc-sales__list span {
-    color: rgba(255, 255, 255, 0.72);
-    font-size: 16px;
-    line-height: 1.45;
-  }
-
-  .busc-sales__image {
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
-  }
-
+  /* Author */
   .busc-author__grid {
     display: grid;
     grid-template-columns: 1fr;

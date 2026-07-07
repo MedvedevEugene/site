@@ -8,6 +8,7 @@ export const BUSINESS_COURSE_IMAGES = {
   methodImage: `/images/site/tild6137-3031-4130-a638-363238663963__image_1319.png`,
   formatDecor: `/images/site/tild3736-3633-4064-b234-616435633739__123123.png`,
   salesImage: `/images/site/tild6430-6262-4934-b431-353166623034__Section.png`,
+  salesOkIcon: `/images/site/tild3635-3431-4131-a531-646438653966__ok.svg`,
   authorPhoto: `/images/site/tild6166-6462-4337-a634-633432346431__image_1320.png`,
   authorDecor: `/images/site/tild6261-6364-4433-b439-373732323034__Group_45.png`,
   authorFrame: `/images/site/tild6162-3433-4331-b133-343066313539_____-.png`,
