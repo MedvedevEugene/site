@@ -8,9 +8,9 @@ import { BaseCoursePopup } from "@/components/base-course/BaseCoursePopup";
 import { BaseCourseReviewsCarousel } from "@/components/base-course/BaseCourseReviewsCarousel";
 import { BaseCourseAudienceSection } from "@/components/base-course/BaseCourseAudienceSection";
 import { BaseCourseReasonsSection } from "@/components/base-course/BaseCourseReasonsSection";
+import { BaseCourseAboutSection } from "@/components/base-course/BaseCourseAboutSection";
 import { BaseCourseStepsSection } from "@/components/base-course/BaseCourseStepsSection";
 import {
-  BASE_COURSE_ABOUT,
   BASE_COURSE_CREATOR,
   BASE_COURSE_FAQ,
   BASE_COURSE_HERO,
@@ -97,28 +97,7 @@ export function BaseCoursePage() {
         <BaseCourseStepsSection onApply={openPopup(setPopup, "application")} />
 
         {/* About constellations — rec1458816801 */}
-        <section className="bc-section bc-section--cream">
-          <div className="container-site bc-about">
-            <div className="bc-about__content">
-              <h2 className="bc-section-title bc-section-title--left">что такое расстановки?</h2>
-              <ul className="bc-about__list">
-                {BASE_COURSE_ABOUT.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <h3 className="bc-about__subtitle">Зачем нужны и почему работают?</h3>
-            </div>
-            <div className="bc-about__images">
-              <Image src={BASE_COURSE_IMAGES.about1} alt="" width={280} height={280} className="bc-about__img" />
-              <Image src={BASE_COURSE_IMAGES.about2} alt="" width={200} height={200} className="bc-about__img bc-about__img--small" />
-            </div>
-          </div>
-          <div className="container-site bc-center mt-10">
-            <button type="button" className="bc-btn bc-btn--dark bc-btn--hero" onClick={openPopup(setPopup, "consultation")}>
-              Получить консультацию
-            </button>
-          </div>
-        </section>
+        <BaseCourseAboutSection onConsultation={openPopup(setPopup, "consultation")} />
 
         {/* Program — rec1458816831, t668 */}
         <section className="bc-section">

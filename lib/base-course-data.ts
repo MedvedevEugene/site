@@ -14,8 +14,8 @@ export const BASE_COURSE_IMAGES = {
   steps: "/images/site/tild6532-6432-4231-b239-613364653032___1.png",
   /** rec1458973181 — list bullet */
   stepsDot: "/images/site/tild6134-6335-4664-b238-666232306165__dot.png",
-  about1: `${CDN}/tild6532-6432-4231-b239-613364653032/_1.png`,
-  about2: `${CDN}/tild3863-3763-4562-a234-393639336263/22222.png`,
+  /** rec1458816801 — central diagram with icons */
+  aboutDiagram: "/images/site/tild3037-6463-4332-a434-663438633466__asdasd.png",
   creator: `${CDN}/tild6432-3132-4636-b564-396230323534/photo.png`,
   tariffsDecor: `${CDN}/tild3530-3731-4261-a632-613638636262/Group_141.png`,
 } as const;
