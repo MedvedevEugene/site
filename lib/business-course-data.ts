@@ -16,6 +16,7 @@ export const BUSINESS_COURSE_IMAGES = {
   diplomaCheckIcon: `/images/site/tild3766-3639-4138-b931-353961343161__Overlay.svg`,
   diplomaOverlay1: `/images/site/tild3766-3639-4138-b931-353961343161__Overlay.svg`,
   diplomaOverlay2: `/images/site/tild6433-3162-4262-a162-613635633066__Overlay.svg`,
+  finalPanelBg: `/images/site/tild3735-3136-4731-b330-343436663330__Section.png`,
 } as const;
 
 export const BUSINESS_COURSE_NAV = [

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { BusinessCourseHeroSection } from "@/components/business-course/BusinessCourseHeroSection";
 import { BusinessCourseMethodSection } from "@/components/business-course/BusinessCourseMethodSection";
 import { BusinessCourseFormatSection } from "@/components/business-course/BusinessCourseFormatSection";
@@ -11,10 +10,10 @@ import { BusinessCourseDiplomaSection } from "@/components/business-course/Busin
 import { BusinessCourseFaqSection } from "@/components/business-course/BusinessCourseFaqSection";
 import { BusinessCourseSalesSection } from "@/components/business-course/BusinessCourseSalesSection";
 import { BusinessCourseTariffsSection } from "@/components/business-course/BusinessCourseTariffsSection";
+import { BusinessCourseFinalCtaSection } from "@/components/business-course/BusinessCourseFinalCtaSection";
 import { BusinessCoursePopup } from "@/components/business-course/BusinessCoursePopup";
 import {
   BUSINESS_COURSE_AUDIENCE,
-  BUSINESS_COURSE_FINAL,
   type BusinessCoursePopupKind,
 } from "@/lib/business-course-data";
 
@@ -80,32 +79,7 @@ export function BusinessCoursePage() {
         <BusinessCourseFaqSection />
 
         {/* Final CTA — rec2303311491 */}
-        <section className="busc-section busc-final">
-          <div className="busc-container busc-final__inner">
-            <div className="busc-final__content">
-              <h2 className="busc-section-title busc-section-title--left">{BUSINESS_COURSE_FINAL.title}</h2>
-              <p className="busc-section-subtitle busc-section-subtitle--left">{BUSINESS_COURSE_FINAL.subtitle}</p>
-              <span className="busc-badge">{BUSINESS_COURSE_FINAL.badge}</span>
-            </div>
-            <form
-              className="busc-final__form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                openPopup(setPopup, "consultation")();
-              }}
-            >
-              <input name="name" required placeholder="Ваше имя" className="busc-input" />
-              <input name="phone" required placeholder="(000) 000-00-00" className="busc-input" />
-              <button type="submit" className="busc-btn busc-btn--primary busc-btn--block">
-                Записаться на консультацию
-              </button>
-              <p className="busc-final__legal">
-                Нажимая кнопку, вы соглашаетесь с{" "}
-                <Link href="/privacy">политикой обработки персональных данных</Link>.
-              </p>
-            </form>
-          </div>
-        </section>
+        <BusinessCourseFinalCtaSection />
       </div>
 
       <BusinessCoursePopup kind={popup} onClose={() => setPopup(null)} />
