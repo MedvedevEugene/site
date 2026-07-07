@@ -1,13 +1,13 @@
 type ChatMessage = { role: "system" | "user" | "assistant"; content: string };
 
+import { isValidAiReport, normalizeAiReport } from "@/lib/ai-report";
+
 export type AiCompletionResult = {
   content: string | null;
   error?: string;
   hasKey: boolean;
   modelUsed?: string;
 };
-
-import { isValidAiReport, normalizeAiReport } from "@/lib/ai-report";
 
 const FREE_MODEL_FALLBACKS = [
   "meta-llama/llama-3.3-70b-instruct:free",
@@ -97,7 +97,7 @@ export async function generateAiCompletion(prompt: string): Promise<AiCompletion
     {
       role: "system",
       content:
-        "Ты помощник института ИЖСИЗ. Отвечай строго на русском языке. Никогда не используй китайские иероглифы, английский или другие языки.",
+        "Ты помощник института ИЖСИЗ. Отвечай строго на русском языке. Никогда не вставляй английские или латинские слова — только русский текст. Не используй китайские иероглифы и другие языки.",
     },
     { role: "user", content: prompt },
   ];
@@ -125,7 +125,8 @@ export async function generateAiCompletion(prompt: string): Promise<AiCompletion
           lastError.includes("429") ||
           lastError.includes("503") ||
           lastError.includes("empty_response") ||
-          lastError.includes("invalid_report");
+          lastError.includes("invalid_report") ||
+          lastError.includes("latin_words");
         if (!retryable) break;
       }
 
