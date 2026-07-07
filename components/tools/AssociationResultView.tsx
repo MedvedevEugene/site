@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AssociationsTree } from "@/components/tools/AssociationsTree";
 import { AiReportView, useAiAnalysis } from "@/components/tools/AiReportView";
+import { isValidAiReport } from "@/lib/ai-report";
 
 type Payload = {
   query: string;
@@ -34,7 +35,7 @@ export function AssociationResultView({ sessionId }: { sessionId: string }) {
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((session) => {
         setPayload(session.payload as Payload);
-        if (session.aiReport) setCachedReport(session.aiReport);
+        if (session.aiReport && isValidAiReport(session.aiReport)) setCachedReport(session.aiReport);
         else run("sixteen_associations", session.payload, sessionId);
       })
       .catch(() => setError(true));

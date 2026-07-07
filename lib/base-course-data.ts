@@ -1,35 +1,37 @@
+const CDN = "https://static.tildacdn.com";
+
 export const BASE_COURSE_IMAGES = {
-  hero: `/images/site/tild3538-3362-4361-a438-643231313961__snapedit_17603574673.png`,
-  heroDecor: `/images/site/tild3163-3835-4638-a561-656430663865__Group_130.png`,
+  hero: `${CDN}/tild3538-3362-4361-a438-643231313961/snapedit_17603574673.png`,
+  heroDecor: `${CDN}/tild3163-3835-4638-a561-656430663865/Group_130.png`,
   /** rec1458878661 — circular diagram with dashed ring and blobs */
-  reasonsDiagram: `/images/site/tild3163-3835-4638-a561-656430663865__Group_130.png`,
+  reasonsDiagram: `${CDN}/tild3163-3835-4638-a561-656430663865/Group_130.png`,
   /** rec1458816791 — audience card icons (142×142) */
-  audiencePsychologist: `/images/site/tild3530-3731-4261-a632-613638636262__Group_141.png`,
-  audienceConstellator: `/images/site/tild6166-6331-4237-a564-373739656134__Group_134.png`,
-  audienceEsoteric: `/images/site/tild6364-3330-4431-b335-636466366565__Group_107.png`,
-  audienceNotPsychologist: `/images/site/tild3936-3632-4864-b439-363536633033__Group_108.png`,
-  steps: `/images/site/tild3763-6162-4334-b863-373038343366__10.png`,
-  about1: `/images/site/tild6532-6432-4231-b239-613364653032___1.png`,
-  about2: `/images/site/tild3863-3763-4562-a234-393639336263__22222.png`,
-  creator: `/images/site/tild6432-3132-4636-b564-396230323534__photo.png`,
-  tariffsDecor: `/images/site/tild3530-3731-4261-a632-613638636262__Group_141.png`,
+  audiencePsychologist: `${CDN}/tild3530-3731-4261-a632-613638636262/Group_141.png`,
+  audienceConstellator: `${CDN}/tild6166-6331-4237-a564-373739656134/Group_134.png`,
+  audienceEsoteric: `${CDN}/tild6364-3330-4431-b335-636466366565/Group_107.png`,
+  audienceNotPsychologist: `${CDN}/tild3936-3632-4864-b439-363536633033/Group_108.png`,
+  steps: `${CDN}/tild3763-6162-4334-b863-373038343366/10.png`,
+  about1: `${CDN}/tild6532-6432-4231-b239-613364653032/_1.png`,
+  about2: `${CDN}/tild3863-3763-4562-a234-393639336263/22222.png`,
+  creator: `${CDN}/tild6432-3132-4636-b564-396230323534/photo.png`,
+  tariffsDecor: `${CDN}/tild3530-3731-4261-a632-613638636262/Group_141.png`,
 } as const;
 
 /** lifeinstitute.ru/base-cource — rec1458816851, t994 slider (13 slides) */
 export const BASE_COURSE_REVIEWS = [
-  `/images/site/tild3136-6536-4663-b563-373732383538__1.png`,
-  `/images/site/tild6132-3838-4135-b134-316661326236__2.png`,
-  `/images/site/tild3062-6533-4366-b565-663136316334__3.png`,
-  `/images/site/tild6463-6433-4634-b739-373030396333__4.png`,
-  `/images/site/tild3432-6463-4335-b634-353461643330__5.png`,
-  `/images/site/tild3061-3132-4131-b632-636234646537__6.png`,
-  `/images/site/tild3837-6665-4134-b035-626237376261__7.png`,
-  `/images/site/tild3161-3539-4534-b334-393838633633__8.png`,
-  `/images/site/tild3038-3261-4536-a538-373763343730__9.png`,
-  `/images/site/tild3763-6162-4334-b863-373038343366__10.png`,
-  `/images/site/tild3164-3132-4239-a136-363638306166__11.png`,
-  `/images/site/tild3836-6634-4930-a462-323035623539__12.png`,
-  `/images/site/tild6563-6234-4331-a163-313463346562__13.png`,
+  `${CDN}/tild3136-6536-4663-b563-373732383538/1.png`,
+  `${CDN}/tild6132-3838-4135-b134-316661326236/2.png`,
+  `${CDN}/tild3062-6533-4366-b565-663136316334/3.png`,
+  `${CDN}/tild6463-6433-4634-b739-373030396333/4.png`,
+  `${CDN}/tild3432-6463-4335-b634-353461643330/5.png`,
+  `${CDN}/tild3061-3132-4131-b632-636234646537/6.png`,
+  `${CDN}/tild3837-6665-4134-b035-626237376261/7.png`,
+  `${CDN}/tild3161-3539-4534-b334-393838633633/8.png`,
+  `${CDN}/tild3038-3261-4536-a538-373763343730/9.png`,
+  `${CDN}/tild3763-6162-4334-b863-373038343366/10.png`,
+  `${CDN}/tild3164-3132-4239-a136-363638306166/11.png`,
+  `${CDN}/tild3836-6634-4930-a462-323035623539/12.png`,
+  `${CDN}/tild6563-6234-4331-a163-313463346562/13.png`,
 ] as const;
 
 export const BASE_COURSE_HERO = {

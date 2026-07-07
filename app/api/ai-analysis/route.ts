@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { generateAiCompletion } from "@/lib/ai-client";
+import { isValidAiReport, normalizeAiReport } from "@/lib/ai-report";
 import { sendAiReportEmail } from "@/lib/email";
 import { buildToolPrompt } from "@/lib/ai-prompts";
 import { getToolSession, saveToolSessionAiReport } from "@/lib/tool-sessions";
@@ -54,7 +55,7 @@ export async function POST(request: Request) {
     if (sessionId) {
       const session = await getToolSession(sessionId);
       if (!session) return NextResponse.json({ error: "Session not found" }, { status: 404 });
-      if (session.aiReport) {
+      if (session.aiReport && isValidAiReport(session.aiReport)) {
         return NextResponse.json({ analysis: session.aiReport, cached: true });
       }
       resolvedTool = session.tool as ToolId;
@@ -68,9 +69,9 @@ export async function POST(request: Request) {
     const prompt = buildToolPrompt(resolvedTool, payload);
     const ai = await generateAiCompletion(prompt);
     const analysis =
-      ai.content || fallbackAnalysis(resolvedTool, payload, ai.error, ai.hasKey);
+      ai.content?.trim() || fallbackAnalysis(resolvedTool, payload, ai.error, ai.hasKey);
 
-    if (sessionId) {
+    if (sessionId && ai.content) {
       await saveToolSessionAiReport(sessionId, analysis).catch(() => {});
     }
 

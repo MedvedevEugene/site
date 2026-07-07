@@ -1,7 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import Link from "next/link";
+import { filterDisplaySections } from "@/lib/ai-report";
+
+function renderBody(body: string) {
+  const lines = body.split("\n");
+  const nodes: ReactNode[] = [];
+  let listItems: string[] = [];
+  let key = 0;
+
+  function flushList() {
+    if (listItems.length === 0) return;
+    nodes.push(
+      <ul key={`list-${key++}`} className="m-0 pl-5 text-sm leading-relaxed text-[#3b3758] space-y-1">
+        {listItems.map((item) => (
+          <li key={item}>{item.replace(/\*\*(.+?)\*\*/g, "$1")}</li>
+        ))}
+      </ul>
+    );
+    listItems = [];
+  }
+
+  for (const line of lines) {
+    if (/^[-*]\s+/.test(line)) {
+      listItems.push(line.replace(/^[-*]\s+/, "").trim());
+      continue;
+    }
+
+    flushList();
+    if (line.trim()) {
+      nodes.push(
+        <p key={`p-${key++}`} className="m-0 text-sm leading-relaxed text-[#3b3758]">
+          {line.replace(/\*\*(.+?)\*\*/g, "$1")}
+        </p>
+      );
+    }
+  }
+
+  flushList();
+  return nodes;
+}
 
 export function AiReportView({
   text,
@@ -24,7 +63,8 @@ export function AiReportView({
 
   if (!text) return null;
 
-  const sections = text.split(/(?=^## )/m).filter(Boolean);
+  const sections = filterDisplaySections(text);
+  const hasContent = sections.some((section) => section.body.length > 0);
 
   return (
     <div className="tool-card mt-8">
@@ -32,19 +72,20 @@ export function AiReportView({
       <p className="text-xs text-muted m-0 mb-6">
         Алгоритмический инструмент. Не является консультацией специалиста.
       </p>
-      <div className="flex flex-col gap-5">
-        {sections.map((section) => {
-          const lines = section.trim().split("\n");
-          const title = lines[0]?.replace(/^##\s*/, "");
-          const body = lines.slice(1).join("\n").trim();
-          return (
-            <div key={title}>
-              {title && <h4 className="font-body text-base font-medium m-0 mb-2 text-[#3b3758]">{title}</h4>}
-              <p className="m-0 text-sm leading-relaxed text-[#3b3758] whitespace-pre-wrap">{body}</p>
+      {hasContent ? (
+        <div className="flex flex-col gap-5">
+          {sections.map((section) => (
+            <div key={section.title}>
+              {section.title && (
+                <h4 className="font-body text-base font-medium m-0 mb-2 text-[#3b3758]">{section.title}</h4>
+              )}
+              <div className="flex flex-col gap-2">{renderBody(section.body)}</div>
             </div>
-          );
-        })}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <p className="m-0 text-sm leading-relaxed text-[#3b3758] whitespace-pre-wrap">{text}</p>
+      )}
       {emailSent && userEmail && (
         <p className="text-sm text-green-700 bg-green-50 rounded-lg px-4 py-3 mt-4 m-0">
           Разбор также отправлен на <strong>{userEmail}</strong>
@@ -85,6 +126,10 @@ export function useAiAnalysis() {
         body: JSON.stringify({ tool, payload, sessionId }),
       });
       const data = await res.json();
+      if (!res.ok) {
+        setAnalysis(data.error || "Не удалось сформировать разбор. Попробуйте позже.");
+        return;
+      }
       setAnalysis(data.analysis || "Не удалось сформировать разбор.");
       setEmailSent(!!data.emailSent);
       setUserEmail(data.userEmail || null);

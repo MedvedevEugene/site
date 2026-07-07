@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { AiToolsSection } from "@/components/tools/AiToolsSection";
+
 export const metadata: Metadata = {
   title: "Психологическая помощь",
 };
+
+const HERO_IMAGE = "/images/site/tild6433-6434-4538-b932-306265666464__1.png";
 
 const TOPICS = [
   "Отношения и семья",
@@ -13,7 +16,7 @@ const TOPICS = [
   "Жизненные сценарии",
   "Деньги и реализация",
   "Тело и состояние",
-];
+] as const;
 
 export default function PsychologicalHelpPage() {
   return (
@@ -32,13 +35,26 @@ export default function PsychologicalHelpPage() {
                 Консультации, расстановки, телесно-ориентированные практики и цифровые инструменты для исследования внутренних запросов.
               </p>
               <div className="flex flex-wrap gap-3">
-                <a href="#formats" className="btn btn-primary">Выбрать формат помощи</a>
-                <a href="#tools" className="btn btn-outline">Пройти онлайн-инструмент</a>
-                <Link href="/individual-consultations" className="btn btn-outline">Записаться на консультацию</Link>
+                <a href="#formats" className="btn btn-primary">
+                  Выбрать формат помощи
+                </a>
+                <a href="#ai-tools" className="btn btn-outline">
+                  Пройти онлайн-инструмент
+                </a>
+                <Link href="/individual-consultations" className="btn btn-outline">
+                  Записаться на консультацию
+                </Link>
               </div>
             </div>
             <div className="relative rounded-[20px] overflow-hidden aspect-[4/3] bg-cream-bg">
-              <Image src="/images/site/tild6433-6434-4538-b932-306265666464__1.png" alt="" fill className="object-cover" />
+              <Image
+                src={HERO_IMAGE}
+                alt=""
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
@@ -57,7 +73,7 @@ export default function PsychologicalHelpPage() {
         </div>
       </section>
 
-      <AiToolsSection id="tools" />
+      <AiToolsSection />
 
       <section className="section-cream" id="formats">
         <div className="container-site">
@@ -66,31 +82,43 @@ export default function PsychologicalHelpPage() {
             <div className="card">
               <h3 className="font-heading text-lg font-medium m-0 mb-2.5">Психологические консультации</h3>
               <p className="text-muted text-[15px] m-0 mb-5">Индивидуальный формат работы с личным запросом.</p>
-              <Link href="/individual-consultations" className="btn btn-outline">Записаться</Link>
+              <Link href="/individual-consultations" className="btn btn-outline">
+                Записаться
+              </Link>
             </div>
             <div className="card">
               <h3 className="font-heading text-lg font-medium m-0 mb-2.5">Расстановки</h3>
               <p className="text-muted text-[15px] m-0 mb-5">Глубинный формат системной работы с запросами.</p>
-              <Link href="/rasstanovochnye-gruppy" className="btn btn-outline">Узнать о расстановках</Link>
+              <Link href="/rasstanovochnye-gruppy" className="btn btn-outline">
+                Узнать о расстановках
+              </Link>
             </div>
             <div className="card">
               <h3 className="font-heading text-lg font-medium m-0 mb-2.5">Телесная терапия</h3>
               <p className="text-muted text-[15px] m-0 mb-5">Работа с телом, напряжением и восстановлением ресурса.</p>
-              <Link href="/telese-terapiya" className="btn btn-outline">Посмотреть практики</Link>
+              <Link href="/telese-terapiya" className="btn btn-outline">
+                Посмотреть практики
+              </Link>
             </div>
             <div className="card">
               <h3 className="font-heading text-lg font-medium m-0 mb-2.5">Базовый курс</h3>
               <p className="text-muted text-[15px] m-0 mb-5">Обучение системному подходу и расстановкам.</p>
-              <Link href="/base-cource" className="btn btn-outline">Подробнее о курсе</Link>
+              <Link href="/base-cource" className="btn btn-outline">
+                Подробнее о курсе
+              </Link>
             </div>
             <div className="card">
               <h3 className="font-heading text-lg font-medium m-0 mb-2.5">Бизнес-курс</h3>
               <p className="text-muted text-[15px] m-0 mb-5">Для предпринимателей и руководителей.</p>
-              <Link href="/business-cource" className="btn btn-outline">Подробнее о курсе</Link>
+              <Link href="/business-cource" className="btn btn-outline">
+                Подробнее о курсе
+              </Link>
             </div>
             <div className="card card-accent">
               <h3 className="font-heading text-lg font-medium m-0 mb-2.5">Путь клиента</h3>
-              <p className="text-white/85 text-[15px] m-0">Инструмент → ИИ-разбор → консультация со специалистом.</p>
+              <p className="text-white/85 text-[15px] m-0">
+                Инструмент → ИИ-разбор → консультация со специалистом.
+              </p>
             </div>
           </div>
         </div>

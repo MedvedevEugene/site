@@ -1084,6 +1084,18 @@
     @apply bg-white border border-border rounded-[20px] p-7 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-200;
   }
 
+  .card-accent {
+    background: linear-gradient(135deg, #3b3758 0%, #5a5478 100%);
+    color: #fff;
+    border: none;
+  }
+
+  .card-accent .btn-outline {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
   .card-cream {
     @apply bg-cream-pill border-0 rounded-[24px] p-7;
   }
@@ -2236,6 +2248,10 @@
     }
   }
 
+  .ic-page {
+    @apply bg-white;
+  }
+
   .ic-page__hero {
     @apply bg-white;
     padding-top: 30px;
@@ -2283,7 +2299,7 @@
   }
 
   .ic-page__hero-actions {
-    @apply flex flex-wrap gap-3;
+    @apply flex flex-row flex-nowrap items-center gap-3;
     margin-top: 32px;
   }
 
@@ -2291,15 +2307,14 @@
     @apply relative;
     width: 100%;
     max-width: 620px;
-    min-height: 420px;
+    min-height: 440px;
     margin-left: auto;
   }
 
   .ic-page__hero-image {
     object-fit: contain;
-    object-position: right center;
-    transform: scale(1.08);
-    transform-origin: right center;
+    object-position: right bottom;
+    transform: none;
   }
 
   .ic-page__features {
@@ -2338,10 +2353,65 @@
 
   .ic-page__section--cream {
     background: #f9f8e8;
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  .ic-page__section--cream .ic-page__title {
+    font-weight: 600;
+    line-height: 1.25;
   }
 
   .ic-page__section--methods {
     background: #3b3758;
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  .ic-page__methods-wrap {
+    max-width: 1160px;
+  }
+
+  .ic-page__methods {
+    @apply grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .ic-method {
+    @apply flex flex-col items-center bg-[#f9f8e8];
+    gap: 10px;
+    border-radius: 15px;
+    padding: 32px;
+  }
+
+  .ic-method__icon {
+    @apply flex shrink-0 items-center justify-center;
+    width: 150px;
+    height: 150px;
+  }
+
+  .ic-method__icon-img {
+    @apply h-full w-full object-contain;
+  }
+
+  .ic-method__body {
+    @apply flex w-full flex-col text-left;
+    gap: 10px;
+  }
+
+  .ic-method__title {
+    @apply m-0 font-heading text-[#3c3758];
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .ic-method__text {
+    @apply m-0 font-heading text-[#3c3758];
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
   }
 
   .ic-page__section--faq {
@@ -2362,6 +2432,26 @@
 
   .ic-page__title--center {
     @apply text-center;
+  }
+
+  .ic-page__section--methods .ic-page__title--methods {
+    @apply font-heading text-white;
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 60px;
+  }
+
+  @media (max-width: 1199px) {
+    .ic-page__section--methods .ic-page__title--methods {
+      font-size: 38px;
+    }
+  }
+
+  @media (max-width: 959px) {
+    .ic-page__section--methods .ic-page__title--methods {
+      font-size: 35px;
+    }
   }
 
   .ic-page__title--light {
@@ -2387,10 +2477,14 @@
 
   .ic-page__btn--hero {
     min-height: 60px;
-    min-width: 240px;
+    min-width: 0;
+    width: auto;
     padding: 0 36px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 
   .ic-page__btn--sm {
@@ -2418,128 +2512,315 @@
   }
 
   .ic-page__topics {
-    @apply grid gap-5;
+    @apply grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
   }
 
   .ic-topic {
     @apply relative overflow-hidden;
-    min-height: 360px;
-    border-radius: 20px;
+    min-height: 346px;
+    border-radius: 15px;
     padding: 32px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
     color: #fff;
   }
 
-  .ic-topic__overlay {
-    @apply absolute inset-0;
-    background: linear-gradient(180deg, rgba(39, 35, 68, 0.15) 0%, rgba(39, 35, 68, 0.92) 100%);
+  .ic-topic__image {
+    object-fit: cover;
+    object-position: center center;
   }
 
   .ic-topic__content {
-    @apply relative z-[1] h-full flex flex-col justify-end;
+    @apply relative z-[2] flex flex-col;
+    gap: 5px;
+    margin-top: auto;
   }
 
   .ic-topic__arrow {
-    @apply absolute top-8 left-8 inline-flex items-center justify-center rounded-full bg-white/90;
-    width: 36px;
-    height: 36px;
+    @apply relative z-[2] inline-flex shrink-0 items-center justify-center self-start;
+    width: 30px;
+    height: 30px;
   }
 
   .ic-topic__title {
-    @apply m-0 font-body font-medium;
+    @apply m-0 font-body font-bold text-white;
     font-size: 20px;
-    line-height: 1.3;
-    margin-bottom: 8px;
+    line-height: 1.35;
   }
 
   .ic-topic__text {
-    @apply m-0 font-body;
+    @apply m-0 font-body font-normal text-white;
     font-size: 16px;
-    font-weight: 300;
-    line-height: 1.55;
-    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.3;
+  }
+
+  .ic-page__section--pricing {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  .ic-page__title--pricing {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 60px;
   }
 
   .ic-page__pricing {
-    @apply grid gap-5;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    @apply grid justify-center;
+    grid-template-columns: repeat(2, minmax(0, 561px));
+    gap: 40px;
+    max-width: 1162px;
+    margin-inline: auto;
   }
 
   .ic-price-card {
     @apply relative flex flex-col;
     background: #f9f8e8;
     border-radius: 20px;
-    min-height: 260px;
-    padding: 28px;
+    min-height: 321px;
+    padding: 32px;
+    box-sizing: border-box;
   }
 
   .ic-price-card__icon {
-    @apply absolute top-5 right-5;
-    width: 80px;
-    height: 80px;
+    @apply absolute;
+    top: 32px;
+    right: 32px;
+    width: 142px;
+    height: 142px;
   }
 
   .ic-price-card__title {
     @apply m-0 font-body text-[#3b3758];
+    position: relative;
+    z-index: 1;
+    max-width: calc(100% - 158px);
     font-size: 28px;
-    font-weight: 500;
-    line-height: 1.25;
-    max-width: 72%;
-    margin-bottom: 12px;
+    font-weight: 600;
+    line-height: 1.3;
+    white-space: pre-line;
+    margin-bottom: 8px;
   }
 
   .ic-price-card__text {
-    @apply m-0 font-body text-[#3b3758] flex-1;
+    @apply m-0 font-body text-[#3b3758];
+    position: relative;
+    z-index: 1;
+    max-width: 300px;
     font-size: 18px;
-    font-weight: 300;
-    line-height: 1.55;
-    max-width: 75%;
-    margin-bottom: 24px;
-  }
-
-  .ic-page__methods {
-    @apply grid gap-5;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .ic-method {
-    @apply rounded-[20px] p-8 min-h-[280px];
-  }
-
-  .ic-method--white {
-    background: #ffffff;
-  }
-
-  .ic-method--cream {
-    background: #f9f8e8;
-  }
-
-  .ic-method--blue {
-    background: #f6f9ff;
-  }
-
-  .ic-method__icon {
-    @apply mb-6;
-    width: 48px;
-    height: 48px;
-  }
-
-  .ic-method__title {
-    @apply m-0 font-body text-[#3b3758];
-    font-size: 20px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.3;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
 
-  .ic-method__text {
-    @apply m-0 font-body text-[#3b3758];
+  .ic-page__btn--price {
+    @apply self-start text-white border-transparent;
+    width: 200px;
+    min-height: 55px;
+    margin-top: auto;
+    padding: 0 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    background: #272344;
+  }
+
+  .ic-page__section--steps {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  .ic-page__section--faq {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  .ic-page__steps {
+    max-width: 1160px;
+  }
+
+  .ic-page__title--steps {
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+    margin-bottom: 56px;
+  }
+
+  .ic-accordion {
+    @apply mx-auto flex flex-col;
+    max-width: 1160px;
+    gap: 20px;
+  }
+
+  .ic-accordion__card {
+    @apply bg-[#f9f8e8];
+    border-radius: 20px;
+  }
+
+  .ic-accordion__header {
+    @apply relative;
+  }
+
+  .ic-accordion__trigger {
+    @apply relative w-full cursor-pointer border-0 bg-transparent text-left text-[#3b3758];
+    padding: 30px 80px 30px 30px;
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 27px;
+  }
+
+  .ic-accordion__question {
+    display: inline-block;
+    padding-right: 30px;
+  }
+
+  .ic-accordion__icon-stack {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    transform: translateY(-50%);
+  }
+
+  .ic-accordion__icon {
+    position: absolute;
+    inset: 0;
+    width: 24px;
+    height: 24px;
+    padding: 8px;
+    box-sizing: content-box;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .ic-accordion__icon--default {
+    opacity: 1;
+  }
+
+  .ic-accordion__icon--hover {
+    opacity: 0;
+  }
+
+  .ic-accordion__card.is-open .ic-accordion__icon--default,
+  .ic-accordion__header:hover .ic-accordion__icon--default {
+    opacity: 0;
+  }
+
+  .ic-accordion__card.is-open .ic-accordion__icon--hover,
+  .ic-accordion__header:hover .ic-accordion__icon--hover {
+    opacity: 1;
+  }
+
+  .ic-accordion__icon-circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+  }
+
+  .ic-accordion__icon-circle.is-visible {
+    background-color: #eeeeee;
+  }
+
+  .ic-accordion__icon-lines {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin: 1px;
+    transition: transform 0.3s ease-in-out;
+    transform: rotate(0deg);
+  }
+
+  .ic-accordion__icon-lines::before,
+  .ic-accordion__icon-lines::after {
+    content: "";
+    position: absolute;
+    background-color: #222222;
+  }
+
+  .ic-accordion__icon-lines::before {
+    top: 50%;
+    left: 0;
+    width: 22px;
+    height: 1px;
+    transform: translateY(-50%);
+  }
+
+  .ic-accordion__icon-lines::after {
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 22px;
+    transform: translateX(-50%);
+  }
+
+  .ic-accordion__icon-lines.is-open {
+    transform: rotate(-45deg);
+  }
+
+  .ic-accordion__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-in-out;
+  }
+
+  .ic-accordion__card.is-open .ic-accordion__panel {
+    grid-template-rows: 1fr;
+  }
+
+  .ic-accordion__panel-inner {
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .ic-accordion__card.is-open .ic-accordion__panel-inner {
+    opacity: 1;
+  }
+
+  .ic-accordion__textwrapper {
+    padding: 0 30px 30px;
+  }
+
+  .ic-accordion__answer {
+    @apply m-0 text-[#3b3758];
+    font-family: var(--font-unbounded), Unbounded, sans-serif;
     font-size: 16px;
     font-weight: 300;
-    line-height: 1.55;
+    line-height: 24.8px;
+  }
+
+  @media (max-width: 960px) {
+    .ic-accordion__header:hover .ic-accordion__icon--default {
+      opacity: 1;
+    }
+
+    .ic-accordion__header:hover .ic-accordion__icon--hover {
+      opacity: 0;
+    }
+
+    .ic-accordion__card.is-open .ic-accordion__icon--default {
+      opacity: 0;
+    }
+
+    .ic-accordion__card.is-open .ic-accordion__icon--hover {
+      opacity: 1;
+    }
   }
 
   .ic-page .accordion-item {
@@ -2556,185 +2837,202 @@
     line-height: 1.55;
   }
 
-  .ic-quiz {
-    @apply relative overflow-hidden bg-[#f4f4f4];
-    border-radius: 20px;
-    min-height: 500px;
+  .ic-page__section--quiz {
+    padding-top: 70px;
+    padding-bottom: 70px;
   }
 
-  .ic-quiz__progress {
-    @apply absolute top-0 left-0 right-0 h-1 bg-[#e6e6e6] z-[2];
-  }
-
-  .ic-quiz__progress-bar {
-    @apply block h-full;
-    background: #774bd9;
-    transition: width 0.25s ease;
-  }
-
-  .ic-quiz__cover {
-    @apply relative min-h-[500px] flex items-center justify-center text-center text-white;
-    padding: 48px 32px;
-  }
-
-  .ic-quiz__cover-overlay {
-    @apply absolute inset-0;
-    background: rgba(0, 0, 0, 0.45);
-  }
-
-  .ic-quiz__cover-content {
-    @apply relative z-[1] max-w-[640px];
-  }
-
-  .ic-quiz__cover-title {
-    @apply m-0 font-body font-medium;
-    font-size: clamp(22px, 3vw, 32px);
+  .ic-page__title--quiz {
+    @apply m-0 text-center font-body text-[#3b3758];
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    font-size: 36px;
+    font-weight: 600;
     line-height: 1.3;
-    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    margin-bottom: 40px;
   }
 
-  .ic-quiz__cover-text {
-    @apply m-0 font-body;
-    font-size: 18px;
-    line-height: 1.55;
-    margin-bottom: 24px;
-    color: rgba(255, 255, 255, 0.92);
+  .ic-page__title--specialists,
+  .ic-page__title--faq {
+    @apply m-0 text-center font-body text-[#3b3758];
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 47px;
   }
 
-  .ic-quiz__panel {
-    @apply min-h-[500px] p-8 md:p-10 flex flex-col;
+  .ic-page__title--specialists {
+    margin-bottom: 40px;
   }
 
-  .ic-quiz__panel-head {
-    @apply flex items-center justify-between gap-4 mb-6;
+  .ic-page__title--faq {
+    margin-bottom: 56px;
   }
 
-  .ic-quiz__back {
-    @apply border-0 bg-transparent font-body text-[#3b3758] cursor-pointer hover:opacity-70;
-    font-size: 24px;
-    line-height: 1;
-    padding: 0;
+  .ic-page__faq {
+    width: 100%;
   }
 
-  .ic-quiz__step-label {
-    @apply font-body text-[#3b3758];
-    font-size: 14px;
-    font-weight: 500;
+  .ic-page__faq .ic-accordion {
+    width: 100%;
+    max-width: 1160px;
+    margin-inline: auto;
   }
 
-  .ic-quiz__question {
-    @apply m-0 font-body text-[#3b3758];
-    font-size: clamp(24px, 3vw, 32px);
-    font-weight: 500;
-    line-height: 1.25;
-    margin-bottom: 24px;
+  .ic-page__section--specialists {
+    padding-bottom: 70px;
   }
 
-  .ic-quiz__options {
-    @apply flex flex-col gap-3 flex-1;
-    margin-bottom: 24px;
+  .ic-specialists-carousel {
+    @apply relative w-full;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
   }
 
-  .ic-quiz__option {
-    @apply flex items-center gap-3 rounded-[12px] bg-[#f5f5f5] px-4 py-3 font-body text-[#3b3758] cursor-pointer;
-    font-size: 16px;
-    line-height: 1.4;
+  .ic-specialists-carousel__track {
+    @apply flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 select-none;
+    gap: 40px;
+    padding-inline: 40px;
+    cursor: grab;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
-  .ic-quiz__option input {
-    accent-color: #774bd9;
+  .ic-specialists-carousel__track::-webkit-scrollbar {
+    display: none;
   }
 
-  .ic-quiz__form {
-    @apply flex flex-col gap-4 flex-1;
-    margin-bottom: 24px;
+  .ic-specialists-carousel__track--dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
   }
 
-  .ic-quiz__input {
-    @apply w-full border-0 rounded-[10px] bg-[#f5f5f5] px-4 py-3 font-body text-[#3b3758];
-    font-size: 16px;
+  .ic-specialists-carousel__track--dragging .ic-specialist {
+    pointer-events: none;
   }
 
-  .ic-quiz__btn {
-    @apply self-start inline-flex items-center justify-center border-0 font-body font-semibold text-white cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed;
-    min-height: 44px;
-    padding: 10px 28px;
-    border-radius: 10px;
-    background: #774bd9;
-    font-size: 14px;
+  .ic-specialists-carousel__track--centered {
+    @apply justify-center;
+    overflow-x: hidden;
+    scroll-snap-type: none;
+    cursor: default;
   }
 
-  .ic-quiz__btn--start {
-    @apply self-center;
-  }
-
-  .ic-quiz__success {
-    @apply min-h-[500px] p-8 md:p-10 flex flex-col items-center text-center;
-  }
-
-  .ic-quiz__success-image {
-    @apply relative overflow-hidden rounded-[20px] mb-6;
-    width: min(100%, 320px);
-    aspect-ratio: 4 / 3;
-  }
-
-  .ic-quiz__success-title {
-    @apply m-0 font-body text-[#3b3758];
-    font-size: 28px;
-    font-weight: 500;
-    margin-bottom: 12px;
-  }
-
-  .ic-quiz__success-text {
-    @apply m-0 font-body text-[#3b3758] max-w-[640px];
-    font-size: 16px;
-    line-height: 1.55;
-  }
-
-  .ic-page__specialists-head {
-    @apply flex flex-wrap items-end justify-between gap-4;
-    margin-bottom: 32px;
-  }
-
-  .ic-page__specialists {
-    @apply flex gap-5 overflow-x-auto pb-2;
-    scroll-snap-type: x mandatory;
-  }
-
+  /* lifeinstitute.ru — «Наши специалисты» (rec1478100091, t1196) */
   .ic-specialist {
-    @apply relative shrink-0 overflow-hidden;
-    width: 280px;
-    scroll-snap-align: start;
+    @apply relative shrink-0 snap-start overflow-hidden;
+    flex: 0 0 360px;
+    width: 360px;
+    height: 540px;
     border-radius: 20px;
   }
 
-  .ic-specialist__photo {
-    @apply relative;
-    aspect-ratio: 3 / 4;
+  .ic-specialist__media {
+    @apply absolute inset-0;
+  }
+
+  .ic-specialist__content {
+    @apply absolute inset-x-0 bottom-0;
+    top: 244px;
+    padding: 10px;
   }
 
   .ic-specialist__body {
-    @apply relative z-[1] mx-3 -mt-8 mb-3 rounded-[20px] bg-white p-5;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    @apply rounded-[20px] bg-white;
+    padding: 20px;
+    width: 100%;
   }
 
   .ic-specialist__name {
-    @apply m-0 font-body font-semibold text-[#3b3758];
-    font-size: 14px;
-    margin-bottom: 4px;
+    @apply m-0 font-heading text-black;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 27px;
+    padding-bottom: 14px;
   }
 
   .ic-specialist__role {
-    @apply m-0 font-body text-[#3b3758];
-    font-size: 12px;
-    line-height: 1.45;
-    min-height: 52px;
-    margin-bottom: 16px;
-    opacity: 0.75;
+    @apply m-0 font-heading text-black;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24.8px;
+    padding-bottom: 20px;
   }
 
   .ic-specialist__actions {
-    @apply flex flex-col gap-2;
+    @apply flex flex-wrap items-center;
+    gap: 10px;
+  }
+
+  .ic-specialist__btn {
+    @apply inline-flex items-center justify-center border font-heading font-semibold transition-opacity hover:opacity-90;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.35;
+    padding: 12px 30px;
+    text-transform: none;
+    letter-spacing: normal;
+    white-space: nowrap;
+  }
+
+  .ic-specialist__btn--primary {
+    @apply border-transparent text-white;
+    background: #3b3758;
+  }
+
+  .ic-specialist__btn--outline {
+    @apply bg-transparent text-[#3b3758];
+    border: 1px solid #3b3758;
+    padding: 11px 30px;
+  }
+
+  .ic-specialist__btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .ic-specialists-carousel__controls {
+    @apply absolute left-0 right-0 top-1/2 z-10 items-center justify-between pointer-events-none;
+    display: none;
+    padding-inline: 24px;
+    transform: translateY(-50%);
+  }
+
+  @media (min-width: 961px) {
+    .ic-specialists-carousel__controls {
+      display: flex;
+    }
+  }
+
+  .ic-specialists-carousel__control {
+    @apply flex items-center justify-center rounded-full border-0 p-0 cursor-pointer pointer-events-auto transition-opacity hover:opacity-90;
+    width: 40px;
+    height: 40px;
+    background: #3b3758;
+  }
+
+  .ic-specialists-carousel__control svg path {
+    transition: stroke 0.2s ease-in-out;
+  }
+
+  @media (max-width: 960px) {
+    .ic-specialists-carousel__controls {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ic-specialists-carousel__track {
+      gap: 10px;
+      padding-inline: 20px;
+    }
+
+    .ic-page__title--specialists,
+    .ic-page__title--faq {
+      font-size: 28px;
+      line-height: 1.3;
+    }
   }
 
   @media (max-width: 1023px) {
@@ -2764,7 +3062,25 @@
     }
 
     .ic-page__pricing {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 460px);
+      gap: 32px;
+    }
+
+    .ic-price-card {
+      min-height: 250px;
+      padding: 28px;
+    }
+
+    .ic-price-card__icon {
+      top: 28px;
+      right: 28px;
+      width: 100px;
+      height: 100px;
+    }
+
+    .ic-price-card__title {
+      font-size: 24px;
+      max-width: calc(100% - 116px);
     }
   }
 
@@ -2786,23 +3102,104 @@
       width: 100%;
     }
 
-    .ic-page__btn--hero {
-      min-height: 52px;
+    .ic-page__hero-actions .ic-page__btn--hero {
+      width: auto;
+      flex: 1 1 0;
       min-width: 0;
-      padding: 0 24px;
-      font-size: 15px;
+      padding: 0 16px;
+      font-size: 11px;
+    }
+
+    .ic-page__title--quiz {
+      font-size: 26px;
     }
 
     .ic-page__title {
       font-size: 30px;
     }
 
+    .ic-page__title--specialists,
+    .ic-page__title--faq {
+      font-size: 28px;
+      line-height: 1.3;
+    }
+
+    .ic-page__title--faq {
+      margin-bottom: 40px;
+    }
+
+    .ic-price-card {
+      min-height: 194px;
+      padding: 24px;
+    }
+
+    .ic-price-card__icon {
+      top: 24px;
+      right: 24px;
+      width: 80px;
+      height: 80px;
+    }
+
     .ic-price-card__title {
-      font-size: 18px;
+      font-size: 22px;
+      max-width: calc(100% - 92px);
     }
 
     .ic-price-card__text {
-      font-size: 12px;
+      font-size: 16px;
+      max-width: none;
+    }
+
+    .ic-page__btn--price {
+      width: 100%;
+      max-width: 200px;
+    }
+
+    .ic-page__title--steps {
+      font-size: 36px;
+      margin-bottom: 48px;
+    }
+
+    .ic-page__section--steps {
+      padding-top: 70px;
+      padding-bottom: 70px;
+    }
+
+    .ic-accordion__trigger {
+      padding: 24px 72px 24px 24px;
+      font-size: 18px;
+    }
+
+    .ic-accordion__icon-stack {
+      right: 24px;
+    }
+
+    .ic-accordion__textwrapper {
+      padding: 0 24px 24px;
+    }
+
+    .ic-page__section--methods {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    .ic-page__section--methods .ic-page__title--methods {
+      font-size: 30px;
+      margin-bottom: 40px;
+    }
+
+    .ic-method {
+      padding: 24px;
+    }
+
+    .ic-method__icon {
+      width: 120px;
+      height: 120px;
+    }
+
+    .ic-page__title--pricing {
+      font-size: 28px;
+      margin-bottom: 40px;
     }
 
     .ic-page .accordion-item {
