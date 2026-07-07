@@ -57,6 +57,14 @@ export function AssociationResultView({ sessionId }: { sessionId: string }) {
     return <div className="tool-card max-w-lg mx-auto animate-pulse text-muted">Загрузка…</div>;
   }
 
+  const columns = [
+    { title: "16 ассоциаций", words: markDuplicates(payload.level1) },
+    { title: "8 слов", words: payload.level2 },
+    { title: "4 слова", words: payload.level3 },
+    { title: "2 направления", words: payload.level4 },
+    { title: "Ключ", words: [payload.finalWord] },
+  ];
+
   return (
     <div className="max-w-4xl mx-auto">
       <div className="tool-card">
@@ -64,14 +72,7 @@ export function AssociationResultView({ sessionId }: { sessionId: string }) {
         <p className="text-sm text-muted m-0 mb-6">
           Запрос: <strong>{payload.query}</strong> → Ключ: <strong>{payload.finalWord}</strong>
         </p>
-        <AssociationsTree
-          level1={markDuplicates(payload.level1)}
-          level2={payload.level2}
-          level3={payload.level3}
-          level4={payload.level4}
-          finalWord={payload.finalWord}
-          highlightDuplicates
-        />
+        <AssociationsTree columns={columns} />
       </div>
       <AiReportView
         text={cachedReport || analysis}

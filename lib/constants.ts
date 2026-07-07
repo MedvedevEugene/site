@@ -115,7 +115,7 @@ export const PROGRAMS = [
     icon: "/images/site/tild6532-3836-4639-a337-376536323337__base.svg",
   },
   {
-    href: "/individual-consultations",
+    href: "/psychological-help",
     meta: "от 30 минут",
     title: "Психологическая помощь",
     icon: "/images/site/tild6433-6434-4538-b932-306265666464__1.png",

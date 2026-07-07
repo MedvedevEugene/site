@@ -56,9 +56,6 @@ export function IndividualConsultationsSection({ specialists }: IndividualConsul
                 <button type="button" className="ic-page__btn ic-page__btn--hero ic-page__btn--outline" onClick={() => scrollTo("quiz")}>
                   ПОЛУЧИТЬ КОНСУЛЬТАЦИЮ
                 </button>
-                <button type="button" className="ic-page__btn ic-page__btn--hero ic-page__btn--outline" onClick={() => scrollTo("ai-tools")}>
-                  ПРОЙТИ ОНЛАЙН-ИНСТРУМЕНТ
-                </button>
               </div>
             </div>
             <div className="ic-page__hero-media">

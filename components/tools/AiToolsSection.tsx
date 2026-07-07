@@ -10,15 +10,10 @@ export function AiToolsSection({ variant = "default", id = "ai-tools" }: AiTools
   const isIc = variant === "ic";
 
   return (
-    <section
-      className={isIc ? "ic-page__section ic-page__section--ai-tools" : "section"}
-      id={id}
-    >
+    <section className={isIc ? "ic-page__section" : "section"} id={id}>
       <div className="container-site">
-        <h2 className={isIc ? "ic-page__title ic-page__title--center" : "section-title"}>
-          Цифровые НЛП/НЛУ-инструменты
-        </h2>
-        <p className={isIc ? "ic-page__subtitle ic-page__subtitle--center" : "section-subtitle"}>
+        <h2 className={isIc ? "ic-page__title" : "section-title"}>Цифровые НЛП/НЛУ-инструменты</h2>
+        <p className={isIc ? "ic-page__subtitle" : "section-subtitle"}>
           Самостоятельное исследование → карта ответов → ИИ-разбор
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

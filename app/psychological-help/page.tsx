@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { AiToolsSection } from "@/components/tools/AiToolsSection";
 
 export const metadata: Metadata = {
   title: "Психологическая помощь",
@@ -37,9 +38,9 @@ export default function PsychologicalHelpPage() {
                 <a href="#formats" className="btn btn-primary">
                   Выбрать формат помощи
                 </a>
-                <Link href="/individual-consultations#ai-tools" className="btn btn-outline">
+                <a href="#ai-tools" className="btn btn-outline">
                   Пройти онлайн-инструмент
-                </Link>
+                </a>
                 <Link href="/individual-consultations" className="btn btn-outline">
                   Записаться на консультацию
                 </Link>
@@ -71,6 +72,8 @@ export default function PsychologicalHelpPage() {
           </div>
         </div>
       </section>
+
+      <AiToolsSection />
 
       <section className="section-cream" id="formats">
         <div className="container-site">

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { AssociationsTree } from "@/components/tools/AssociationsTree";
 import { AiReportView, saveToolSession, useAiAnalysis } from "@/components/tools/AiReportView";
 import { ToolAccessGate } from "@/components/tools/ToolAccessGate";
-import { pairIndices, pairWords } from "@/lib/tool-config";
+import { pairWords } from "@/lib/tool-config";
 
 export function SixteenAssociationsWizard() {
   const router = useRouter();
@@ -70,11 +70,13 @@ export function SixteenAssociationsWizard() {
               Запрос: <strong>{query.trim()}</strong> → Ключ: <strong>{finalWord.trim()}</strong>
             </p>
             <AssociationsTree
-              level1={level1.map((w) => w.trim())}
-              level2={level2.map((w) => w.trim())}
-              level3={level3.map((w) => w.trim())}
-              level4={level4.map((w) => w.trim())}
-              finalWord={finalWord.trim()}
+              columns={[
+                { title: "16 ассоциаций", words: level1.map((w) => w.trim()) },
+                { title: "8 слов", words: level2.map((w) => w.trim()) },
+                { title: "4 слова", words: level3.map((w) => w.trim()) },
+                { title: "2 направления", words: level4.map((w) => w.trim()) },
+                { title: "Ключ", words: [finalWord.trim()] },
+              ]}
             />
             <p className="text-xs text-muted m-0 mt-4">
               Не удалось сохранить сессию — разбор показан здесь. Для постоянной ссылки пройдите тест снова позже.
@@ -103,38 +105,20 @@ export function SixteenAssociationsWizard() {
       {step === 1 && (
         <>
           <h3 className="font-heading text-xl m-0 mb-4">16 первичных ассоциаций</h3>
-          <p className="text-sm text-muted m-0 mb-4">
-            Впишите слова по порядку. Слова 1 и 2 образуют одну пару, 3 и 4 — другую, и так далее.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {pairIndices(16).map(([leftIndex, rightIndex], pairIndex) => (
-              <div key={pairIndex} className="assoc-input-pair">
-                <p className="assoc-input-pair__label">
-                  Пара {pairIndex + 1}: слова {leftIndex + 1} и {rightIndex + 1}
-                </p>
-                <div className="flex flex-col gap-2">
-                  <input
-                    value={level1[leftIndex]}
-                    onChange={(e) => {
-                      const next = [...level1];
-                      next[leftIndex] = e.target.value;
-                      setLevel1(next);
-                    }}
-                    placeholder={`Слово ${leftIndex + 1}`}
-                    className="tool-input"
-                  />
-                  <input
-                    value={level1[rightIndex]}
-                    onChange={(e) => {
-                      const next = [...level1];
-                      next[rightIndex] = e.target.value;
-                      setLevel1(next);
-                    }}
-                    placeholder={`Слово ${rightIndex + 1}`}
-                    className="tool-input"
-                  />
-                </div>
-              </div>
+          <p className="text-sm text-muted m-0 mb-4">Первые слова, которые приходят в голову. Повторы допустимы.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {level1.map((val, i) => (
+              <input
+                key={i}
+                value={val}
+                onChange={(e) => {
+                  const next = [...level1];
+                  next[i] = e.target.value;
+                  setLevel1(next);
+                }}
+                placeholder={`Ассоциация ${i + 1}`}
+                className="tool-input"
+              />
             ))}
           </div>
         </>
@@ -146,14 +130,7 @@ export function SixteenAssociationsWizard() {
           <div className="flex flex-col gap-4">
             {pairs1.map(([a, b], i) => (
               <div key={i} className="tool-pair-row">
-                <span className="text-sm text-muted shrink-0">
-                  Слова {i * 2 + 1} + {i * 2 + 2}
-                  {(a.trim() || b.trim()) && (
-                    <>
-                      : <strong>{a.trim() || "…"}</strong> + <strong>{b.trim() || "…"}</strong>
-                    </>
-                  )}
-                </span>
+                <span className="text-sm text-muted shrink-0">{a} + {b}</span>
                 <input
                   value={level2[i]}
                   onChange={(e) => {
@@ -176,14 +153,7 @@ export function SixteenAssociationsWizard() {
           <div className="flex flex-col gap-4">
             {pairs2.map(([a, b], i) => (
               <div key={i} className="tool-pair-row">
-                <span className="text-sm text-muted shrink-0">
-                  Слова {i * 2 + 1} + {i * 2 + 2} из 8
-                  {(a.trim() || b.trim()) && (
-                    <>
-                      : <strong>{a.trim() || "…"}</strong> + <strong>{b.trim() || "…"}</strong>
-                    </>
-                  )}
-                </span>
+                <span className="text-sm text-muted shrink-0">{a} + {b}</span>
                 <input
                   value={level3[i]}
                   onChange={(e) => {
@@ -206,14 +176,7 @@ export function SixteenAssociationsWizard() {
           <div className="flex flex-col gap-4">
             {pairs3.map(([a, b], i) => (
               <div key={i} className="tool-pair-row">
-                <span className="text-sm text-muted shrink-0">
-                  Слова {i * 2 + 1} + {i * 2 + 2} из 4
-                  {(a.trim() || b.trim()) && (
-                    <>
-                      : <strong>{a.trim() || "…"}</strong> + <strong>{b.trim() || "…"}</strong>
-                    </>
-                  )}
-                </span>
+                <span className="text-sm text-muted shrink-0">{a} + {b}</span>
                 <input
                   value={level4[i]}
                   onChange={(e) => {
