@@ -7,12 +7,15 @@ export type AiCompletionResult = {
   modelUsed?: string;
 };
 
+import { isValidAiReport, normalizeAiReport } from "@/lib/ai-report";
+
 const FREE_MODEL_FALLBACKS = [
   "meta-llama/llama-3.3-70b-instruct:free",
   "meta-llama/llama-3.2-3b-instruct:free",
-  "qwen/qwen3-next-80b-a3b-instruct:free",
   "openrouter/free",
 ] as const;
+
+const AI_MAX_TOKENS = 4000;
 
 const CJK_PATTERN = /[\u4e00-\u9fff\u3400-\u4dbf\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af]+/g;
 
@@ -51,7 +54,7 @@ async function callOpenRouter(
     body: JSON.stringify({
       model,
       messages,
-      max_tokens: 2500,
+      max_tokens: AI_MAX_TOKENS,
       temperature: 0.7,
     }),
   });
@@ -73,8 +76,14 @@ async function callOpenRouter(
     choices?: Array<{ message?: { content?: string } }>;
   };
   const content = data.choices?.[0]?.message?.content || null;
-  const sanitized = content ? sanitizeRussianAiText(content) : null;
-  return { content: sanitized, error: sanitized ? undefined : "empty_response" };
+  if (!content) return { content: null, error: "empty_response" };
+
+  const normalized = normalizeAiReport(sanitizeRussianAiText(content));
+  if (!isValidAiReport(normalized)) {
+    return { content: null, error: "invalid_report" };
+  }
+
+  return { content: normalized };
 }
 
 export async function generateAiCompletion(prompt: string): Promise<AiCompletionResult> {
@@ -115,7 +124,8 @@ export async function generateAiCompletion(prompt: string): Promise<AiCompletion
           lastError.includes("rate") ||
           lastError.includes("429") ||
           lastError.includes("503") ||
-          lastError.includes("empty_response");
+          lastError.includes("empty_response") ||
+          lastError.includes("invalid_report");
         if (!retryable) break;
       }
 
@@ -133,24 +143,24 @@ export async function generateAiCompletion(prompt: string): Promise<AiCompletion
         body: JSON.stringify({
           model,
           messages,
-          max_tokens: 2500,
+          max_tokens: AI_MAX_TOKENS,
           temperature: 0.7,
         }),
       });
-      const raw = await res.text();
+      const responseText = await res.text();
       if (!res.ok) {
-        console.error("[ai] OpenAI error", res.status, raw);
+        console.error("[ai] OpenAI error", res.status, responseText);
         return { content: null, error: `openai_${res.status}`, hasKey: true };
       }
-      const data = JSON.parse(raw) as {
+      const data = JSON.parse(responseText) as {
         choices?: Array<{ message?: { content?: string } }>;
       };
+      const messageContent = data.choices?.[0]?.message?.content;
+      const normalized = messageContent ? normalizeAiReport(sanitizeRussianAiText(messageContent)) : null;
       return {
-        content: data.choices?.[0]?.message?.content
-          ? sanitizeRussianAiText(data.choices[0].message.content)
-          : null,
+        content: normalized && isValidAiReport(normalized) ? normalized : null,
         hasKey: true,
-        error: data.choices?.[0]?.message?.content ? undefined : "empty_response",
+        error: normalized && isValidAiReport(normalized) ? undefined : "invalid_report",
         modelUsed: model,
       };
     }
