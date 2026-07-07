@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FAQ } from "@/components/ui/FAQ";
+import { BusinessCourseHeroSection } from "@/components/business-course/BusinessCourseHeroSection";
 import { BusinessCoursePopup } from "@/components/business-course/BusinessCoursePopup";
 import {
   BUSINESS_COURSE_AUDIENCE,
@@ -12,11 +13,9 @@ import {
   BUSINESS_COURSE_FAQ,
   BUSINESS_COURSE_FINAL,
   BUSINESS_COURSE_FORMAT,
-  BUSINESS_COURSE_HERO,
   BUSINESS_COURSE_IMAGES,
   BUSINESS_COURSE_METHOD,
   BUSINESS_COURSE_MODULES,
-  BUSINESS_COURSE_NAV,
   BUSINESS_COURSE_PROGRAM_INTRO,
   BUSINESS_COURSE_SALES,
   BUSINESS_COURSE_TARIFFS,
@@ -34,52 +33,10 @@ export function BusinessCoursePage() {
     <>
       <div className="busc-page">
         {/* Hero — rec2284896261 */}
-        <section className="busc-hero">
-          <Image src={BUSINESS_COURSE_IMAGES.heroBg} alt="" fill priority className="busc-hero__bg" sizes="100vw" />
-          <div className="busc-hero__overlay" aria-hidden />
-          <div className="busc-hero__inner">
-            <header className="busc-hero__header">
-              <Image src={BUSINESS_COURSE_IMAGES.heroLogo} alt="ИЖСИЗ" width={180} height={48} className="busc-hero__logo" />
-              <nav className="busc-hero__nav" aria-label="Навигация по странице">
-                {BUSINESS_COURSE_NAV.map((item) => (
-                  <a key={item.href} href={item.href} className="busc-hero__nav-link">
-                    {item.label}
-                  </a>
-                ))}
-              </nav>
-            </header>
-
-            <div className="busc-hero__main">
-              <div className="busc-hero__content">
-                <span className="busc-badge">{BUSINESS_COURSE_HERO.badge}</span>
-                <h1 className="busc-hero__title">{BUSINESS_COURSE_HERO.title}</h1>
-                <p className="busc-hero__subtitle">{BUSINESS_COURSE_HERO.subtitle}</p>
-                <div className="busc-hero__offer">
-                  <Image src={BUSINESS_COURSE_IMAGES.heroGift} alt="" width={45} height={45} />
-                  <span>{BUSINESS_COURSE_HERO.offer}</span>
-                </div>
-                <div className="busc-hero__actions">
-                  <button type="button" className="busc-btn busc-btn--primary" onClick={openPopup(setPopup, "program")}>
-                    Получить программу курса
-                  </button>
-                  <button type="button" className="busc-btn busc-btn--ghost" onClick={openPopup(setPopup, "consultation")}>
-                    Записаться на консультацию
-                  </button>
-                </div>
-                <ul className="busc-hero__stats">
-                  {BUSINESS_COURSE_HERO.stats.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="busc-hero__scroll" aria-hidden>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </div>
-          </div>
-        </section>
+        <BusinessCourseHeroSection
+          onProgramClick={openPopup(setPopup, "program")}
+          onConsultationClick={openPopup(setPopup, "consultation")}
+        />
 
         {/* Method — rec2284974381 */}
         <section className="busc-section busc-method">
