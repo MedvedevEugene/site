@@ -3696,59 +3696,6 @@
     }
   }
 
-  /* Program t668 rec1458816831 */
-  .bc-program {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 1160px;
-    margin: 0 auto;
-  }
-
-  .bc-program__item {
-    overflow: hidden;
-    border-radius: 20px;
-    background-color: #f9f8e8;
-  }
-
-  .bc-program__summary {
-    display: flex;
-    align-items: center;
-    min-height: 72px;
-    padding: 20px 30px;
-    list-style: none;
-    cursor: pointer;
-    font-family: var(--font-body), Montserrat, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.3;
-    color: #3b3758;
-  }
-
-  @media (min-width: 640px) {
-    .bc-program__summary {
-      font-size: 20px;
-    }
-  }
-
-  .bc-program__summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .bc-program__summary::after {
-    content: "+";
-    margin-left: auto;
-    padding-left: 16px;
-    font-size: 24px;
-    font-weight: 300;
-    line-height: 1;
-    color: #3b3758;
-  }
-
-  .bc-program__item[open] .bc-program__summary::after {
-    content: "−";
-  }
-
   /* Reviews t994 rec1458816851 */
   .bc-reviews-section {
     overflow: hidden;

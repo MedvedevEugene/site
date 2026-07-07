@@ -9,13 +9,13 @@ import { BaseCourseReviewsCarousel } from "@/components/base-course/BaseCourseRe
 import { BaseCourseAudienceSection } from "@/components/base-course/BaseCourseAudienceSection";
 import { BaseCourseReasonsSection } from "@/components/base-course/BaseCourseReasonsSection";
 import { BaseCourseAboutSection } from "@/components/base-course/BaseCourseAboutSection";
+import { BaseCourseProgramSection } from "@/components/base-course/BaseCourseProgramSection";
 import { BaseCourseStepsSection } from "@/components/base-course/BaseCourseStepsSection";
 import {
   BASE_COURSE_CREATOR,
   BASE_COURSE_FAQ,
   BASE_COURSE_HERO,
   BASE_COURSE_IMAGES,
-  BASE_COURSE_MODULES,
   BASE_COURSE_TARIFFS,
   type BaseCoursePopupKind,
 } from "@/lib/base-course-data";
@@ -99,19 +99,8 @@ export function BaseCoursePage() {
         {/* About constellations — rec1458816801 */}
         <BaseCourseAboutSection onConsultation={openPopup(setPopup, "consultation")} />
 
-        {/* Program — rec1458816831, t668 */}
-        <section className="bc-section">
-          <div className="container-site">
-            <h2 className="bc-section-title">Программа курса</h2>
-            <div className="bc-program">
-              {BASE_COURSE_MODULES.map((module) => (
-                <details key={module} className="bc-program__item">
-                  <summary className="bc-program__summary">{module}</summary>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Program — rec1458816811 + rec1458816831, t668 */}
+        <BaseCourseProgramSection onConsultation={openPopup(setPopup, "consultation")} />
 
         {/* Reviews — rec1458816841 + rec1458816851 t994 */}
         <section className="bc-section bc-section--cream bc-reviews-section">
