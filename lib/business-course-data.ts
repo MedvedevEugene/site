@@ -4,6 +4,7 @@ export const BUSINESS_COURSE_IMAGES = {
   heroGift: `/images/site/tild3563-3061-4965-b938-366634623866__image_81.png`,
   heroScroll: `/images/site/tild6533-3335-4566-a462-396230303664__Frame_1321317130.svg`,
   heroPhoto: `/images/site/tild3734-3538-4564-a436-373839386631__Group_44.png`,
+  methodBg: `/images/site/tild3736-3633-4064-b234-616435633739__123123.png`,
   methodImage: `/images/site/tild6137-3031-4130-a638-363238663963__image_1319.png`,
   formatDecor: `/images/site/tild3736-3633-4064-b234-616435633739__123123.png`,
   salesImage: `/images/site/tild6430-6262-4934-b431-353166623034__Section.png`,

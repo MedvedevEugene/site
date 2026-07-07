@@ -1,0 +1,181 @@
+.section {
+  position: relative;
+  padding: 0 0 72px;
+  background: #0a0710;
+}
+
+@media (min-width: 960px) {
+  .section {
+    padding-bottom: 96px;
+  }
+}
+
+.panel {
+  width: min(1200px, calc(100% - 40px));
+  margin-inline: auto;
+  padding: 48px 20px 40px;
+  border-radius: 40px;
+  overflow: hidden;
+  background-color: #000000;
+  background-image: url("/images/site/tild3736-3633-4064-b234-616435633739__123123.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+@media (min-width: 640px) {
+  .panel {
+    padding: 56px 28px 48px;
+    border-radius: 48px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .panel {
+    padding: 80px 40px 64px;
+    border-radius: 60px;
+  }
+}
+
+.header {
+  max-width: 886px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+@media (min-width: 960px) {
+  .header {
+    margin-bottom: 48px;
+  }
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 20px;
+  padding: 8px 18px;
+  border: 1px solid #935ef9;
+  border-radius: 999px;
+  background: #372053;
+  font-family: var(--font-body), Montserrat, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #935ef9;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-body), Montserrat, Arial, sans-serif;
+  font-size: clamp(32px, 6vw, 60px);
+  font-weight: 600;
+  line-height: 1.1;
+  color: #f7f8fb;
+}
+
+.titleAccent {
+  background-image: linear-gradient(103.72deg, #f7f8fb 0%, #c999ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  max-width: 760px;
+  margin: 20px auto 0;
+  font-family: var(--font-body), Montserrat, Arial, sans-serif;
+  font-size: clamp(16px, 2.4vw, 20px);
+  font-weight: 400;
+  line-height: 1.63;
+  color: #9597a4;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: 360px minmax(0, 1fr);
+    gap: 40px;
+  }
+}
+
+.media {
+  overflow: hidden;
+  border-radius: 30px;
+  background: #000000;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  object-fit: cover;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 640px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 40px;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  border: 1px solid #272637;
+  border-radius: 30px;
+  background: linear-gradient(180deg, rgba(9, 9, 21, 0.4) 0%, rgba(21, 20, 35, 0.6) 100%);
+  box-shadow: 0 8px 32px -8px rgba(1, 0, 8, 0.5);
+}
+
+.cardNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  min-height: 50px;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  background: #372053;
+  font-family: var(--font-body), Montserrat, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.56;
+  color: #935ef9;
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: var(--font-body), Montserrat, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.39;
+  color: #f7f8fb;
+}
+
+.cardText {
+  margin: 0;
+  font-family: var(--font-body), Montserrat, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #9597a4;
+}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FAQ } from "@/components/ui/FAQ";
 import { BusinessCourseHeroSection } from "@/components/business-course/BusinessCourseHeroSection";
+import { BusinessCourseMethodSection } from "@/components/business-course/BusinessCourseMethodSection";
 import { BusinessCoursePopup } from "@/components/business-course/BusinessCoursePopup";
 import {
   BUSINESS_COURSE_AUDIENCE,
@@ -14,7 +15,6 @@ import {
   BUSINESS_COURSE_FINAL,
   BUSINESS_COURSE_FORMAT,
   BUSINESS_COURSE_IMAGES,
-  BUSINESS_COURSE_METHOD,
   BUSINESS_COURSE_MODULES,
   BUSINESS_COURSE_PROGRAM_INTRO,
   BUSINESS_COURSE_SALES,
@@ -39,35 +39,7 @@ export function BusinessCoursePage() {
         />
 
         {/* Method — rec2284974381 */}
-        <section className="busc-section busc-method">
-          <div className="busc-container">
-            <div className="busc-section-head">
-              <span className="busc-label">{BUSINESS_COURSE_METHOD.label}</span>
-              <h2 className="busc-section-title">{BUSINESS_COURSE_METHOD.title}</h2>
-              <p className="busc-section-subtitle">{BUSINESS_COURSE_METHOD.subtitle}</p>
-            </div>
-            <div className="busc-method__grid">
-              <div className="busc-method__media">
-                <Image
-                  src={BUSINESS_COURSE_IMAGES.methodImage}
-                  alt=""
-                  width={520}
-                  height={640}
-                  className="busc-method__image"
-                />
-              </div>
-              <div className="busc-method__cards">
-                {BUSINESS_COURSE_METHOD.items.map((item) => (
-                  <article key={item.num} className="busc-card busc-card--glass">
-                    <span className="busc-card__num">{item.num}</span>
-                    <h3 className="busc-card__title">{item.title}</h3>
-                    <p className="busc-card__text">{item.text}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <BusinessCourseMethodSection />
 
         {/* Audience — rec2285016521 */}
         <section className="busc-section busc-audience">

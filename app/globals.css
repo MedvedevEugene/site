@@ -3987,40 +3987,6 @@
     color: rgba(255, 255, 255, 0.72);
   }
 
-  /* Method */
-  .busc-method__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-    align-items: start;
-  }
-
-  @media (min-width: 960px) {
-    .busc-method__grid {
-      grid-template-columns: minmax(280px, 420px) 1fr;
-      gap: 32px;
-    }
-  }
-
-  .busc-method__image {
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
-    object-fit: cover;
-  }
-
-  .busc-method__cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  @media (min-width: 640px) {
-    .busc-method__cards {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
   /* Audience */
   .busc-audience__grid {
     display: grid;
