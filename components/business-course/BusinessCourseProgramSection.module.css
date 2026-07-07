@@ -1,9 +1,11 @@
 .section {
   position: relative;
   padding: 56px 0 72px;
-  background:
-    radial-gradient(ellipse 90% 55% at 50% 0%, rgba(88, 52, 140, 0.32) 0%, rgba(88, 52, 140, 0) 68%),
-    #0a0710;
+  background: radial-gradient(
+    ellipse 90% 55% at 50% 0%,
+    rgba(88, 52, 140, 0.32) 0%,
+    rgba(88, 52, 140, 0) 68%
+  );
 }
 
 @media (min-width: 960px) {

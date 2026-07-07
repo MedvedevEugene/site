@@ -1,7 +1,6 @@
 .section {
   position: relative;
   padding: 0 0 72px;
-  background: #0a0710;
 }
 
 @media (min-width: 960px) {

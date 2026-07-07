@@ -1,4 +1,5 @@
 export const BUSINESS_COURSE_IMAGES = {
+  pageBg: `/images/site/tild3839-6331-4666-a134-353766346539__Desktop_-_5.png`,
   heroBg: `/images/site/tild3230-6139-4132-a233-653533323336__cc1d58be5a59d441e6ef.png`,
   heroLogo: `/images/site/tild6535-6536-4434-b237-396530303934__logo_b.svg`,
   heroGift: `/images/site/tild3563-3061-4965-b938-366634623866__image_81.png`,
