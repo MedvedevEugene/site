@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   BUSINESS_COURSE_MODULES,
   BUSINESS_COURSE_PROGRAM_INTRO,
@@ -31,6 +34,12 @@ type BusinessCourseProgramSectionProps = {
 };
 
 export function BusinessCourseProgramSection({ onApply }: BusinessCourseProgramSectionProps) {
+  const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
+
+  const toggleItem = (num: string) => {
+    setOpenItems((prev) => ({ ...prev, [num]: !prev[num] }));
+  };
+
   return (
     <section className={styles.section} id="program" aria-labelledby="busc-program-title">
       <div className={styles.wrap}>
@@ -45,28 +54,42 @@ export function BusinessCourseProgramSection({ onApply }: BusinessCourseProgramS
         </header>
 
         <div className={styles.list}>
-          {BUSINESS_COURSE_MODULES.map((mod) => (
-            <details key={mod.num} className={styles.item}>
-              <summary className={styles.summary}>
-                <span className={styles.summaryTitle}>
-                  <span className={styles.blockLabel}>Блок </span>
-                  <span className={styles.blockNum}>{mod.num}</span>
-                  <span className={styles.moduleName}>{mod.title}</span>
-                </span>
-                <span className={styles.iconWrap} aria-hidden>
-                  <PlusIcon className={styles.icon} />
-                </span>
-              </summary>
-              <div className={styles.body}>
-                <p className={styles.lead}>Ваши результаты после прохождения блока:</p>
-                <ul>
-                  {mod.results.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </details>
-          ))}
+          {BUSINESS_COURSE_MODULES.map((mod) => {
+            const isOpen = Boolean(openItems[mod.num]);
+
+            return (
+              <article key={mod.num} className={`${styles.item}${isOpen ? ` ${styles.itemOpen}` : ""}`}>
+                <button
+                  type="button"
+                  className={styles.summary}
+                  aria-expanded={isOpen}
+                  onClick={() => toggleItem(mod.num)}
+                >
+                  <span className={styles.summaryTitle}>
+                    <span className={styles.blockLabel}>Блок </span>
+                    <span className={styles.blockNum}>{mod.num}</span>
+                    <span className={styles.moduleName}>{mod.title}</span>
+                  </span>
+                  <span className={styles.iconWrap} aria-hidden>
+                    <PlusIcon className={styles.icon} />
+                  </span>
+                </button>
+
+                <div className={styles.panel} aria-hidden={!isOpen}>
+                  <div className={styles.panelInner}>
+                    <div className={styles.body}>
+                      <p className={styles.lead}>Ваши результаты после прохождения блока:</p>
+                      <ul>
+                        {mod.results.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         <div className={styles.ctaWrap}>
