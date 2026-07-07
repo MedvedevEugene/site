@@ -3792,7 +3792,12 @@
 
 /* Business course — lifeinstitute.ru/business-cource */
   .busc-page {
-    background: #0a0710;
+    background-color: #0a0710;
+    background-image: url("/images/site/tild3736-3633-4064-b234-616435633739__123123.png");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    background-attachment: scroll;
     color: #ffffff;
     overflow-x: hidden;
   }
@@ -3999,30 +4004,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 20px;
     }
-  }
-
-  /* Format */
-  .busc-format__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-bottom: 40px;
-  }
-
-  @media (min-width: 640px) {
-    .busc-format__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 960px) {
-    .busc-format__grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .busc-format__head {
-    text-align: center;
   }
 
   /* Sales */

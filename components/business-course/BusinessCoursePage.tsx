@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FAQ } from "@/components/ui/FAQ";
 import { BusinessCourseHeroSection } from "@/components/business-course/BusinessCourseHeroSection";
 import { BusinessCourseMethodSection } from "@/components/business-course/BusinessCourseMethodSection";
+import { BusinessCourseFormatSection } from "@/components/business-course/BusinessCourseFormatSection";
 import { BusinessCourseProgramSection } from "@/components/business-course/BusinessCourseProgramSection";
 import { BusinessCoursePopup } from "@/components/business-course/BusinessCoursePopup";
 import {
@@ -14,7 +15,6 @@ import {
   BUSINESS_COURSE_DIPLOMA,
   BUSINESS_COURSE_FAQ,
   BUSINESS_COURSE_FINAL,
-  BUSINESS_COURSE_FORMAT,
   BUSINESS_COURSE_IMAGES,
   BUSINESS_COURSE_SALES,
   BUSINESS_COURSE_TARIFFS,
@@ -63,22 +63,7 @@ export function BusinessCoursePage() {
         <BusinessCourseProgramSection onApply={openPopup(setPopup, "apply")} />
 
         {/* Format — rec2302035251 */}
-        <section className="busc-section busc-format">
-          <div className="busc-container">
-            <div className="busc-format__grid">
-              {BUSINESS_COURSE_FORMAT.items.map((item) => (
-                <article key={item.title} className="busc-card busc-card--glass busc-format__item">
-                  <h3 className="busc-card__title">{item.title}</h3>
-                  <p className="busc-card__text">{item.text}</p>
-                </article>
-              ))}
-            </div>
-            <div className="busc-format__head">
-              <span className="busc-label">{BUSINESS_COURSE_FORMAT.label}</span>
-              <h2 className="busc-section-title">{BUSINESS_COURSE_FORMAT.title}</h2>
-            </div>
-          </div>
-        </section>
+        <BusinessCourseFormatSection />
 
         {/* Sales — rec2302040081 */}
         <section className="busc-section busc-sales">
