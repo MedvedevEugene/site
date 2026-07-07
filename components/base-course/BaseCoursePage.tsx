@@ -8,12 +8,12 @@ import { BaseCourseReviewsCarousel } from "@/components/base-course/BaseCourseRe
 import { BaseCourseAudienceSection } from "@/components/base-course/BaseCourseAudienceSection";
 import { BaseCourseReasonsSection } from "@/components/base-course/BaseCourseReasonsSection";
 import { BaseCourseAboutSection } from "@/components/base-course/BaseCourseAboutSection";
+import { BaseCourseCreatorSection } from "@/components/base-course/BaseCourseCreatorSection";
 import { BaseCourseFaqSection } from "@/components/base-course/BaseCourseFaqSection";
 import { BaseCourseProgramSection } from "@/components/base-course/BaseCourseProgramSection";
 import { BaseCourseStepsSection } from "@/components/base-course/BaseCourseStepsSection";
 import { BaseCourseTariffsSection } from "@/components/base-course/BaseCourseTariffsSection";
 import {
-  BASE_COURSE_CREATOR,
   BASE_COURSE_HERO,
   BASE_COURSE_IMAGES,
   type BaseCoursePopupKind,
@@ -121,31 +121,8 @@ export function BaseCoursePage() {
         {/* FAQ — rec1460075601 + rec1458816891, t668 */}
         <BaseCourseFaqSection />
 
-        {/* Creator — rec1458816911 */}
-        <section className="bc-section">
-          <div className="container-site bc-creator">
-            <div className="bc-creator__photo-wrap">
-              <Image
-                src={BASE_COURSE_IMAGES.creator}
-                alt={BASE_COURSE_CREATOR.name}
-                width={360}
-                height={420}
-                className="bc-creator__photo"
-              />
-            </div>
-            <div className="bc-creator__content">
-              <h2 className="bc-section-title bc-section-title--left">Создатель курса</h2>
-              <h3 className="bc-creator__name">{BASE_COURSE_CREATOR.name}</h3>
-              <p className="bc-creator__quote">{BASE_COURSE_CREATOR.quote}</p>
-              <ul className="bc-creator__credentials">
-                {BASE_COURSE_CREATOR.credentials.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <p className="bc-creator__bio">{BASE_COURSE_CREATOR.bio}</p>
-            </div>
-          </div>
-        </section>
+        {/* Creator — rec1458816901 */}
+        <BaseCourseCreatorSection />
 
         {/* Final CTA */}
         <section className="bc-section bc-section--cream bc-final">
