@@ -41,10 +41,10 @@ export function BaseCourseCreatorSection() {
             <Image
               src={BASE_COURSE_IMAGES.creator}
               alt={BASE_COURSE_CREATOR.name}
-              width={820}
-              height={1083}
+              width={794}
+              height={1049}
               className={styles.photo}
-              sizes="(min-width: 960px) 820px, 560px"
+              sizes="(min-width: 960px) 794px, 560px"
             />
           </div>
         </div>

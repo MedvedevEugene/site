@@ -6,7 +6,7 @@
 
 @media (min-width: 960px) {
   .section {
-    padding: 120px 0 64px;
+    padding: 200px 0 64px;
   }
 }
 
@@ -35,7 +35,7 @@
 
 @media (min-width: 960px) {
   .panel {
-    min-height: 800px;
+    min-height: 861px;
     border-radius: 60px;
   }
 }
@@ -188,12 +188,13 @@
 @media (min-width: 960px) {
   .media {
     position: absolute;
-    top: -175px;
-    right: -24px;
+    right: 0;
+    bottom: 0;
     z-index: 3;
-    width: min(820px, 58%);
+    width: min(794px, 58%);
     margin: 0;
     padding: 0;
+    line-height: 0;
   }
 }
 
@@ -212,6 +213,7 @@
 @media (min-width: 960px) {
   .photo {
     width: 100%;
-    max-width: none;
+    height: auto;
+    display: block;
   }
 }
