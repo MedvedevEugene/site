@@ -42,7 +42,12 @@ export function ToolAccessGate({ children }: { children: ReactNode }) {
   }
 
   if (phase === "disclaimer") {
-    return <ToolDisclaimer onAccept={() => setPhase("ready")} />;
+    return (
+      <ToolDisclaimer
+        onAccept={() => setPhase("ready")}
+        onClose={() => setPhase("ready")}
+      />
+    );
   }
 
   return (
