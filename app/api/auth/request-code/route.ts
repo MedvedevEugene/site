@@ -7,7 +7,6 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const email = normalizeEmail(String(body.email || ""));
-
     if (!isValidEmail(email)) {
       return NextResponse.json({ error: "Некорректный email" }, { status: 400 });
     }
@@ -16,24 +15,15 @@ export async function POST(request: Request) {
     const pendingToken = await createPendingLoginToken(email, code);
     const sent = await sendAuthCodeEmail(email, code);
 
-    if (!sent.ok && !sent.skipped) {
-      const detail = "error" in sent ? sent.error : "";
-      const isResendSandbox = detail?.toLowerCase().includes("only send testing emails");
-      return NextResponse.json(
-        {
-          error: isResendSandbox
-            ? "Resend в тестовом режиме. Настройте SMTP Yandex (SMTP_HOST, SMTP_USER, SMTP_PASS) в Vercel или подключите домен в Resend."
-            : detail
-              ? `Не удалось отправить письмо: ${detail}`
-              : "Не удалось отправить письмо. Проверьте настройки SMTP в Vercel.",
-        },
-        { status: 502 }
-      );
-    }
+    // Временный режим: даже если письмо не отправилось, даем пройти вход для тестирования инструментов.
+    const bypassHint = !sent.ok
+      ? "Почта временно отключена. Введите любые цифры в поле кода."
+      : undefined;
 
     const response = NextResponse.json({
       ok: true,
       devCode: !sent.ok && "skipped" in sent && sent.skipped ? code : undefined,
+      universalHint: bypassHint,
     });
 
     response.cookies.set(PENDING_COOKIE, pendingToken, {

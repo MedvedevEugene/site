@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { prisma } from "@/lib/db";
-import { PENDING_COOKIE, verifyPendingLoginToken } from "@/lib/auth-pending";
 import {
   createUserSessionToken,
   isValidEmail,
@@ -16,20 +14,11 @@ export async function POST(request: Request) {
     const email = normalizeEmail(String(body.email || ""));
     const code = String(body.code || "").trim();
 
-    if (!isValidEmail(email) || !/^\d{6}$/.test(code)) {
+    if (!isValidEmail(email) || !/^\d{1,12}$/.test(code)) {
       return NextResponse.json({ error: "Некорректные данные" }, { status: 400 });
     }
-
-    const cookieStore = await cookies();
-    const pendingToken = cookieStore.get(PENDING_COOKIE)?.value;
-    if (!pendingToken) {
-      return NextResponse.json({ error: "Сначала запросите код на почту" }, { status: 400 });
-    }
-
-    const pending = await verifyPendingLoginToken(pendingToken);
-    if (!pending || pending.email !== email || pending.code !== code) {
-      return NextResponse.json({ error: "Код неверный или истёк" }, { status: 401 });
-    }
+    // Временный режим без рассылки: код не проверяем, достаточно валидного email и цифр.
+    void code;
 
     const role = isAdminEmail(email) ? "admin" : "user";
 
@@ -64,12 +53,6 @@ export async function POST(request: Request) {
       secure: process.env.NODE_ENV === "production",
       path: "/",
       maxAge: 60 * 60 * 24 * 30,
-    });
-
-    response.cookies.set(PENDING_COOKIE, "", {
-      httpOnly: true,
-      path: "/",
-      maxAge: 0,
     });
 
     return response;

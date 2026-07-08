@@ -29,6 +29,7 @@ export function ToolLogin({
   const [error, setError] = useState("");
   const [consent, setConsent] = useState(false);
   const [devHint, setDevHint] = useState("");
+  const [universalHint, setUniversalHint] = useState("");
 
   async function requestCode(e: React.FormEvent) {
     e.preventDefault();
@@ -46,6 +47,7 @@ export function ToolLogin({
         return;
       }
       if (data.devCode) setDevHint(`Код для разработки: ${data.devCode}`);
+      if (data.universalHint) setUniversalHint(data.universalHint);
       setStep("code");
     } catch {
       setError("Ошибка сети. Попробуйте позже.");
@@ -115,21 +117,22 @@ export function ToolLogin({
           <p className="text-sm text-muted m-0">
             Код отправлен на <strong>{email}</strong>
           </p>
+          {universalHint && <p className="text-xs text-primary bg-cream rounded-lg p-2 m-0">{universalHint}</p>}
           {devHint && <p className="text-xs text-amber-700 bg-amber-50 rounded-lg p-2 m-0">{devHint}</p>}
           <input
             type="text"
             inputMode="numeric"
-            pattern="\d{6}"
-            maxLength={6}
+            pattern="\d+"
+            maxLength={12}
             required
             value={code}
             onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-            placeholder="6 цифр"
+            placeholder="Любые цифры"
             className="tool-input text-center tracking-[0.3em] text-lg"
             autoComplete="one-time-code"
           />
           {error && <p className="text-sm text-red-600 m-0">{error}</p>}
-          <button type="submit" className="btn btn-primary w-full" disabled={loading || code.length !== 6}>
+          <button type="submit" className="btn btn-primary w-full" disabled={loading || code.length < 1}>
             {loading ? "Проверяем…" : "Войти"}
           </button>
           <button
@@ -140,6 +143,7 @@ export function ToolLogin({
               setCode("");
               setError("");
               setDevHint("");
+              setUniversalHint("");
             }}
           >
             Другой email
