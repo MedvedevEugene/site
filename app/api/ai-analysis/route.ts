@@ -21,7 +21,10 @@ function fallbackAnalysis(
     "ваш запрос";
 
   let hint = "Добавьте `OPENROUTER_API_KEY` и `AI_MODEL` в Vercel → Redeploy.";
-  if (hasKey && reason) {
+  if (hasKey && reason === "invalid_report") {
+    hint =
+      "Сервис сгенерировал слишком короткий или неструктурный ответ. Попробуйте запустить разбор ещё раз — обычно следующая попытка даёт полный результат.";
+  } else if (hasKey && reason) {
     hint = `Ключ на сервере есть, но OpenRouter вернул ошибку: ${reason}. Проверьте значение \`AI_MODEL\` (должно быть \`meta-llama/llama-3.3-70b-instruct:free\`) и лимиты на openrouter.ai.`;
   } else if (hasKey) {
     hint = "Ключ на сервере есть, но ответ пустой. Попробуйте другую модель в `AI_MODEL` или повторите позже.";

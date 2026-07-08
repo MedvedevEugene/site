@@ -321,9 +321,9 @@ export function isValidAiReport(text: string, minSectionsWithBody = 3) {
   if (sections.length === 0) return false;
 
   const filled = sections.filter(
-    (section) => section.body.length >= 40 && CYRILLIC.test(section.body)
+    (section) => section.body.length >= 20 && CYRILLIC.test(section.body)
   );
-  return filled.length >= minSectionsWithBody && !hasResidualLatin(text);
+  return filled.length >= minSectionsWithBody;
 }
 
 /** Для UI: показываем только разделы с текстом; если таких нет — все. */
