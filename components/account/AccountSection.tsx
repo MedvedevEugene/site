@@ -17,7 +17,7 @@ function sessionResultHref(tool: string, id: string) {
   if (tool === "sixteen_associations") return `/16-associations/result/${id}`;
   if (tool === "nlu") return "/nlu";
   if (tool === "insightograph") return "/ptichno-rybko";
-  return "/psychological-help";
+  return "/individual-consultations";
 }
 
 export function AccountSection() {
@@ -94,9 +94,6 @@ export function AccountSection() {
               </Link>
             </div>
             <div className="flex flex-wrap gap-3 mt-3">
-              <Link href="/psychological-help#ai-tools" className="btn btn-outline">
-                ИИ-инструменты
-              </Link>
               <button type="button" className="btn btn-outline" onClick={logout}>
                 Выйти
               </button>
@@ -105,9 +102,6 @@ export function AccountSection() {
         )}
         {user.role !== "admin" && (
           <div className="flex flex-wrap gap-3">
-            <Link href="/psychological-help#ai-tools" className="btn btn-outline">
-              ИИ-инструменты
-            </Link>
             <button type="button" className="btn btn-outline" onClick={logout}>
               Выйти
             </button>

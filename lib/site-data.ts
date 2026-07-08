@@ -221,7 +221,7 @@ export const FOOTER_COLUMNS = {
       { label: "Статьи", href: "/blog" },
       { label: "Расписание", href: "/timetable" },
       { label: "Расстановочные группы", href: "/rasstanovochnye-gruppy" },
-      { label: "Психологическая помощь", href: "/psychological-help" },
+      { label: "Психологическая помощь", href: "/individual-consultations" },
       { label: "Маркет развивающих товаров", href: "/market" },
       { label: "Индивидуальные расстановки", href: "/individual-consultations" },
       { label: "Вебинары", href: "/video-materials" },
