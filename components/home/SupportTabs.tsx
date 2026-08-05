@@ -7,6 +7,7 @@ import { SUPPORT_TABS } from "@/lib/site-data";
 export function SupportTabs() {
   const [active, setActive] = useState<(typeof SUPPORT_TABS)[number]["id"]>(SUPPORT_TABS[0].id);
   const tab = SUPPORT_TABS.find((item) => item.id === active) ?? SUPPORT_TABS[0];
+  const mediaTone = "mediaTone" in tab ? tab.mediaTone : "light";
 
   return (
     <section className="support-section">
@@ -54,14 +55,16 @@ export function SupportTabs() {
               <h3 className="support-panel__title">{tab.title}</h3>
               <p className="support-panel__text">{tab.text}</p>
             </div>
-            <div className="support-panel__media">
+            <div
+              className={`support-panel__media support-panel__media--${mediaTone}`}
+            >
               {tab.image ? (
                 <Image
                   key={tab.id}
                   src={tab.image}
                   alt=""
                   fill
-                  className="object-contain object-top"
+                  className="support-panel__image"
                   sizes="(max-width: 1024px) 100vw, 630px"
                 />
               ) : null}

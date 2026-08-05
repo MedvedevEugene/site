@@ -14,8 +14,10 @@ export const IMAGES = {
   /** Декор на карточке «Базовый курс» — завитушка, не фото */
   catalogDecor: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
   spiral: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
-  /** Сонаставники — скрин с Tilda */
-  supportMentors: "/images/support/mentors.png",
+  /** Сонаставники / поддержка — кадры из Figma */
+  supportMentors: "/images/support/mentors.png?v=1",
+  supportSales: "/images/support/sales.png?v=1",
+  supportPractice: "/images/support/practice.png?v=1",
   supportChat: "/images/support/chat.png",
   /** Фон блока дипломов */
   diplomaBg: "/images/diplomas/bg.png",
@@ -64,19 +66,24 @@ export const HERO_TAG_ROWS = [
   ["Карьера", "Бизнес", "Семья", "Тревога и стресс"],
 ] as const;
 
+/** Декоры карточек — экспорты из Figma блок «каталог услуг» / 1440 */
+export type CatalogDecor = "base" | "business" | "body" | "consult" | "groups" | "market";
+
 export const CATALOG_PROGRAMS = [
   {
     href: "/base-cource",
     featured: true,
     tone: "featured" as const,
+    decor: "base" as const,
     tag: "Профессиональная переподготовка",
     badge: "Программа 2026",
     title: "Базовый курс обучения семейным расстановкам",
-    meta: "10 мес. / 777 часов",
+    meta: "10 мес. / 700 часов",
   },
   {
     href: "/business-cource",
     tone: "cream" as const,
+    decor: "business" as const,
     tag: "Профессиональная переподготовка",
     title: "Курс обучения бизнес расстановкам",
     meta: "6 мес. / 400 часов",
@@ -84,15 +91,17 @@ export const CATALOG_PROGRAMS = [
   {
     href: "/telese-terapiya",
     tone: "cream" as const,
-    tag: "Внутренний курс",
-    title: "Телесно ориентированная терапия",
-    meta: "10 мес. / 777 часов",
+    decor: "body" as const,
+    tag: "Телесные практики",
+    title: "Телесно-ориентированная терапия",
+    meta: "Индивидуально / очно",
     callbackVariant: "advanced-course" as const,
   },
   {
     href: "/individual-consultations",
     wide: true,
     tone: "cream" as const,
+    decor: "consult" as const,
     tag: "Психологическая помощь",
     title: "Индивидуальные консультации",
     meta: "от 30 минут",
@@ -100,6 +109,7 @@ export const CATALOG_PROGRAMS = [
   {
     href: "/rasstanovochnye-gruppy",
     tone: "cream" as const,
+    decor: "groups" as const,
     tag: "Мероприятия",
     title: "Расстановочные группы",
     meta: "Очно / онлайн",
@@ -108,6 +118,7 @@ export const CATALOG_PROGRAMS = [
   {
     href: "/market",
     tone: "cream" as const,
+    decor: "market" as const,
     tag: "Магазин",
     title: "Маркет развивающих товаров",
     meta: "Круглосуточно",
@@ -149,27 +160,31 @@ export const SUPPORT_TABS = [
     title: "Даём подробную обратную связь во время обучения и после.",
     text: "Каждое ваше задание проверит сонаставник, даст качественную ОС в рост, подсветит слепые пятна, динамики, которые нужно проработать.",
     image: IMAGES.supportMentors,
+    mediaTone: "lavender" as const,
   },
   {
     id: "sales",
     label: "Центр продаж",
     title: "Помогаем научиться продавать услуги непродавая.",
     text: "Наш опытный эксперт в продажах поможет вам освоить навыки привлечения клиентов и получить первые деньги от продажи ваших услуг.",
-    image: null,
+    image: IMAGES.supportSales,
+    mediaTone: "light" as const,
   },
   {
     id: "practice",
     label: "Опыт и практика",
     title: "Основа обучения — максимум практики",
     text: "Всю теорию вы закрепите с первых дней обучения, проводя диагностики и расстановочные задания. К концу обучения вы будете состоявшимся специалистом, готовым профессионально практиковать как в онлайн, так и в офлайн форматах.",
-    image: null,
+    image: IMAGES.supportPractice,
+    mediaTone: "dark" as const,
   },
   {
     id: "community",
     label: "Сообщество",
     title: "Объединяем осознанных людей",
     text: "Вокруг института сформировалось вдохновляющее сообщество расстановщиков, профессиональных замов и осознанных людей, которые пользуются этим методом для себя. Вы можете стать частью этого сообщества, которое будет поддерживать вас на вашем пути.",
-    image: null,
+    image: IMAGES.supportChat,
+    mediaTone: "lavender" as const,
   },
 ] as const;
 

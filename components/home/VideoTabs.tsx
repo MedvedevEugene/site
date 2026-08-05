@@ -29,6 +29,22 @@ export function VideoTabs() {
           ))}
         </div>
 
+        <label className="sr-only" htmlFor="video-tabs-select">
+          Формат видео
+        </label>
+        <select
+          id="video-tabs-select"
+          className="video-tabs-select"
+          value={active}
+          onChange={(e) => setActive(e.target.value as (typeof VIDEO_TABS)[number]["id"])}
+        >
+          {VIDEO_TABS.map((tab) => (
+            <option key={tab.id} value={tab.id}>
+              {tab.label}
+            </option>
+          ))}
+        </select>
+
         <div className="video-player">
           {VIDEO_TABS.map((tab) => (
             <div

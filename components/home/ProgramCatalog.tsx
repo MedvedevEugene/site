@@ -25,6 +25,7 @@ export function ProgramCatalog() {
                 featured={featured}
                 wide={wide}
                 tone={tone}
+                decor={"decor" in p ? p.decor : undefined}
                 tag={p.tag}
                 badge={"badge" in p ? p.badge : undefined}
                 title={p.title}
