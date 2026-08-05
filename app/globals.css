@@ -1583,6 +1583,18 @@
 
   .testimonial-card--hero {
     @apply relative w-[260px] min-h-[213px] max-w-none p-5 flex flex-col box-border bg-white border border-black/30 rounded-[10px] shadow-none h-auto;
+    animation: hero-quote-in 0.4s ease;
+  }
+
+  @keyframes hero-quote-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .testimonial-card__quote-marks {
@@ -1634,11 +1646,28 @@
   }
 
   .hero-tilda__media {
-    @apply relative z-[1] mt-4;
+    @apply relative z-[1] mt-4 min-h-[260px] flex items-end justify-center;
+  }
+
+  .hero-tilda__cloud {
+    @apply absolute left-1/2 top-[20%] z-0 w-[140%] max-w-none -translate-x-1/2 opacity-60 pointer-events-none select-none;
   }
 
   .hero-tilda__portrait {
     @apply relative z-[1] mx-auto mb-0 w-full max-w-[245px] h-auto object-contain object-bottom pointer-events-none select-none;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.45s ease;
+  }
+
+  .hero-tilda__portrait--active {
+    opacity: 1;
+    position: relative;
+    left: auto;
+    transform: none;
   }
 
   .hero-tilda__story {
@@ -1647,6 +1676,14 @@
 
   .hero-tilda__story-info {
     @apply inline-flex items-center justify-center size-[12px] rounded-full border border-[#3b3758]/40 text-[8px] leading-none text-[#3b3758]/60;
+  }
+
+  .hero-tilda__story-panel {
+    @apply relative z-[3] mt-4 mx-auto max-w-[300px] lg:hidden;
+  }
+
+  .hero-tilda__story-close {
+    @apply mt-3 mx-auto block text-sm text-[#3b3758] underline bg-transparent border-0 cursor-pointer;
   }
 
   .hero-tilda__quote {
@@ -1658,7 +1695,7 @@
   }
 
   .hero-tilda__dot {
-    @apply size-2.5 rounded-full bg-[#d9d9e3];
+    @apply size-2.5 rounded-full bg-[#d9d9e3] border-0 p-0 cursor-pointer appearance-none;
   }
 
   .hero-tilda__dot--active {
@@ -1715,20 +1752,38 @@
       position: absolute;
       inset: 0;
       margin: 0;
+      min-height: 0;
       pointer-events: none;
     }
 
+    .hero-tilda__cloud {
+      left: 459px;
+      top: 138px;
+      width: 650px;
+      transform: none;
+      max-width: none;
+    }
+
     .hero-tilda__portrait {
-      position: absolute;
-      bottom: 0;
       left: 452px;
-      top: auto;
       width: 584px;
       max-width: none;
       margin: 0;
+      transform: none;
+    }
+
+    .hero-tilda__portrait--active {
+      position: absolute;
+      left: 452px;
+      bottom: 0;
+      transform: none;
     }
 
     .hero-tilda__story {
+      @apply hidden;
+    }
+
+    .hero-tilda__story-panel {
       @apply hidden;
     }
 
@@ -1746,6 +1801,7 @@
       bottom: 6px;
       transform: translateX(-50%);
       margin: 0;
+      pointer-events: auto;
     }
 
     .hero-tilda__dot {
@@ -1796,10 +1852,19 @@
     }
 
     .hero-tilda__portrait {
-      bottom: 0;
-      top: auto;
       left: 38%;
       width: 48%;
+    }
+
+    .hero-tilda__portrait--active {
+      left: 38%;
+      width: 48%;
+    }
+
+    .hero-tilda__cloud {
+      left: 36%;
+      width: 55%;
+      top: 30%;
     }
 
     .hero-tilda__quote {

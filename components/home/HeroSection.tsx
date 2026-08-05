@@ -1,17 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import { useCallback, useEffect, useRef, useState, type TouchEvent } from "react";
 import { HeroProgramCta } from "@/components/home/HeroProgramCta";
-import { HERO_TESTIMONIAL } from "@/lib/constants";
 import { HERO_TAGS } from "@/lib/constants";
-import { IMAGES } from "@/lib/site-data";
+import { HERO_SLIDE_INTERVAL_MS, HERO_SLIDES, type HeroSlide } from "@/lib/hero-slides";
 
 type HeroSectionProps = {
   heroPortrait?: string;
 };
-
-const HERO_PORTRAIT_MARK = "01b0e4cc";
-const HERO_DOTS = 6;
 
 const TAG_ICONS: Record<string, string> = {
   Отношения: "/images/hero/tags/otnosheniya.png",
@@ -22,11 +19,6 @@ const TAG_ICONS: Record<string, string> = {
   Семья: "/images/hero/tags/otnosheniya.png",
   "Тревога и стресс": "/images/hero/tags/trevoga.png",
 };
-
-function resolvePortrait(url?: string) {
-  if (url?.includes(HERO_PORTRAIT_MARK)) return url;
-  return IMAGES.heroPortrait;
-}
 
 function HeroQuoteMark() {
   return (
@@ -47,21 +39,16 @@ function HeroQuoteMark() {
   );
 }
 
-function HeroTestimonialCard() {
+function HeroTestimonialCard({ slide }: { slide: HeroSlide }) {
   return (
-    <div className="testimonial-card testimonial-card--hero">
+    <div className="testimonial-card testimonial-card--hero" key={slide.id}>
       <div className="testimonial-card__quote-marks" aria-hidden>
         <HeroQuoteMark />
         <HeroQuoteMark />
       </div>
-      <p className="testimonial-card__quote-text">
-        Я перестал играть роль жертвы и&nbsp;стал увереннее. Это изменило мой доход
-        и&nbsp;отношения.
-      </p>
+      <p className="testimonial-card__quote-text">{slide.quote}</p>
       <div className="mt-auto pt-3">
-        <div className="font-semibold text-[14px] text-[#3b3758] leading-none">
-          {HERO_TESTIMONIAL.author}
-        </div>
+        <div className="font-semibold text-[14px] text-[#3b3758] leading-none">{slide.author}</div>
         <div className="text-[11px] text-[#3b3758] leading-none mt-1.5">
           Выпускник программы
           <br />
@@ -93,14 +80,64 @@ function HeroTags() {
   );
 }
 
+function resolveSlides(heroPortrait?: string): HeroSlide[] {
+  if (!heroPortrait) return HERO_SLIDES;
+  return HERO_SLIDES.map((slide, index) =>
+    index === 0 ? { ...slide, portrait: heroPortrait } : slide,
+  );
+}
+
 export function HeroSection({ heroPortrait }: HeroSectionProps) {
-  const portrait = resolvePortrait(heroPortrait);
+  const slides = resolveSlides(heroPortrait);
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [storyOpen, setStoryOpen] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+
+  const slide = slides[index] ?? slides[0];
+  const count = slides.length;
+
+  const goTo = useCallback(
+    (next: number) => {
+      setIndex(((next % count) + count) % count);
+      setStoryOpen(false);
+    },
+    [count],
+  );
+
+  useEffect(() => {
+    if (paused || storyOpen || count < 2) return;
+    const id = window.setInterval(() => {
+      setIndex((current) => (current + 1) % count);
+    }, HERO_SLIDE_INTERVAL_MS);
+    return () => window.clearInterval(id);
+  }, [paused, storyOpen, count]);
+
+  const onTouchStart = (event: TouchEvent) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const onTouchEnd = (event: TouchEvent) => {
+    if (touchStartX.current == null) return;
+    const delta = (event.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(delta) < 40) return;
+    goTo(index + (delta < 0 ? 1 : -1));
+  };
 
   return (
-    <section className="hero-tilda">
+    <section
+      className="hero-tilda"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <div className="hero-tilda__band">
         <div className="container-site">
-          <div className="hero-tilda__stage">
+          <div
+            className="hero-tilda__stage"
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+          >
             <div className="hero-tilda__intro">
               <h1 className="hero-tilda__title">
                 Освойте системные расстановки и&nbsp;найдите внутреннюю опору
@@ -113,16 +150,35 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
 
             <div className="hero-tilda__media">
               <Image
-                src={portrait}
+                src="/images/hero/cloud-bg.png"
                 alt=""
-                width={584}
-                height={516}
-                priority
-                sizes="(max-width: 1023px) 85vw, 584px"
-                className="hero-tilda__portrait"
+                width={650}
+                height={289}
+                className="hero-tilda__cloud"
+                aria-hidden
               />
-              <button type="button" className="hero-tilda__story" aria-label="История Геннадия">
-                История Геннадия
+              {slides.map((item, slideIndex) => (
+                <Image
+                  key={item.id}
+                  src={item.portrait}
+                  alt={item.author}
+                  width={584}
+                  height={516}
+                  priority={slideIndex === 0}
+                  sizes="(max-width: 1023px) 85vw, 584px"
+                  className={`hero-tilda__portrait${
+                    slideIndex === index ? " hero-tilda__portrait--active" : ""
+                  }`}
+                />
+              ))}
+              <button
+                type="button"
+                className="hero-tilda__story"
+                aria-expanded={storyOpen}
+                aria-controls="hero-story-panel"
+                onClick={() => setStoryOpen((open) => !open)}
+              >
+                {slide.storyLabel}
                 <span className="hero-tilda__story-info" aria-hidden>
                   i
                 </span>
@@ -130,14 +186,34 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
             </div>
 
             <div className="hero-tilda__quote">
-              <HeroTestimonialCard />
+              <HeroTestimonialCard slide={slide} />
             </div>
 
-            <div className="hero-tilda__dots" aria-hidden>
-              {Array.from({ length: HERO_DOTS }, (_, index) => (
-                <span
-                  key={index}
-                  className={`hero-tilda__dot${index === 0 ? " hero-tilda__dot--active" : ""}`}
+            {storyOpen ? (
+              <div id="hero-story-panel" className="hero-tilda__story-panel" role="dialog">
+                <HeroTestimonialCard slide={slide} />
+                <button
+                  type="button"
+                  className="hero-tilda__story-close"
+                  onClick={() => setStoryOpen(false)}
+                >
+                  Закрыть
+                </button>
+              </div>
+            ) : null}
+
+            <div className="hero-tilda__dots" role="tablist" aria-label="Истории выпускников">
+              {slides.map((item, slideIndex) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={slideIndex === index}
+                  aria-label={`${item.storyLabel}, слайд ${slideIndex + 1} из ${count}`}
+                  className={`hero-tilda__dot${
+                    slideIndex === index ? " hero-tilda__dot--active" : ""
+                  }`}
+                  onClick={() => goTo(slideIndex)}
                 />
               ))}
             </div>
