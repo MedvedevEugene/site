@@ -9,7 +9,7 @@ export function FeaturePillars() {
           {FEATURE_PILLARS.map((item) => (
             <article
               key={item.titleLines.join("-")}
-              className={`feature-pillar${item.tint === "blue" ? " feature-pillar--blue" : ""}`}
+              className={`feature-pillar${item.tint === "dark" ? " feature-pillar--dark" : ""}`}
             >
               <div className="feature-pillar__icon">
                 <Image
@@ -17,18 +17,23 @@ export function FeaturePillars() {
                   alt=""
                   width={item.imageWidth}
                   height={item.imageHeight}
-                  className="h-auto object-contain"
+                  className="feature-pillar__image"
                   style={{ width: item.imageWidth, maxWidth: "100%" }}
                 />
               </div>
-              <p className="feature-pillar__title">
-                {item.titleLines.map((line, index) => (
-                  <span key={line}>
-                    {index > 0 ? <br /> : null}
-                    {line}
-                  </span>
-                ))}
-              </p>
+              <div className="feature-pillar__copy">
+                <p className="feature-pillar__title">
+                  {item.titleLines.map((line, index) => (
+                    <span key={line}>
+                      {index > 0 ? <br /> : null}
+                      {line}
+                    </span>
+                  ))}
+                </p>
+                {"text" in item && item.text ? (
+                  <p className="feature-pillar__text">{item.text}</p>
+                ) : null}
+              </div>
             </article>
           ))}
         </div>

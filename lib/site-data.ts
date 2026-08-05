@@ -15,15 +15,18 @@ export const IMAGES = {
   catalogDecor: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
   spiral: `${CDN}/tild3738-6362-4233-b064-633765623561/Vector.svg`,
   /** Сонаставники / поддержка — кадры из Figma */
-  supportMentors: "/images/support/mentors.png?v=1",
+  featureCompass: "/images/features/compass.png",
+  featureAtom: "/images/features/atom.png",
+  featureMixer: "/images/features/mixer.png",
+  featureWork: "/images/features/work.png?v=1",
+  featureCommunity: "/images/features/community.png?v=1",
+  featureLife: "/images/features/life.png?v=1",
+  supportMentors: "/images/support/mentors.png?v=2",
   supportSales: "/images/support/sales.png?v=1",
   supportPractice: "/images/support/practice.png?v=1",
   supportChat: "/images/support/chat.png",
   /** Фон блока дипломов */
   diplomaBg: "/images/diplomas/bg.png",
-  featureCompass: "/images/features/compass.png",
-  featureAtom: "/images/features/atom.png",
-  featureMixer: "/images/features/mixer.png",
   diploma: "/images/diplomas/diploma.jpg",
   certificate: "/images/diplomas/certificate.png",
   pathCloud: `${CDN}/tild6336-3530-4139-b964-313032653332/2334f0c3-5471-4549-9.png`,
@@ -160,7 +163,7 @@ export const SUPPORT_TABS = [
     title: "Даём подробную обратную связь во время обучения и после.",
     text: "Каждое ваше задание проверит сонаставник, даст качественную ОС в рост, подсветит слепые пятна, динамики, которые нужно проработать.",
     image: IMAGES.supportMentors,
-    mediaTone: "lavender" as const,
+    mediaTone: "light" as const,
   },
   {
     id: "sales",
@@ -190,32 +193,35 @@ export const SUPPORT_TABS = [
 
 export const FEATURE_PILLARS = [
   {
-    titleLines: ["Работа на себя", "и в удовольствие."],
-    image: IMAGES.featureCompass,
-    imageWidth: 150,
+    titleLines: ["Работа на себя", "и в удовольствие"],
+    text: "Освойте профессию, которую можно развивать в своём темпе и подходящем формате.",
+    image: IMAGES.featureWork,
+    imageWidth: 191,
+    imageHeight: 148,
+    tint: "cream" as const,
+  },
+  {
+    titleLines: ["Вдохновляющее окружение,", "которое с вами"],
+    text: "Общайтесь с единомышленниками, находите поддержку и продолжайте расти после обучения.",
+    image: IMAGES.featureCommunity,
+    imageWidth: 164,
     imageHeight: 151,
     tint: "cream" as const,
   },
   {
-    titleLines: ["Вдохновляющее окружение,", "которое с вами."],
-    image: IMAGES.featureAtom,
-    imageWidth: 160,
-    imageHeight: 144,
-    tint: "cream" as const,
-  },
-  {
-    titleLines: ["Управление\u00a0жизнью\u00a0—", "ваш новый навык."],
-    image: IMAGES.featureMixer,
-    imageWidth: 172,
-    imageHeight: 111,
-    tint: "blue" as const,
+    titleLines: ["Управление жизнью —", "ваш новый навык"],
+    text: "Лучше понимайте себя и увереннее принимайте решения.",
+    image: IMAGES.featureLife,
+    imageWidth: 140,
+    imageHeight: 133,
+    tint: "dark" as const,
   },
 ] as const;
 
 export const VIDEO_TABS = [
-  { id: "offline", label: "Очный формат", youtubeId: "asdasdasd" },
-  { id: "online", label: "Онлайн практика", youtubeId: "asdasdasd" },
-  { id: "lecture", label: "Онлайн лекция", youtubeId: "asdasdasd" },
+  { id: "offline", label: "очный формат", youtubeId: "asdasdasd" },
+  { id: "online", label: "онлайн практика", youtubeId: "asdasdasd" },
+  { id: "lecture", label: "онлайн лекция", youtubeId: "asdasdasd" },
 ] as const;
 
 export const FOOTER_PLACEHOLDER_HREF = "/coming-soon";
