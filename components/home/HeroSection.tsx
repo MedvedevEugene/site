@@ -158,18 +158,21 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
                 aria-hidden
               />
               {slides.map((item, slideIndex) => (
-                <Image
+                <div
                   key={item.id}
-                  src={item.portrait}
-                  alt={item.author}
-                  width={584}
-                  height={516}
-                  priority={slideIndex === 0}
-                  sizes="(max-width: 1023px) 85vw, 584px"
-                  className={`hero-tilda__portrait${
-                    slideIndex === index ? " hero-tilda__portrait--active" : ""
+                  className={`hero-tilda__portrait-slot${
+                    slideIndex === index ? " hero-tilda__portrait-slot--active" : ""
                   }`}
-                />
+                >
+                  <Image
+                    src={item.portrait}
+                    alt={item.author}
+                    fill
+                    priority={slideIndex === 0}
+                    sizes="(max-width: 1023px) 85vw, 584px"
+                    className="hero-tilda__portrait"
+                  />
+                </div>
               ))}
               <button
                 type="button"

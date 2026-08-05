@@ -1646,29 +1646,36 @@
   }
 
   .hero-tilda__media {
-    @apply relative z-[1] mt-4 h-[231px] flex items-end justify-center;
+    @apply relative z-[1] mt-4 h-[260px] flex items-end justify-center;
   }
 
   .hero-tilda__cloud {
-    @apply absolute left-1/2 top-[20%] z-0 w-[140%] max-w-none -translate-x-1/2 opacity-60 pointer-events-none select-none;
+    @apply absolute left-1/2 top-[12%] z-0 w-[140%] max-w-none -translate-x-1/2 opacity-60 pointer-events-none select-none;
   }
 
-  .hero-tilda__portrait {
-    @apply z-[1] mx-auto mb-0 w-full max-w-[245px] pointer-events-none select-none;
+  .hero-tilda__portrait-slot {
     position: absolute;
     left: 50%;
     bottom: 0;
-    height: 231px;
-    max-height: 231px;
-    object-fit: contain;
-    object-position: bottom center;
+    z-index: 1;
+    width: min(245px, 78%);
+    height: 240px;
     transform: translateX(-50%);
     opacity: 0;
+    pointer-events: none;
     transition: opacity 0.45s ease;
   }
 
-  .hero-tilda__portrait--active {
+  .hero-tilda__portrait-slot--active {
     opacity: 1;
+  }
+
+  .hero-tilda__portrait {
+    object-fit: contain !important;
+    object-position: bottom center !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
   }
 
   .hero-tilda__story {
@@ -1753,6 +1760,7 @@
       position: absolute;
       inset: 0;
       margin: 0;
+      height: auto;
       min-height: 0;
       pointer-events: none;
     }
@@ -1765,20 +1773,11 @@
       max-width: none;
     }
 
-    .hero-tilda__portrait {
+    .hero-tilda__portrait-slot {
       left: 452px;
       width: 584px;
-      max-width: 584px;
       height: 516px;
-      max-height: 516px;
-      margin: 0;
       transform: none;
-      object-fit: contain;
-      object-position: bottom center;
-    }
-
-    .hero-tilda__portrait--active {
-      opacity: 1;
     }
 
     .hero-tilda__story {
@@ -1853,17 +1852,11 @@
       width: 42%;
     }
 
-    .hero-tilda__portrait {
+    .hero-tilda__portrait-slot {
       left: 38%;
       width: 50%;
-      max-width: 50%;
       height: 460px;
-      max-height: 460px;
       transform: none;
-    }
-
-    .hero-tilda__portrait--active {
-      opacity: 1;
     }
 
     .hero-tilda__cloud {
