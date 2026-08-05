@@ -6,13 +6,13 @@ export function ProgramCatalog() {
     <section id="catalog" className="bg-white scroll-mt-24 pt-[70px] pb-[70px]">
       <div className="container-site section-heading-band">
         <h2 className="section-title">
-          Каталог наших
+          Программы и&nbsp;форматы
           <br />
-          программ
+          работы
         </h2>
       </div>
       <div className="container-site">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="catalog-grid">
           {CATALOG_PROGRAMS.map((p) => {
             const featured = "featured" in p && p.featured;
             const wide = featured || ("wide" in p && p.wide);

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { SafeImage } from "@/components/ui/SafeImage";
 import {
   SITE,
@@ -34,13 +35,25 @@ function SearchIcon() {
 }
 
 export function TopBar({ onCallbackClick }: HeaderProps) {
+  const router = useRouter();
+  const [query, setQuery] = useState("");
+
+  function handleSearch(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const value = query.trim();
+    if (!value) return;
+    router.push(`/search?q=${encodeURIComponent(value)}`);
+  }
+
   return (
     <div className="bg-white pt-[18px]">
       <div className="container-site flex items-center justify-between gap-4 flex-wrap">
-        <form className="site-search hidden sm:flex" onSubmit={(e) => e.preventDefault()}>
+        <form className="site-search hidden sm:flex" onSubmit={handleSearch}>
           <div className="site-search__field">
             <input
               type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
               placeholder="Поиск"
               className="site-search__input"
               aria-label="Поиск"

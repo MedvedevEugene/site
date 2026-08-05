@@ -10,13 +10,13 @@ export function HeroProgramCta() {
   return (
     <button type="button" onClick={openProgramPopup} className="hero-tilda__cta">
       <SafeImage
-        src={IMAGES.logoCircle}
+        src="/images/hero/cta-favicon.svg"
         alt=""
-        width={19}
-        height={19}
-        className="w-[19px] h-[19px] shrink-0"
+        width={20}
+        height={20}
+        className="w-5 h-5 shrink-0"
       />
-      Подобрать программу
+      Выбрать программу
     </button>
   );
 }

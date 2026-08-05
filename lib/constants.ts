@@ -63,12 +63,12 @@ export const FOOTER_LINKS = {
   ],
 } as const;
 
-/** Единственная цитата в hero — как на lifeinstitute.ru */
+/** Единственная цитата в hero — как в макете «Для Жени» */
 export const HERO_TESTIMONIAL = {
   quote:
     "Я перестал играть роль жертвы и стал увереннее. Это изменило мой доход и отношения.",
   author: "Геннадий Шепелин",
-  role: "Выпускник ИРЖ",
+  role: "Выпускник программы по системным расстановкам",
 } as const;
 
 export const TESTIMONIALS = [
@@ -99,12 +99,12 @@ export const TESTIMONIALS = [
 
 export const HERO_TAGS = [
   "Отношения",
-  "Границы",
-  "Тревога / стресс",
-  "Бизнес",
+  "Личные границы",
   "Деньги",
   "Карьера",
+  "Бизнес",
   "Семья",
+  "Тревога и стресс",
 ] as const;
 
 export const PROGRAMS = [

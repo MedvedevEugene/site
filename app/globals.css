@@ -133,6 +133,13 @@
     max-width: calc(100% - 40px);
   }
 
+  .support-tabs-select {
+    @apply hidden w-full max-w-[420px] mx-auto mb-8 border border-[#272344] bg-white font-body text-base font-semibold text-[#272344];
+    height: 50px;
+    padding: 0 16px;
+    border-radius: 12px;
+  }
+
   .support-tab {
     @apply inline-flex items-center justify-center h-10 px-4 text-base font-semibold whitespace-nowrap transition-colors;
     color: #272344;
@@ -173,9 +180,11 @@
     }
 
     .support-tabs-rail {
-      border-radius: 20px;
-      min-height: auto;
-      padding: 12px;
+      @apply hidden;
+    }
+
+    .support-tabs-select {
+      @apply block;
     }
   }
 
@@ -670,7 +679,7 @@
   @media (max-width: 480px) {
     .resonance-carousel__track {
       gap: 10px;
-      padding-inline: 20px;
+      padding-inline: 50px;
     }
 
     .resonance-card {
@@ -1100,18 +1109,26 @@
     @apply bg-cream-pill border-0 rounded-[24px] p-7;
   }
 
+  .catalog-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5;
+    padding-left: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    .catalog-grid {
+      padding-left: 40px;
+    }
+  }
+
   .catalog-card {
-    @apply relative overflow-hidden rounded-[20px] px-[30px] py-[30px] min-h-[242px] flex flex-col transition-transform duration-200 hover:-translate-y-1;
+    @apply relative overflow-hidden rounded-[20px] px-[30px] pt-[40px] pb-[30px] min-h-[242px] flex flex-col transition-transform duration-200 hover:-translate-y-1;
   }
 
   .catalog-card--button {
-    @apply block w-full border-0 p-0 text-left cursor-pointer;
+    @apply block w-full border-0 text-left cursor-pointer;
     font: inherit;
     color: inherit;
-  }
-
-  .catalog-card--button.catalog-card {
-    padding: 30px;
+    padding: 40px 30px 30px;
   }
 
   .catalog-card--featured {
@@ -1136,19 +1153,19 @@
   }
 
   .catalog-card__tag {
-    @apply relative z-[1] text-[13px] text-[#1e1e1e] mb-2;
+    @apply relative z-[1] text-[13px] text-[#1e1e1e] mb-3;
   }
 
   .catalog-card__body {
-    @apply relative z-[1] flex-1 flex items-center;
+    @apply relative z-[1] flex-1 flex items-start;
   }
 
   .catalog-card__title {
-    @apply font-body text-[20px] font-normal leading-[1.2] m-0 text-[#1e1e1e] max-w-[420px] group-hover:opacity-80;
+    @apply font-body text-[20px] font-semibold leading-[1.25] m-0 text-[#1e1e1e] max-w-[420px] group-hover:opacity-80;
   }
 
   .catalog-card__meta {
-    @apply relative z-[1] text-[14px] text-[#1e1e1e];
+    @apply relative z-[1] text-[14px] text-[#1e1e1e] mt-4;
   }
 
   .catalog-card--default {
@@ -1565,11 +1582,11 @@
   }
 
   .testimonial-card--hero {
-    @apply relative w-[259px] h-[192px] max-w-none p-[19px] flex flex-col box-border bg-white border border-primary-dark rounded-[10px] shadow-none;
+    @apply relative w-[260px] min-h-[213px] max-w-none p-5 flex flex-col box-border bg-white border border-black/30 rounded-[10px] shadow-none h-auto;
   }
 
   .testimonial-card__quote-marks {
-    @apply absolute top-[19px] left-[19px] flex items-center gap-0.5 pointer-events-none;
+    @apply absolute top-5 left-5 flex items-center gap-0 pointer-events-none;
   }
 
   .testimonial-card__quote-icon {
@@ -1578,19 +1595,21 @@
   }
 
   .testimonial-card__quote-text {
-    @apply text-[12px] leading-[1.55] m-0 text-[#272344] pt-[37px] pr-1;
+    @apply text-[14px] leading-normal m-0 text-[#3b3758] pt-9 pr-1;
   }
 
-  /* Hero — layout from lifeinstitute.ru (1200×727 artboard) */
+  /* Hero — Figma «1440 #1» / «320 #1» */
   .hero-tilda {
     @apply bg-white;
   }
 
   .hero-tilda__band {
-    background: linear-gradient(to top, #f8f7e4 0%, #ffffff 58%);
-    border-radius: 0 0 60px 60px;
+    background: linear-gradient(to top, #f8f7e4 0%, #ffffff 64%);
+    border-radius: 0 0 40px 40px;
     overflow: hidden;
     padding-bottom: 0;
+    border: 1px solid rgba(30, 30, 30, 0.07);
+    border-top: 0;
   }
 
   .hero-tilda__stage {
@@ -1599,103 +1618,188 @@
     max-width: 1200px;
     margin-inline: auto;
     min-height: 0;
-    padding: 32px 0 0;
+    padding: 24px 0 28px;
   }
 
-  .hero-tilda__content {
+  .hero-tilda__intro {
     @apply relative z-10;
   }
 
   .hero-tilda__title {
-    @apply font-body text-[clamp(28px,4vw,40px)] font-semibold leading-none m-0 text-[#3b3758] max-w-[482px];
+    @apply font-body text-[22px] font-semibold leading-none m-0 text-[#1e1e1e] max-w-[536px];
   }
 
   .hero-tilda__subtitle {
-    @apply font-body text-[clamp(18px,2.5vw,24px)] font-normal leading-[1.55] m-0 mt-6 text-[#3b3758] max-w-[449px];
+    @apply font-body text-base font-normal leading-normal m-0 mt-4 text-[#1e1e1e] max-w-[526px];
   }
 
-  .hero-tilda__tags {
-    @apply flex flex-col gap-2.5 mt-8 max-w-[482px];
-  }
-
-  .hero-tilda__tag-row {
-    @apply flex flex-wrap gap-2;
-  }
-
-  .hero-tilda__tag {
-    @apply inline-flex items-center justify-center h-[37px] px-4 rounded-[10px] bg-white text-[14px] font-medium text-[#3b3758] whitespace-nowrap;
-  }
-
-  .hero-tilda__cta {
-    @apply inline-flex items-center justify-center gap-1.5 mt-3 h-[37px] min-w-[224px] px-[15px] rounded-[10px] bg-[#3b3758] text-white text-[14px] font-medium normal-case tracking-normal border-0 cursor-pointer hover:opacity-90 transition-opacity;
+  .hero-tilda__media {
+    @apply relative z-[1] mt-4;
   }
 
   .hero-tilda__portrait {
-    @apply relative z-[1] mx-auto mt-6 mb-0 w-full max-w-[400px] h-auto object-contain object-bottom pointer-events-none select-none;
+    @apply relative z-[1] mx-auto mb-0 w-full max-w-[245px] h-auto object-contain object-bottom pointer-events-none select-none;
+  }
+
+  .hero-tilda__story {
+    @apply absolute z-[2] left-1/2 -translate-x-1/2 bottom-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-[40px] border border-white/10 bg-white/80 text-[10px] text-[#3b3758]/60 font-normal whitespace-nowrap cursor-pointer;
+  }
+
+  .hero-tilda__story-info {
+    @apply inline-flex items-center justify-center size-[12px] rounded-full border border-[#3b3758]/40 text-[8px] leading-none text-[#3b3758]/60;
   }
 
   .hero-tilda__quote {
-    @apply relative z-[2] mt-5 max-w-[259px] mx-auto sm:mx-0;
+    @apply hidden;
+  }
+
+  .hero-tilda__dots {
+    @apply relative z-[2] flex items-center justify-center gap-1 mt-3;
+  }
+
+  .hero-tilda__dot {
+    @apply size-2.5 rounded-full bg-[#d9d9e3];
+  }
+
+  .hero-tilda__dot--active {
+    @apply bg-[#3b3758];
+  }
+
+  .hero-tilda__actions {
+    @apply relative z-10 mt-4 flex flex-col items-stretch;
+  }
+
+  .hero-tilda__cta {
+    @apply inline-flex items-center justify-center gap-[5px] h-10 w-full max-w-[300px] mx-auto px-2.5 rounded-[10px] bg-[#3b3758] text-white text-[14px] font-medium normal-case tracking-normal border-0 cursor-pointer hover:opacity-90 transition-opacity;
+  }
+
+  .hero-tilda__tags {
+    @apply flex flex-wrap gap-[7px_10px] mt-4;
+  }
+
+  .hero-tilda__tag {
+    @apply inline-flex items-center justify-center gap-2.5 h-9 px-2.5 rounded-[10px] bg-[#f0f4f9] text-[12px] font-medium text-[#3b3758]/80 whitespace-nowrap;
+  }
+
+  .hero-tilda__tag-icon {
+    @apply inline-flex size-4 shrink-0 overflow-hidden;
   }
 
   @media (min-width: 1024px) {
-    .hero-tilda__stage {
-      /* высота = портрет 515px, низ картинки = низ жёлтой подложки */
-      min-height: 515px;
-      padding: 0;
+    .hero-tilda__band {
+      background: linear-gradient(to top, #f8f7e4 0%, #ffffff 50.5%);
+      border-radius: 0 0 60px 60px;
     }
 
-    .hero-tilda__content {
+    .hero-tilda__stage {
+      min-height: 541px;
+      padding: 0 0 24px;
+    }
+
+    .hero-tilda__intro {
       position: absolute;
-      top: 48px;
+      top: 58px;
       left: 20px;
-      width: 482px;
+      width: 536px;
+    }
+
+    .hero-tilda__title {
+      @apply text-[40px];
     }
 
     .hero-tilda__subtitle {
-      margin-top: 24px;
+      @apply text-2xl mt-5;
     }
 
-    .hero-tilda__tags {
-      margin-top: 32px;
+    .hero-tilda__media {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      pointer-events: none;
     }
 
     .hero-tilda__portrait {
       position: absolute;
       bottom: 0;
-      left: 411px;
+      left: 452px;
       top: auto;
       width: 584px;
-      height: auto;
       max-width: none;
       margin: 0;
     }
 
+    .hero-tilda__story {
+      @apply hidden;
+    }
+
     .hero-tilda__quote {
-      position: absolute;
-      top: 48px;
-      left: 921px;
-      width: 259px;
+      @apply block absolute z-[2];
+      top: 54px;
+      left: 920px;
+      width: 260px;
       margin: 0;
+    }
+
+    .hero-tilda__dots {
+      position: absolute;
+      left: 50%;
+      bottom: 6px;
+      transform: translateX(-50%);
+      margin: 0;
+    }
+
+    .hero-tilda__dot {
+      @apply bg-white border border-[#3b3758]/20;
+    }
+
+    .hero-tilda__dot--active {
+      @apply bg-[#3b3758] border-[#3b3758];
+    }
+
+    .hero-tilda__actions {
+      position: absolute;
+      top: 332px;
+      left: 20px;
+      width: 459px;
+      margin: 0;
+      align-items: flex-start;
+    }
+
+    .hero-tilda__cta {
+      @apply w-[260px] mx-0 mt-0;
+    }
+
+    .hero-tilda__tags {
+      @apply mt-5 max-w-[459px];
+    }
+
+    .hero-tilda__tag {
+      @apply bg-white;
     }
   }
 
   @media (min-width: 1024px) and (max-width: 1199px) {
     .hero-tilda__stage {
-      min-height: 460px;
+      min-height: 480px;
     }
 
-    .hero-tilda__content {
+    .hero-tilda__intro {
       top: 36px;
       left: 10px;
-      width: 38%;
+      width: 42%;
+    }
+
+    .hero-tilda__actions {
+      top: 280px;
+      left: 10px;
+      width: 42%;
     }
 
     .hero-tilda__portrait {
       bottom: 0;
       top: auto;
-      left: 36%;
-      width: 46%;
+      left: 38%;
+      width: 48%;
     }
 
     .hero-tilda__quote {
@@ -1707,7 +1811,7 @@
 
     .testimonial-card--hero {
       width: 220px;
-      height: 192px;
+      min-height: 192px;
     }
   }
 
@@ -1764,7 +1868,7 @@
 
   .site-footer__lead-copy {
     @apply font-body font-normal m-0;
-    margin-top: 47px;
+    margin-top: 24px;
     max-width: 499px;
     color: #ffffff;
     font-size: 20px;
@@ -1775,7 +1879,7 @@
     @apply flex flex-col;
     width: 100%;
     max-width: 400px;
-    gap: 10px;
+    gap: 6px;
   }
 
   .site-footer__form-success {
@@ -1848,8 +1952,7 @@
   }
 
   .site-footer__col--programs {
-    @apply justify-between;
-    min-height: 280px;
+    @apply justify-start;
   }
 
   .site-footer__col-title {
@@ -1877,7 +1980,15 @@
   }
 
   .site-footer__logo {
-    @apply w-full max-w-[300px] h-auto mt-10;
+    @apply w-full max-w-[300px] h-auto;
+    margin-top: 48px;
+  }
+
+  .site-footer__logo-row {
+    @apply w-full;
+    max-width: 1160px;
+    margin-inline: auto;
+    margin-top: 48px;
   }
 
   .site-footer__contact-row {

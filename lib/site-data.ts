@@ -60,8 +60,8 @@ export const CALENDAR_EMBED_MONTH =
   "https://calendar.google.com/calendar/embed?src=c_9481efcc388485ed3906e8a504f872266ae1fa7cabd23d868a88eb8388d9258f%40group.calendar.google.com&ctz=Europe%2FMoscow&mode=MONTH&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&lang=ru";
 
 export const HERO_TAG_ROWS = [
-  ["Отношения", "Семья", "Деньги", "Карьера"],
-  ["Бизнес", "Тревога/стресс", "Границы"],
+  ["Отношения", "Личные границы", "Деньги"],
+  ["Карьера", "Бизнес", "Семья", "Тревога и стресс"],
 ] as const;
 
 export const CATALOG_PROGRAMS = [

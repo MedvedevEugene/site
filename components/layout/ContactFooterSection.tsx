@@ -129,13 +129,6 @@ export function ContactFooterSection() {
           <div className="site-footer__grid">
             <div className="site-footer__col site-footer__col--programs">
               <FooterColumn title={FOOTER_COLUMNS.programs.title} links={FOOTER_COLUMNS.programs.links} />
-              <Image
-                src={IMAGES.logoWhite}
-                alt={`${SITE.name} — ${SITE.fullName}`}
-                width={300}
-                height={48}
-                className="site-footer__logo"
-              />
             </div>
 
             <FooterColumn title={FOOTER_COLUMNS.about.title} links={FOOTER_COLUMNS.about.links} />
@@ -180,6 +173,16 @@ export function ContactFooterSection() {
                 </nav>
               </div>
             </div>
+          </div>
+
+          <div className="site-footer__logo-row">
+            <Image
+              src={IMAGES.logoWhite}
+              alt={`${SITE.name} — ${SITE.fullName}`}
+              width={300}
+              height={48}
+              className="site-footer__logo"
+            />
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@ export function SupportTabs() {
         <h2 className="section-title section-title--support">
           Поддерживаем и{"\u00a0"}помогаем
           <br />
-          прийти к результату
+          прийти к&nbsp;результату
         </h2>
       </div>
 
@@ -32,6 +32,22 @@ export function SupportTabs() {
               </button>
             ))}
           </div>
+
+          <label className="sr-only" htmlFor="support-tabs-select">
+            Раздел поддержки
+          </label>
+          <select
+            id="support-tabs-select"
+            className="support-tabs-select"
+            value={active}
+            onChange={(e) => setActive(e.target.value as (typeof SUPPORT_TABS)[number]["id"])}
+          >
+            {SUPPORT_TABS.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.label}
+              </option>
+            ))}
+          </select>
 
           <div className="support-panel__grid">
             <div className="support-panel__copy">
