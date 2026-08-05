@@ -1,3 +1,4 @@
+/** portrait assets reframed for hero slot */
 export type HeroSlide = {
   id: string;
   firstName: string;
