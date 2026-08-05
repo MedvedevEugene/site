@@ -1674,16 +1674,14 @@
   }
 
   .hero-tilda__portrait {
+    /* Figma-кадры: фиксированная высота слота, ширина по пропорции узла — без растягивания */
     display: block;
     width: auto !important;
     height: 100% !important;
-    max-width: 100% !important;
+    max-width: none !important;
     max-height: 100% !important;
     object-fit: contain !important;
     object-position: bottom center !important;
-    /* мягкий край без артефактов вырезания */
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 2%, #000 100%);
-    mask-image: linear-gradient(to top, transparent 0%, #000 2%, #000 100%);
   }
 
   .hero-tilda__story {
