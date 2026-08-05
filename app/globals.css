@@ -1664,6 +1664,9 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.45s ease;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
   }
 
   .hero-tilda__portrait-slot--active {
@@ -1671,11 +1674,13 @@
   }
 
   .hero-tilda__portrait {
+    display: block;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
     object-fit: contain !important;
     object-position: bottom center !important;
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
   }
 
   .hero-tilda__story {

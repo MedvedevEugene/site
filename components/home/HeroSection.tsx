@@ -164,13 +164,14 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
                     slideIndex === index ? " hero-tilda__portrait-slot--active" : ""
                   }`}
                 >
-                  <Image
+                  {/* plain img: Next Image fill + height:auto conflicts stretch portraits */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src={item.portrait}
                     alt={item.author}
-                    fill
-                    priority={slideIndex === 0}
-                    sizes="(max-width: 1023px) 85vw, 584px"
                     className="hero-tilda__portrait"
+                    decoding="async"
+                    fetchPriority={slideIndex === 0 ? "high" : "auto"}
                   />
                 </div>
               ))}
