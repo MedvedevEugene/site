@@ -2,7 +2,7 @@ const CDN = "https://static.tildacdn.com";
 
 export const IMAGES = {
   /** Портрет в hero (как на lifeinstitute.ru) */
-  heroPortrait: `${CDN}/tild3865-3764-4963-b439-373761633561/01b0e4cc-d423-4d42-9.png`,
+  heroPortrait: "/images/hero/portraits/gennadiy.png",
   /** Кавычки в hero-цитате (как на lifeinstitute.ru) */
   quoteIcon: `${CDN}/tild3765-6635-4265-b734-613031326165/Ellipse_3.svg`,
   logoCircle: `${CDN}/tild3633-3262-4161-a430-353230613533/logo-circle.svg`,

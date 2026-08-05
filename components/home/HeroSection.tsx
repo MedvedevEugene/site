@@ -80,11 +80,9 @@ function HeroTags() {
   );
 }
 
-function resolveSlides(heroPortrait?: string): HeroSlide[] {
-  if (!heroPortrait) return HERO_SLIDES;
-  return HERO_SLIDES.map((slide, index) =>
-    index === 0 ? { ...slide, portrait: heroPortrait } : slide,
-  );
+function resolveSlides(_heroPortrait?: string): HeroSlide[] {
+  // Локальные экспорты из Figma — единый кадр; CMS-override давал чужой CDN-кадр
+  return HERO_SLIDES;
 }
 
 export function HeroSection({ heroPortrait }: HeroSectionProps) {

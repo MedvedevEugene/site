@@ -1658,7 +1658,7 @@
     left: 50%;
     bottom: 0;
     z-index: 1;
-    width: min(245px, 78%);
+    width: min(280px, 86%);
     height: 240px;
     transform: translateX(-50%);
     opacity: 0;
@@ -1676,7 +1676,7 @@
   .hero-tilda__portrait {
     display: block;
     width: auto !important;
-    height: auto !important;
+    height: 100% !important;
     max-width: 100% !important;
     max-height: 100% !important;
     object-fit: contain !important;
@@ -1779,10 +1779,11 @@
     }
 
     .hero-tilda__portrait-slot {
-      left: 452px;
-      width: 584px;
+      /* Figma: кадры ~437–650 × ~509–516, выравниваем по низу */
+      left: 50%;
+      width: 660px;
       height: 516px;
-      transform: none;
+      transform: translateX(-38%);
     }
 
     .hero-tilda__story {
@@ -1858,10 +1859,10 @@
     }
 
     .hero-tilda__portrait-slot {
-      left: 38%;
-      width: 50%;
+      left: 55%;
+      width: 52%;
       height: 460px;
-      transform: none;
+      transform: translateX(-50%);
     }
 
     .hero-tilda__cloud {
