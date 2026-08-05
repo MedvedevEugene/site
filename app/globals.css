@@ -1646,7 +1646,7 @@
   }
 
   .hero-tilda__media {
-    @apply relative z-[1] mt-4 min-h-[260px] flex items-end justify-center;
+    @apply relative z-[1] mt-4 h-[231px] flex items-end justify-center;
   }
 
   .hero-tilda__cloud {
@@ -1654,10 +1654,14 @@
   }
 
   .hero-tilda__portrait {
-    @apply relative z-[1] mx-auto mb-0 w-full max-w-[245px] h-auto object-contain object-bottom pointer-events-none select-none;
+    @apply z-[1] mx-auto mb-0 w-full max-w-[245px] pointer-events-none select-none;
     position: absolute;
     left: 50%;
     bottom: 0;
+    height: 231px;
+    max-height: 231px;
+    object-fit: contain;
+    object-position: bottom center;
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.45s ease;
@@ -1665,9 +1669,6 @@
 
   .hero-tilda__portrait--active {
     opacity: 1;
-    position: relative;
-    left: auto;
-    transform: none;
   }
 
   .hero-tilda__story {
@@ -1767,16 +1768,17 @@
     .hero-tilda__portrait {
       left: 452px;
       width: 584px;
-      max-width: none;
+      max-width: 584px;
+      height: 516px;
+      max-height: 516px;
       margin: 0;
       transform: none;
+      object-fit: contain;
+      object-position: bottom center;
     }
 
     .hero-tilda__portrait--active {
-      position: absolute;
-      left: 452px;
-      bottom: 0;
-      transform: none;
+      opacity: 1;
     }
 
     .hero-tilda__story {
@@ -1853,12 +1855,15 @@
 
     .hero-tilda__portrait {
       left: 38%;
-      width: 48%;
+      width: 50%;
+      max-width: 50%;
+      height: 460px;
+      max-height: 460px;
+      transform: none;
     }
 
     .hero-tilda__portrait--active {
-      left: 38%;
-      width: 48%;
+      opacity: 1;
     }
 
     .hero-tilda__cloud {
