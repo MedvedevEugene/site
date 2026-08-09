@@ -53,50 +53,50 @@ export function SupportTabs() {
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="support-mobile">
-          <div className="support-accordion">
-            {SUPPORT_TABS.map((item) => {
-              const open = active === item.id;
-              const tone = "mediaTone" in item ? item.mediaTone : "light";
-              return (
-                <div
-                  key={item.id}
-                  className={`support-accordion__item${open ? " support-accordion__item--open" : ""}`}
+      <div className="support-mobile">
+        <div className="support-accordion">
+          {SUPPORT_TABS.map((item) => {
+            const open = active === item.id;
+            const tone = "mediaTone" in item ? item.mediaTone : "light";
+            return (
+              <div
+                key={item.id}
+                className={`support-accordion__item${open ? " support-accordion__item--open" : ""}`}
+              >
+                <button
+                  type="button"
+                  className="support-accordion__trigger"
+                  aria-expanded={open}
+                  onClick={() => setActive(item.id)}
                 >
-                  <button
-                    type="button"
-                    className="support-accordion__trigger"
-                    aria-expanded={open}
-                    onClick={() => setActive(item.id)}
-                  >
-                    <span>{item.label}</span>
-                    <span
-                      className={`support-accordion__chevron${open ? " support-accordion__chevron--open" : ""}`}
-                      aria-hidden
-                    />
-                  </button>
-                  {open ? (
-                    <div className="support-accordion__body">
-                      {item.image ? (
-                        <div className={`support-accordion__media support-panel__media--${tone}`}>
-                          <Image
-                            src={item.image}
-                            alt=""
-                            width={600}
-                            height={296}
-                            className="support-accordion__image"
-                          />
-                        </div>
-                      ) : null}
-                      <h3 className="support-accordion__title">{item.title}</h3>
-                      <p className="support-accordion__text">{item.text}</p>
-                    </div>
-                  ) : null}
-                </div>
-              );
-            })}
-          </div>
+                  <span>{item.label}</span>
+                  <span
+                    className={`support-accordion__chevron${open ? " support-accordion__chevron--open" : ""}`}
+                    aria-hidden
+                  />
+                </button>
+                {open ? (
+                  <div className="support-accordion__body">
+                    {item.image ? (
+                      <div className={`support-accordion__media support-panel__media--${tone}`}>
+                        <Image
+                          src={item.image}
+                          alt=""
+                          width={600}
+                          height={296}
+                          className="support-accordion__image"
+                        />
+                      </div>
+                    ) : null}
+                    <h3 className="support-accordion__title">{item.title}</h3>
+                    <p className="support-accordion__text">{item.text}</p>
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -46,8 +46,8 @@ export function TopBar({ onCallbackClick }: HeaderProps) {
   }
 
   return (
-    <div className="bg-white pt-[18px]">
-      <div className="container-site flex items-center justify-between gap-4 flex-wrap">
+    <div className="site-topbar">
+      <div className="container-site site-topbar__inner">
         <form className="site-search hidden sm:flex" onSubmit={handleSearch}>
           <div className="site-search__field">
             <input
@@ -64,12 +64,12 @@ export function TopBar({ onCallbackClick }: HeaderProps) {
             Найти
           </button>
         </form>
-        <div className="flex items-center gap-4 flex-wrap ml-auto">
-          <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="text-base underline">
+        <div className="site-topbar__contacts">
+          <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="site-topbar__phone">
             {SITE.phoneDisplay}
           </a>
-          <span className="text-base hidden md:inline">{SITE.hours}</span>
-          <button type="button" onClick={onCallbackClick} className="btn btn-primary-solid">
+          <span className="site-topbar__hours hidden md:inline">{SITE.hours}</span>
+          <button type="button" onClick={onCallbackClick} className="btn btn-primary-solid site-topbar__callback">
             Заказать звонок
           </button>
         </div>
