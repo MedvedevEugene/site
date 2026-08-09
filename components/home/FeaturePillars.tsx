@@ -18,7 +18,6 @@ export function FeaturePillars() {
                   width={item.imageWidth}
                   height={item.imageHeight}
                   className="feature-pillar__image"
-                  style={{ width: item.imageWidth, maxWidth: "100%" }}
                 />
               </div>
               <div className="feature-pillar__copy">

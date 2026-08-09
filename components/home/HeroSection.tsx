@@ -247,7 +247,7 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
               aria-label="Закрыть"
               onClick={() => setStoryOpen(false)}
             >
-              <span aria-hidden>×</span>
+              <span className="hero-story-sheet__close-icon" aria-hidden />
             </button>
             <HeroTestimonialCard slide={slide} />
           </div>
