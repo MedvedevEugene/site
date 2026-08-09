@@ -249,7 +249,9 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
             >
               <span className="hero-story-sheet__close-icon" aria-hidden />
             </button>
-            <HeroTestimonialCard slide={slide} />
+            <div className="hero-story-sheet__content">
+              <HeroTestimonialCard slide={slide} />
+            </div>
           </div>
         </div>
       ) : null}
