@@ -43,7 +43,6 @@ function CarouselArrow({
 export function ResonanceCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef({ active: false, startX: 0, scrollLeft: 0, moved: false });
-  const initialScrollDone = useRef(false);
   const [dragging, setDragging] = useState(false);
   const [trackCentered, setTrackCentered] = useState(false);
 
@@ -59,13 +58,6 @@ export function ResonanceCarousel() {
 
     if (fits) {
       track.scrollLeft = 0;
-      initialScrollDone.current = false;
-      return;
-    }
-
-    if (!initialScrollDone.current) {
-      track.scrollLeft = overflow / 2;
-      initialScrollDone.current = true;
     }
   }, []);
 
