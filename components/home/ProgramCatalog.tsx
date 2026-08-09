@@ -29,6 +29,7 @@ export function ProgramCatalog() {
                 tag={p.tag}
                 badge={"badge" in p ? p.badge : undefined}
                 title={p.title}
+                titleLines={p.titleLines}
                 meta={p.meta}
                 callbackVariant={"callbackVariant" in p ? p.callbackVariant : undefined}
               />

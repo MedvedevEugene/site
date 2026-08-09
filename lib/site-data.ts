@@ -81,6 +81,7 @@ export const CATALOG_PROGRAMS = [
     tag: "Профессиональная переподготовка",
     badge: "Программа 2026",
     title: "Базовый курс обучения семейным расстановкам",
+    titleLines: ["Базовый курс обучения", "семейным расстановкам"],
     meta: "10 мес. / 700 часов",
   },
   {
@@ -89,6 +90,7 @@ export const CATALOG_PROGRAMS = [
     decor: "business" as const,
     tag: "Профессиональная переподготовка",
     title: "Курс обучения бизнес расстановкам",
+    titleLines: ["Курс обучения", "бизнес", "расстановкам"],
     meta: "6 мес. / 400 часов",
   },
   {
@@ -97,6 +99,7 @@ export const CATALOG_PROGRAMS = [
     decor: "body" as const,
     tag: "Телесные практики",
     title: "Телесно-ориентированная терапия",
+    titleLines: ["Телесно-", "ориентированная", "терапия"],
     meta: "Индивидуально / очно",
     callbackVariant: "advanced-course" as const,
   },
@@ -107,6 +110,7 @@ export const CATALOG_PROGRAMS = [
     decor: "consult" as const,
     tag: "Психологическая помощь",
     title: "Индивидуальные консультации",
+    titleLines: ["Индивидуальные", "консультации"],
     meta: "от 30 минут",
   },
   {
@@ -115,6 +119,7 @@ export const CATALOG_PROGRAMS = [
     decor: "groups" as const,
     tag: "Мероприятия",
     title: "Расстановочные группы",
+    titleLines: ["Расстановочные", "группы"],
     meta: "Очно / онлайн",
     callbackVariant: "constellation-groups" as const,
   },
@@ -124,6 +129,7 @@ export const CATALOG_PROGRAMS = [
     decor: "market" as const,
     tag: "Магазин",
     title: "Маркет развивающих товаров",
+    titleLines: ["Маркет", "развивающих", "товаров"],
     meta: "Круглосуточно",
   },
 ] as const;

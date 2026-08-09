@@ -1197,8 +1197,80 @@
 
   .catalog-card--square {
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto 1fr auto;
     align-content: stretch;
+  }
+
+  .catalog-card--square .catalog-card__decor--business {
+    left: 50%;
+    top: 56%;
+    width: 118%;
+    height: auto;
+    transform: translate(-50%, -50%) rotate(-30deg);
+  }
+
+  .catalog-card--square .catalog-card__decor--body {
+    inset: auto;
+    left: 50%;
+    top: 54%;
+    width: 274px;
+    height: 269px;
+    transform: translate(-50%, -50%);
+  }
+
+  .catalog-card--square .catalog-card__decor-layer--body-outer {
+    left: 0;
+    top: 0;
+  }
+
+  .catalog-card--square .catalog-card__decor-layer--body-mid {
+    left: 48px;
+    top: 47px;
+  }
+
+  .catalog-card--square .catalog-card__decor-layer--body-inner {
+    left: 94px;
+    top: 92px;
+  }
+
+  .catalog-card--square .catalog-card__decor--groups {
+    inset: auto;
+    left: 50%;
+    top: 57%;
+    width: 220px;
+    height: 220px;
+    transform: translate(-50%, -50%);
+  }
+
+  .catalog-card--square .catalog-card__decor-layer--groups-a {
+    left: -4%;
+    bottom: 2%;
+    top: auto;
+    width: 136px;
+    transform: rotate(-90deg);
+  }
+
+  .catalog-card--square .catalog-card__decor-layer--groups-b {
+    right: -6%;
+    left: auto;
+    top: 28%;
+    width: 168px;
+    transform: rotate(30deg);
+  }
+
+  .catalog-card--square .catalog-card__decor-layer--groups-c {
+    left: 50%;
+    top: -2%;
+    width: 118px;
+    transform: translateX(-50%);
+  }
+
+  .catalog-card--square .catalog-card__decor--market {
+    left: 50%;
+    top: 54%;
+    width: 292px;
+    height: auto;
+    transform: translate(-50%, -50%);
   }
 
   .catalog-card__decor--base {
@@ -1320,15 +1392,22 @@
   }
 
   .catalog-card--square .catalog-card__body {
-    min-height: 96px;
+    min-height: 0;
+    padding-top: 35px;
   }
 
   .catalog-card__title {
-    @apply font-body text-[20px] font-medium leading-[normal] m-0 text-[#1e1e1e] max-w-[210px] group-hover:opacity-80;
+    @apply font-body text-[20px] font-medium m-0 text-[#1e1e1e] max-w-[210px] group-hover:opacity-80;
+    line-height: 1.2;
+  }
+
+  .catalog-card--square .catalog-card__title {
+    min-height: 72px;
   }
 
   .catalog-card--wide .catalog-card__title {
     @apply max-w-[360px];
+    min-height: 48px;
   }
 
   .catalog-card__footer {

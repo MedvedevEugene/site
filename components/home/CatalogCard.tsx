@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Fragment } from "react";
 import { useCallbackPopup } from "@/components/layout/CallbackPopupContext";
 import type { CatalogDecor } from "@/lib/site-data";
 import type { CallbackPopupVariantId } from "@/lib/callback-popup-variants";
@@ -20,6 +21,7 @@ type CatalogCardProps = {
   tag: string;
   badge?: string;
   title: string;
+  titleLines: readonly string[];
   meta: string;
   callbackVariant?: CallbackPopupVariantId;
 };
@@ -137,10 +139,10 @@ function CatalogCardContent({
   featured,
   badge,
   tag,
-  title,
+  titleLines,
   meta,
   decor,
-}: Pick<CatalogCardProps, "featured" | "badge" | "tag" | "title" | "meta" | "decor">) {
+}: Pick<CatalogCardProps, "featured" | "badge" | "tag" | "titleLines" | "meta" | "decor">) {
   return (
     <>
       <CatalogDecorLayer decor={decor} />
@@ -152,7 +154,14 @@ function CatalogCardContent({
       )}
       <div className="catalog-card__tag">{tag}</div>
       <div className="catalog-card__body">
-        <h3 className="catalog-card__title">{title}</h3>
+        <h3 className="catalog-card__title">
+          {titleLines.map((line, index) => (
+            <Fragment key={line}>
+              {index > 0 ? <br /> : null}
+              {line}
+            </Fragment>
+          ))}
+        </h3>
       </div>
       <div className="catalog-card__footer">
         <div className="catalog-card__meta">{meta}</div>
@@ -164,7 +173,7 @@ function CatalogCardContent({
 
 export function CatalogCard(props: CatalogCardProps) {
   const { openCallbackPopup } = useCallbackPopup();
-  const { href, featured, wide, tone, decor, callbackVariant, badge, tag, title, meta } = props;
+  const { href, featured, wide, tone, decor, callbackVariant, badge, tag, title, titleLines, meta } = props;
   const className = `catalog-card ${TONE_CLASS[tone]} ${wide ? "lg:col-span-2 catalog-card--wide" : "catalog-card--square"} group`;
 
   if (callbackVariant) {
@@ -173,12 +182,13 @@ export function CatalogCard(props: CatalogCardProps) {
         type="button"
         onClick={() => openCallbackPopup(callbackVariant)}
         className={`${className} catalog-card--button`}
+        aria-label={title}
       >
         <CatalogCardContent
           featured={featured}
           badge={badge}
           tag={tag}
-          title={title}
+          titleLines={titleLines}
           meta={meta}
           decor={decor}
         />
@@ -187,12 +197,12 @@ export function CatalogCard(props: CatalogCardProps) {
   }
 
   return (
-    <Link href={href} className={className}>
+    <Link href={href} className={className} aria-label={title}>
       <CatalogCardContent
         featured={featured}
         badge={badge}
         tag={tag}
-        title={title}
+        titleLines={titleLines}
         meta={meta}
         decor={decor}
       />
