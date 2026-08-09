@@ -643,14 +643,16 @@
     @apply relative w-full;
     width: 100vw;
     margin-left: calc(50% - 50vw);
+    --resonance-card-width: 360px;
     --resonance-track-gutter: max(20px, calc((100vw - min(1200px, 100vw - 40px)) / 2));
+    --resonance-track-end: max(40px, calc(100vw - var(--resonance-track-gutter) - var(--resonance-card-width)));
   }
 
   .resonance-carousel__track {
     @apply flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 select-none;
     gap: 40px;
     padding-left: var(--resonance-track-gutter);
-    padding-right: 40px;
+    padding-right: var(--resonance-track-end);
     cursor: grab;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -737,13 +739,15 @@
 
   @media (max-width: 480px) {
     .resonance-carousel {
+      --resonance-card-width: 280px;
       --resonance-track-gutter: 20px;
+      --resonance-track-end: max(20px, calc(100vw - var(--resonance-track-gutter) - var(--resonance-card-width)));
     }
 
     .resonance-carousel__track {
       gap: 10px;
       padding-left: var(--resonance-track-gutter);
-      padding-right: 20px;
+      padding-right: var(--resonance-track-end);
     }
 
     .resonance-card {
