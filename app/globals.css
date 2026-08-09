@@ -190,10 +190,6 @@
     @apply object-contain object-center;
   }
 
-  .support-panel__media--lavender .support-panel__image {
-    @apply object-cover;
-  }
-
   @media (max-width: 959px) {
     .support-card {
       padding-top: 30px;
