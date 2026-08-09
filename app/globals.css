@@ -644,15 +644,14 @@
     width: 100vw;
     margin-left: calc(50% - 50vw);
     --resonance-card-width: 360px;
-    --resonance-track-gutter: max(20px, calc((100vw - min(1200px, 100vw - 40px)) / 2));
-    --resonance-track-end: max(40px, calc(100vw - var(--resonance-track-gutter) - var(--resonance-card-width)));
+    --resonance-card-gap: 40px;
+    --resonance-track-padding: max(20px, calc(50vw - 1.5 * var(--resonance-card-width) - var(--resonance-card-gap)));
   }
 
   .resonance-carousel__track {
-    @apply flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 select-none;
-    gap: 40px;
-    padding-left: var(--resonance-track-gutter);
-    padding-right: var(--resonance-track-end);
+    @apply flex overflow-x-auto scroll-smooth pb-2 select-none;
+    gap: var(--resonance-card-gap);
+    padding-inline: var(--resonance-track-padding);
     cursor: grab;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -664,22 +663,14 @@
 
   .resonance-carousel__track--dragging {
     cursor: grabbing;
-    scroll-snap-type: none;
   }
 
   .resonance-carousel__track--dragging .resonance-card {
     pointer-events: none;
   }
 
-  .resonance-carousel__track--centered {
-    @apply justify-center;
-    overflow-x: hidden;
-    scroll-snap-type: none;
-    cursor: default;
-  }
-
   .resonance-card {
-    @apply relative shrink-0 overflow-hidden snap-start;
+    @apply relative shrink-0 overflow-hidden;
     flex: 0 0 360px;
     width: 360px;
     aspect-ratio: 3 / 4;
@@ -740,14 +731,12 @@
   @media (max-width: 480px) {
     .resonance-carousel {
       --resonance-card-width: 280px;
-      --resonance-track-gutter: 20px;
-      --resonance-track-end: max(20px, calc(100vw - var(--resonance-track-gutter) - var(--resonance-card-width)));
+      --resonance-card-gap: 10px;
     }
 
     .resonance-carousel__track {
-      gap: 10px;
-      padding-left: var(--resonance-track-gutter);
-      padding-right: var(--resonance-track-end);
+      gap: var(--resonance-card-gap);
+      padding-inline: var(--resonance-track-padding);
     }
 
     .resonance-card {

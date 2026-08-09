@@ -5,6 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { RESONANCE_CARDS } from "@/lib/site-data";
 
+const INITIAL_SNAP_INDEX = 1;
+const MAX_SNAP_INDEX = 3;
+
 function CarouselArrow({
   direction,
   onClick,
@@ -46,66 +49,80 @@ function CarouselArrow({
 export function ResonanceCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef({ active: false, startX: 0, scrollLeft: 0, moved: false });
+  const activeSnapIndexRef = useRef(INITIAL_SNAP_INDEX);
   const [dragging, setDragging] = useState(false);
-  const [trackCentered, setTrackCentered] = useState(false);
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
+  const [activeSnapIndex, setActiveSnapIndex] = useState(INITIAL_SNAP_INDEX);
 
-  const syncTrackLayout = useCallback(() => {
+  activeSnapIndexRef.current = activeSnapIndex;
+
+  const getCards = useCallback(() => {
     const track = trackRef.current;
-    if (!track) return;
-
-    const overflow = track.scrollWidth - track.clientWidth;
-    const fits = overflow <= 1;
-
-    setTrackCentered(fits);
-    track.classList.toggle("resonance-carousel__track--centered", fits);
-
-    if (fits) {
-      track.scrollLeft = 0;
-      setCanScrollPrev(false);
-      setCanScrollNext(false);
-      return;
-    }
-
-    setCanScrollPrev(track.scrollLeft > 1);
-    setCanScrollNext(track.scrollLeft < overflow - 1);
+    if (!track) return [];
+    return Array.from(track.querySelectorAll<HTMLElement>(".resonance-card"));
   }, []);
+
+  const getScrollLeftForIndex = useCallback(
+    (index: number) => {
+      const track = trackRef.current;
+      const cards = getCards();
+      const card = cards[index];
+      if (!track || !card) return 0;
+
+      const target = card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
+      const max = track.scrollWidth - track.clientWidth;
+      return Math.max(0, Math.min(target, max));
+    },
+    [getCards],
+  );
+
+  const scrollToSnapIndex = useCallback(
+    (index: number, behavior: ScrollBehavior = "smooth") => {
+      const track = trackRef.current;
+      if (!track) return;
+
+      const clamped = Math.max(INITIAL_SNAP_INDEX, Math.min(index, MAX_SNAP_INDEX));
+      const left = getScrollLeftForIndex(clamped);
+
+      if (behavior === "auto" || behavior === "instant") {
+        track.scrollLeft = left;
+      } else {
+        track.scrollTo({ left, behavior });
+      }
+
+      setActiveSnapIndex(clamped);
+    },
+    [getScrollLeftForIndex],
+  );
+
+  useLayoutEffect(() => {
+    scrollToSnapIndex(INITIAL_SNAP_INDEX, "auto");
+  }, [scrollToSnapIndex]);
 
   useLayoutEffect(() => {
     const track = trackRef.current;
     if (!track) return;
 
-    syncTrackLayout();
+    const syncPosition = () => {
+      scrollToSnapIndex(activeSnapIndexRef.current, "auto");
+    };
 
-    const observer = new ResizeObserver(syncTrackLayout);
+    const observer = new ResizeObserver(syncPosition);
     observer.observe(track);
+    window.addEventListener("resize", syncPosition);
 
-    track.addEventListener("scroll", syncTrackLayout, { passive: true });
-    window.addEventListener("resize", syncTrackLayout);
     return () => {
       observer.disconnect();
-      track.removeEventListener("scroll", syncTrackLayout);
-      window.removeEventListener("resize", syncTrackLayout);
+      window.removeEventListener("resize", syncPosition);
     };
-  }, [syncTrackLayout]);
-
-  const scrollStep = useCallback(() => {
-    const track = trackRef.current;
-    if (!track) return 400;
-    const card = track.querySelector<HTMLElement>(".resonance-card");
-    if (!card) return 400;
-    const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "40");
-    return card.offsetWidth + gap;
-  }, []);
+  }, [scrollToSnapIndex]);
 
   function scroll(dir: -1 | 1) {
-    trackRef.current?.scrollBy({ left: dir * scrollStep(), behavior: "smooth" });
+    scrollToSnapIndex(activeSnapIndex + dir);
   }
 
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
     const track = trackRef.current;
-    if (!track || event.button !== 0 || track.scrollWidth <= track.clientWidth) return;
+    if (!track || event.button !== 0) return;
 
     dragRef.current = {
       active: true,
@@ -124,7 +141,6 @@ export function ResonanceCarousel() {
     const delta = event.clientX - dragRef.current.startX;
     if (Math.abs(delta) > 4) dragRef.current.moved = true;
     track.scrollLeft = dragRef.current.scrollLeft - delta;
-    syncTrackLayout();
   }
 
   function endDrag(event: React.PointerEvent<HTMLDivElement>) {
@@ -136,7 +152,19 @@ export function ResonanceCarousel() {
     if (track.hasPointerCapture(event.pointerId)) {
       track.releasePointerCapture(event.pointerId);
     }
-    syncTrackLayout();
+
+    let nearest = activeSnapIndex;
+    let minDistance = Infinity;
+
+    for (let index = INITIAL_SNAP_INDEX; index <= MAX_SNAP_INDEX; index += 1) {
+      const distance = Math.abs(track.scrollLeft - getScrollLeftForIndex(index));
+      if (distance < minDistance) {
+        minDistance = distance;
+        nearest = index;
+      }
+    }
+
+    scrollToSnapIndex(nearest);
   }
 
   function onCardClick(event: React.MouseEvent<HTMLAnchorElement>) {
@@ -145,6 +173,9 @@ export function ResonanceCarousel() {
       dragRef.current.moved = false;
     }
   }
+
+  const canScrollPrev = activeSnapIndex > INITIAL_SNAP_INDEX;
+  const canScrollNext = activeSnapIndex < MAX_SNAP_INDEX;
 
   return (
     <section className="resonance-section">
@@ -159,7 +190,7 @@ export function ResonanceCarousel() {
       <div className="resonance-carousel">
         <div
           ref={trackRef}
-          className={`resonance-carousel__track${trackCentered ? " resonance-carousel__track--centered" : ""}${dragging ? " resonance-carousel__track--dragging" : ""}`}
+          className={`resonance-carousel__track${dragging ? " resonance-carousel__track--dragging" : ""}`}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={endDrag}
@@ -184,7 +215,7 @@ export function ResonanceCarousel() {
                 className="object-cover"
                 sizes="(max-width: 480px) 280px, 360px"
                 draggable={false}
-                onLoad={syncTrackLayout}
+                onLoad={() => scrollToSnapIndex(activeSnapIndexRef.current, "auto")}
               />
               <div className="resonance-card__filter" />
               <div className="resonance-card__content">
@@ -204,12 +235,10 @@ export function ResonanceCarousel() {
           ))}
         </div>
 
-        {!trackCentered && (
-          <div className="resonance-carousel__controls">
-            <CarouselArrow direction="prev" onClick={() => scroll(-1)} disabled={!canScrollPrev} />
-            <CarouselArrow direction="next" onClick={() => scroll(1)} disabled={!canScrollNext} />
-          </div>
-        )}
+        <div className="resonance-carousel__controls">
+          <CarouselArrow direction="prev" onClick={() => scroll(-1)} disabled={!canScrollPrev} />
+          <CarouselArrow direction="next" onClick={() => scroll(1)} disabled={!canScrollNext} />
+        </div>
       </div>
     </section>
   );
