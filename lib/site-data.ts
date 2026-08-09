@@ -24,7 +24,7 @@ export const IMAGES = {
   supportMentors: "/images/support/mentors.png?v=2",
   supportSales: "/images/support/sales.png?v=1",
   supportPractice: "/images/support/practice.png?v=1",
-  supportChat: "/images/support/chat.png?v=2",
+  supportChat: "/images/support/chat.png?v=3",
   /** Фон блока дипломов */
   diplomaBg: "/images/diplomas/bg.png",
   diploma: "/images/diplomas/diploma.jpg",
