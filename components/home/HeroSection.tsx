@@ -154,7 +154,7 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
               </h1>
               <p className="hero-tilda__subtitle">
                 Обучение расстановкам, психологическая помощь и&nbsp;расстановочные группы
-                очно и&nbsp;онлайн.
+                очно и&nbsp;онлайн
               </p>
             </div>
 
