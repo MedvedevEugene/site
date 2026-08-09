@@ -1195,13 +1195,18 @@
     @apply absolute pointer-events-none select-none z-0;
   }
 
+  .catalog-card--square {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    align-content: stretch;
+  }
+
   .catalog-card__decor--base {
     left: 0;
     top: -100%;
     width: 100%;
     height: auto;
     min-height: 280%;
-    opacity: 0.55;
   }
 
   .catalog-card__decor--business {
@@ -1209,7 +1214,6 @@
     top: 20%;
     width: 140%;
     height: auto;
-    opacity: 0.45;
     transform: rotate(-30deg);
   }
 
@@ -1228,7 +1232,6 @@
     top: -14px;
     width: 274px;
     height: 269px;
-    opacity: 0.5;
   }
 
   .catalog-card__decor-layer--body-mid {
@@ -1236,7 +1239,6 @@
     top: 33px;
     width: 178px;
     height: 175px;
-    opacity: 0.5;
   }
 
   .catalog-card__decor-layer--body-inner {
@@ -1244,7 +1246,6 @@
     top: 78px;
     width: 86px;
     height: 85px;
-    opacity: 0.5;
   }
 
   .catalog-card__decor-layer--consult-outer {
@@ -1252,7 +1253,6 @@
     top: 38px;
     width: 562px;
     height: 562px;
-    opacity: 0.45;
   }
 
   .catalog-card__decor-layer--consult-mid {
@@ -1260,7 +1260,6 @@
     top: 109px;
     width: 421px;
     height: 421px;
-    opacity: 0.45;
   }
 
   .catalog-card__decor-layer--consult-inner {
@@ -1268,7 +1267,6 @@
     top: 179px;
     width: 281px;
     height: 281px;
-    opacity: 0.45;
   }
 
   .catalog-card__decor-layer--groups-a {
@@ -1276,7 +1274,6 @@
     bottom: -10%;
     width: 150px;
     height: auto;
-    opacity: 0.45;
     transform: rotate(-90deg);
   }
 
@@ -1285,7 +1282,6 @@
     top: 24%;
     width: 185px;
     height: auto;
-    opacity: 0.45;
     transform: rotate(30deg);
   }
 
@@ -1294,7 +1290,6 @@
     top: -18%;
     width: 127px;
     height: auto;
-    opacity: 0.45;
   }
 
   .catalog-card__decor--market {
@@ -1302,7 +1297,6 @@
     top: -6px;
     width: 296px;
     height: auto;
-    opacity: 0.55;
   }
 
   .catalog-card__badge {
@@ -1314,19 +1308,39 @@
   }
 
   .catalog-card__tag {
-    @apply relative z-[1] text-[12px] font-medium text-[#1e1e1e] mb-0 max-w-[70%];
+    @apply relative z-[1] text-[12px] font-medium leading-[normal] text-[#1e1e1e] mb-0 max-w-[70%];
   }
 
   .catalog-card__body {
-    @apply relative z-[1] flex-1 flex items-start pt-[35px];
+    @apply relative z-[1] flex items-start pt-[35px];
+  }
+
+  .catalog-card--wide .catalog-card__body {
+    @apply flex-1;
+  }
+
+  .catalog-card--square .catalog-card__body {
+    min-height: 96px;
   }
 
   .catalog-card__title {
-    @apply font-body text-[20px] font-medium leading-[normal] m-0 text-[#1e1e1e] max-w-[360px] group-hover:opacity-80;
+    @apply font-body text-[20px] font-medium leading-[normal] m-0 text-[#1e1e1e] max-w-[210px] group-hover:opacity-80;
+  }
+
+  .catalog-card--wide .catalog-card__title {
+    @apply max-w-[360px];
   }
 
   .catalog-card__footer {
-    @apply relative z-[1] mt-auto flex items-end justify-between gap-3 pt-4;
+    @apply relative z-[1] mt-auto flex items-end justify-between gap-3;
+  }
+
+  .catalog-card--square .catalog-card__footer {
+    @apply pt-0;
+  }
+
+  .catalog-card--wide .catalog-card__footer {
+    @apply pt-4;
   }
 
   .catalog-card__meta {

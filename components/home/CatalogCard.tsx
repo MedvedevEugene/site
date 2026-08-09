@@ -165,7 +165,7 @@ function CatalogCardContent({
 export function CatalogCard(props: CatalogCardProps) {
   const { openCallbackPopup } = useCallbackPopup();
   const { href, featured, wide, tone, decor, callbackVariant, badge, tag, title, meta } = props;
-  const className = `catalog-card ${TONE_CLASS[tone]} ${wide ? "lg:col-span-2" : ""} group`;
+  const className = `catalog-card ${TONE_CLASS[tone]} ${wide ? "lg:col-span-2 catalog-card--wide" : "catalog-card--square"} group`;
 
   if (callbackVariant) {
     return (
