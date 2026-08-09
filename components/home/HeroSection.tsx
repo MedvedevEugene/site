@@ -49,7 +49,7 @@ function HeroTestimonialCard({ slide }: { slide: HeroSlide }) {
       <p className="testimonial-card__quote-text">{slide.quote}</p>
       <div className="mt-auto pt-3">
         <div className="font-semibold text-[14px] text-[#3b3758] leading-none">{slide.author}</div>
-        <div className="text-[11px] text-[#3b3758] leading-none mt-1.5">
+        <div className="text-[11px] text-[#3b3758] leading-[1.35] mt-1.5">
           Выпускник программы
           <br />
           по&nbsp;системным расстановкам
@@ -81,7 +81,6 @@ function HeroTags() {
 }
 
 function resolveSlides(_heroPortrait?: string): HeroSlide[] {
-  // Локальные экспорты из Figma — единый кадр; CMS-override давал чужой CDN-кадр
   return HERO_SLIDES;
 }
 
@@ -110,6 +109,19 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
     }, HERO_SLIDE_INTERVAL_MS);
     return () => window.clearInterval(id);
   }, [paused, storyOpen, count]);
+
+  useEffect(() => {
+    if (!storyOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setStoryOpen(false);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [storyOpen]);
 
   const onTouchStart = (event: TouchEvent) => {
     touchStartX.current = event.touches[0]?.clientX ?? null;
@@ -162,7 +174,6 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
                     slideIndex === index ? " hero-tilda__portrait-slot--active" : ""
                   }`}
                 >
-                  {/* plain img: Next Image fill + height:auto conflicts stretch portraits */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.portrait}
@@ -177,8 +188,8 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
                 type="button"
                 className="hero-tilda__story"
                 aria-expanded={storyOpen}
-                aria-controls="hero-story-panel"
-                onClick={() => setStoryOpen((open) => !open)}
+                aria-controls="hero-story-sheet"
+                onClick={() => setStoryOpen(true)}
               >
                 {slide.storyLabel}
                 <span className="hero-tilda__story-info" aria-hidden>
@@ -190,19 +201,6 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
             <div className="hero-tilda__quote">
               <HeroTestimonialCard slide={slide} />
             </div>
-
-            {storyOpen ? (
-              <div id="hero-story-panel" className="hero-tilda__story-panel" role="dialog">
-                <HeroTestimonialCard slide={slide} />
-                <button
-                  type="button"
-                  className="hero-tilda__story-close"
-                  onClick={() => setStoryOpen(false)}
-                >
-                  Закрыть
-                </button>
-              </div>
-            ) : null}
 
             <div className="hero-tilda__dots" role="tablist" aria-label="Истории выпускников">
               {slides.map((item, slideIndex) => (
@@ -227,6 +225,34 @@ export function HeroSection({ heroPortrait }: HeroSectionProps) {
           </div>
         </div>
       </div>
+
+      {storyOpen ? (
+        <div className="hero-story-sheet" role="presentation">
+          <button
+            type="button"
+            className="hero-story-sheet__backdrop"
+            aria-label="Закрыть историю"
+            onClick={() => setStoryOpen(false)}
+          />
+          <div
+            id="hero-story-sheet"
+            className="hero-story-sheet__panel"
+            role="dialog"
+            aria-modal="true"
+            aria-label={slide.storyLabel}
+          >
+            <button
+              type="button"
+              className="hero-story-sheet__close"
+              aria-label="Закрыть"
+              onClick={() => setStoryOpen(false)}
+            >
+              <span aria-hidden>×</span>
+            </button>
+            <HeroTestimonialCard slide={slide} />
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }

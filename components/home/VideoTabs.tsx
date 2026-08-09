@@ -1,10 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { VIDEO_TABS } from "@/lib/site-data";
 
 export function VideoTabs() {
   const [active, setActive] = useState<(typeof VIDEO_TABS)[number]["id"]>(VIDEO_TABS[0].id);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const activeTab = VIDEO_TABS.find((tab) => tab.id === active) ?? VIDEO_TABS[0];
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onPointer = (event: MouseEvent) => {
+      if (!menuRef.current?.contains(event.target as Node)) setMenuOpen(false);
+    };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("mousedown", onPointer);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointer);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [menuOpen]);
 
   return (
     <section className="video-section">
@@ -29,23 +48,67 @@ export function VideoTabs() {
           ))}
         </div>
 
-        <label className="sr-only" htmlFor="video-tabs-select">
-          Формат видео
-        </label>
-        <select
-          id="video-tabs-select"
-          className="video-tabs-select"
-          value={active}
-          onChange={(e) => setActive(e.target.value as (typeof VIDEO_TABS)[number]["id"])}
-        >
-          {VIDEO_TABS.map((tab) => (
-            <option key={tab.id} value={tab.id}>
-              {tab.label}
-            </option>
-          ))}
-        </select>
+        <div className="video-mobile" ref={menuRef}>
+          <button
+            type="button"
+            className={`video-mobile__trigger${menuOpen ? " video-mobile__trigger--open" : ""}`}
+            aria-expanded={menuOpen}
+            aria-haspopup="listbox"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span>{activeTab.label}</span>
+            <span
+              className={`video-mobile__caret${menuOpen ? " video-mobile__caret--open" : ""}`}
+              aria-hidden
+            />
+          </button>
 
-        <div className="video-player">
+          <div className={`video-player video-player--mobile${menuOpen ? " video-player--menu-open" : ""}`}>
+            {menuOpen ? (
+              <ul className="video-mobile__menu" role="listbox" aria-label="Формат видео">
+                {VIDEO_TABS.map((tab) => (
+                  <li key={tab.id}>
+                    <button
+                      type="button"
+                      role="option"
+                      aria-selected={active === tab.id}
+                      className={`video-mobile__option${
+                        active === tab.id ? " video-mobile__option--active" : ""
+                      }`}
+                      onClick={() => {
+                        setActive(tab.id);
+                        setMenuOpen(false);
+                      }}
+                    >
+                      {active === tab.id ? <span aria-hidden>✓</span> : <span aria-hidden />}
+                      {tab.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+
+            {VIDEO_TABS.map((tab) => (
+              <div
+                key={tab.id}
+                className={`video-frame${active === tab.id ? " video-frame--active" : ""}`}
+                role="tabpanel"
+                aria-hidden={active !== tab.id}
+                aria-label={tab.label}
+              >
+                <iframe
+                  src={`https://www.youtube.com/embed/${tab.youtubeId}?enablejsapi=1`}
+                  title={tab.label}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="video-player video-player--desktop">
           {VIDEO_TABS.map((tab) => (
             <div
               key={tab.id}

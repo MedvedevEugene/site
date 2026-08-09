@@ -225,9 +225,9 @@ export const FEATURE_PILLARS = [
 ] as const;
 
 export const VIDEO_TABS = [
-  { id: "offline", label: "очный формат", youtubeId: "asdasdasd" },
-  { id: "online", label: "онлайн практика", youtubeId: "asdasdasd" },
-  { id: "lecture", label: "онлайн лекция", youtubeId: "asdasdasd" },
+  { id: "offline", label: "Очный формат", youtubeId: "asdasdasd" },
+  { id: "online", label: "Онлайн практика", youtubeId: "asdasdasd" },
+  { id: "lecture", label: "Онлайн лекция", youtubeId: "asdasdasd" },
 ] as const;
 
 export const FOOTER_PLACEHOLDER_HREF = "/coming-soon";
