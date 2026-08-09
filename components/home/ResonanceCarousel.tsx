@@ -8,9 +8,11 @@ import { RESONANCE_CARDS } from "@/lib/site-data";
 function CarouselArrow({
   direction,
   onClick,
+  disabled,
 }: {
   direction: "prev" | "next";
   onClick: () => void;
+  disabled?: boolean;
 }) {
   const path = direction === "prev" ? "M23 13L15.5 20L23 27" : "M17 13L24.5 20L17 27";
 
@@ -19,7 +21,8 @@ function CarouselArrow({
       type="button"
       aria-label={direction === "prev" ? "Предыдущий слайд" : "Следующий слайд"}
       onClick={onClick}
-      className={`resonance-carousel__control resonance-carousel__control--${direction}`}
+      disabled={disabled}
+      className={`resonance-carousel__control resonance-carousel__control--${direction}${disabled ? " resonance-carousel__control--disabled" : ""}`}
     >
       <svg
         viewBox="0 0 40 40"
@@ -45,6 +48,8 @@ export function ResonanceCarousel() {
   const dragRef = useRef({ active: false, startX: 0, scrollLeft: 0, moved: false });
   const [dragging, setDragging] = useState(false);
   const [trackCentered, setTrackCentered] = useState(false);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
 
   const syncTrackLayout = useCallback(() => {
     const track = trackRef.current;
@@ -58,7 +63,13 @@ export function ResonanceCarousel() {
 
     if (fits) {
       track.scrollLeft = 0;
+      setCanScrollPrev(false);
+      setCanScrollNext(false);
+      return;
     }
+
+    setCanScrollPrev(track.scrollLeft > 1);
+    setCanScrollNext(track.scrollLeft < overflow - 1);
   }, []);
 
   useLayoutEffect(() => {
@@ -70,9 +81,11 @@ export function ResonanceCarousel() {
     const observer = new ResizeObserver(syncTrackLayout);
     observer.observe(track);
 
+    track.addEventListener("scroll", syncTrackLayout, { passive: true });
     window.addEventListener("resize", syncTrackLayout);
     return () => {
       observer.disconnect();
+      track.removeEventListener("scroll", syncTrackLayout);
       window.removeEventListener("resize", syncTrackLayout);
     };
   }, [syncTrackLayout]);
@@ -111,6 +124,7 @@ export function ResonanceCarousel() {
     const delta = event.clientX - dragRef.current.startX;
     if (Math.abs(delta) > 4) dragRef.current.moved = true;
     track.scrollLeft = dragRef.current.scrollLeft - delta;
+    syncTrackLayout();
   }
 
   function endDrag(event: React.PointerEvent<HTMLDivElement>) {
@@ -122,6 +136,7 @@ export function ResonanceCarousel() {
     if (track.hasPointerCapture(event.pointerId)) {
       track.releasePointerCapture(event.pointerId);
     }
+    syncTrackLayout();
   }
 
   function onCardClick(event: React.MouseEvent<HTMLAnchorElement>) {
@@ -189,10 +204,12 @@ export function ResonanceCarousel() {
           ))}
         </div>
 
-        <div className="resonance-carousel__controls">
-          <CarouselArrow direction="prev" onClick={() => scroll(-1)} />
-          <CarouselArrow direction="next" onClick={() => scroll(1)} />
-        </div>
+        {!trackCentered && (
+          <div className="resonance-carousel__controls">
+            <CarouselArrow direction="prev" onClick={() => scroll(-1)} disabled={!canScrollPrev} />
+            <CarouselArrow direction="next" onClick={() => scroll(1)} disabled={!canScrollNext} />
+          </div>
+        )}
       </div>
     </section>
   );
