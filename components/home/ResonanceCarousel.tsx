@@ -5,8 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { RESONANCE_CARDS } from "@/lib/site-data";
 
-const INITIAL_SNAP_INDEX = 1;
-const MAX_SNAP_INDEX = 3;
+const INITIAL_SNAP_INDEX = 0;
+const MAX_SNAP_INDEX = 2;
 
 function CarouselArrow({
   direction,
