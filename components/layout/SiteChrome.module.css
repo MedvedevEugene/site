@@ -1,0 +1,300 @@
+.topbar {
+  padding-top: 16px;
+}
+.topbarInner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.searchWrap {
+  position: relative;
+}
+.topbar .searchWrap {
+  margin-right: auto;
+  width: 350px;
+  flex-shrink: 1;
+  min-width: 200px;
+}
+.search {
+  display: flex;
+  gap: 15px;
+}
+.searchField {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #efefef;
+  border-radius: 10px;
+  padding: 8px 12px;
+  min-width: 0;
+  flex: 1;
+  background: #fff;
+}
+.searchField svg {
+  width: 20px;
+  flex-shrink: 0;
+  color: #aaa;
+}
+.search input {
+  min-width: 0;
+  width: 100%;
+  outline: none;
+  background: transparent;
+  font: inherit;
+}
+.searchField:focus-within {
+  outline: 2px solid #8c77e3;
+  outline-offset: 2px;
+}
+.search > button {
+  background: #f1f1f3;
+  border-radius: 10px;
+  padding: 8px 30px;
+}
+.phone {
+  text-decoration: underline;
+}
+.callback {
+  padding: 14px 20px;
+  background: #3b3758;
+  border-radius: 10px;
+  color: white;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.header {
+  padding: 12px 0;
+  position: relative;
+  z-index: 30;
+}
+.shell {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 19px 20px;
+  border: 1px solid #efefef;
+  border-radius: 20px;
+  background: linear-gradient(0deg, #f8f7e4, #fff);
+}
+.logo {
+  flex-shrink: 0;
+  width: 171px;
+}
+.desktopNav {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 15px;
+  white-space: nowrap;
+}
+.menuGroup {
+  position: relative;
+}
+.menuButton,
+.education {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 40px;
+}
+.education {
+  border: 1px solid #3b3758;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+.menuButton span,
+.education span {
+  font-size: 9px;
+}
+.dropdown {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  padding: 10px;
+  min-width: 275px;
+  background: white;
+  border: 1px solid #efefef;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px #27234418;
+  white-space: normal;
+}
+.menuGroup:last-child .dropdown {
+  left: auto;
+  right: 0;
+}
+.dropdown a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+.dropdown a:hover,
+.dropdown a:focus-visible {
+  background: #f9f8e8;
+}
+.mobileActions {
+  display: none;
+}
+.mobileDialog {
+  color: #3b3758;
+  padding: 16px;
+  margin: 0 0 0 auto;
+  width: min(100%, 420px);
+  height: 100dvh;
+  max-height: 100dvh;
+  max-width: 100%;
+  background: linear-gradient(#fff, #f8f7e4);
+  border: 0;
+}
+.mobileDialog::backdrop {
+  background: #27234480;
+}
+.mobileHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+.mobileHeading img {
+  width: 140px;
+  height: auto;
+}
+.mobileHeading button {
+  font-size: 28px;
+  width: 44px;
+  height: 44px;
+}
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0 24px;
+  font-size: 16px;
+  line-height: 1.4;
+}
+.mobileNav > a,
+.mobileNav > div,
+.mobileNav > button,
+.mobileNav summary {
+  padding: 12px 0;
+  border-bottom: 1px solid #3b375812;
+  text-align: left;
+}
+.mobileNav summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.mobileNav summary::-webkit-details-marker {
+  display: none;
+}
+.mobileNav details[open] summary span {
+  transform: rotate(180deg);
+}
+.mobileNav details > div {
+  padding: 4px 0 10px;
+  display: grid;
+  gap: 12px;
+}
+.mobileNav details a {
+  font-size: 13px;
+  padding-left: 12px;
+  border-left: 2px solid #8c77e3;
+}
+.mobileContacts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  font-size: 12px;
+}
+.mobileContacts > div,
+.mobileContacts > p {
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+}
+.mobileContacts small {
+  display: block;
+  color: #777;
+  margin-bottom: 4px;
+}
+.mobileContacts p {
+  grid-column: 1/-1;
+  margin: 0;
+  font-size: 11px;
+}
+.results {
+  background: white;
+  border: 1px solid #efefef;
+  border-radius: 0 0 12px 12px;
+  padding: 10px;
+}
+.results a {
+  display: block;
+  padding: 10px 0;
+  font-size: 12px;
+}
+@media (max-width: 1199px) {
+  .topbarInner {
+    gap: 12px;
+    font-size: 12px;
+  }
+  .topbar .searchWrap {
+    width: 280px;
+  }
+  .search > button {
+    padding-inline: 18px;
+  }
+  .desktopNav {
+    font-size: 13px;
+    gap: 8px;
+  }
+  .shell {
+    gap: 16px;
+  }
+  .logo {
+    width: 150px;
+  }
+}
+@media (max-width: 1023px) {
+  .topbar,
+  .desktopNav {
+    display: none;
+  }
+  .header {
+    padding: 8px 0;
+  }
+  .shell {
+    padding: 14px 12px;
+    gap: 10px;
+    border-radius: 16px;
+  }
+  .logo {
+    width: 145px;
+  }
+  .mobileActions {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+  }
+  .mobileActions button {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #3b3758;
+    border-radius: 8px;
+  }
+  .mobileActions svg {
+    width: 23px;
+    height: 23px;
+  }
+}
+@media (min-width: 1024px) {
+  .mobileDialog {
+    max-width: 420px;
+  }
+}

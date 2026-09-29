@@ -5,6 +5,7 @@ export type SearchResult = {
 };
 
 export const SEARCHABLE_PAGES: SearchResult[] = [
+  { title: "Психологическая помощь", href: "/psychological-help", description: "Форматы помощи: консультации, индивидуальные расстановки, группы, телесная терапия" },
   {
     title: "Базовый курс обучения семейным расстановкам",
     href: "/base-cource",

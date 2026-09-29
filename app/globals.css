@@ -5018,3 +5018,14 @@
     @apply text-[#774bd9];
   }
 }
+
+/* Shared chrome, September 2026 Figma revision. */
+.header-account-link { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+.accessible-view body { color: #111; background: #fff; }
+.accessible-view main p,
+.accessible-view main li,
+.accessible-view header a,
+.accessible-view header button { font-size: max(1.15em, 18px); line-height: 1.6; }
+.accessible-view a { text-decoration: underline; text-underline-offset: 3px; }
+.accessible-view :focus-visible { outline: 3px solid #111; outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

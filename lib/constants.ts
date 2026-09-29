@@ -18,14 +18,14 @@ export const BURGER_ICON =
 
 export const NAV_LINKS = [
   { label: "Расписание", href: "/timetable" },
-  { label: "Психологическая помощь", href: "/individual-consultations" },
+  { label: "Психологическая помощь", href: "/psychological-help" },
   { label: "Статьи", href: "/blog" },
 ] as const;
 
 export const MORE_LINKS = [
   { label: "Расстановочные группы", href: "/rasstanovochnye-gruppy" },
   { label: "Телесная терапия", href: "/telese-terapiya" },
-  { label: "Психологическая помощь", href: "/individual-consultations" },
+  { label: "Психологическая помощь", href: "/psychological-help" },
   { label: "Маркет", href: "/market" },
 ] as const;
 
@@ -54,7 +54,7 @@ export const FOOTER_LINKS = {
   ],
   help: [
     { label: "Консультации", href: "/individual-consultations" },
-    { label: "Психологическая помощь", href: "/individual-consultations" },
+    { label: "Психологическая помощь", href: "/psychological-help" },
     { label: "Телесная терапия", href: "/telese-terapiya" },
   ],
   info: [
@@ -115,7 +115,7 @@ export const PROGRAMS = [
     icon: "/images/site/tild6532-3836-4639-a337-376536323337__base.svg",
   },
   {
-    href: "/individual-consultations",
+    href: "/psychological-help",
     meta: "от 30 минут",
     title: "Психологическая помощь",
     icon: "/images/site/tild6433-6434-4538-b932-306265666464__1.png",

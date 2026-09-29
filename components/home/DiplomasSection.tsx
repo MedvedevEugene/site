@@ -8,7 +8,7 @@ type DiplomasSectionProps = {
 
 export function DiplomasSection({ diplomaUrl = IMAGES.diploma }: DiplomasSectionProps) {
   return (
-    <section className="diploma-section">
+    <section className="diploma-section" id="institute">
       <div className="container-site diploma-section__grid">
         <div className="diploma-section__copy">
           <h2 className="diploma-section__title">

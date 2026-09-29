@@ -132,7 +132,7 @@ export function IndividualConsultationsSection({ specialists }: IndividualConsul
         </div>
       </section>
 
-      <section className="ic-page__section ic-page__section--methods">
+      <section className="ic-page__section ic-page__section--methods" id="methods">
         <div className="container-site ic-page__methods-wrap">
           <h2 className="ic-page__title ic-page__title--center ic-page__title--methods">Методы работы</h2>
           <div className="ic-page__methods">
