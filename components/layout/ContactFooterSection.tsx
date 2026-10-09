@@ -183,7 +183,7 @@ export function ContactFooterSection() {
               links={[
                 {
                   label: "Специалисты",
-                  href: "/psychological-help#specialists",
+                  href: "/specialists",
                 },
                 { label: "Календарь мероприятий", href: "/timetable" },
                 { label: "Блог", href: "/blog" },

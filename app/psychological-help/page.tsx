@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PsychologicalHelpPage } from "@/components/psychological-help/PsychologicalHelpPage";
-import { getMediaUrl, getPublishedSpecialists } from "@/lib/content";
+import { getMediaUrl, getSpecialistDisplayRecords } from "@/lib/content";
 import { resolveSpecialistsForCarousel } from "@/lib/specialists-display";
 import { prisma } from "@/lib/db";
 import { withDbTimeout } from "@/lib/db-timeout";
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 export default async function Page() {
   const [specialists, events, heroImage] = await Promise.all([
-    getPublishedSpecialists(),
+    getSpecialistDisplayRecords(),
     withDbTimeout(
       () =>
         prisma.event.findMany({

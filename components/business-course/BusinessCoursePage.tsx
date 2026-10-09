@@ -474,7 +474,7 @@ export function BusinessCoursePage() {
             <nav aria-label="Помощь">
               <h3>Помощь</h3>
               <Link href="/psychological-help">Форматы помощи</Link>
-              <Link href="/psychological-help#specialists">Специалисты</Link>
+              <Link href="/specialists">Специалисты</Link>
               <Link href="/timetable">Мероприятия</Link>
             </nav>
             <nav aria-label="Исследовать и учиться">

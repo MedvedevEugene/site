@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AssociationsTree } from "@/components/tools/AssociationsTree";
 import { AiReportView, saveToolSession, useAiAnalysis } from "@/components/tools/AiReportView";
@@ -9,6 +9,8 @@ import { pairWords } from "@/lib/tool-config";
 
 export function SixteenAssociationsWizard() {
   const router = useRouter();
+  const finishingRef = useRef(false);
+  const [finishing, setFinishing] = useState(false);
   const [step, setStep] = useState(0);
   const [query, setQuery] = useState("");
   const [level1, setLevel1] = useState(Array(16).fill(""));
@@ -43,6 +45,9 @@ export function SixteenAssociationsWizard() {
   }
 
   async function finish() {
+    if (finishingRef.current || !canProceed()) return;
+    finishingRef.current = true;
+    setFinishing(true);
     const payload = {
       query: query.trim(),
       level1: level1.map((w) => w.trim()),
@@ -51,11 +56,14 @@ export function SixteenAssociationsWizard() {
       level4: level4.map((w) => w.trim()),
       finalWord: finalWord.trim(),
     };
-    const id = await saveToolSession("sixteen_associations", payload);
+    let id: string | null = null;
+    try { id = await saveToolSession("sixteen_associations", payload); } catch { /* Keep the completed map available when the network fails. */ }
     if (id) {
       router.push(`/16-associations/result/${id}`);
       return;
     }
+    setFinishing(false);
+    finishingRef.current = false;
     setDone(true);
     run("sixteen_associations", payload, null);
   }
@@ -210,17 +218,17 @@ export function SixteenAssociationsWizard() {
 
       <div className="flex gap-3 mt-8">
         {step > 0 && (
-          <button type="button" className="btn btn-outline" onClick={() => setStep((s) => s - 1)}>
+          <button type="button" className="btn btn-outline" disabled={finishing} onClick={() => setStep((s) => s - 1)}>
             Назад
           </button>
         )}
         <button
           type="button"
           className="btn btn-primary"
-          disabled={!canProceed()}
+          disabled={finishing || !canProceed()}
           onClick={() => (step === 5 ? finish() : setStep((s) => s + 1))}
         >
-          {step === 5 ? "Получить карту и ИИ-разбор" : "Далее →"}
+          {finishing ? "Сохраняем…" : step === 5 ? "Получить карту и ИИ-разбор" : "Далее →"}
         </button>
       </div>
         </div>

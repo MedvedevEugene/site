@@ -9,6 +9,8 @@ interface ProgramSelectionPopupProps {
 
 export function ProgramSelectionPopup({ open, onClose }: ProgramSelectionPopupProps) {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (!open) setSent(false);
@@ -18,11 +20,14 @@ export function ProgramSelectionPopup({ open, onClose }: ProgramSelectionPopupPr
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (sending) return;
+    setSending(true);
+    setError(false);
     const form = e.currentTarget;
     const data = new FormData(form);
 
     try {
-      await fetch("/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -32,9 +37,12 @@ export function ProgramSelectionPopup({ open, onClose }: ProgramSelectionPopupPr
           contact: data.get("contact"),
         }),
       });
+      if (!response.ok) throw new Error("Contact failed");
       setSent(true);
     } catch {
-      setSent(true);
+      setError(true);
+    } finally {
+      setSending(false);
     }
   }
 
@@ -79,7 +87,8 @@ export function ProgramSelectionPopup({ open, onClose }: ProgramSelectionPopupPr
                 <option value="whatsapp">WhatsApp</option>
                 <option value="max">Max</option>
               </select>
-              <button type="submit" className="btn btn-primary w-full mt-2">
+              {error && <p role="alert">Не удалось отправить заявку. Попробуйте ещё раз.</p>}
+              <button disabled={sending} type="submit" className="btn btn-primary w-full mt-2">
                 Отправить
               </button>
             </form>

@@ -257,6 +257,7 @@ export function ConsultationQuiz() {
   const [phoneValue, setPhoneValue] = useState("");
   const [phoneCountryIso, setPhoneCountryIso] = useState(DEFAULT_PHONE_COUNTRY.iso);
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const { renderStep, screenClassName, handleAnimationEnd } = useQuizStepTransition(step);
   const showSidebar = renderStep >= 1 && renderStep <= IC_QUIZ.steps.length + 1;
@@ -285,7 +286,9 @@ export function ConsultationQuiz() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (submitting) return;
     setSubmitting(true);
+    setSubmitError(false);
     const form = e.currentTarget;
     const data = new FormData(form);
     const contactValue = data.get("contactValue")?.toString() || "";
@@ -297,7 +300,7 @@ export function ConsultationQuiz() {
         : contactValue;
 
     try {
-      await fetch("/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -309,11 +312,13 @@ export function ConsultationQuiz() {
           comment: [`Тема: ${answers[0]}`, `Формат: ${answers[1]}`, `Приоритет: ${answers[2]}`].join("\n"),
         }),
       });
+      if (!response.ok) throw new Error("Contact failed");
+      setSubmitError(false);
+      setStep(IC_QUIZ.steps.length + 2);
     } catch {
-      // show success either way for demo
+      setSubmitError(true);
     } finally {
       setSubmitting(false);
-      setStep(IC_QUIZ.steps.length + 2);
     }
   }
 
@@ -443,6 +448,7 @@ export function ConsultationQuiz() {
                   {renderScreenContent(renderStep)}
                 </AnimatedScreen>
 
+                {submitError && <p role="alert">Не удалось отправить заявку. Попробуйте ещё раз.</p>}
                 <QuizFooter
                   stepNumber={renderStep >= 1 && renderStep <= IC_QUIZ.steps.length ? renderStep : IC_QUIZ.totalSteps}
                   onBack={handleBack}

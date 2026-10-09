@@ -263,7 +263,7 @@
   display: none;
 }
 .specialist {
-  flex: 0 0 360px;
+  flex: 0 0 268px;
   scroll-snap-align: start;
   min-width: 0;
 }
@@ -283,12 +283,6 @@
   background: white;
   padding: 28px 20px;
   margin-top: -45px;
-}
-.specialist h3 {
-  margin: 0 0 16px;
-  font-size: 21px;
-  color: #161616;
-  font-weight: 600;
 }
 .specialistBody > p {
   font-size: 14px;

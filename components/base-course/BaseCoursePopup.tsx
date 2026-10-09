@@ -10,6 +10,8 @@ interface BaseCoursePopupProps {
 
 export function BaseCoursePopup({ kind, onClose }: BaseCoursePopupProps) {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
   const config = kind ? BASE_COURSE_POPUPS[kind] : null;
 
   useEffect(() => {
@@ -20,12 +22,15 @@ export function BaseCoursePopup({ kind, onClose }: BaseCoursePopupProps) {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!config) return;
+    if (sending) return;
+    setSending(true);
+    setError(false);
+    if (!config) { setSending(false); return; }
     const form = e.currentTarget;
     const data = new FormData(form);
 
     try {
-      await fetch("/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -36,10 +41,13 @@ export function BaseCoursePopup({ kind, onClose }: BaseCoursePopupProps) {
           message: data.get("message"),
         }),
       });
+      if (!response.ok) throw new Error("Contact failed");
+      setSent(true);
     } catch {
-      /* fallback */
+      setError(true);
+    } finally {
+      setSending(false);
     }
-    setSent(true);
   }
 
   return (
@@ -79,7 +87,8 @@ export function BaseCoursePopup({ kind, onClose }: BaseCoursePopupProps) {
                 <option value="whatsapp">WhatsApp</option>
                 <option value="max">Max</option>
               </select>
-              <button type="submit" className="bc-btn bc-btn--dark w-full mt-2">
+              {error && <p role="alert">Не удалось отправить заявку. Попробуйте ещё раз.</p>}
+              <button disabled={sending} type="submit" className="bc-btn bc-btn--dark w-full mt-2">
                 {config.submit}
               </button>
               <p className="text-[11px] text-muted m-0 text-center leading-relaxed">

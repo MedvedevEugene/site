@@ -31,6 +31,8 @@ function CloseIcon() {
 
 export function CallbackPopup({ open, onClose, variant = "default" }: CallbackPopupProps) {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
   const [contactMethod, setContactMethod] = useState<ContactMethod>("phone");
   const [phoneValue, setPhoneValue] = useState("");
   const [phoneCountryIso, setPhoneCountryIso] = useState(DEFAULT_PHONE_COUNTRY.iso);
@@ -62,6 +64,9 @@ export function CallbackPopup({ open, onClose, variant = "default" }: CallbackPo
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (sending) return;
+    setSending(true);
+    setError(false);
     const form = e.currentTarget;
     const data = new FormData(form);
     const contactValue = data.get("contactValue")?.toString() || "";
@@ -73,7 +78,7 @@ export function CallbackPopup({ open, onClose, variant = "default" }: CallbackPo
         : contactValue;
 
     try {
-      await fetch("/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -85,9 +90,12 @@ export function CallbackPopup({ open, onClose, variant = "default" }: CallbackPo
           comment: data.get("comment"),
         }),
       });
+      if (!response.ok) throw new Error("Contact failed");
       setSent(true);
     } catch {
-      setSent(true);
+      setError(true);
+    } finally {
+      setSending(false);
     }
   }
 
@@ -182,9 +190,10 @@ export function CallbackPopup({ open, onClose, variant = "default" }: CallbackPo
                 />
               </div>
 
-              <button type="submit" className="callback-popup__submit">
+              {error && <p role="alert">Не удалось отправить заявку. Попробуйте ещё раз.</p>}
+              <button type="submit" disabled={sending} className="callback-popup__submit">
                 <span className="callback-popup__submit-icon" aria-hidden="true">→</span>
-                <span>{variantConfig.submitLabel}</span>
+                <span>{sending ? "Отправляем…" : variantConfig.submitLabel}</span>
               </button>
             </form>
           </div>
@@ -231,14 +240,19 @@ export function CookieBanner() {
 
 export function ContactForm({ title, subtitle }: { title?: string; subtitle?: string }) {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (sending) return;
+    setSending(true);
+    setError(false);
     const form = e.currentTarget;
     const data = new FormData(form);
 
     try {
-      await fetch("/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -248,10 +262,13 @@ export function ContactForm({ title, subtitle }: { title?: string; subtitle?: st
           email: data.get("email"),
         }),
       });
+      if (!response.ok) throw new Error("Contact failed");
+      setSent(true);
     } catch {
-      /* fallback */
+      setError(true);
+    } finally {
+      setSending(false);
     }
-    setSent(true);
   }
 
   if (sent) {
@@ -265,7 +282,8 @@ export function ContactForm({ title, subtitle }: { title?: string; subtitle?: st
       <input name="name" required placeholder="Имя" className="border-0 rounded-[10px] px-4 py-3.5 text-base" />
       <input name="phone" required placeholder="Телефон" className="border-0 rounded-[10px] px-4 py-3.5 text-base" />
       <input name="email" type="email" placeholder="Почта" className="border-0 rounded-[10px] px-4 py-3.5 text-base" />
-      <button type="submit" className="btn bg-white text-primary hover:bg-cream-bg mt-2">Отправить заявку</button>
+      {error && <p role="alert">Не удалось отправить заявку. Попробуйте ещё раз.</p>}
+      <button type="submit" disabled={sending} className="btn bg-white text-primary hover:bg-cream-bg mt-2">{sending ? "Отправляем…" : "Отправить заявку"}</button>
     </form>
   );
 }

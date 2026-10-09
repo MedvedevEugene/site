@@ -18,7 +18,7 @@ export const TOOL_LINKS = [
 ];
 export const ABOUT_LINKS = [
   { label: "Об институте", href: "/#institute" },
-  { label: "Специалисты", href: "/psychological-help#specialists" },
+  { label: "Специалисты", href: "/specialists" },
   { label: "Лицензия и документы", href: "/#institute" },
 ];
 export const NAVIGATION = [
@@ -26,6 +26,6 @@ export const NAVIGATION = [
   { label: "Психологическая помощь", links: HELP_LINKS },
   { label: "Онлайн-сервисы", links: TOOL_LINKS },
   { label: "Мероприятия", href: "/timetable" },
-  { label: "Специалисты", href: "/psychological-help#specialists" },
+  { label: "Специалисты", href: "/specialists" },
   { label: "Об институте", links: ABOUT_LINKS },
 ];

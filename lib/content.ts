@@ -59,6 +59,11 @@ export async function getPublishedSpecialists() {
   );
 }
 
+/** Include publication flags so design fallbacks never revive a hidden profile. */
+export async function getSpecialistDisplayRecords() {
+  return withDbTimeout(() => prisma.specialist.findMany({ orderBy: { sortOrder: "asc" } }), []);
+}
+
 export async function getSpecialistBySlug(slug: string) {
   return withDbTimeout(
     () => prisma.specialist.findFirst({ where: { slug, published: true } }),

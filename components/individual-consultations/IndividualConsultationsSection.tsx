@@ -168,7 +168,7 @@ export function IndividualConsultationsSection({ specialists }: IndividualConsul
         <div className="container-site">
           <h2 className="ic-page__title--center ic-page__title--specialists m-0">Наши специалисты</h2>
         </div>
-        <IcSpecialistsCarousel specialists={specialists} onBook={() => scrollTo("quiz")} />
+        <IcSpecialistsCarousel specialists={specialists} />
       </section>
 
       <section className="ic-page__section ic-page__section--faq">

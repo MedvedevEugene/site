@@ -5,6 +5,7 @@ export type SearchResult = {
 };
 
 export const SEARCHABLE_PAGES: SearchResult[] = [
+  { title: "Специалисты ИЖСИЗ", href: "/specialists", description: "Психологи, расстановщики, преподаватели, подбор специалиста" },
   { title: "Психологическая помощь", href: "/psychological-help", description: "Форматы помощи: консультации, индивидуальные расстановки, группы, телесная терапия" },
   {
     title: "Базовый курс обучения семейным расстановкам",

@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
+import { SpecialistCard } from "@/components/specialists/SpecialistCard";
 import Link from "next/link";
 import Image from "next/image";
 import { useCallbackPopup } from "@/components/layout/CallbackPopupContext";
@@ -261,37 +262,13 @@ export function PsychologicalHelpPage({
               ref={track}
               className={allSpecialists ? styles.specialistGrid : styles.track}
             >
-              {specialists.map((specialist) => (
-                <article key={specialist.slug} className={styles.specialist}>
-                  <div className={styles.portrait}>
-                    <Image
-                      src={specialist.photo}
-                      alt={specialist.name}
-                      fill
-                      sizes="(max-width:767px) 280px, 360px"
-                    />
-                  </div>
-                  <div className={styles.specialistBody}>
-                    <h3>{specialist.name}</h3>
-                    <p className={styles.role}>{specialist.role}</p>
-                    <p>
-                      Вы можете выбрать специалиста самостоятельно — по
-                      направлениям работы, опыту и темам, с которыми он
-                      работает, или просто по отклику.
-                    </p>
-                    <Link
-                      className={styles.outline}
-                      href={`/teachers/${specialist.slug}`}
-                    >
-                      О специалисте
-                      <Arrow />
-                    </Link>
-                  </div>
-                </article>
+              {specialists.map((specialist, index) => (
+                <SpecialistCard key={specialist.slug} specialist={specialist} featured={index === 0} className={styles.specialist} />
               ))}
             </div>
           </div>
           <div className={styles.centerAction}>
+            <Link href="/specialists" className={styles.outline}>Каталог специалистов ↗</Link>
             <button
               type="button"
               className={styles.outline}

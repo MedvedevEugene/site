@@ -12,11 +12,16 @@ const config = BASE_COURSE_POPUPS.discount;
 
 export function BaseCourseFinalCtaSection() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
   const [phoneValue, setPhoneValue] = useState("");
   const [phoneCountryIso, setPhoneCountryIso] = useState(DEFAULT_PHONE_COUNTRY.iso);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (sending) return;
+    setSending(true);
+    setError(false);
     const form = event.currentTarget;
     const data = new FormData(form);
     const countryIso = data.get("phoneCountry")?.toString() || DEFAULT_PHONE_COUNTRY.iso;
@@ -24,7 +29,7 @@ export function BaseCourseFinalCtaSection() {
     const phone = buildFullPhoneNumber(country, data.get("phone")?.toString() || "");
 
     try {
-      await fetch("/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -34,11 +39,13 @@ export function BaseCourseFinalCtaSection() {
           message: data.get("message"),
         }),
       });
+      if (!response.ok) throw new Error("Contact failed");
+      setSent(true);
     } catch {
-      /* fallback */
+      setError(true);
+    } finally {
+      setSending(false);
     }
-
-    setSent(true);
   }
 
   return (
@@ -81,7 +88,8 @@ export function BaseCourseFinalCtaSection() {
                 className={styles.input}
               />
 
-              <button type="submit" className={styles.submit}>
+              {error && <p role="alert">Не удалось отправить заявку. Попробуйте ещё раз.</p>}
+              <button disabled={sending} type="submit" className={styles.submit}>
                 Записаться на консультацию
               </button>
 
