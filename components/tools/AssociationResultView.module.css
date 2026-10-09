@@ -1,0 +1,121 @@
+.result {
+  max-width: 1160px;
+  margin: 0 auto;
+  color: #29253f;
+  font-family: var(--font-montserrat), sans-serif;
+}
+.key {
+  background: #f7f2ff;
+  border: 1px solid #eee5fc;
+  border-radius: 16px;
+  padding: 28px;
+  margin: 24px 0;
+}
+.key > span {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #827a91;
+  letter-spacing: 0.05em;
+}
+.key h2 {
+  font-size: 40px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 12px 0;
+}
+.key p {
+  margin: 0;
+  font-size: 13px;
+  color: #827a91;
+}
+.result h1 {
+  font-size: 32px;
+  font-weight: 600;
+}
+.result h3 {
+  font-size: 22px;
+  font-weight: 600;
+}
+.observations {
+  padding: 32px 0;
+  border-top: 1px solid #eeeaf3;
+  margin-top: 32px;
+}
+.observations form {
+  display: grid;
+  gap: 18px;
+}
+.observations label {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+}
+.observations textarea {
+  border: 1px solid #ded9e5;
+  padding: 14px;
+  border-radius: 8px;
+  min-height: 85px;
+  width: 100%;
+  resize: vertical;
+}
+.observations button {
+  justify-self: start;
+  font-size: 12px;
+}
+.observations p {
+  font-size: 12px;
+  color: #827a91;
+}
+.report {
+  margin-top: 32px;
+  background: #faf8e9;
+  border-radius: 20px;
+  padding: 32px;
+}
+.report :global(.tool-card) {
+  margin-top: 0;
+  box-shadow: none;
+  border: 0;
+}
+.report details {
+  padding: 16px;
+  background: white;
+  border: 1px solid #eeeaf3;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.report summary {
+  cursor: pointer;
+  font-size: 14px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.report summary::after {
+  content: "+";
+  color: #7145cb;
+}
+.report details[open] summary::after {
+  content: "−";
+}
+.report details[open] summary {
+  margin-bottom: 14px;
+}
+@media (max-width: 650px) {
+  .key {
+    padding: 20px;
+  }
+  .key h2 {
+    font-size: 30px;
+  }
+  .result h1 {
+    font-size: 26px;
+  }
+  .report {
+    padding: 20px 16px;
+  }
+  .observations {
+    padding-top: 24px;
+  }
+}

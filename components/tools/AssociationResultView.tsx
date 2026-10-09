@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { AssociationsTree } from "@/components/tools/AssociationsTree";
 import { AiReportView, useAiAnalysis } from "@/components/tools/AiReportView";
+import styles from "./AssociationResultView.module.css";
 import { isValidAiReport } from "@/lib/ai-report";
 
 type Payload = {
@@ -21,10 +22,36 @@ function markDuplicates(words: string[]) {
     const key = w.toLowerCase();
     if (key) counts.set(key, (counts.get(key) || 0) + 1);
   });
-  return words.map((w) => ((counts.get(w.toLowerCase()) || 0) > 1 ? `${w} (повтор)` : w));
+  return words.map((w) =>
+    (counts.get(w.toLowerCase()) || 0) > 1 ? `${w} (повтор)` : w,
+  );
 }
 
 export function AssociationResultView({ sessionId }: { sessionId: string }) {
+  const [reflections, setReflections] = useState({ meaning: "", nextStep: "" });
+  const [notesSaved, setNotesSaved] = useState(false);
+  const [notesError, setNotesError] = useState(false);
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(`associations-notes:${sessionId}`);
+      if (saved) setReflections(JSON.parse(saved));
+    } catch {
+      /* Storage can be unavailable. */
+    }
+  }, [sessionId]);
+  function saveNotes(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    try {
+      localStorage.setItem(
+        `associations-notes:${sessionId}`,
+        JSON.stringify(reflections),
+      );
+      setNotesSaved(true);
+      setNotesError(false);
+    } catch {
+      setNotesError(true);
+    }
+  }
   const [payload, setPayload] = useState<Payload | null>(null);
   const [error, setError] = useState(false);
   const [cachedReport, setCachedReport] = useState<string | null>(null);
@@ -35,7 +62,8 @@ export function AssociationResultView({ sessionId }: { sessionId: string }) {
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((session) => {
         setPayload(session.payload as Payload);
-        if (session.aiReport && isValidAiReport(session.aiReport)) setCachedReport(session.aiReport);
+        if (session.aiReport && isValidAiReport(session.aiReport))
+          setCachedReport(session.aiReport);
         else run("sixteen_associations", session.payload, sessionId);
       })
       .catch(() => setError(true));
@@ -54,7 +82,11 @@ export function AssociationResultView({ sessionId }: { sessionId: string }) {
   }
 
   if (!payload) {
-    return <div className="tool-card max-w-lg mx-auto animate-pulse text-muted">Загрузка…</div>;
+    return (
+      <div className="tool-card max-w-lg mx-auto animate-pulse text-muted">
+        Загрузка…
+      </div>
+    );
   }
 
   const columns = [
@@ -66,20 +98,77 @@ export function AssociationResultView({ sessionId }: { sessionId: string }) {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className={styles.result}>
       <div className="tool-card">
-        <h1 className="font-heading text-2xl font-medium m-0 mb-2">16 ассоциаций — результат</h1>
+        <h1 className="font-heading text-2xl font-medium m-0 mb-2">
+          Ваш результат
+        </h1>
         <p className="text-sm text-muted m-0 mb-6">
-          Запрос: <strong>{payload.query}</strong> → Ключ: <strong>{payload.finalWord}</strong>
+          Запрос: <strong>{payload.query}</strong> → Ключ:{" "}
+          <strong>{payload.finalWord}</strong>
         </p>
-        <AssociationsTree columns={columns} />
+        <div className={styles.key}>
+          <span>Ключевое слово</span>
+          <h2>{payload.finalWord}</h2>
+          <p>Ваш запрос: {payload.query}</p>
+        </div>
+        <p className="text-sm text-muted">
+          Итоговое слово — повод прислушаться к своим ассоциациям и посмотреть
+          на запрос с другой стороны.
+        </p>
+        <details>
+          <summary className="cursor-pointer text-sm text-primary mb-4">
+            Посмотреть весь путь: 16 → 8 → 4 → 2 → 1
+          </summary>
+          <AssociationsTree columns={columns} />
+        </details>
+        <section className={styles.observations}>
+          <h3>Что вы замечаете в своём результате?</h3>
+          <form onSubmit={saveNotes}>
+            <label>
+              Что для вас означает итоговое слово?
+              <textarea
+                value={reflections.meaning}
+                onChange={(e) => {
+                  setReflections({ ...reflections, meaning: e.target.value });
+                  setNotesSaved(false);
+                }}
+              />
+            </label>
+            <label>
+              Что хочется сделать или изменить?
+              <textarea
+                value={reflections.nextStep}
+                onChange={(e) => {
+                  setReflections({ ...reflections, nextStep: e.target.value });
+                  setNotesSaved(false);
+                }}
+              />
+            </label>
+            <button className="btn btn-primary" type="submit">
+              Сохранить наблюдения
+            </button>
+            <p>Наблюдения сохраняются в этом браузере.</p>
+            {notesSaved && <p role="status">Наблюдения сохранены.</p>}
+            {notesError && (
+              <p role="alert">
+                Браузер не разрешил сохранить наблюдения. Скопируйте их перед
+                закрытием страницы.
+              </p>
+            )}
+          </form>
+        </section>
       </div>
-      <AiReportView
-        text={cachedReport || analysis}
-        loading={loading && !cachedReport}
-        emailSent={emailSent}
-        userEmail={userEmail}
-      />
+      <section className={styles.report}>
+        <h3>Разбор вашего исследования</h3>
+        <AiReportView
+          text={cachedReport || analysis}
+          loading={loading && !cachedReport}
+          emailSent={emailSent}
+          userEmail={userEmail}
+          collapsible
+        />
+      </section>
       <div className="text-center mt-6">
         <Link href="/16-associations" className="btn btn-outline">
           Пройти снова

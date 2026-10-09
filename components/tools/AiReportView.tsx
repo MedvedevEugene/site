@@ -13,11 +13,14 @@ function renderBody(body: string) {
   function flushList() {
     if (listItems.length === 0) return;
     nodes.push(
-      <ul key={`list-${key++}`} className="m-0 pl-5 text-sm leading-relaxed text-[#3b3758] space-y-1">
+      <ul
+        key={`list-${key++}`}
+        className="m-0 pl-5 text-sm leading-relaxed text-[#3b3758] space-y-1"
+      >
         {listItems.map((item) => (
           <li key={item}>{item.replace(/\*\*(.+?)\*\*/g, "$1")}</li>
         ))}
-      </ul>
+      </ul>,
     );
     listItems = [];
   }
@@ -31,9 +34,12 @@ function renderBody(body: string) {
     flushList();
     if (line.trim()) {
       nodes.push(
-        <p key={`p-${key++}`} className="m-0 text-sm leading-relaxed text-[#3b3758]">
+        <p
+          key={`p-${key++}`}
+          className="m-0 text-sm leading-relaxed text-[#3b3758]"
+        >
           {line.replace(/\*\*(.+?)\*\*/g, "$1")}
-        </p>
+        </p>,
       );
     }
   }
@@ -47,16 +53,20 @@ export function AiReportView({
   loading,
   emailSent,
   userEmail,
+  collapsible = false,
 }: {
   text: string | null;
   loading: boolean;
   emailSent?: boolean;
   userEmail?: string | null;
+  collapsible?: boolean;
 }) {
   if (loading) {
     return (
       <div className="tool-card mt-8">
-        <p className="m-0 text-muted animate-pulse">Формируем ИИ-разбор по методологии ИЖСИЗ…</p>
+        <p className="m-0 text-muted animate-pulse">
+          Формируем ИИ-разбор по методологии ИЖСИЗ…
+        </p>
       </div>
     );
   }
@@ -74,31 +84,52 @@ export function AiReportView({
       </p>
       {hasContent ? (
         <div className="flex flex-col gap-5">
-          {sections.map((section) => (
-            <div key={section.title}>
-              {section.title && (
-                <h4 className="font-body text-base font-medium m-0 mb-2 text-[#3b3758]">{section.title}</h4>
-              )}
-              <div className="flex flex-col gap-2">{renderBody(section.body)}</div>
-            </div>
-          ))}
+          {sections.map((section, index) =>
+            collapsible ? (
+              <details key={`${section.title}-${index}`}>
+                <summary>{section.title || "Разбор результата"}</summary>
+                <div className="flex flex-col gap-2">
+                  {renderBody(section.body)}
+                </div>
+              </details>
+            ) : (
+              <div key={`${section.title}-${index}`}>
+                {section.title && (
+                  <h4 className="font-body text-base font-medium m-0 mb-2 text-[#3b3758]">
+                    {section.title}
+                  </h4>
+                )}
+                <div className="flex flex-col gap-2">
+                  {renderBody(section.body)}
+                </div>
+              </div>
+            ),
+          )}
         </div>
       ) : (
-        <p className="m-0 text-sm leading-relaxed text-[#3b3758] whitespace-pre-wrap">{text}</p>
+        <p className="m-0 text-sm leading-relaxed text-[#3b3758] whitespace-pre-wrap">
+          {text}
+        </p>
       )}
       {emailSent && userEmail && (
         <p className="text-sm text-green-700 bg-green-50 rounded-lg px-4 py-3 mt-4 m-0">
           Разбор также отправлен на <strong>{userEmail}</strong>
         </p>
       )}
-      <Link href="/individual-consultations" className="btn btn-primary mt-6 inline-flex">
+      <Link
+        href="/individual-consultations"
+        className="btn btn-primary mt-6 inline-flex"
+      >
         Записаться на консультацию
       </Link>
     </div>
   );
 }
 
-export async function saveToolSession(tool: string, payload: Record<string, unknown>) {
+export async function saveToolSession(
+  tool: string,
+  payload: Record<string, unknown>,
+) {
   const res = await fetch("/api/tool-sessions", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -115,7 +146,11 @@ export function useAiAnalysis() {
   const [emailSent, setEmailSent] = useState(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
 
-  async function run(tool: string, payload: Record<string, unknown>, sessionId?: string | null) {
+  async function run(
+    tool: string,
+    payload: Record<string, unknown>,
+    sessionId?: string | null,
+  ) {
     setLoading(true);
     setEmailSent(false);
     setUserEmail(null);
@@ -127,7 +162,9 @@ export function useAiAnalysis() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setAnalysis(data.error || "Не удалось сформировать разбор. Попробуйте позже.");
+        setAnalysis(
+          data.error || "Не удалось сформировать разбор. Попробуйте позже.",
+        );
         return;
       }
       setAnalysis(data.analysis || "Не удалось сформировать разбор.");

@@ -3,16 +3,23 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AssociationsTree } from "@/components/tools/AssociationsTree";
-import { AiReportView, saveToolSession, useAiAnalysis } from "@/components/tools/AiReportView";
+import {
+  AiReportView,
+  saveToolSession,
+  useAiAnalysis,
+} from "@/components/tools/AiReportView";
 import { ToolAccessGate } from "@/components/tools/ToolAccessGate";
+import styles from "./SixteenAssociationsWizard.module.css";
 import { pairWords } from "@/lib/tool-config";
 
-export function SixteenAssociationsWizard() {
+export function SixteenAssociationsWizard({
+  initialQuery = "",
+}: { initialQuery?: string } = {}) {
   const router = useRouter();
   const finishingRef = useRef(false);
   const [finishing, setFinishing] = useState(false);
-  const [step, setStep] = useState(0);
-  const [query, setQuery] = useState("");
+  const [step, setStep] = useState(initialQuery ? 1 : 0);
+  const [query, setQuery] = useState(initialQuery);
   const [level1, setLevel1] = useState(Array(16).fill(""));
   const [level2, setLevel2] = useState(Array(8).fill(""));
   const [level3, setLevel3] = useState(Array(4).fill(""));
@@ -57,7 +64,11 @@ export function SixteenAssociationsWizard() {
       finalWord: finalWord.trim(),
     };
     let id: string | null = null;
-    try { id = await saveToolSession("sixteen_associations", payload); } catch { /* Keep the completed map available when the network fails. */ }
+    try {
+      id = await saveToolSession("sixteen_associations", payload);
+    } catch {
+      /* Keep the completed map available when the network fails. */
+    }
     if (id) {
       router.push(`/16-associations/result/${id}`);
       return;
@@ -73,9 +84,12 @@ export function SixteenAssociationsWizard() {
       {done ? (
         <div className="max-w-4xl mx-auto">
           <div className="tool-card">
-            <h3 className="font-heading text-xl m-0 mb-2">Ваша карта ассоциаций</h3>
+            <h3 className="font-heading text-xl m-0 mb-2">
+              Ваша карта ассоциаций
+            </h3>
             <p className="text-sm text-muted m-0 mb-6">
-              Запрос: <strong>{query.trim()}</strong> → Ключ: <strong>{finalWord.trim()}</strong>
+              Запрос: <strong>{query.trim()}</strong> → Ключ:{" "}
+              <strong>{finalWord.trim()}</strong>
             </p>
             <AssociationsTree
               columns={[
@@ -87,150 +101,211 @@ export function SixteenAssociationsWizard() {
               ]}
             />
             <p className="text-xs text-muted m-0 mt-4">
-              Не удалось сохранить сессию — разбор показан здесь. Для постоянной ссылки пройдите тест снова позже.
+              Не удалось сохранить сессию — разбор показан здесь. Для постоянной
+              ссылки пройдите тест снова позже.
             </p>
           </div>
-          <AiReportView text={analysis} loading={loading} emailSent={emailSent} userEmail={userEmail} />
+          <AiReportView
+            text={analysis}
+            loading={loading}
+            emailSent={emailSent}
+            userEmail={userEmail}
+          />
         </div>
       ) : (
-        <div className="tool-card max-w-2xl mx-auto">
-      <p className="text-sm text-muted m-0 mb-2">Шаг {step + 1} из 6</p>
+        <div className={styles.workspace}>
+          <ol className={styles.progress} aria-label="Этапы исследования">
+            {["16 слов", "8 слов", "4 слова", "2 слова", "Ключ"].map(
+              (label, i) => (
+                <li
+                  key={label}
+                  className={i < step ? styles.active : ""}
+                  aria-current={i === step - 1 ? "step" : undefined}
+                >
+                  {i + 1}. {label}
+                </li>
+              ),
+            )}
+          </ol>
+          <div className={styles.card}>
+            {step > 0 && (
+              <p className={styles.query}>
+                Ваш запрос: <strong>{query}</strong> · Шаг {step} из 5
+              </p>
+            )}
 
-      {step === 0 && (
-        <>
-          <h3 className="font-heading text-xl m-0 mb-4">Ваш запрос</h3>
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            maxLength={120}
-            placeholder="деньги, отношения, страх начать своё дело..."
-            className="tool-input"
-          />
-          <p className="text-xs text-muted mt-2 m-0">{query.length}/120 символов</p>
-        </>
-      )}
-
-      {step === 1 && (
-        <>
-          <h3 className="font-heading text-xl m-0 mb-4">16 первичных ассоциаций</h3>
-          <p className="text-sm text-muted m-0 mb-4">Первые слова, которые приходят в голову. Повторы допустимы.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {level1.map((val, i) => (
-              <input
-                key={i}
-                value={val}
-                onChange={(e) => {
-                  const next = [...level1];
-                  next[i] = e.target.value;
-                  setLevel1(next);
-                }}
-                placeholder={`Ассоциация ${i + 1}`}
-                className="tool-input"
-              />
-            ))}
-          </div>
-        </>
-      )}
-
-      {step === 2 && (
-        <>
-          <h3 className="font-heading text-xl m-0 mb-4">Объединение в 8 слов</h3>
-          <div className="flex flex-col gap-4">
-            {pairs1.map(([a, b], i) => (
-              <div key={i} className="tool-pair-row">
-                <span className="text-sm text-muted shrink-0">{a} + {b}</span>
+            {step === 0 && (
+              <>
+                <h3 className="font-heading text-xl m-0 mb-4">
+                  С чем вы хотите поработать?
+                </h3>
                 <input
-                  value={level2[i]}
-                  onChange={(e) => {
-                    const next = [...level2];
-                    next[i] = e.target.value;
-                    setLevel2(next);
-                  }}
-                  placeholder="Объединяющее слово"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  maxLength={120}
+                  placeholder="деньги, отношения, страх начать своё дело..."
+                  className="tool-input"
+                />
+                <p className="text-xs text-muted mt-2 m-0">
+                  {query.length}/120 символов
+                </p>
+              </>
+            )}
+
+            {step === 1 && (
+              <>
+                <h3 className="font-heading text-xl m-0 mb-4">
+                  16 первичных ассоциаций
+                </h3>
+                <p className="text-sm text-muted m-0 mb-4">
+                  Первые слова, которые приходят в голову. Повторы допустимы.
+                </p>
+                <div className={styles.words}>
+                  {level1.map((val, i) => (
+                    <label key={i} className={styles.word}>
+                      <span>{String(i + 1).padStart(2, "0")}</span>
+                      <input
+                        aria-label={`Ассоциация ${i + 1}`}
+                        key={i}
+                        value={val}
+                        onChange={(e) => {
+                          const next = [...level1];
+                          next[i] = e.target.value;
+                          setLevel1(next);
+                        }}
+                        placeholder={`Ассоциация ${i + 1}`}
+                        className="tool-input"
+                      />
+                    </label>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {step === 2 && (
+              <>
+                <h3 className="font-heading text-xl m-0 mb-4">
+                  Объединение 16 слов в 8
+                </h3>
+                <div className={styles.pairs}>
+                  {pairs1.map(([a, b], i) => (
+                    <div key={i} className={styles.pair}>
+                      <span className="text-sm text-muted shrink-0">
+                        {a} + {b}
+                      </span>
+                      <input
+                        value={level2[i]}
+                        onChange={(e) => {
+                          const next = [...level2];
+                          next[i] = e.target.value;
+                          setLevel2(next);
+                        }}
+                        placeholder="Объединяющее слово"
+                        className="tool-input"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {step === 3 && (
+              <>
+                <h3 className="font-heading text-xl m-0 mb-4">
+                  Объединение 8 слов в 4
+                </h3>
+                <div className={styles.pairs}>
+                  {pairs2.map(([a, b], i) => (
+                    <div key={i} className={styles.pair}>
+                      <span className="text-sm text-muted shrink-0">
+                        {a} + {b}
+                      </span>
+                      <input
+                        value={level3[i]}
+                        onChange={(e) => {
+                          const next = [...level3];
+                          next[i] = e.target.value;
+                          setLevel3(next);
+                        }}
+                        placeholder="Объединяющее слово"
+                        className="tool-input"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {step === 4 && (
+              <>
+                <h3 className="font-heading text-xl m-0 mb-4">
+                  Объединение 4 слов в 2
+                </h3>
+                <div className={styles.pairs}>
+                  {pairs3.map(([a, b], i) => (
+                    <div key={i} className={styles.pair}>
+                      <span className="text-sm text-muted shrink-0">
+                        {a} + {b}
+                      </span>
+                      <input
+                        value={level4[i]}
+                        onChange={(e) => {
+                          const next = [...level4];
+                          next[i] = e.target.value;
+                          setLevel4(next);
+                        }}
+                        placeholder="Ключевое направление"
+                        className="tool-input"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {step === 5 && (
+              <div className={styles.final}>
+                <h3 className="font-heading text-xl m-0 mb-4">
+                  Остался последний шаг
+                </h3>
+                <p className="text-sm text-muted m-0 mb-4">
+                  Объедините: <strong>{level4[0]}</strong> и{" "}
+                  <strong>{level4[1]}</strong>
+                </p>
+                <input
+                  value={finalWord}
+                  onChange={(e) => setFinalWord(e.target.value)}
+                  placeholder="Одно финальное слово"
                   className="tool-input"
                 />
               </div>
-            ))}
+            )}
+
+            <div className={styles.actions}>
+              {step > 0 && (
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  disabled={finishing}
+                  onClick={() => setStep((s) => s - 1)}
+                >
+                  Назад
+                </button>
+              )}
+              <button
+                type="button"
+                className="btn btn-primary"
+                disabled={finishing || !canProceed()}
+                onClick={() => (step === 5 ? finish() : setStep((s) => s + 1))}
+              >
+                {finishing
+                  ? "Сохраняем…"
+                  : step === 5
+                    ? "Получить карту и ИИ-разбор"
+                    : "Далее →"}
+              </button>
+            </div>
           </div>
-        </>
-      )}
-
-      {step === 3 && (
-        <>
-          <h3 className="font-heading text-xl m-0 mb-4">Объединение в 4 слова</h3>
-          <div className="flex flex-col gap-4">
-            {pairs2.map(([a, b], i) => (
-              <div key={i} className="tool-pair-row">
-                <span className="text-sm text-muted shrink-0">{a} + {b}</span>
-                <input
-                  value={level3[i]}
-                  onChange={(e) => {
-                    const next = [...level3];
-                    next[i] = e.target.value;
-                    setLevel3(next);
-                  }}
-                  placeholder="Объединяющее слово"
-                  className="tool-input"
-                />
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-
-      {step === 4 && (
-        <>
-          <h3 className="font-heading text-xl m-0 mb-4">Два ключевых направления</h3>
-          <div className="flex flex-col gap-4">
-            {pairs3.map(([a, b], i) => (
-              <div key={i} className="tool-pair-row">
-                <span className="text-sm text-muted shrink-0">{a} + {b}</span>
-                <input
-                  value={level4[i]}
-                  onChange={(e) => {
-                    const next = [...level4];
-                    next[i] = e.target.value;
-                    setLevel4(next);
-                  }}
-                  placeholder="Ключевое направление"
-                  className="tool-input"
-                />
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-
-      {step === 5 && (
-        <>
-          <h3 className="font-heading text-xl m-0 mb-4">Итоговое ключевое слово</h3>
-          <p className="text-sm text-muted m-0 mb-4">
-            Объедините: <strong>{level4[0]}</strong> и <strong>{level4[1]}</strong>
-          </p>
-          <input
-            value={finalWord}
-            onChange={(e) => setFinalWord(e.target.value)}
-            placeholder="Одно финальное слово"
-            className="tool-input"
-          />
-        </>
-      )}
-
-      <div className="flex gap-3 mt-8">
-        {step > 0 && (
-          <button type="button" className="btn btn-outline" disabled={finishing} onClick={() => setStep((s) => s - 1)}>
-            Назад
-          </button>
-        )}
-        <button
-          type="button"
-          className="btn btn-primary"
-          disabled={finishing || !canProceed()}
-          onClick={() => (step === 5 ? finish() : setStep((s) => s + 1))}
-        >
-          {finishing ? "Сохраняем…" : step === 5 ? "Получить карту и ИИ-разбор" : "Далее →"}
-        </button>
-      </div>
         </div>
       )}
     </ToolAccessGate>
